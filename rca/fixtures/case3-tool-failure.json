@@ -169,7 +169,7 @@
           ],
           "availableCapacity": 56596172800,
           "createDate": "Sep 19, 2026 12:43:37 AM",
-          "hostname": "192.168.122.123",
+          "hostname": "192.0.2.10",
           "lastOpDate": "Sep 30, 2026 10:16:34 PM",
           "name": "bs-local",
           "sshPort": 22,
@@ -260,7 +260,7 @@
         "availableMemoryCapacity": 12229926912,
         "cpuNum": 12,
         "cpuSpeed": null,
-        "managementIp": "192.168.122.123",
+        "managementIp": "192.0.2.10",
         "osDistribution": "helix",
         "raw": {
           "architecture": "x86_64",
@@ -280,7 +280,7 @@
           "ipmiPowerStatus": "UN_CONFIGURED",
           "iscsiInitiatorName": "iqn.2015-01.io.helix:ba32b97357d",
           "lastOpDate": "Sep 19, 2026 1:41:10 AM",
-          "managementIp": "192.168.122.123",
+          "managementIp": "192.0.2.10",
           "memoryStatus": "Unknown",
           "name": "host-1",
           "nicStatus": "Unknown",
@@ -439,16 +439,16 @@
         "ipRanges": [
           {
             "createDate": "Sep 19, 2026 12:45:03 AM",
-            "endIp": "10.100.0.250",
-            "gateway": "10.100.0.1",
+            "endIp": "10.0.0.250",
+            "gateway": "10.0.0.1",
             "ipVersion": 4,
             "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
             "lastOpDate": "Sep 19, 2026 12:45:03 AM",
             "name": "range-demo",
             "netmask": "255.255.255.0",
-            "networkCidr": "10.100.0.0/24",
+            "networkCidr": "10.0.0.0/24",
             "prefixLen": 24,
-            "startIp": "10.100.0.10",
+            "startIp": "10.0.0.10",
             "uuid": "929a7b204f8443b286099b280fecbee9"
           }
         ],
@@ -480,16 +480,16 @@
           "ipRanges": [
             {
               "createDate": "Sep 19, 2026 12:45:03 AM",
-              "endIp": "10.100.0.250",
-              "gateway": "10.100.0.1",
+              "endIp": "10.0.0.250",
+              "gateway": "10.0.0.1",
               "ipVersion": 4,
               "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
               "lastOpDate": "Sep 19, 2026 12:45:03 AM",
               "name": "range-demo",
               "netmask": "255.255.255.0",
-              "networkCidr": "10.100.0.0/24",
+              "networkCidr": "10.0.0.0/24",
               "prefixLen": 24,
-              "startIp": "10.100.0.10",
+              "startIp": "10.0.0.10",
               "uuid": "929a7b204f8443b286099b280fecbee9"
             }
           ],
@@ -720,16 +720,16 @@
               "ipRanges": [
                 {
                   "createDate": "Sep 19, 2026 12:45:03 AM",
-                  "endIp": "10.100.0.250",
-                  "gateway": "10.100.0.1",
+                  "endIp": "10.0.0.250",
+                  "gateway": "10.0.0.1",
                   "ipVersion": 4,
                   "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
                   "lastOpDate": "Sep 19, 2026 12:45:03 AM",
                   "name": "range-demo",
                   "netmask": "255.255.255.0",
-                  "networkCidr": "10.100.0.0/24",
+                  "networkCidr": "10.0.0.0/24",
                   "prefixLen": 24,
-                  "startIp": "10.100.0.10",
+                  "startIp": "10.0.0.10",
                   "uuid": "929a7b204f8443b286099b280fecbee9"
                 }
               ],

@@ -35,7 +35,7 @@ echo "PORTGROUP=$PG"
 
 echo
 echo "== [4] AddIpRange =="
-api POST "l3-networks/$PG/ip-ranges" '{"params":{"name":"range-1","startIp":"10.100.0.10","endIp":"10.100.0.250","netmask":"255.255.255.0","gateway":"10.100.0.1","ipRangeType":"Normal"}}' | head -c 400
+api POST "l3-networks/$PG/ip-ranges" '{"params":{"name":"range-1","startIp":"10.0.0.10","endIp":"10.0.0.250","netmask":"255.255.255.0","gateway":"10.0.0.1","ipRangeType":"Normal"}}' | head -c 400
 echo
 
 echo "== [5] AddDnsToL3Network =="

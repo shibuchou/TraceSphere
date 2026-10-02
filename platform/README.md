@@ -209,7 +209,7 @@ systemd 单元（W2 整理）：`ExecStart=/usr/bin/python3 /opt/tracesphere/pla
 
 ### 真实环境注意（已处理/已记录）
 
-1. **VM IP**：ZSvirt 的 `vmNics` 不记录 IP（10.100.0.0/24 的 flat DHCP 由宿主机手工提供）。
+1. **VM IP**：ZSvirt 的 `vmNics` 不记录 IP（10.0.0.0/24 的 flat DHCP 由宿主机手工提供）。
    VM 资源最终 IP 以 **Agent Registration 的 `ips`** 为准（注册时合并进 VM `attributes.ips`）。
 2. **网络层级**：`/l3-networks` 实际返回 `type=portGroup`；`pg-demo → L2PortGroup → DSwitch` 用 `over` 边表达。
 3. **告警语义**：`/zwatch/alarms` 是告警定义（18 条，仅 1 条 `status=Alarm`）。默认只把激活告警转成事件，dedup key 含状态与 `lastOpDate`；告警运营由 Alertmanager 承担（方案 §6.2）。

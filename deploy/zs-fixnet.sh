@@ -3,7 +3,7 @@
 set -u
 MN=${MN_IP:?}
 PW=${ZS_PW:?export ZS_PW}
-PWD_IP="10.100.0.0"
+PWD_IP="10.0.0.0"
 BASE="http://$MN:8080/zstack/v1"
 PG="26391fe900e44409b3d2a37721b08f76"
 PWHASH=$(printf '%s' "$PW" | sha512sum | cut -d' ' -f1)
@@ -24,7 +24,7 @@ echo
 
 echo
 echo "== add ip range to pg-demo =="
-api POST "l3-networks/$PG/ip-ranges" '{"params":{"name":"range-demo","startIp":"10.100.0.10","endIp":"10.100.0.250","netmask":"255.255.255.0","gateway":"10.100.0.1","ipRangeType":"Normal"}}' | head -c 300
+api POST "l3-networks/$PG/ip-ranges" '{"params":{"name":"range-demo","startIp":"10.0.0.10","endIp":"10.0.0.250","netmask":"255.255.255.0","gateway":"10.0.0.1","ipRangeType":"Normal"}}' | head -c 300
 echo
 echo "== add dns to pg-demo =="
 api POST "l3-networks/$PG/dns" '{"params":{"dns":"223.5.5.5"}}' | head -c 300

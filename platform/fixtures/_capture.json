@@ -2,7 +2,7 @@
   "provider": "fixture",
   "provisional": false,
   "captured_at": "2026-09-20T09:24:22.929Z",
-  "base_url": "http://192.168.122.123:8080/zstack/v1",
+  "base_url": "http://192.0.2.10:8080/zstack/v1",
   "note": "Real ZSvirt REST responses captured as-is. Do not edit by hand; re-run tools/capture_fixtures.py on the KVM host to refresh.",
   "collections": [
     "zones",

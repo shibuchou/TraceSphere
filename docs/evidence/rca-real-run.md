@@ -1,6 +1,6 @@
 # C 侧真实环境验收记录（2026-09-21）
 
-- 环境：GPU1（KVM 宿主机，20 vCPU / 30 GiB）+ ZSvirt 管理节点 + `workload-vm`（10.100.0.181，4 vCPU / 4 GiB）
+- 环境：GPU1（KVM 宿主机，20 vCPU / 30 GiB）+ ZSvirt 管理节点 + `workload-vm`（10.0.0.10，4 vCPU / 4 GiB）
 - 链路：**真实注入 → VM 内真实采集 → platform 入库/关联 → C 侧 RCA 诊断**（全程无 mock）
 - 数据源标注：`platform=real prometheus=real`（响应里可核验）
 - 采集桥：`rca/tools/event-bridge.py`（VM 内，10s 轮询；A/B 正式接入后可下线）

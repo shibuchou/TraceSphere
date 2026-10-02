@@ -30,7 +30,7 @@ ZSvirt API responses consumed by `FixtureProvider`（方案 §4.2）。**当前�
 
 - `/l3-networks` 返回的是 `type=portGroup`（不是 `L3BasicNetwork`）；`pg-demo` 的父级是 L2PortGroup `04eb58aa...`，
   再上联 DSwitch(`virtualSwitch`) `db58a900...`，资源图用 `over` 边表达该层级。
-- VM `vmNics[].ip` 为空（10.100.0.0/24 的 DHCP 由宿主机手工提供）；VM IP 经 **Agent Registration** 的 `ips` 合并进 VM 资源。
+- VM `vmNics[].ip` 为空（10.0.0.0/24 的 DHCP 由宿主机手工提供）；VM IP 经 **Agent Registration** 的 `ips` 合并进 VM 资源。
 - `/zwatch/alarms` 是告警**定义**：只有 `status=Alarm` 的条目会转成 `zsvirt.alarm` 事件（默认过滤 OK，降噪）；
   dedup key 含 status + lastOpDate，可保留激活/恢复的状态变化。
 - ZStack 展示时间如 `Aug 23, 2026 7:55:35 PM` 与 events 的 `time`（epoch 毫秒）均已兼容解析。

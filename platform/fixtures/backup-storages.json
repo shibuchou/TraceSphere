@@ -1,7 +1,7 @@
 {
   "inventories": [
     {
-      "hostname": "192.168.122.123",
+      "hostname": "192.0.2.10",
       "username": "root",
       "sshPort": 22,
       "uuid": "2fa50ded127743859cf2bb80e9d3a25a",

@@ -16,9 +16,9 @@ mnssh() { sshpass -p "$PW" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile
 echo "== current dhcp-ip =="
 curl -s -m 20 -H "$AH" "$BASE/l3-networks/$PG/dhcp-ip" | head -c 300
 echo
-echo "== change dhcp-ip -> 10.100.0.2 =="
+echo "== change dhcp-ip -> 10.0.0.2 =="
 curl -s -m 30 -X PUT -H "$AH" -H 'Content-Type: application/json' \
-  -d '{"changeL3NetworkDhcpIpAddress":{"dhcpServerIp":"10.100.0.2"}}' \
+  -d '{"changeL3NetworkDhcpIpAddress":{"dhcpServerIp":"10.0.0.2"}}' \
   "$BASE/l3-networks/$PG/dhcp-ip" | head -c 300
 echo
 sleep 8

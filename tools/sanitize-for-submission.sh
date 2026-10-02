@@ -18,6 +18,7 @@ mkdir -p "$OUT"
 rsync -a \
   --exclude '.git' --exclude 'node_modules' --exclude 'dist' \
   --exclude '.npm-cache' --exclude '.cache' \
+  --exclude '.*-backup-*' \
   --exclude 'bin' --exclude 'data' --exclude '__pycache__' \
   --exclude 'docs/开工交接-*.md' \
   --exclude 'docs/交接文档-*.md' \
@@ -33,7 +34,7 @@ rsync -a \
   "$ROOT/" "$OUT/"
 
 # 脱敏：内网网段 / VM uuid / 口令 / 本机用户名与内网宿主 -> 占位值（仅作用于提交副本）
-grep -rlI -E '192\.168\.122\.|10\.100\.0\.|63bbb4613a524e4e97090600af03da93|zsvirt\.123|222\.24\.18\.171|ailab1' "$OUT" 2>/dev/null \
+grep -rlI -E '192\.168\.122\.|10\.100\.0\.|63bbb461|zsvirt\.123|222\.24\.18\.171|ailab1' "$OUT" 2>/dev/null \
   | while IFS= read -r f; do
       sed -i \
         -e 's/192\.168\.122\./192.0.2./g' \

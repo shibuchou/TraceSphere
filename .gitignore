@@ -32,3 +32,20 @@ Thumbs.db
 *.swp
 *.bak
 *.orig
+
+# Local-only credential copies of the demo script (never pushed)
+**/*.local.md
+
+# Internal handover / submission-prep documents (kept locally, not pushed)
+docs/开工交接-*.md
+docs/交接文档-*.md
+docs/demo-*.md
+docs/fixlog-*.md
+docs/anonymization-sweep-*.md
+deploy/README.md
+
+# Local deliverable drafts (PDFs generated from local paths)
+docs/成品文档/
+
+# Ad-hoc local backups created next to the repo
+.*-backup-*

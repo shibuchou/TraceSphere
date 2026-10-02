@@ -11,7 +11,7 @@
       "name": "host-1",
       "uuid": "cbb61d8a22cc4fd1b3702af673cbf405",
       "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
-      "managementIp": "192.168.122.123",
+      "managementIp": "192.0.2.10",
       "hypervisorType": "KVM",
       "state": "Enabled",
       "status": "Connected",

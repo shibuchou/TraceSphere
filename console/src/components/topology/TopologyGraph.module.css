@@ -1,0 +1,164 @@
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ts-rule);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.canvasWrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background-color: #fcfdfe;
+  /* 工程网格底纹：4px 细点 + 40px 粗点，替代渐变背景 */
+  background-image:
+    radial-gradient(circle at 1px 1px, #e4e8ec 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, #d6dbe1 1px, transparent 0);
+  background-size:
+    12px 12px,
+    60px 60px;
+  background-position:
+    0 0,
+    0 0;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.layerBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed var(--ts-rule-strong);
+  pointer-events: none;
+}
+
+.layerBandLabel {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+  background: rgba(252, 253, 254, 0.86);
+  padding: 1px 4px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 7px 12px;
+  border-top: 1px solid var(--ts-rule);
+  background: #fafbfc;
+  font-size: 11px;
+}
+
+.legendGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ts-ink-2);
+  font-family: var(--ts-mono);
+  font-size: 11px;
+}
+
+.swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 1px;
+  border: 1px solid rgba(15, 19, 24, 0.25);
+  flex: none;
+}
+
+.swatchBar {
+  width: 3px;
+  height: 12px;
+  flex: none;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--ts-rule);
+  background: var(--ts-surface);
+}
+
+.corner {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.corner :global(.ant-btn) {
+  min-width: 36px;
+  height: 36px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(246, 247, 249, 0.72);
+  font-size: 12px;
+  color: var(--ts-ink-2);
+  z-index: 3;
+}
+
+.hint {
+  color: var(--ts-ink-3);
+  font-size: 11px;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    height: min(560px, 70vh) !important;
+    min-height: 400px;
+  }
+
+  .toolbar {
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .hint {
+    flex-basis: 100%;
+  }
+
+  .corner :global(.ant-btn) {
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .legend {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .legendGroup {
+    flex-wrap: wrap;
+  }
+}

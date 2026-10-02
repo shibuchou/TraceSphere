@@ -1,0 +1,34 @@
+{
+  "name": "tracesphere-console",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "TraceSphere Web Console — ZSvirt 智算云 Agent 故障根因诊断控制台",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:only": "vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "check:fixtures": "node scripts/check-fixtures.mjs",
+    "check:css": "node scripts/check-css-modules.mjs",
+    "verify": "npm run typecheck && npm run check:fixtures && npm run check:css"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.5.1",
+    "@antv/g6": "^5.0.0",
+    "antd": "^5.21.0",
+    "echarts": "^5.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.9"
+  }
+}

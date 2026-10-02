@@ -1,0 +1,5 @@
+bin/
+*.o
+bpf/vmlinux.h
+*_bpfel.go
+*_bpfeb.go

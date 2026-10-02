@@ -1,0 +1,43 @@
+{
+  "inventories": [
+    {
+      "username": "root",
+      "sshPort": 22,
+      "osDistribution": "helix",
+      "osRelease": "Green Obsidian",
+      "osVersion": "8.4",
+      "iscsiInitiatorName": "iqn.2015-01.io.helix:ba32b97357d",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "name": "host-1",
+      "uuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+      "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+      "managementIp": "192.168.122.123",
+      "hypervisorType": "KVM",
+      "state": "Enabled",
+      "status": "Connected",
+      "totalCpuCapacity": 120,
+      "availableCpuCapacity": 116,
+      "cpuSockets": 12,
+      "totalMemoryCapacity": 16524894208,
+      "availableMemoryCapacity": 12229926912,
+      "cpuNum": 12,
+      "ipmiPort": 623,
+      "ipmiPowerStatus": "UN_CONFIGURED",
+      "cpuStatus": "Unknown",
+      "memoryStatus": "Unknown",
+      "diskStatus": "Unknown",
+      "nicStatus": "Unknown",
+      "gpuStatus": "Unknown",
+      "powerSupplyStatus": "Unknown",
+      "fanStatus": "Unknown",
+      "raidStatus": "Unknown",
+      "temperatureStatus": "Unknown",
+      "architecture": "x86_64",
+      "nqn": "nqn.2014-08.org.nvmexpress:uuid:ad352a43-fe00-4df4-b2e1-e65d89b6d1dd",
+      "hostname": "zsvirt-mn",
+      "createDate": "Sep 19, 2026 12:40:44 AM",
+      "lastOpDate": "Sep 19, 2026 1:41:10 AM"
+    }
+  ],
+  "total": 1
+}

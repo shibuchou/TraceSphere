@@ -1,0 +1,21 @@
+[Unit]
+Description=TraceSphere RCA (rule engine + Evidence Match + console hosting)
+After=network.target tracesphere-platform.service
+Wants=tracesphere-platform.service
+
+[Service]
+Type=simple
+User=__TS_USER__
+# __TS_* 占位符由 install-services.sh 按实际部署用户/仓库位置生成（systemd 的 %h 指 root 家目录，不可用）
+WorkingDirectory=__TS_ROOT__/rca
+Environment=TRACESPHERE_PLATFORM_URL=http://127.0.0.1:8000
+# Prometheus 地址按环境覆盖（示例：TRACESPHERE_PROMETHEUS_URL=http://<业务 VM IP>:9090）
+EnvironmentFile=-/etc/tracesphere/rca.env
+ExecStart=__TS_ROOT__/rca/bin/tracesphere serve --listen :8010 --console __TS_ROOT__/console/dist
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

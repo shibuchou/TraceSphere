@@ -1,0 +1,25 @@
+{
+  "inventories": [
+    {
+      "uuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "name": "ps-local",
+      "url": "/var/lib/zstack/ps-local",
+      "totalCapacity": 97801142272,
+      "availableCapacity": 30104720896,
+      "totalPhysicalCapacity": 97801142272,
+      "availablePhysicalCapacity": 65873854464,
+      "systemUsedCapacity": 24121491456,
+      "type": "LocalStorage",
+      "state": "Enabled",
+      "status": "Connected",
+      "mountPath": "/var/lib/zstack/ps-local",
+      "createDate": "Sep 19, 2026 12:43:32 AM",
+      "lastOpDate": "Sep 19, 2026 12:43:32 AM",
+      "attachedClusterUuids": [
+        "a29a9e1c13ac4017a187e30fca573625"
+      ]
+    }
+  ],
+  "total": 1
+}

@@ -1,0 +1,151 @@
+{
+  "generated_at": "2026-09-20T08:29:40Z",
+  "count": 7,
+  "source": {
+    "platform": "real",
+    "prometheus": "real",
+    "fixture": "mock"
+  },
+  "incidents": [
+    {
+      "incident_id": "inc-cf6d4dfcd64a",
+      "correlation_id": "cf6d4dfcd64a",
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "rule": "cpu_contention",
+      "severity": "major",
+      "status": "open",
+      "match_score": 86,
+      "first_seen_at": "2026-09-20T08:28:47Z",
+      "last_seen_at": "2026-09-20T08:28:54Z",
+      "focus_resource": {
+        "resource_id": "container:e5d6f856a747",
+        "name": "cpu-stress",
+        "kind": "container"
+      },
+      "evidence_count": 7,
+      "affected_tasks": 1,
+      "summary": "PSI cpu.some 24.17% + nr_throttled 27 → inference 36.4s 任务超时（同 VM 跨容器）",
+      "source": "correlation_cluster"
+    },
+    {
+      "incident_id": "inc-8da4d26c78f6",
+      "correlation_id": "8da4d26c78f6",
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "rule": "tool_failure",
+      "severity": "major",
+      "status": "acknowledged",
+      "match_score": 79,
+      "first_seen_at": "2026-09-20T08:27:20Z",
+      "last_seen_at": "2026-09-20T08:27:30Z",
+      "focus_resource": {
+        "resource_id": "container:e6eab2f12b53",
+        "name": "toxiproxy",
+        "kind": "container"
+      },
+      "evidence_count": 6,
+      "affected_tasks": 1,
+      "summary": "tool.result status=error（timed out）→ task.failed（同 correlation_id，Δt=10s）",
+      "source": "correlation_cluster"
+    },
+    {
+      "incident_id": "inc-case4-gpu-mock",
+      "correlation_id": "85bcc7f9b016",
+      "title": "GPU 显存耗尽（GPU Memory Exhaustion）",
+      "rule": "gpu_memory_exhaustion",
+      "severity": "critical",
+      "status": "open",
+      "match_score": 89,
+      "first_seen_at": "2026-09-20T08:25:35Z",
+      "last_seen_at": "2026-09-20T08:25:40Z",
+      "focus_resource": {
+        "resource_id": "gpu:mock-gpu0",
+        "kind": "gpu",
+        "name": "Mock GPU 0 (DCGM)"
+      },
+      "evidence_count": 3,
+      "affected_tasks": 1,
+      "summary": "Mock GPU 0 (DCGM) 显存占用率峰值 0.995，出现 gpu.memory.exhausted 事件（模拟 DCGM 降级数据源）",
+      "source": "correlation_cluster"
+    },
+    {
+      "incident_id": "inc-d38fc66c8364",
+      "correlation_id": "d38fc66c8364",
+      "title": "容器内存耗尽（Container OOM）",
+      "rule": "container_oom",
+      "severity": "critical",
+      "status": "open",
+      "match_score": 92,
+      "first_seen_at": "2026-09-20T08:25:35Z",
+      "last_seen_at": "2026-09-20T08:25:37Z",
+      "focus_resource": {
+        "resource_id": "container:7196bcad3bc1",
+        "name": "tool-service",
+        "kind": "container"
+      },
+      "evidence_count": 9,
+      "affected_tasks": 2,
+      "summary": "memory.events.oom_kill Δ=4 → task.failed（同一容器，Δt=2s）",
+      "source": "correlation_cluster"
+    },
+    {
+      "incident_id": "inc-f11aa2c09e41",
+      "correlation_id": "f11aa2c09e41",
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "rule": "tool_failure",
+      "severity": "warning",
+      "status": "resolved",
+      "match_score": 64,
+      "first_seen_at": "2026-09-20T08:22:06Z",
+      "last_seen_at": "2026-09-20T08:22:11Z",
+      "focus_resource": {
+        "resource_id": "container:e6eab2f12b53",
+        "name": "toxiproxy",
+        "kind": "container"
+      },
+      "evidence_count": 4,
+      "affected_tasks": 1,
+      "summary": "tool.result status=error（Connection reset by peer，演练窗口内预期注入）",
+      "source": "rule_scan"
+    },
+    {
+      "incident_id": "inc-a4c8e1b73d20",
+      "correlation_id": "a4c8e1b73d20",
+      "title": "容器内存耗尽（Container OOM）",
+      "rule": "container_oom",
+      "severity": "warning",
+      "status": "resolved",
+      "match_score": 58,
+      "first_seen_at": "2026-09-20T08:18:31Z",
+      "last_seen_at": "2026-09-20T08:18:33Z",
+      "focus_resource": {
+        "resource_id": "container:7196bcad3bc1",
+        "name": "tool-service",
+        "kind": "container"
+      },
+      "evidence_count": 5,
+      "affected_tasks": 1,
+      "summary": "memory.current_ratio 0.97 逼近 limit，oom_kill 未递增（低分候选，未闭环）",
+      "source": "rule_scan"
+    },
+    {
+      "incident_id": "inc-2b77d0f5a193",
+      "correlation_id": "2b77d0f5a193",
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "rule": "cpu_contention",
+      "severity": "info",
+      "status": "silenced",
+      "match_score": 31,
+      "first_seen_at": "2026-09-20T08:16:12Z",
+      "last_seen_at": "2026-09-20T08:16:40Z",
+      "focus_resource": {
+        "resource_id": "container:e5d6f856a747",
+        "name": "cpu-stress",
+        "kind": "container"
+      },
+      "evidence_count": 3,
+      "affected_tasks": 0,
+      "summary": "PSI cpu.some 短时尖峰，无应用层失败伴随（规则静默窗口）",
+      "source": "rule_scan"
+    }
+  ]
+}

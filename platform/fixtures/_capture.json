@@ -1,0 +1,125 @@
+{
+  "provider": "fixture",
+  "provisional": false,
+  "captured_at": "2026-09-20T09:24:22.929Z",
+  "base_url": "http://192.168.122.123:8080/zstack/v1",
+  "note": "Real ZSvirt REST responses captured as-is. Do not edit by hand; re-run tools/capture_fixtures.py on the KVM host to refresh.",
+  "collections": [
+    "zones",
+    "clusters",
+    "hosts",
+    "vms",
+    "images",
+    "l3-networks",
+    "l2-networks",
+    "port-groups",
+    "primary-storages",
+    "backup-storages",
+    "instance-offerings",
+    "alerts",
+    "events"
+  ],
+  "paths": {
+    "zones": "zones",
+    "clusters": "clusters",
+    "hosts": "hosts",
+    "vms": "vm-instances",
+    "images": "images",
+    "l3-networks": "l3-networks",
+    "l2-networks": "l2-networks",
+    "port-groups": "l2-networks/port-groups",
+    "primary-storages": "primary-storage",
+    "backup-storages": "backup-storage",
+    "instance-offerings": "instance-offerings",
+    "alerts": "zwatch/alarms",
+    "events": "zwatch/events"
+  },
+  "known_uuids": {
+    "zone": "26fd04cdf31047e4a96aff5e41225420",
+    "cluster": "a29a9e1c13ac4017a187e30fca573625",
+    "host": "cbb61d8a22cc4fd1b3702af673cbf405",
+    "primary_storage": "4a0ecf3f472c4042aa4f9f9d36494b11",
+    "backup_storage": "2fa50ded127743859cf2bb80e9d3a25a",
+    "l2_network": "db58a900bd344ba8ba6904ff7b7ce9e9",
+    "l3_network": "26391fe900e44409b3d2a37721b08f76",
+    "image": "f39ba0991de143e6b76b0887e19edb0a",
+    "instance_offering": "21830e28a8f74391ba2a5fe46aca85af",
+    "workload_vm": "63bbb4613a524e4e97090600af03da93",
+    "root_volume": "c6114309f9d34fa980a00a4895383654"
+  },
+  "account": "admin",
+  "clock": {
+    "ok": true,
+    "server_date": "Sun, 20 Sep 2026 09:24:22 GMT",
+    "local_time": "2026-09-20T09:24:22.848Z",
+    "skew_seconds": -0.848,
+    "warning": null
+  },
+  "results": {
+    "zones": {
+      "ok": true,
+      "path": "zones",
+      "total": 1
+    },
+    "clusters": {
+      "ok": true,
+      "path": "clusters",
+      "total": 1
+    },
+    "hosts": {
+      "ok": true,
+      "path": "hosts",
+      "total": 1
+    },
+    "vms": {
+      "ok": true,
+      "path": "vm-instances",
+      "total": 1
+    },
+    "images": {
+      "ok": true,
+      "path": "images",
+      "total": 1
+    },
+    "l3-networks": {
+      "ok": true,
+      "path": "l3-networks",
+      "total": 2
+    },
+    "l2-networks": {
+      "ok": true,
+      "path": "l2-networks",
+      "total": 3
+    },
+    "port-groups": {
+      "ok": true,
+      "path": "l2-networks/port-groups",
+      "total": 0
+    },
+    "primary-storages": {
+      "ok": true,
+      "path": "primary-storage",
+      "total": 1
+    },
+    "backup-storages": {
+      "ok": true,
+      "path": "backup-storage",
+      "total": 1
+    },
+    "instance-offerings": {
+      "ok": true,
+      "path": "instance-offerings",
+      "total": 1
+    },
+    "alerts": {
+      "ok": true,
+      "path": "zwatch/alarms",
+      "total": 18
+    },
+    "events": {
+      "ok": true,
+      "path": "zwatch/events",
+      "total": null
+    }
+  }
+}

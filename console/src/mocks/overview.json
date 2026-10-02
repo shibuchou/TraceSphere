@@ -1,0 +1,771 @@
+{
+  "generated_at": "2026-09-20T08:29:40Z",
+  "source": {
+    "platform": "real",
+    "prometheus": "real",
+    "fixture": "mock"
+  },
+  "window": {
+    "from": "2026-09-20T08:14:40Z",
+    "to": "2026-09-20T08:29:40Z",
+    "seconds": 900
+  },
+  "summary": {
+    "resources": 16,
+    "healthy": 6,
+    "warning": 6,
+    "critical": 4,
+    "tasks_total": 15,
+    "tasks_failed": 4,
+    "incidents": 4,
+    "open_alerts": 3
+  },
+  "workloads": [
+    {
+      "resource_id": "container:7196bcad3bc1",
+      "name": "tool-service",
+      "kind": "container",
+      "workload_type": "tool",
+      "status": "critical",
+      "health_score": 38,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:25:37Z",
+      "task_failures": 2,
+      "signals": [
+        {
+          "signal": "memory.events.oom_kill",
+          "layer": "container",
+          "count": 4,
+          "last_at": "2026-09-20T08:25:37Z",
+          "severity": "critical"
+        },
+        {
+          "signal": "task.failed",
+          "layer": "application",
+          "count": 2,
+          "last_at": "2026-09-20T08:25:37Z",
+          "severity": "major"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "memory.current_ratio",
+          "label": "内存使用率",
+          "value": 1.02,
+          "unit": "ratio",
+          "status": "critical",
+          "trend": "up",
+          "threshold": 0.95
+        },
+        {
+          "name": "memory.peak_bytes",
+          "label": "峰值 working_set",
+          "value": 14600000,
+          "unit": "byte",
+          "status": "warning",
+          "trend": "up"
+        },
+        {
+          "name": "container.restart",
+          "label": "容器重启次数",
+          "value": 2,
+          "unit": "count",
+          "status": "warning",
+          "trend": "up"
+        },
+        {
+          "name": "cpu.cfs.throttled_periods",
+          "label": "CPU 限流周期",
+          "value": 0,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    },
+    {
+      "resource_id": "container:e5d6f856a747",
+      "name": "cpu-stress",
+      "kind": "container",
+      "workload_type": "stress",
+      "status": "warning",
+      "health_score": 61,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:28:54Z",
+      "task_failures": 0,
+      "signals": [
+        {
+          "signal": "cpu.cfs.throttled_periods",
+          "layer": "container",
+          "count": 27,
+          "last_at": "2026-09-20T08:28:54Z",
+          "severity": "major"
+        },
+        {
+          "signal": "cpu.stat.nr_throttled",
+          "layer": "container",
+          "count": 27,
+          "last_at": "2026-09-20T08:28:54Z",
+          "severity": "major"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "cpu.cfs.throttled_periods",
+          "label": "CPU 限流周期",
+          "value": 27,
+          "unit": "count",
+          "status": "warning",
+          "trend": "up",
+          "threshold": 20
+        },
+        {
+          "name": "cpu.stat.nr_periods",
+          "label": "CFS 调度周期",
+          "value": 417,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "cpu.stat.usage_usec",
+          "label": "CPU 累计用量",
+          "value": 81495176,
+          "unit": "usec",
+          "status": "warning",
+          "trend": "up"
+        },
+        {
+          "name": "memory.events.oom_kill",
+          "label": "OOM 计数",
+          "value": 0,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    },
+    {
+      "resource_id": "container:1f0a4c9b2d33",
+      "name": "agent-service",
+      "kind": "container",
+      "workload_type": "agent",
+      "status": "warning",
+      "health_score": 72,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:28:54Z",
+      "task_failures": 3,
+      "signals": [
+        {
+          "signal": "task.failed",
+          "layer": "application",
+          "count": 3,
+          "last_at": "2026-09-20T08:28:54Z",
+          "severity": "major"
+        },
+        {
+          "signal": "tool.result",
+          "layer": "application",
+          "count": 2,
+          "last_at": "2026-09-20T08:27:30Z",
+          "severity": "warning"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "tasks_total",
+          "label": "窗口内任务总数",
+          "value": 14,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "tasks_failed",
+          "label": "失败任务数",
+          "value": 3,
+          "unit": "count",
+          "status": "warning",
+          "trend": "up",
+          "threshold": 2
+        }
+      ]
+    },
+    {
+      "resource_id": "container:7c21e0b45a88",
+      "name": "llama-server",
+      "kind": "container",
+      "workload_type": "inference",
+      "status": "healthy",
+      "health_score": 84,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:28:54Z",
+      "task_failures": 0,
+      "signals": [
+        {
+          "signal": "llama_latency_p95_ms",
+          "layer": "container",
+          "count": 1,
+          "last_at": "2026-09-20T08:28:54Z",
+          "severity": "major"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "llama_latency_p95_ms",
+          "label": "推理延迟 P95",
+          "value": 36363,
+          "unit": "ms",
+          "status": "warning",
+          "trend": "up",
+          "threshold": 3000
+        },
+        {
+          "name": "llamacpp.tokens_per_s",
+          "label": "推理吞吐",
+          "value": 4.2,
+          "unit": "none",
+          "status": "warning",
+          "trend": "down"
+        }
+      ]
+    },
+    {
+      "resource_id": "container:e6eab2f12b53",
+      "name": "toxiproxy",
+      "kind": "container",
+      "workload_type": "proxy",
+      "status": "healthy",
+      "health_score": 90,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:27:30Z",
+      "task_failures": 0,
+      "signals": [
+        {
+          "signal": "tool.transport_error",
+          "layer": "vm",
+          "count": 1,
+          "last_at": "2026-09-20T08:27:30Z",
+          "severity": "major"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "memory.current",
+          "label": "内存占用",
+          "value": 4304896,
+          "unit": "byte",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "proxy_upstream_errors",
+          "label": "上游错误数",
+          "value": 1,
+          "unit": "count",
+          "status": "warning",
+          "trend": "up"
+        }
+      ]
+    },
+    {
+      "resource_id": "container:3a9d7f10c2e4",
+      "name": "prometheus",
+      "kind": "container",
+      "workload_type": "observability",
+      "status": "healthy",
+      "health_score": 98,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:29:35Z",
+      "task_failures": 0,
+      "signals": [],
+      "metrics": [
+        {
+          "name": "scrape_targets_up",
+          "label": "在线抓取目标",
+          "value": 6,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "scrape_duration_ms",
+          "label": "抓取耗时",
+          "value": 41,
+          "unit": "ms",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    },
+    {
+      "resource_id": "container:5b8e2a7d91f0",
+      "name": "vm-agent",
+      "kind": "container",
+      "workload_type": "collector",
+      "status": "healthy",
+      "health_score": 97,
+      "parent": {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "name": "workload-vm",
+        "kind": "vm"
+      },
+      "last_event_at": "2026-09-20T08:29:37Z",
+      "task_failures": 0,
+      "signals": [],
+      "metrics": [
+        {
+          "name": "overhead_cpu_pct",
+          "label": "采集开销 CPU",
+          "value": 0.4,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "event_rate_per_s",
+          "label": "事件速率",
+          "value": 118,
+          "unit": "none",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    },
+    {
+      "resource_id": "service:svc-agent",
+      "name": "agent-service",
+      "kind": "service",
+      "workload_type": "agent",
+      "status": "healthy",
+      "health_score": 88,
+      "parent": {
+        "resource_id": "container:1f0a4c9b2d33",
+        "name": "agent-service",
+        "kind": "container"
+      },
+      "last_event_at": "2026-09-20T08:28:54Z",
+      "task_failures": 3,
+      "signals": [
+        {
+          "signal": "task.started",
+          "layer": "application",
+          "count": 14,
+          "last_at": "2026-09-20T08:28:17Z",
+          "severity": "info"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "tasks_total",
+          "label": "任务总数",
+          "value": 14,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "up"
+        },
+        {
+          "name": "task_failure_ratio",
+          "label": "任务失败率",
+          "value": 0.21,
+          "unit": "ratio",
+          "status": "warning",
+          "trend": "up",
+          "threshold": 0.1
+        }
+      ]
+    },
+    {
+      "resource_id": "service:svc-tool",
+      "name": "mock-search",
+      "kind": "service",
+      "workload_type": "tool",
+      "status": "warning",
+      "health_score": 58,
+      "parent": {
+        "resource_id": "container:7196bcad3bc1",
+        "name": "tool-service",
+        "kind": "container"
+      },
+      "last_event_at": "2026-09-20T08:27:30Z",
+      "task_failures": 2,
+      "signals": [
+        {
+          "signal": "tool.result",
+          "layer": "application",
+          "count": 2,
+          "last_at": "2026-09-20T08:27:30Z",
+          "severity": "major"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "tool_error_ratio",
+          "label": "工具调用错误率",
+          "value": 0.5,
+          "unit": "ratio",
+          "status": "critical",
+          "trend": "up",
+          "threshold": 0.2
+        },
+        {
+          "name": "tool_latency_p95_ms",
+          "label": "工具调用 P95",
+          "value": 10000,
+          "unit": "ms",
+          "status": "warning",
+          "trend": "up",
+          "threshold": 3000
+        }
+      ]
+    },
+    {
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "name": "workload-vm",
+      "kind": "vm",
+      "workload_type": "compute",
+      "status": "warning",
+      "health_score": 69,
+      "parent": {
+        "resource_id": "host:cbb61d8a",
+        "name": "host-1 (GPU1)",
+        "kind": "host"
+      },
+      "last_event_at": "2026-09-20T08:28:54Z",
+      "task_failures": 0,
+      "signals": [
+        {
+          "signal": "psi_cpu_some_avg10",
+          "layer": "vm",
+          "count": 1,
+          "last_at": "2026-09-20T08:28:52Z",
+          "severity": "major"
+        },
+        {
+          "signal": "process.exit",
+          "layer": "vm",
+          "count": 20,
+          "last_at": "2026-09-20T08:28:54Z",
+          "severity": "info"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "psi_cpu_some_avg10",
+          "label": "CPU PSI some avg10",
+          "value": 24.17,
+          "unit": "percent",
+          "status": "critical",
+          "trend": "up",
+          "threshold": 5
+        },
+        {
+          "name": "psi_cpu_full_avg10",
+          "label": "CPU PSI full avg10",
+          "value": 0,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "psi_io_some_avg10",
+          "label": "IO PSI some avg10",
+          "value": 0.91,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "psi_mem_some_avg10",
+          "label": "内存 PSI some avg10",
+          "value": 0,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    },
+    {
+      "resource_id": "host:cbb61d8a",
+      "name": "host-1 (GPU1)",
+      "kind": "host",
+      "workload_type": "zsvirt-node",
+      "status": "healthy",
+      "health_score": 95,
+      "parent": {
+        "resource_id": "zsvirt:management",
+        "name": "ZSvirt 云平台",
+        "kind": "service"
+      },
+      "last_event_at": "2026-09-20T08:28:00Z",
+      "task_failures": 0,
+      "signals": [],
+      "metrics": [
+        {
+          "name": "vm_count",
+          "label": "承载虚拟机",
+          "value": 1,
+          "unit": "count",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "cpu_pct",
+          "label": "宿主机 CPU",
+          "value": 34.6,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        },
+        {
+          "name": "mem_pct",
+          "label": "宿主机内存",
+          "value": 41.2,
+          "unit": "percent",
+          "status": "healthy",
+          "trend": "flat"
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "observed_at": "2026-09-20T08:21:40Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "info",
+      "description": "PSI cpu.some avg10 处于基线区间（0.22%）",
+      "evidence_id": "ev-0200"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:35Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "memory.current_ratio",
+      "severity": "warning",
+      "description": "memory.current / memory.max 升破 0.95 阈值（working_set 1.01e7 / limit 1.0e7）",
+      "evidence_id": "ev-0002",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:35Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "memory.events.oom_kill",
+      "severity": "critical",
+      "description": "memory.events.oom_kill Δ=3（cgroup v2 内核 OOM 计数）",
+      "evidence_id": "ev-0001",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:36Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "oom.ebpf",
+      "severity": "major",
+      "description": "eBPF oom/mark_victim hook：comm=python pid=155597 被标记为 victim",
+      "evidence_id": "ev-0003",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "Agent 任务启动（correlation d38fc66c8364，question=OOM 演练任务）",
+      "evidence_id": "ev-0005",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "tool.call",
+      "severity": "info",
+      "description": "tool.call mock-search → http://toxiproxy:8666/tool",
+      "evidence_id": "ev-0006",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "tool.result",
+      "severity": "warning",
+      "description": "tool.result status=error：[Errno 104] Connection reset by peer",
+      "evidence_id": "ev-0007",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "tool call failed: [Errno 104] Connection reset by peer",
+      "evidence_id": "ev-0008",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "info",
+      "description": "PSI cpu.some avg10 上冲至 0.63%（窗口峰值）",
+      "evidence_id": "ev-0201"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:20Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "Agent 任务启动（correlation 8da4d26c78f6，question=工具故障演练任务）",
+      "evidence_id": "ev-0040",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:30Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "tool.result",
+      "severity": "major",
+      "description": "tool.result status=error：timed out（目标 http://toxiproxy:8666/tool）",
+      "evidence_id": "ev-0041",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:30Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "tool call failed: timed out",
+      "evidence_id": "ev-0042",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:17Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "Agent 任务启动（correlation cf6d4dfcd64a，question=CPU 争抢期间任务A）",
+      "evidence_id": "ev-0060",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:48Z",
+      "layer": "container",
+      "resource_id": "container:e5d6f856a747",
+      "resource_name": "cpu-stress",
+      "signal": "cpu.stat.nr_throttled",
+      "severity": "major",
+      "description": "cpu.stat.nr_throttled=27 / nr_periods=417（throttled_usec 11020）",
+      "evidence_id": "ev-0061",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:52Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "critical",
+      "description": "PSI cpu.some avg10 达 24.17%（基线 <1%，阈值 5%）",
+      "evidence_id": "ev-0062",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:54Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "inference.result",
+      "severity": "major",
+      "description": "inference.result duration_ms=36363（P95 阈值 3000ms）",
+      "evidence_id": "ev-0063",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:29:00Z",
+      "layer": "zsvirt",
+      "resource_id": "host:cbb61d8a",
+      "resource_name": "host-1 (GPU1)",
+      "signal": "zsvirt.alarm",
+      "severity": "info",
+      "description": "ZSvirt 告警：workload-vm CPU 利用率持续超阈值 30s",
+      "evidence_id": "ev-0080"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "signal": "gpu.memory_used_ratio",
+      "severity": "critical",
+      "description": "显存占用率升至 0.995（注入 exhaust）",
+      "evidence_id": "ev-gpu-gpu-memory_used_ratio"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "signal": "gpu.memory.exhausted",
+      "severity": "critical",
+      "description": "显存耗尽事件上报",
+      "evidence_id": "ev-gpu-gpu-memory-exhausted"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:40Z",
+      "layer": "application",
+      "resource_id": "container:1f0a4c9b2d33",
+      "resource_name": "agent-service",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "演练任务失败（关联锚点）",
+      "evidence_id": "ev-gpu-task-failed"
+    }
+  ]
+}

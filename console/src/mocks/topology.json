@@ -1,0 +1,514 @@
+{
+  "generated_at": "2026-09-20T08:29:40Z",
+  "source": {
+    "platform": "real",
+    "prometheus": "real",
+    "fixture": "mock"
+  },
+  "combos": [
+    {
+      "id": "combo:host:cbb61d8a",
+      "label": "host-1 (GPU1)",
+      "kind": "host",
+      "parent": null
+    },
+    {
+      "id": "combo:vm:63bbb461",
+      "label": "workload-vm",
+      "kind": "vm",
+      "parent": "combo:host:cbb61d8a"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "host:cbb61d8a",
+      "resource_id": "host:cbb61d8a",
+      "label": "host-1 (GPU1)",
+      "kind": "host",
+      "combo": null,
+      "subtitle": "ZStack KVM · ZSvirt 云平台节点",
+      "status": "healthy",
+      "incident_count": 0,
+      "badges": [],
+      "metrics": [
+        {
+          "name": "vm_count",
+          "value": 1,
+          "unit": "count"
+        },
+        {
+          "name": "cpu_pct",
+          "value": 34.6,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "label": "workload-vm",
+      "kind": "vm",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
+      "status": "warning",
+      "incident_count": 0,
+      "badges": [
+        "PSI cpu.some 24.17"
+      ],
+      "metrics": [
+        {
+          "name": "psi_cpu_some_avg10",
+          "value": 24.17,
+          "unit": "percent"
+        },
+        {
+          "name": "psi_io_some_avg10",
+          "value": 0.91,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "id": "container:7196bcad3bc1",
+      "resource_id": "container:7196bcad3bc1",
+      "label": "tool-service",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "docker-7196bcad3bc1… · mock-search 工具后端",
+      "status": "critical",
+      "incident_count": 1,
+      "badges": [
+        "OOM ×4",
+        "task.failed"
+      ],
+      "metrics": [
+        {
+          "name": "memory.current_ratio",
+          "value": 1.02,
+          "unit": "ratio"
+        },
+        {
+          "name": "memory.events.oom_kill",
+          "value": 4,
+          "unit": "count"
+        }
+      ]
+    },
+    {
+      "id": "container:e5d6f856a747",
+      "resource_id": "container:e5d6f856a747",
+      "label": "cpu-stress",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "docker-e5d6f856a747… · CPU 压力源",
+      "status": "warning",
+      "incident_count": 1,
+      "badges": [
+        "nr_throttled 27/417"
+      ],
+      "metrics": [
+        {
+          "name": "cpu.cfs.throttled_periods",
+          "value": 27,
+          "unit": "count"
+        },
+        {
+          "name": "cpu.stat.nr_periods",
+          "value": 417,
+          "unit": "count"
+        }
+      ]
+    },
+    {
+      "id": "container:1f0a4c9b2d33",
+      "resource_id": "container:1f0a4c9b2d33",
+      "label": "agent-service",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "Agent 编排入口 · AppEvent 产出方",
+      "status": "warning",
+      "incident_count": 0,
+      "badges": [
+        "3 task.failed"
+      ],
+      "metrics": [
+        {
+          "name": "task_failed",
+          "value": 3,
+          "unit": "count"
+        }
+      ]
+    },
+    {
+      "id": "container:7c21e0b45a88",
+      "resource_id": "container:7c21e0b45a88",
+      "label": "llama-server",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "本地推理后端 · pid 153917",
+      "status": "healthy",
+      "incident_count": 0,
+      "badges": [],
+      "metrics": [
+        {
+          "name": "llama_latency_p95_ms",
+          "value": 36363,
+          "unit": "ms"
+        }
+      ]
+    },
+    {
+      "id": "container:e6eab2f12b53",
+      "resource_id": "container:e6eab2f12b53",
+      "label": "toxiproxy",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "docker-e6eab2f12b53… · 故障注入代理 8666",
+      "status": "healthy",
+      "incident_count": 1,
+      "badges": [
+        "tool 链路"
+      ],
+      "metrics": [
+        {
+          "name": "memory.current",
+          "value": 4304896,
+          "unit": "byte"
+        }
+      ]
+    },
+    {
+      "id": "container:3a9d7f10c2e4",
+      "resource_id": "container:3a9d7f10c2e4",
+      "label": "prometheus",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "指标采集 :9090",
+      "status": "healthy",
+      "incident_count": 0,
+      "badges": [],
+      "metrics": [
+        {
+          "name": "scrape_targets_up",
+          "value": 6,
+          "unit": "count"
+        }
+      ]
+    },
+    {
+      "id": "container:5b8e2a7d91f0",
+      "resource_id": "container:5b8e2a7d91f0",
+      "label": "vm-agent",
+      "kind": "container",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "eBPF + PSI 采集（vm-agent.service）",
+      "status": "healthy",
+      "incident_count": 0,
+      "badges": [],
+      "metrics": [
+        {
+          "name": "overhead_cpu_pct",
+          "value": 0.4,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "id": "service:svc-agent",
+      "resource_id": "service:svc-agent",
+      "label": "agent-service",
+      "kind": "service",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "AI 服务 · Agent 任务编排",
+      "status": "healthy",
+      "incident_count": 0,
+      "badges": [],
+      "metrics": [
+        {
+          "name": "tasks_total",
+          "value": 14,
+          "unit": "count"
+        }
+      ]
+    },
+    {
+      "id": "service:svc-tool",
+      "resource_id": "service:svc-tool",
+      "label": "mock-search",
+      "kind": "service",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "AI 服务 · 工具后端 http://toxiproxy:8666/tool",
+      "status": "warning",
+      "incident_count": 1,
+      "badges": [
+        "error ×1"
+      ],
+      "metrics": [
+        {
+          "name": "tool_error_rate",
+          "value": 0.5,
+          "unit": "ratio"
+        }
+      ]
+    },
+    {
+      "id": "task:task-1789892737-9d8d72",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "label": "task-…9d8d72",
+      "kind": "task",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "correlation d38fc66c8364 · OOM 演练任务",
+      "status": "critical",
+      "incident_count": 1,
+      "badges": [
+        "failed"
+      ],
+      "metrics": [
+        {
+          "name": "duration_ms",
+          "value": 0,
+          "unit": "ms"
+        }
+      ]
+    },
+    {
+      "id": "task:task-1789892897-9025e6",
+      "resource_id": "task:task-1789892897-9025e6",
+      "label": "task-…9025e6",
+      "kind": "task",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "correlation cf6d4dfcd64a · CPU 争抢期间任务A",
+      "status": "warning",
+      "incident_count": 1,
+      "badges": [
+        "超时 36.4s"
+      ],
+      "metrics": [
+        {
+          "name": "duration_ms",
+          "value": 36363,
+          "unit": "ms"
+        }
+      ]
+    },
+    {
+      "id": "task:task-1789892840-179c3c",
+      "resource_id": "task:task-1789892840-179c3c",
+      "label": "task-…179c3c",
+      "kind": "task",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "correlation 8da4d26c78f6 · 工具故障演练任务",
+      "status": "warning",
+      "incident_count": 1,
+      "badges": [
+        "timed out"
+      ],
+      "metrics": [
+        {
+          "name": "duration_ms",
+          "value": 10000,
+          "unit": "ms"
+        }
+      ]
+    },
+    {
+      "id": "gpu:mock-gpu0",
+      "label": "Mock GPU 0 (DCGM)",
+      "kind": "gpu",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "Mock DCGM · 显存占用 99.5%",
+      "status": "critical",
+      "incident_count": 1,
+      "badges": [
+        "显存 99.5%",
+        "gpu.memory.exhausted"
+      ],
+      "metrics": []
+    },
+    {
+      "id": "task:task-gpu-demo",
+      "label": "task-gpu-demo",
+      "kind": "task",
+      "combo": "combo:vm:63bbb461",
+      "subtitle": "GPU 演练任务 · failed",
+      "status": "critical",
+      "incident_count": 1,
+      "badges": [
+        "task.failed"
+      ],
+      "metrics": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-host-vm",
+      "source": "host:cbb61d8a",
+      "target": "vm:63bbb4613a524e4e97090600af03da93",
+      "relation": "hosts",
+      "label": "hosts"
+    },
+    {
+      "id": "e-vm-tool",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:7196bcad3bc1",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-cpu",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:e5d6f856a747",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-agent",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:1f0a4c9b2d33",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-llama",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:7c21e0b45a88",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-toxi",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:e6eab2f12b53",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-prom",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:3a9d7f10c2e4",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-vm-vmagent",
+      "source": "vm:63bbb4613a524e4e97090600af03da93",
+      "target": "container:5b8e2a7d91f0",
+      "relation": "contains",
+      "label": "contains"
+    },
+    {
+      "id": "e-agent-svc",
+      "source": "container:1f0a4c9b2d33",
+      "target": "service:svc-agent",
+      "relation": "runs_on",
+      "label": "runs_on"
+    },
+    {
+      "id": "e-tool-svc",
+      "source": "container:7196bcad3bc1",
+      "target": "service:svc-tool",
+      "relation": "runs_on",
+      "label": "runs_on"
+    },
+    {
+      "id": "e-svc-task1",
+      "source": "service:svc-agent",
+      "target": "task:task-1789892737-9d8d72",
+      "relation": "calls",
+      "label": "calls"
+    },
+    {
+      "id": "e-svc-task2",
+      "source": "service:svc-agent",
+      "target": "task:task-1789892897-9025e6",
+      "relation": "calls",
+      "label": "calls"
+    },
+    {
+      "id": "e-svc-task3",
+      "source": "service:svc-agent",
+      "target": "task:task-1789892840-179c3c",
+      "relation": "calls",
+      "label": "calls"
+    },
+    {
+      "id": "e-task1-tool",
+      "source": "task:task-1789892737-9d8d72",
+      "target": "service:svc-tool",
+      "relation": "depends_on",
+      "label": "depends_on"
+    },
+    {
+      "id": "e-task2-tool",
+      "source": "task:task-1789892897-9025e6",
+      "target": "service:svc-tool",
+      "relation": "depends_on",
+      "label": "depends_on"
+    },
+    {
+      "id": "e-task3-tool",
+      "source": "task:task-1789892840-179c3c",
+      "target": "service:svc-tool",
+      "relation": "depends_on",
+      "label": "depends_on"
+    },
+    {
+      "id": "e-tool-toxi",
+      "source": "service:svc-tool",
+      "target": "container:e6eab2f12b53",
+      "relation": "proxies",
+      "label": "proxies"
+    },
+    {
+      "id": "e-task2-llama",
+      "source": "task:task-1789892897-9025e6",
+      "target": "container:7c21e0b45a88",
+      "relation": "depends_on",
+      "label": "depends_on"
+    },
+    {
+      "id": "edge-host:cbb61d8a-gpu:mock-gpu0",
+      "source": "host:cbb61d8a",
+      "target": "gpu:mock-gpu0",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-gpu:mock-gpu0-vm:63bbb4613a524e4e97090600af03da93",
+      "source": "gpu:mock-gpu0",
+      "target": "vm:63bbb4613a524e4e97090600af03da93",
+      "relation": "assigned_to"
+    },
+    {
+      "id": "edge-container:1f0a4c9b2d33-task:task-gpu-demo",
+      "source": "container:1f0a4c9b2d33",
+      "target": "task:task-gpu-demo",
+      "relation": "calls"
+    }
+  ],
+  "legend": [
+    {
+      "kind": "host",
+      "label": "宿主机"
+    },
+    {
+      "kind": "vm",
+      "label": "虚拟机"
+    },
+    {
+      "kind": "container",
+      "label": "容器"
+    },
+    {
+      "kind": "service",
+      "label": "AI 服务"
+    },
+    {
+      "kind": "task",
+      "label": "Agent 任务"
+    },
+    {
+      "kind": "process",
+      "label": "进程"
+    }
+  ]
+}

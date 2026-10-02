@@ -1,0 +1,42 @@
+flowchart LR
+    accTitle: TraceSphere 证据链与诊断闭环
+    accDescr: 展示任务事件、系统指标、GPU 信号和 ZSvirt 告警如何被统一关联为证据，并输出根因候选、影响范围和处置建议。
+
+    task_event["Agent 任务事件\ntask_id / correlation_id\ntool.result / task.failed"]
+    system_signal["系统信号\nPSI / cgroup / eBPF / journal"]
+    metric_signal["指标信号\nPrometheus / cAdvisor / llama"]
+    gpu_signal["GPU 信号\n显存比例 / exhausted"]
+    cloud_event["ZSvirt 信号\n资源 / 告警 / 事件"]
+
+    normalize["Schema v1 归一化\n字段白名单 + Token + 隐私最小化"]
+    identity["身份映射\nPID → cgroup → container → VM\nGPU assigned_to VM"]
+    correlate["关联簇\ncorrelation_id + 时间窗 + 资源图"]
+    evidence["证据快照\n来源 / 时间 / 数值 / source_event_ids"]
+    rules["规则匹配\nYAML 条款 + 必选 / 可选 / 时序"]
+    score["Evidence Match\n规则命中 55\n时序 15 / 邻接 10 / 强度 10 / 独立性 10"]
+    result["诊断输出\nTop-N 根因候选\n影响范围 + 处置建议"]
+    operate["告警运营\n确认 / 静默 / 恢复\n每 IP 限流"]
+
+    task_event --> normalize
+    system_signal --> normalize
+    metric_signal --> normalize
+    gpu_signal --> normalize
+    cloud_event --> normalize
+    normalize --> identity
+    identity --> correlate
+    correlate --> evidence
+    evidence --> rules
+    rules --> score
+    score --> result
+    result --> operate
+    operate -.反馈诊断状态.-> correlate
+
+    classDef source fill:#eef2f6,stroke:#65717e,color:#1f2933,stroke-width:1.3px
+    classDef process fill:#e8f1fb,stroke:#2b5b8f,color:#163b61,stroke-width:1.4px
+    classDef output fill:#fff3e3,stroke:#d97b10,color:#75420a,stroke-width:1.4px
+    classDef control fill:#eaf6f1,stroke:#2e8b57,color:#184f35,stroke-width:1.4px
+
+    class task_event,system_signal,metric_signal,gpu_signal,cloud_event source
+    class normalize,identity,correlate,evidence,rules,score process
+    class result output
+    class operate control

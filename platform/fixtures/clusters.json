@@ -1,0 +1,16 @@
+{
+  "inventories": [
+    {
+      "name": "Cluster-1",
+      "uuid": "a29a9e1c13ac4017a187e30fca573625",
+      "state": "Enabled",
+      "hypervisorType": "KVM",
+      "createDate": "Sep 19, 2026 12:34:56 AM",
+      "lastOpDate": "Sep 19, 2026 12:42:53 AM",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "type": "zstack",
+      "architecture": "x86_64"
+    }
+  ],
+  "total": 1
+}

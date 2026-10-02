@@ -1,0 +1,73 @@
+# TraceSphere RCA 规则：CPU 资源争抢（Case 2）
+# 结构：rule / evidence / correlation / result（方案 §6.3 冻结）
+rule: cpu_contention
+version: 1
+title: CPU 资源争抢（CPU Resource Contention）
+description: 同 VM 内出现 CPU 压力源，PSI / cgroup throttling 升高，推理延迟上升导致 Agent 任务超时
+severity: major
+
+evidence:
+  # ---- 主判据：PSI CPU 压力（vm-agent 采集；基线对比见 op=increase_gt）----
+  - metric: psi_cpu_some_avg10
+    op: ">"
+    value: 5
+    weight: 30
+    description: PSI cpu.some avg10 明显升高（窗口内峰值 > 5%，基线 < 1%）
+
+  # ---- cgroup v2 CPU 限流（cAdvisor 侧，Prometheus 可得）----
+  - signal: cpu.cfs.throttled_periods
+    kind: metric
+    layer: container
+    weight: 25
+    require_increase: true
+    description: container_cpu_cfs_throttled_periods_total Δ > 0（限流周期递增）
+
+  # ---- cgroup 直读互证（vm-agent，可选）----
+  - signal: cpu.stat.nr_throttled
+    kind: cgroup
+    layer: container
+    weight: 15
+    optional: true
+    require_increase: true
+    description: cpu.stat.nr_throttled / throttled_usec 递增
+
+  # ---- 业务影响：推理延迟 P95 升高（由 inference.result 的 duration_ms 计算）----
+  - metric: llama_latency_p95_ms
+    op: ">"
+    value: 3000
+    weight: 15
+    description: llama-server 推理延迟 P95 升高（窗口内 > 3s，基线 < 1s）
+
+  # ---- 应用层表现：任务超时/失败 ----
+  - signal: task.failed
+    kind: app_event
+    layer: application
+    weight: 15
+    match_any: ["timeout", "timed out", "超时"]
+    description: Agent 任务因推理超时失败（correlation_id 锚点）
+
+correlation:
+  same_resource: false          # 争抢是「同 VM 内跨容器」关系，由资源图拓扑关联
+  same_vm: true
+  time_window: 5s
+  require_correlation_id: false
+
+result:
+  root_cause: cpu_resource_contention
+  label: 同 VM 内 CPU 争抢（可定位到具体压力源容器）
+  suggestions:
+    - action: adjust_cpu_limit
+      title: 调整 CPU limit / 权重
+      basis: cpu.cfs.throttled_periods 递增且 PSI cpu.some 升高
+      detail: 为受影响服务设置 cpu.weight / 提高 cpu.max，抑制压力源容器
+      risk: 单纯提高配额会挤占同 VM 其他负载，需按优先级分配
+    - action: isolate_heavy_container
+      title: 隔离高负载容器
+      basis: 压力源容器 CPU 用量显著高于同 VM 其他容器
+      detail: 将压力源容器迁移到独立 VM，或限制其 cpu.max
+      risk: 迁移需确认业务依赖（同 VM 网络/存储）
+    - action: verify_baseline
+      title: 复核基线与阈值
+      basis: PSI 阈值依赖基线，环境变更后需重新标定
+      detail: 重新采集空闲基线，更新规则阈值（rules/cpu.yaml）
+      risk: 阈值过松会漏报，过紧会误报

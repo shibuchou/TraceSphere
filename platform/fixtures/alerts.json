@@ -1,0 +1,499 @@
+{
+  "inventories": [
+    {
+      "uuid": "00d550dd83e14bbdaf111ae087d34b11",
+      "name": "VM Used Memory Percentage (Advanced Monitoring)",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/VM",
+      "metricName": "OperatingSystemMemoryUsedPercent",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00d550dd83e14bbdaf111ae087d34b11",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00d781a5db9542e2b0c6ddd62e0c4811",
+      "name": "VM Used Memory Percentage",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/VM",
+      "metricName": "MemoryUsedInPercent",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "Alarm",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Sep 19, 2026 9:21:56 AM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00d781a5db9542e2b0c6ddd62e0c4811",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00d78dac81854d86a056fae8d0913711",
+      "name": "VM Average CPU Utilization",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/VM",
+      "metricName": "CPUAverageUsedUtilization",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00d78dac81854d86a056fae8d0913711",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00d78ee6b5914dee9d6ac82b37207711",
+      "name": "Host Memory Utilization",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "MemoryUsedInPercent",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00d78ee6b5914dee9d6ac82b37207711",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00d9435038505e5f90af167cfacbf611",
+      "name": "Average CPU Utilization of Hosts",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "CPUAverageUsedUtilization",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00d9435038505e5f90af167cfacbf611",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00da493006cb4668a46c09f9d4914c11",
+      "name": "SSD Temperature",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "SSDTemperature",
+      "threshold": 70.0,
+      "repeatInterval": 300,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:36 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:36 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00da493006cb4668a46c09f9d4914c11",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00dbd80dbac0494d8f351bfb640a4d11",
+      "name": "VM Average CPU Utilization (Advanced Monitoring)",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/VM",
+      "metricName": "OperatingSystemCPUAverageUsedUtilization",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00dbd80dbac0494d8f351bfb640a4d11",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "00df1327d49e4631a21f4467aa729c11",
+      "name": "Physical GPU Temperature",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "GpuTemperature",
+      "threshold": 80.0,
+      "repeatInterval": 300,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:36 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:36 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "00df1327d49e4631a21f4467aa729c11",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "065f9609dce141bb952c80f729f58af4",
+      "name": "Monitor IP Unreachable",
+      "comparisonOperator": "LessThan",
+      "period": 600,
+      "namespace": "ZStack/MN",
+      "metricName": "DbFencerIpReachable",
+      "threshold": 1.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "065f9609dce141bb952c80f729f58af4",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "10908b6b7b8741139a5efc2b1d461a16",
+      "name": "Host CPU Temperature",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "CpuTemperature",
+      "threshold": 90.0,
+      "repeatInterval": 300,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:36 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:36 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "10908b6b7b8741139a5efc2b1d461a16",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "4123f054a59a451fb1b535accff61232",
+      "name": "Disaster Recovery Storage Used Capacity In Percent",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 1800,
+      "namespace": "ZStack/BackupStorage",
+      "metricName": "UsedCapacityInPercent",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:36 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:36 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "4123f054a59a451fb1b535accff61232",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "44e6f054a59a451fb1b535accff64fc2",
+      "name": "Image Storage Available Capacity",
+      "comparisonOperator": "LessThan",
+      "period": 600,
+      "namespace": "ZStack/BackupStorage",
+      "metricName": "AvailableCapacityInPercent",
+      "threshold": 20.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "44e6f054a59a451fb1b535accff64fc2",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "5d3bb9d271a349b283893317f531f723",
+      "name": "Host Root Volume Utilization",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 600,
+      "namespace": "ZStack/Host",
+      "metricName": "DiskRootUsedCapacityInPercent",
+      "threshold": 80.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "5d3bb9d271a349b283893317f531f723",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "66dfdee6fd314aac96ca3779774ad977",
+      "name": "Data Storage Allocatable Capacity",
+      "comparisonOperator": "LessThan",
+      "period": 600,
+      "namespace": "ZStack/PrimaryStorage",
+      "metricName": "AvailableCapacityInPercent",
+      "threshold": 20.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Sep 19, 2026 1:16:46 AM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "66dfdee6fd314aac96ca3779774ad977",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "712c3dec6aa94ed2b3bcd32192c22f69",
+      "name": "Dual Management Node Database Needs Synchronization",
+      "comparisonOperator": "GreaterThan",
+      "period": 3600,
+      "namespace": "ZStack/MN",
+      "metricName": "TimeNeededToSyncDB",
+      "threshold": 0.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "712c3dec6aa94ed2b3bcd32192c22f69",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "a3905b37d5e8477dbe0fb75a30b8f21c",
+      "name": "SSD Remaining Life Expectancy",
+      "comparisonOperator": "LessThanOrEqualTo",
+      "period": 300,
+      "namespace": "ZStack/Host",
+      "metricName": "SSDLifeLeft",
+      "threshold": 20.0,
+      "repeatInterval": 300,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:36 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:36 PM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "a3905b37d5e8477dbe0fb75a30b8f21c",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:36 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:36 PM"
+        }
+      ],
+      "emergencyLevel": "Important"
+    },
+    {
+      "uuid": "b632652cc16044cdb6b4f516ed93a118",
+      "name": "System Data Directory Disk Capacity",
+      "comparisonOperator": "GreaterThanOrEqualTo",
+      "period": 60,
+      "namespace": "ZStack/System",
+      "metricName": "ManagementServerDirUsedCapacityInPercent",
+      "threshold": 70.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Aug 23, 2026 7:55:35 PM",
+      "labels": [
+        {
+          "uuid": "d64c024a7b434424a55fac001540d1f3",
+          "key": "DirPath",
+          "operator": "Equal",
+          "value": "/var/lib/zstack/",
+          "alarmUuid": "b632652cc16044cdb6b4f516ed93a118"
+        }
+      ],
+      "actions": [
+        {
+          "alarmUuid": "b632652cc16044cdb6b4f516ed93a118",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    },
+    {
+      "uuid": "ded02f9786444c6296e9bc3efb8eb484",
+      "name": "Data Storage Available Physical Capacity",
+      "comparisonOperator": "LessThan",
+      "period": 600,
+      "namespace": "ZStack/PrimaryStorage",
+      "metricName": "AvailablePhysicalCapacityInPercent",
+      "threshold": 20.0,
+      "repeatInterval": 1800,
+      "repeatCount": -1,
+      "status": "OK",
+      "state": "Enabled",
+      "enableRecovery": false,
+      "createDate": "Aug 23, 2026 7:55:35 PM",
+      "lastOpDate": "Sep 19, 2026 1:16:46 AM",
+      "labels": [],
+      "actions": [
+        {
+          "alarmUuid": "ded02f9786444c6296e9bc3efb8eb484",
+          "actionType": "sns",
+          "actionUuid": "e7d6f5e23bb74e99a2777126078b551c",
+          "createDate": "Aug 23, 2026 7:55:35 PM",
+          "lastOpDate": "Aug 23, 2026 7:55:35 PM"
+        }
+      ],
+      "emergencyLevel": "Emergent"
+    }
+  ],
+  "total": 18
+}

@@ -1,0 +1,418 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 10px;
+}
+
+/* 页内工具条（页面级过滤控件行） */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  border: 1px solid var(--ts-rule);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+}
+
+/* 段落说明文字（诊断页规则卡等） */
+.pageDesc {
+  font-size: 12px;
+  color: var(--ts-ink-2);
+  max-width: 98ch;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .twoCol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 10px;
+  border: 1px solid var(--ts-rule);
+  border-left: 3px solid var(--ts-rule-strong);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.listRow:hover {
+  background: #fbfcfd;
+}
+
+.listRowActive {
+  border-color: var(--ts-primary);
+  background: var(--ts-primary-soft);
+}
+
+.listRowTitle {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listRowMeta {
+  margin-left: auto;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 16px 12px;
+  font-size: 12px;
+  color: var(--ts-ink-3);
+}
+
+/* 健康页工作负载卡片 */
+
+.workloadGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 12px;
+}
+
+.wlCard {
+  border: 1px solid var(--ts-rule);
+  border-left: 3px solid var(--ts-rule-strong);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 370px) {
+  .workloadGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wlCard {
+    min-width: 0;
+  }
+
+  .wlId {
+    overflow-wrap: anywhere;
+  }
+}
+
+.wlHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.wlName {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wlTitle {
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wlId {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+}
+
+.wlScore {
+  margin-left: auto;
+  text-align: right;
+  font-family: var(--ts-mono);
+  line-height: 1.1;
+}
+
+.wlScoreValue {
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.wlScoreLabel {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+}
+
+.wlMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wlMetric {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  align-items: center;
+  font-size: 11px;
+}
+
+.wlMetricLabel {
+  color: var(--ts-ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wlMetricValue {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wlTrack {
+  grid-column: 1 / -1;
+  height: 4px;
+  background: #eef1f4;
+  border: 1px solid var(--ts-rule);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.wlFill {
+  height: 100%;
+}
+
+.wlFoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px dotted var(--ts-rule);
+  padding-top: 7px;
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+}
+
+.signalList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.signalRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-family: var(--ts-mono);
+}
+
+/* 详情页 */
+
+.detailHead {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.impactList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.impactRow {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px solid var(--ts-rule);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+  font-size: 12px;
+}
+
+.depthChip {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+}
+
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.suggestion {
+  border: 1px solid var(--ts-rule);
+  border-left: 3px solid var(--ts-primary);
+  border-radius: var(--ts-radius);
+  padding: 9px 11px;
+  background: var(--ts-surface);
+}
+
+.suggestionHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.suggestionTitle {
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+.suggestionAction {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+  margin-left: auto;
+}
+
+.suggRow {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 8px;
+  font-size: 12px;
+  padding: 3px 0;
+}
+
+.suggKey {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+
+.suggKeyBasis {
+  color: var(--ts-layer-container);
+}
+.suggKeyDetail {
+  color: var(--ts-primary);
+}
+.suggKeyRisk {
+  color: var(--ts-warning);
+}
+
+.suggVal {
+  color: var(--ts-ink-2);
+}
+
+.ruleCard {
+  border: 1px solid var(--ts-rule);
+  border-radius: var(--ts-radius);
+  background: var(--ts-surface);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ruleHead {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.ruleTitle {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.ruleMeta {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+}
+
+.yaml {
+  margin: 0;
+  padding: 10px;
+  background: #fbfcfd;
+  border: 1px solid var(--ts-rule);
+  border-radius: 2px;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  line-height: 1.65;
+  overflow: auto;
+  max-height: 320px;
+  white-space: pre;
+}
+
+.weightRow {
+  display: grid;
+  grid-template-columns: 1fr 46px;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+}
+
+.clauseList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.clause {
+  border: 1px solid var(--ts-rule);
+  border-radius: 2px;
+  padding: 6px 9px;
+  background: #fbfcfd;
+}
+
+.clauseHead {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.clauseSignal {
+  font-family: var(--ts-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.clauseDesc {
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  margin-top: 2px;
+}

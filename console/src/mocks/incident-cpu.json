@@ -1,0 +1,919 @@
+{
+  "incident": {
+    "incident_id": "inc-cf6d4dfcd64a",
+    "correlation_id": "cf6d4dfcd64a",
+    "title": "CPU 资源争抢（CPU Resource Contention）",
+    "rule": "cpu_contention",
+    "severity": "major",
+    "status": "open",
+    "match_score": 83,
+    "first_seen_at": "2026-09-20T08:28:47Z",
+    "last_seen_at": "2026-09-20T08:28:54Z",
+    "focus_resource": {
+      "resource_id": "container:e5d6f856a747",
+      "name": "cpu-stress",
+      "kind": "container"
+    },
+    "evidence_count": 7,
+    "affected_tasks": 1,
+    "summary": "PSI cpu.some 24.17% + nr_throttled 27 → inference 36.4s 任务超时（同 VM 跨容器）",
+    "source": "correlation_cluster"
+  },
+  "window": {
+    "from": "2026-09-20T08:24:54Z",
+    "to": "2026-09-20T08:28:54Z"
+  },
+  "source": {
+    "platform": "real",
+    "prometheus": "real",
+    "fixture": "mock"
+  },
+  "diagnosis": {
+    "diagnosis_id": "diag-20260920T082854Z-cpu_contention",
+    "rule": "cpu_contention",
+    "rule_version": 1,
+    "title": "CPU 资源争抢（CPU Resource Contention）",
+    "root_cause": "cpu_resource_contention",
+    "root_cause_label": "同 VM 内 CPU 争抢（可定位到具体压力源容器）",
+    "severity": "major",
+    "match_score": 83,
+    "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+    "score_breakdown": [
+      {
+        "dimension": "rule_match",
+        "label": "规则证据命中",
+        "score": 55,
+        "max": 55,
+        "detail": "4/4 条参与条款命中：psi_cpu_some_avg10 峰值 24.17%>5、cpu.cfs.throttled_periods Δ=27>0、cpu.stat.nr_throttled=27/417、llama_latency_p95_ms=36363>3000"
+      },
+      {
+        "dimension": "temporal_precedence",
+        "label": "时间优先性",
+        "score": 15,
+        "max": 15,
+        "detail": "本规则无 after 约束，不扣分（维度上限即得分）"
+      },
+      {
+        "dimension": "resource_adjacency",
+        "label": "资源邻接度",
+        "score": 6,
+        "max": 10,
+        "detail": "证据跨资源：cpu-stress / workload-vm / agent-service 同属 vm:63bbb461…，资源图 1 跳可达"
+      },
+      {
+        "dimension": "signal_strength",
+        "label": "信号强度",
+        "score": 7,
+        "max": 10,
+        "detail": "PSI 24.17% 持续递增（6.41 → 14.79 → 18.16 → 21.24 → 24.17），超过阈值 5% 近 5 倍"
+      },
+      {
+        "dimension": "independent_evidence",
+        "label": "独立证据数",
+        "score": 0,
+        "max": 10,
+        "detail": "仅覆盖 metric 类单一证据来源（cgroup 直读终值经 adapter 归一为 metric）"
+      }
+    ],
+    "evidence_ids": [
+      "ev-0061",
+      "ev-0062",
+      "ev-0063",
+      "ev-0064",
+      "ev-0065",
+      "ev-0066",
+      "ev-0067"
+    ],
+    "suggestions": [
+      {
+        "action": "adjust_cpu_limit",
+        "title": "调整 CPU limit / 权重",
+        "basis": "cpu.cfs.throttled_periods Δ=27 且 PSI cpu.some avg10 升至 24.17%",
+        "detail": "为 agent-service / llama-server 设置 cpu.weight，或提高其 cpu.max；同时下调 cpu-stress 的 cpu.max",
+        "risk": "单纯提高配额会挤占同 VM 其他负载，需按优先级分配（4 vCPU 总量固定）"
+      },
+      {
+        "action": "isolate_heavy_container",
+        "title": "隔离高负载容器",
+        "basis": "cpu-stress 的 usage_usec 达 81.5s / 窗口，显著高于同 VM 其他容器",
+        "detail": "将 cpu-stress 迁出该 VM 或限制其 cpu.max 至 1 vCPU 以下，恢复推理路径的调度份额",
+        "risk": "迁移需确认业务依赖（同 VM 网络/存储），演练环境可直接限流"
+      },
+      {
+        "action": "verify_baseline",
+        "title": "复核基线与阈值",
+        "basis": "PSI 阈值依赖基线，环境变更后需重新标定",
+        "detail": "重新采集空闲基线（当前基线 <1%），更新 rules/cpu.yaml 中的 op/value",
+        "risk": "阈值过松会漏报，过紧会误报"
+      }
+    ],
+    "alternatives": [
+      {
+        "rule": "container_oom",
+        "title": "容器内存耗尽（Container OOM）",
+        "root_cause": "container_memory_exhausted",
+        "match_score": 12,
+        "reason": "cpu-stress 的 memory.events.oom_kill = 0，memory.max = max（未设限），容器内存耗尽条款整体未命中"
+      },
+      {
+        "rule": "tool_failure",
+        "title": "Agent 工具调用失败（Agent Tool Failure）",
+        "root_cause": "tool_endpoint_unreachable",
+        "match_score": 21,
+        "reason": "存在 task.failed（reason=推理超时），但无传输层异常证据（无 RST / 无 retransmit / 无 connect error）"
+      }
+    ],
+    "window": {
+      "from": "2026-09-20T08:24:54Z",
+      "to": "2026-09-20T08:28:54Z"
+    },
+    "correlation_id": "cf6d4dfcd64a"
+  },
+  "candidates": [
+    {
+      "diagnosis_id": "diag-20260920T082854Z-cpu_contention",
+      "rule": "cpu_contention",
+      "rule_version": 1,
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "root_cause": "cpu_resource_contention",
+      "root_cause_label": "同 VM 内 CPU 争抢（可定位到具体压力源容器）",
+      "severity": "major",
+      "match_score": 83,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        {
+          "dimension": "rule_match",
+          "label": "规则证据命中",
+          "score": 55,
+          "max": 55,
+          "detail": "4/4 条命中"
+        },
+        {
+          "dimension": "temporal_precedence",
+          "label": "时间优先性",
+          "score": 15,
+          "max": 15,
+          "detail": "无 after 约束"
+        },
+        {
+          "dimension": "resource_adjacency",
+          "label": "资源邻接度",
+          "score": 6,
+          "max": 10,
+          "detail": "同 VM 跨容器"
+        },
+        {
+          "dimension": "signal_strength",
+          "label": "信号强度",
+          "score": 7,
+          "max": 10,
+          "detail": "PSI 24.17%，超阈值 4.8 倍"
+        },
+        {
+          "dimension": "independent_evidence",
+          "label": "独立证据数",
+          "score": 0,
+          "max": 10,
+          "detail": "仅 metric 一类"
+        }
+      ],
+      "evidence_ids": [
+        "ev-0061",
+        "ev-0062",
+        "ev-0063",
+        "ev-0064",
+        "ev-0065",
+        "ev-0066",
+        "ev-0067"
+      ],
+      "suggestions": [
+        {
+          "action": "adjust_cpu_limit",
+          "title": "调整 CPU limit / 权重",
+          "basis": "cpu.cfs.throttled_periods Δ=27 且 PSI cpu.some avg10 升至 24.17%",
+          "detail": "为 agent-service / llama-server 设置 cpu.weight，或提高其 cpu.max；同时下调 cpu-stress 的 cpu.max",
+          "risk": "单纯提高配额会挤占同 VM 其他负载，需按优先级分配（4 vCPU 总量固定）"
+        },
+        {
+          "action": "isolate_heavy_container",
+          "title": "隔离高负载容器",
+          "basis": "cpu-stress 的 usage_usec 达 81.5s / 窗口，显著高于同 VM 其他容器",
+          "detail": "将 cpu-stress 迁出该 VM 或限制其 cpu.max 至 1 vCPU 以下，恢复推理路径的调度份额",
+          "risk": "迁移需确认业务依赖（同 VM 网络/存储），演练环境可直接限流"
+        },
+        {
+          "action": "verify_baseline",
+          "title": "复核基线与阈值",
+          "basis": "PSI 阈值依赖基线，环境变更后需重新标定",
+          "detail": "重新采集空闲基线（当前基线 <1%），更新 rules/cpu.yaml 中的 op/value",
+          "risk": "阈值过松会漏报，过紧会误报"
+        }
+      ],
+      "alternatives": [],
+      "correlation_id": "cf6d4dfcd64a"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082854Z-tool_failure",
+      "rule": "tool_failure",
+      "rule_version": 1,
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "root_cause": "tool_endpoint_unreachable",
+      "root_cause_label": "目标端点不可达 / 依赖服务故障（或网络策略阻断）",
+      "severity": "major",
+      "match_score": 21,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        {
+          "dimension": "rule_match",
+          "label": "规则证据命中",
+          "score": 11,
+          "max": 55,
+          "detail": "1/3 条参与条款命中：task.failed（match_any=超时）命中；tool.result 无 error；无传输层信号"
+        },
+        {
+          "dimension": "temporal_precedence",
+          "label": "时间优先性",
+          "score": 0,
+          "max": 15,
+          "detail": "0/1 条 after 约束满足（tool.result 未命中）"
+        },
+        {
+          "dimension": "resource_adjacency",
+          "label": "资源邻接度",
+          "score": 0,
+          "max": 10,
+          "detail": "跨资源"
+        },
+        {
+          "dimension": "signal_strength",
+          "label": "信号强度",
+          "score": 0,
+          "max": 10,
+          "detail": "无高severity证据"
+        },
+        {
+          "dimension": "independent_evidence",
+          "label": "独立证据数",
+          "score": 10,
+          "max": 10,
+          "detail": "覆盖 app_event / metric 等 ≥3 类"
+        }
+      ],
+      "evidence_ids": [
+        "ev-0062",
+        "ev-0066"
+      ],
+      "suggestions": [
+        {
+          "action": "adjust_cpu_limit",
+          "title": "调整 CPU limit / 权重",
+          "basis": "cpu.cfs.throttled_periods Δ=27 且 PSI cpu.some avg10 升至 24.17%",
+          "detail": "为 agent-service / llama-server 设置 cpu.weight，或提高其 cpu.max；同时下调 cpu-stress 的 cpu.max",
+          "risk": "单纯提高配额会挤占同 VM 其他负载，需按优先级分配（4 vCPU 总量固定）"
+        },
+        {
+          "action": "isolate_heavy_container",
+          "title": "隔离高负载容器",
+          "basis": "cpu-stress 的 usage_usec 达 81.5s / 窗口，显著高于同 VM 其他容器",
+          "detail": "将 cpu-stress 迁出该 VM 或限制其 cpu.max 至 1 vCPU 以下，恢复推理路径的调度份额",
+          "risk": "迁移需确认业务依赖（同 VM 网络/存储），演练环境可直接限流"
+        },
+        {
+          "action": "verify_baseline",
+          "title": "复核基线与阈值",
+          "basis": "PSI 阈值依赖基线，环境变更后需重新标定",
+          "detail": "重新采集空闲基线（当前基线 <1%），更新 rules/cpu.yaml 中的 op/value",
+          "risk": "阈值过松会漏报，过紧会误报"
+        }
+      ],
+      "alternatives": [],
+      "correlation_id": "cf6d4dfcd64a"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082854Z-container_oom",
+      "rule": "container_oom",
+      "rule_version": 1,
+      "title": "容器内存耗尽（Container OOM）",
+      "root_cause": "container_memory_exhausted",
+      "root_cause_label": "容器 memory limit 与实际需求不匹配（或应用内存泄漏）",
+      "severity": "critical",
+      "match_score": 12,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        {
+          "dimension": "rule_match",
+          "label": "规则证据命中",
+          "score": 0,
+          "max": 55,
+          "detail": "0/2 条参与条款命中：oom_kill=0、memory.max=max（该容器不计判定）"
+        },
+        {
+          "dimension": "temporal_precedence",
+          "label": "时间优先性",
+          "score": 0,
+          "max": 15,
+          "detail": "0/1"
+        },
+        {
+          "dimension": "resource_adjacency",
+          "label": "资源邻接度",
+          "score": 10,
+          "max": 10,
+          "detail": "同 cpu-stress 容器"
+        },
+        {
+          "dimension": "signal_strength",
+          "label": "信号强度",
+          "score": 2,
+          "max": 10,
+          "detail": "severity=info"
+        },
+        {
+          "dimension": "independent_evidence",
+          "label": "独立证据数",
+          "score": 0,
+          "max": 10,
+          "detail": "0 类"
+        }
+      ],
+      "evidence_ids": [
+        "ev-0064",
+        "ev-0066"
+      ],
+      "suggestions": [
+        {
+          "action": "adjust_cpu_limit",
+          "title": "调整 CPU limit / 权重",
+          "basis": "cpu.cfs.throttled_periods Δ=27 且 PSI cpu.some avg10 升至 24.17%",
+          "detail": "为 agent-service / llama-server 设置 cpu.weight，或提高其 cpu.max；同时下调 cpu-stress 的 cpu.max",
+          "risk": "单纯提高配额会挤占同 VM 其他负载，需按优先级分配（4 vCPU 总量固定）"
+        },
+        {
+          "action": "isolate_heavy_container",
+          "title": "隔离高负载容器",
+          "basis": "cpu-stress 的 usage_usec 达 81.5s / 窗口，显著高于同 VM 其他容器",
+          "detail": "将 cpu-stress 迁出该 VM 或限制其 cpu.max 至 1 vCPU 以下，恢复推理路径的调度份额",
+          "risk": "迁移需确认业务依赖（同 VM 网络/存储），演练环境可直接限流"
+        },
+        {
+          "action": "verify_baseline",
+          "title": "复核基线与阈值",
+          "basis": "PSI 阈值依赖基线，环境变更后需重新标定",
+          "detail": "重新采集空闲基线（当前基线 <1%），更新 rules/cpu.yaml 中的 op/value",
+          "risk": "阈值过松会漏报，过紧会误报"
+        }
+      ],
+      "alternatives": [],
+      "correlation_id": "cf6d4dfcd64a"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-0061",
+      "signal": "cpu.cfs.throttled_periods",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:e5d6f856a747",
+      "resource_name": "cpu-stress",
+      "correlation_id": "cf6d4dfcd64a",
+      "observed_at": "2026-09-20T08:28:52Z",
+      "severity": "major",
+      "description": "cpu.cfs.throttled_periods Δ=27（27 / 389 周期被限流）",
+      "value": 27,
+      "baseline": 12,
+      "unit": "count",
+      "source_event_ids": [
+        "evt-prom-throttle-e5d6f856"
+      ],
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "promql": "increase(container_cpu_cfs_throttled_periods_total{name=\"cpu-stress\"}[4m])",
+        "cpu_cfs_throttled_periods_total": {
+          "min": 12,
+          "max": 27,
+          "last": 27,
+          "samples": 3
+        },
+        "cpu_cfs_periods_total": {
+          "min": 87,
+          "max": 389,
+          "last": 389,
+          "samples": 3
+        },
+        "container_id": "e5d6f856a7479da140ff982417fca98f8b2841cb8690af4b8289529525af8d7a"
+      }
+    },
+    {
+      "evidence_id": "ev-0062",
+      "signal": "psi_cpu_some_avg10",
+      "kind": "metric",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "cf6d4dfcd64a",
+      "observed_at": "2026-09-20T08:28:52Z",
+      "severity": "critical",
+      "description": "PSI cpu.some avg10 单调升至 24.17%（基线 <1%，阈值 5%）",
+      "value": 24.17,
+      "baseline": 0.93,
+      "unit": "percent",
+      "source_event_ids": [
+        "evt-vmagent-psi-1789892932"
+      ],
+      "origin": "vm-agent",
+      "mode": "real",
+      "payload": {
+        "origin": "cgroup",
+        "type": "metric",
+        "psi_cpu_some_avg10": 24.17,
+        "psi_cpu_full_avg10": 0,
+        "psi_io_some_avg10": 0,
+        "psi_mem_some_avg10": 0,
+        "ts": 1789892932106426280,
+        "wall": "2026-09-20T08:28:52Z",
+        "note": "PSI 仅存在于 vm-agent 事件流，Prometheus 未采集"
+      }
+    },
+    {
+      "evidence_id": "ev-0063",
+      "signal": "llama_latency_p95_ms",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:7c21e0b45a88",
+      "resource_name": "llama-server",
+      "correlation_id": "cf6d4dfcd64a",
+      "observed_at": "2026-09-20T08:28:54Z",
+      "severity": "major",
+      "description": "inference.result duration_ms=36363，窗口 P95 36.4s（阈值 3000ms）",
+      "value": 36363,
+      "baseline": 1000,
+      "unit": "ms",
+      "source_event_ids": [
+        "evt-app-inference-9025e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "inference.result",
+        "task_id": "task-1789892897-9025e6",
+        "correlation_id": "cf6d4dfcd64a",
+        "timestamp": "2026-09-20T08:28:54+0000",
+        "status": "ok",
+        "attributes": {
+          "duration_ms": 36363
+        },
+        "threshold": 3000
+      }
+    },
+    {
+      "evidence_id": "ev-0064",
+      "signal": "cpu.stat.nr_throttled",
+      "kind": "cgroup",
+      "layer": "container",
+      "resource_id": "container:e5d6f856a747",
+      "resource_name": "cpu-stress",
+      "correlation_id": "cf6d4dfcd64a",
+      "observed_at": "2026-09-20T08:28:54Z",
+      "severity": "major",
+      "description": "cgroup v2 直读：nr_throttled=27 / nr_periods=417，throttled_usec=11020",
+      "value": 27,
+      "baseline": 0,
+      "unit": "count",
+      "source_event_ids": [
+        "evt-cgroup-e5d6f856-cpustat"
+      ],
+      "origin": "cgroup",
+      "mode": "real",
+      "payload": {
+        "cgroup_path": "/sys/fs/cgroup/system.slice/docker-e5d6f856a7479da140ff982417fca98f8b2841cb8690af4b8289529525af8d7a.scope",
+        "cpu.stat": {
+          "usage_usec": 81495176,
+          "user_usec": 81464204,
+          "system_usec": 30972,
+          "nr_periods": 417,
+          "nr_throttled": 27,
+          "throttled_usec": 11020,
+          "nr_bursts": 0,
+          "burst_usec": 0
+        },
+        "memory.current": 14925824,
+        "memory.max": "max",
+        "memory.events": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "pid": 158699
+      }
+    },
+    {
+      "evidence_id": "ev-0065",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "correlation_id": "cf6d4dfcd64a",
+      "task_id": "task-1789892897-9025e6",
+      "observed_at": "2026-09-20T08:28:17Z",
+      "severity": "info",
+      "description": "task.started（question=CPU 争抢期间任务A）",
+      "unit": "none",
+      "source_event_ids": [
+        "evt-app-task-started-9025e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.started",
+        "task_id": "task-1789892897-9025e6",
+        "correlation_id": "cf6d4dfcd64a",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:28:17+0000",
+        "status": "ok",
+        "attributes": {
+          "question": "CPU 争抢期间任务A"
+        }
+      }
+    },
+    {
+      "evidence_id": "ev-0066",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "correlation_id": "cf6d4dfcd64a",
+      "task_id": "task-1789892897-9025e6",
+      "observed_at": "2026-09-20T08:28:17Z",
+      "severity": "info",
+      "description": "tool.result status=ok（duration_ms=1，未命中错误条款）",
+      "value": 1,
+      "unit": "ms",
+      "source_event_ids": [
+        "evt-app-tool-result-9025e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "tool.result",
+        "task_id": "task-1789892897-9025e6",
+        "correlation_id": "cf6d4dfcd64a",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:28:17+0000",
+        "status": "ok",
+        "attributes": {
+          "duration_ms": 1,
+          "result": "{'tool': 'mock-search', 'query': 'CPU 争抢期间任务A', 'results': [{'title': 'VM 内可观测性实践', 'score': 0.91}, ...]}"
+        }
+      }
+    },
+    {
+      "evidence_id": "ev-0067",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "correlation_id": "cf6d4dfcd64a",
+      "task_id": "task-1789892897-9025e6",
+      "observed_at": "2026-09-20T08:28:54Z",
+      "severity": "major",
+      "description": "task.finished 超时收口：推理耗时 36.4s 超出任务预算，业务侧判定失败",
+      "unit": "none",
+      "source_event_ids": [
+        "evt-app-task-finished-9025e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.finished",
+        "task_id": "task-1789892897-9025e6",
+        "correlation_id": "cf6d4dfcd64a",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:28:54+0000",
+        "status": "ok",
+        "attributes": {
+          "answer": "CPU 争抢期间，VM 内可观测性实践（VM 内可观测性实践）是最佳选择，因其能直接监控 CPU 负载与资源分配情况。"
+        },
+        "note": "SLA 口径：duration_ms=36363 超出 3s 预算，console 记为受影响任务"
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "observed_at": "2026-09-20T08:28:17Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "task.started（correlation cf6d4dfcd64a）",
+      "evidence_id": "ev-0065",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:17Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "tool.result",
+      "severity": "info",
+      "description": "tool.result status=ok duration_ms=1（工具链路正常，排除 Case3 型故障）",
+      "evidence_id": "ev-0066",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:22Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "warning",
+      "description": "PSI cpu.some avg10 跃升至 6.41%（越过 5% 阈值）",
+      "evidence_id": "ev-0062",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:27Z",
+      "layer": "container",
+      "resource_id": "container:e5d6f856a747",
+      "resource_name": "cpu-stress",
+      "signal": "cpu.stat.nr_throttled",
+      "severity": "major",
+      "description": "cpu.stat.nr_throttled=27 / nr_periods=417（限流累计 11020 usec）",
+      "evidence_id": "ev-0064",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:32Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "critical",
+      "description": "PSI cpu.some avg10 = 18.16%（持续攀升，非瞬时尖峰）",
+      "evidence_id": "ev-0062",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:47Z",
+      "layer": "container",
+      "resource_id": "container:e5d6f856a747",
+      "resource_name": "cpu-stress",
+      "signal": "cpu.cfs.throttled_periods",
+      "severity": "major",
+      "description": "cpu.cfs.throttled_periods Δ=27（cAdvisor 侧互证 cgroup 直读）",
+      "evidence_id": "ev-0061",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:52Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "psi_cpu_some_avg10",
+      "severity": "critical",
+      "description": "PSI cpu.some avg10 = 24.17%（窗口峰值）",
+      "evidence_id": "ev-0062",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:54Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "inference.result",
+      "severity": "major",
+      "description": "inference.result duration_ms=36363（P95 阈值 3000ms）",
+      "evidence_id": "ev-0063",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:54Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892897-9025e6",
+      "resource_name": "task-1789892897-9025e6",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "任务以 36.4s 超时收口（受影响任务计 1）",
+      "evidence_id": "ev-0067",
+      "incident_id": "inc-cf6d4dfcd64a"
+    },
+    {
+      "observed_at": "2026-09-20T08:28:54Z",
+      "layer": "zsvirt",
+      "resource_id": "host:cbb61d8a",
+      "resource_name": "host-1 (GPU1)",
+      "signal": "zsvirt.alarm",
+      "severity": "warning",
+      "description": "ZSvirt 告警：workload-vm CPU 利用率持续超阈值 30s",
+      "evidence_id": "ev-0080",
+      "incident_id": "inc-cf6d4dfcd64a"
+    }
+  ],
+  "impact": {
+    "focus": {
+      "resource_id": "container:e5d6f856a747",
+      "name": "cpu-stress",
+      "kind": "container"
+    },
+    "counts": {
+      "tasks": 1,
+      "services": 1,
+      "containers": 2,
+      "vms": 1
+    },
+    "scope": [
+      {
+        "resource_id": "task:task-1789892897-9025e6",
+        "kind": "task",
+        "name": "task-1789892897-9025e6",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "CPU 争抢期间任务A · 推理 36.4s 超时 · correlation cf6d4dfcd64a"
+      },
+      {
+        "resource_id": "container:7c21e0b45a88",
+        "kind": "container",
+        "name": "llama-server",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "healthy",
+        "detail": "推理后端被 CPU 争抢影响，P95 由 <1s 升至 36.4s"
+      },
+      {
+        "resource_id": "service:svc-agent",
+        "kind": "service",
+        "name": "agent-service",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "编排入口，任务超时在应用层表现"
+      },
+      {
+        "resource_id": "container:e5d6f856a747",
+        "kind": "container",
+        "name": "cpu-stress",
+        "relation": "contains",
+        "depth": 0,
+        "status": "warning",
+        "detail": "压力源容器（focus）：nr_throttled 27，usage_usec 81.5s"
+      },
+      {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "kind": "vm",
+        "name": "workload-vm",
+        "relation": "contains",
+        "depth": 2,
+        "status": "warning",
+        "detail": "争抢边界：同 VM 内跨容器资源博弈（4 vCPU）"
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "container:e5d6f856a747",
+        "label": "cpu-stress",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "CPU 压力源（focus）",
+        "status": "warning",
+        "incident_count": 1,
+        "badges": [
+          "nr_throttled 27/417"
+        ],
+        "metrics": [
+          {
+            "name": "cpu.cfs.throttled_periods",
+            "value": 27,
+            "unit": "count"
+          }
+        ]
+      },
+      {
+        "id": "container:7c21e0b45a88",
+        "label": "llama-server",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "推理后端 · P95 36.4s",
+        "status": "healthy",
+        "incident_count": 0,
+        "badges": [
+          "latency ↑"
+        ],
+        "metrics": [
+          {
+            "name": "llama_latency_p95_ms",
+            "value": 36363,
+            "unit": "ms"
+          }
+        ]
+      },
+      {
+        "id": "task:task-1789892897-9025e6",
+        "label": "task-…9025e6",
+        "kind": "task",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "correlation cf6d4dfcd64a",
+        "status": "warning",
+        "incident_count": 1,
+        "badges": [
+          "超时 36.4s"
+        ],
+        "metrics": []
+      },
+      {
+        "id": "container:1f0a4c9b2d33",
+        "label": "agent-service",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "Agent 编排入口",
+        "status": "warning",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "service:svc-agent",
+        "label": "agent-service",
+        "kind": "service",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "任务编排（未在本次候选命中，但为影响路径一环）",
+        "status": "healthy",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "label": "workload-vm",
+        "kind": "vm",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "PSI cpu.some 24.17%",
+        "status": "warning",
+        "incident_count": 0,
+        "badges": [
+          "PSI ↑"
+        ],
+        "metrics": [
+          {
+            "name": "psi_cpu_some_avg10",
+            "value": 24.17,
+            "unit": "percent"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "sg-c1",
+        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "target": "container:e5d6f856a747",
+        "relation": "contains",
+        "label": "contains"
+      },
+      {
+        "id": "sg-c2",
+        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "target": "container:7c21e0b45a88",
+        "relation": "contains",
+        "label": "contains"
+      },
+      {
+        "id": "sg-c3",
+        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "target": "container:1f0a4c9b2d33",
+        "relation": "contains",
+        "label": "contains"
+      },
+      {
+        "id": "sg-c4",
+        "source": "container:1f0a4c9b2d33",
+        "target": "service:svc-agent",
+        "relation": "runs_on",
+        "label": "runs_on"
+      },
+      {
+        "id": "sg-c5",
+        "source": "service:svc-agent",
+        "target": "task:task-1789892897-9025e6",
+        "relation": "calls",
+        "label": "calls"
+      },
+      {
+        "id": "sg-c6",
+        "source": "task:task-1789892897-9025e6",
+        "target": "container:7c21e0b45a88",
+        "relation": "depends_on",
+        "label": "depends_on"
+      }
+    ]
+  }
+}

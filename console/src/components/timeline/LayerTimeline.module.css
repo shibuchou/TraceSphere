@@ -1,0 +1,152 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ts-rule);
+  background: #fafbfc;
+}
+
+.stream {
+  display: flex;
+  flex-direction: column;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: 78px 82px 18px 1fr;
+  align-items: stretch;
+}
+
+.timeCell {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  padding: 8px 8px 0 12px;
+  text-align: right;
+  border-right: 1px solid var(--ts-rule);
+  font-variant-numeric: tabular-nums;
+}
+
+.layerCell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 8px 6px 0 8px;
+}
+
+/* 因果刻度尺：左侧竖线 + 每条事件一个刻度，颜色即层级 */
+.rail {
+  position: relative;
+  padding-top: 8px;
+}
+
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--ts-rule);
+}
+
+.tick {
+  position: absolute;
+  left: 4px;
+  width: 9px;
+  height: 2px;
+  background: var(--ts-ink-3);
+}
+
+.tickDot {
+  position: absolute;
+  left: 5.5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1.4px solid var(--ts-ink-3);
+  background: var(--ts-surface);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  padding: 7px 12px 7px 4px;
+  border-bottom: 1px dotted var(--ts-rule);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.signal {
+  font-family: var(--ts-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 12px;
+  color: var(--ts-ink-2);
+  margin-top: 1px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 3px;
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+  border-top: 1px solid var(--ts-rule);
+  background: #fafbfc;
+  font-size: 11px;
+  color: var(--ts-ink-2);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+}
+
+.chip {
+  width: 12px;
+  height: 3px;
+  flex: none;
+}
+
+.empty {
+  padding: 18px 12px;
+  font-size: 12px;
+  color: var(--ts-ink-3);
+}

@@ -1,0 +1,4498 @@
+{
+  "scenario": "case1-oom",
+  "description": "真实环境抓取（2026-09-21，GPU1 + workload-vm）：OOM 演练任务 - 期望工具调用失败",
+  "mode": "real",
+  "window": {
+    "from": "2026-09-30T14:04:26Z",
+    "to": "2026-09-30T14:14:26Z",
+    "seconds": 600
+  },
+  "focus": {
+    "correlation_id": "bb03e1b2c022"
+  },
+  "resources": [
+    {
+      "resource_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "kind": "cluster",
+      "name": "Cluster-1",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "zstack"
+      },
+      "attributes": {
+        "hypervisorType": "KVM",
+        "raw": {
+          "architecture": "x86_64",
+          "createDate": "Sep 19, 2026 12:34:56 AM",
+          "hypervisorType": "KVM",
+          "lastOpDate": "Sep 19, 2026 12:42:53 AM",
+          "name": "Cluster-1",
+          "state": "Enabled",
+          "type": "zstack",
+          "uuid": "a29a9e1c13ac4017a187e30fca573625",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        }
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "kind": "container",
+      "name": "llama-server",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "kind": "container",
+      "name": "5958daac075f",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "origin": "ebpf",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "memory.events.oom_kill",
+        "last_observed_at": "2026-09-30T14:14:01.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:01Z"
+    },
+    {
+      "resource_id": "container:6808d8574a1b",
+      "kind": "container",
+      "name": "6808d8574a1b",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "tool.call",
+        "last_observed_at": "2026-09-30T14:14:03.000Z",
+        "status": "ok"
+      },
+      "observed_at": "2026-09-30T14:14:03Z"
+    },
+    {
+      "resource_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "kind": "container",
+      "name": "agent-service",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "kind": "container",
+      "name": "cadvisor",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "kind": "container",
+      "name": "prometheus",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "kind": "container",
+      "name": "mock-dcgm",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "kind": "container",
+      "name": "tool-service",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "kind": "container",
+      "name": "toxiproxy",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z"
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "datastore:2fa50ded127743859cf2bb80e9d3a25a",
+      "kind": "datastore",
+      "name": "bs-local",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "ImageStoreBackupStorage"
+      },
+      "attributes": {
+        "availableCapacity": 56600891392,
+        "raw": {
+          "attachedZoneUuids": [
+            "26fd04cdf31047e4a96aff5e41225420"
+          ],
+          "availableCapacity": 56600891392,
+          "createDate": "Sep 19, 2026 12:43:37 AM",
+          "hostname": "192.168.122.123",
+          "lastOpDate": "Sep 30, 2026 10:13:34 PM",
+          "name": "bs-local",
+          "sshPort": 22,
+          "state": "Enabled",
+          "status": "Connected",
+          "totalCapacity": 97801142272,
+          "type": "ImageStoreBackupStorage",
+          "url": "/var/lib/zstack/imagestore-bs",
+          "username": "root",
+          "uuid": "2fa50ded127743859cf2bb80e9d3a25a"
+        },
+        "totalCapacity": 97801142272
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "datastore:4a0ecf3f472c4042aa4f9f9d36494b11",
+      "kind": "datastore",
+      "name": "ps-local",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "LocalStorage"
+      },
+      "attributes": {
+        "availableCapacity": 30104720896,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "availableCapacity": 30104720896,
+          "availablePhysicalCapacity": 56600911872,
+          "createDate": "Sep 19, 2026 12:43:32 AM",
+          "lastOpDate": "Sep 19, 2026 12:43:32 AM",
+          "mountPath": "/var/lib/zstack/ps-local",
+          "name": "ps-local",
+          "state": "Enabled",
+          "status": "Connected",
+          "systemUsedCapacity": 24121491456,
+          "totalCapacity": 97801142272,
+          "totalPhysicalCapacity": 97801142272,
+          "type": "LocalStorage",
+          "url": "/var/lib/zstack/ps-local",
+          "uuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "totalCapacity": 97801142272
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "gpu:mock-gpu0",
+      "kind": "gpu",
+      "name": "Mock GPU 0 (DCGM)",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "host_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "state": "online",
+      "origin": "mock",
+      "mode": "mock",
+      "labels": {
+        "mock": "true",
+        "vendor": "NVIDIA (Mock)"
+      },
+      "attributes": {
+        "driver": "mock-dcgm",
+        "last_event_type": "gpu.metric",
+        "last_observed_at": "2026-09-30T14:14:23.000Z",
+        "memory_total_bytes": 8589934592,
+        "note": "无 GPU 硬件的模拟数据源（赛题 §4 降级模式）"
+      },
+      "observed_at": "2026-09-30T14:14:23Z"
+    },
+    {
+      "resource_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "kind": "host",
+      "name": "host-1",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.hypervisor": "KVM",
+        "zsvirt.status": "Connected"
+      },
+      "attributes": {
+        "availableCpuCapacity": 116,
+        "availableMemoryCapacity": 12229926912,
+        "cpuNum": 12,
+        "cpuSpeed": null,
+        "managementIp": "192.168.122.123",
+        "osDistribution": "helix",
+        "raw": {
+          "architecture": "x86_64",
+          "availableCpuCapacity": 116,
+          "availableMemoryCapacity": 12229926912,
+          "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+          "cpuNum": 12,
+          "cpuSockets": 12,
+          "cpuStatus": "Unknown",
+          "createDate": "Sep 19, 2026 12:40:44 AM",
+          "diskStatus": "Unknown",
+          "fanStatus": "Unknown",
+          "gpuStatus": "Unknown",
+          "hostname": "zsvirt-mn",
+          "hypervisorType": "KVM",
+          "ipmiPort": 623,
+          "ipmiPowerStatus": "UN_CONFIGURED",
+          "iscsiInitiatorName": "iqn.2015-01.io.helix:ba32b97357d",
+          "lastOpDate": "Sep 19, 2026 1:41:10 AM",
+          "managementIp": "192.168.122.123",
+          "memoryStatus": "Unknown",
+          "name": "host-1",
+          "nicStatus": "Unknown",
+          "nqn": "nqn.2014-08.org.nvmexpress:uuid:ad352a43-fe00-4df4-b2e1-e65d89b6d1dd",
+          "osDistribution": "helix",
+          "osRelease": "Green Obsidian",
+          "osVersion": "8.4",
+          "powerSupplyStatus": "Unknown",
+          "raidStatus": "Unknown",
+          "sshPort": 22,
+          "state": "Enabled",
+          "status": "Connected",
+          "temperatureStatus": "Unknown",
+          "totalCpuCapacity": 120,
+          "totalMemoryCapacity": 16524894208,
+          "username": "root",
+          "uuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "totalCpuCapacity": 120,
+        "totalMemoryCapacity": 16524894208
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "image:f39ba0991de143e6b76b0887e19edb0a",
+      "kind": "image",
+      "name": "ubuntu-24.04-cloudimg",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.format": "qcow2",
+        "zsvirt.platform": "Linux"
+      },
+      "attributes": {
+        "actualSize": 625256960,
+        "architecture": "x86_64",
+        "format": "qcow2",
+        "mediaType": "RootVolumeTemplate",
+        "platform": "Linux",
+        "raw": {
+          "actualSize": 625256960,
+          "architecture": "x86_64",
+          "backupStorageRefs": [
+            {
+              "backupStorageUuid": "2fa50ded127743859cf2bb80e9d3a25a",
+              "createDate": "Sep 19, 2026 12:50:44 AM",
+              "id": 1,
+              "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+              "installPath": "zstore://f39ba0991de143e6b76b0887e19edb0a/9dee208e02952ea357be268f244d0ec95eb2fca9",
+              "lastOpDate": "Sep 19, 2026 12:50:45 AM",
+              "status": "Ready"
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:50:44 AM",
+          "format": "qcow2",
+          "guestOsType": "Linux",
+          "lastOpDate": "Sep 19, 2026 12:50:45 AM",
+          "mediaType": "RootVolumeTemplate",
+          "name": "ubuntu-24.04-cloudimg",
+          "platform": "Linux",
+          "size": 3758096384,
+          "state": "Enabled",
+          "status": "Ready",
+          "system": false,
+          "type": "zstack",
+          "url": "file:///var/lib/zstack/imagestore-bs/ubuntu-24.04.img",
+          "uuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "virtio": true
+        },
+        "size": 3758096384,
+        "status": "Ready",
+        "system": false
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "network:04eb58aa1a704dd3ab227bd3de1ee786",
+      "kind": "network",
+      "name": "L2PortGroup-vlan-2344-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "portGroup",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "bridgeName": "br_dvs0_2344",
+              "createDate": "Sep 19, 2026 12:44:44 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:44:44 AM",
+          "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+          "name": "L2PortGroup-vlan-2344-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+          "physicalInterface": "",
+          "type": "portGroup",
+          "uuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+          "vSwitchType": "LinuxBridge",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "virtualNetworkId": 2344,
+          "vlanId": 2344,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 2344,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "network:26391fe900e44409b3d2a37721b08f76",
+      "kind": "network",
+      "name": "pg-demo",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l3-networks",
+        "zsvirt.category": "Private",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l3-networks",
+        "apiType": "portGroup",
+        "category": "Private",
+        "dns": [
+          "223.5.5.5"
+        ],
+        "enableIPAM": true,
+        "ipRanges": [
+          {
+            "createDate": "Sep 19, 2026 12:45:03 AM",
+            "endIp": "10.100.0.250",
+            "gateway": "10.100.0.1",
+            "ipVersion": 4,
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+            "name": "range-demo",
+            "netmask": "255.255.255.0",
+            "networkCidr": "10.100.0.0/24",
+            "prefixLen": 24,
+            "startIp": "10.100.0.10",
+            "uuid": "929a7b204f8443b286099b280fecbee9"
+          }
+        ],
+        "ipVersion": 4,
+        "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+        "networkCidr": null,
+        "networkServices": [
+          {
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+            "networkServiceType": "Userdata"
+          },
+          {
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+            "networkServiceType": "DHCP"
+          }
+        ],
+        "physicalInterface": null,
+        "raw": {
+          "category": "Private",
+          "createDate": "Sep 19, 2026 12:44:44 AM",
+          "description": "TraceSphere workload network",
+          "dns": [
+            "223.5.5.5"
+          ],
+          "enableIPAM": true,
+          "hostRoute": [],
+          "ipRanges": [
+            {
+              "createDate": "Sep 19, 2026 12:45:03 AM",
+              "endIp": "10.100.0.250",
+              "gateway": "10.100.0.1",
+              "ipVersion": 4,
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+              "name": "range-demo",
+              "netmask": "255.255.255.0",
+              "networkCidr": "10.100.0.0/24",
+              "prefixLen": 24,
+              "startIp": "10.100.0.10",
+              "uuid": "929a7b204f8443b286099b280fecbee9"
+            }
+          ],
+          "ipVersion": 4,
+          "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+          "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+          "name": "pg-demo",
+          "networkServices": [
+            {
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+              "networkServiceType": "Userdata"
+            },
+            {
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+              "networkServiceType": "DHCP"
+            }
+          ],
+          "reservedIpRanges": [],
+          "state": "Enabled",
+          "system": false,
+          "type": "portGroup",
+          "uuid": "26391fe900e44409b3d2a37721b08f76",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vlanId": 2344,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": null,
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 2344,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "network:a66f6d6554a84c98884d49275e9613af",
+      "kind": "network",
+      "name": "DPortGroup 0",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l3-networks",
+        "zsvirt.category": "Private",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l3-networks",
+        "apiType": "portGroup",
+        "category": "Private",
+        "dns": [
+          "223.5.5.5"
+        ],
+        "enableIPAM": false,
+        "ipRanges": [],
+        "ipVersion": 4,
+        "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+        "networkCidr": null,
+        "networkServices": [],
+        "physicalInterface": null,
+        "raw": {
+          "category": "Private",
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "dns": [
+            "223.5.5.5"
+          ],
+          "enableIPAM": false,
+          "hostRoute": [],
+          "ipRanges": [],
+          "ipVersion": 4,
+          "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "DPortGroup 0",
+          "networkServices": [],
+          "reservedIpRanges": [],
+          "state": "Enabled",
+          "system": true,
+          "type": "portGroup",
+          "uuid": "a66f6d6554a84c98884d49275e9613af",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vlanId": 0,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": null,
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 0,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "network:ad7a0511bb90468eb641f4378f870a0e",
+      "kind": "network",
+      "name": "L2PortGroup-noVlan-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "portGroup",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "bridgeName": "br_dvs0",
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "L2PortGroup-noVlan-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+          "physicalInterface": "",
+          "type": "portGroup",
+          "uuid": "ad7a0511bb90468eb641f4378f870a0e",
+          "vSwitchType": "LinuxBridge",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "virtualNetworkId": 0,
+          "vlanId": 0,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 0,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "network:db58a900bd344ba8ba6904ff7b7ce9e9",
+      "kind": "network",
+      "name": "DSwitch 0",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "virtualSwitch"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "virtualSwitch",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "isDistributed": true,
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "DSwitch 0",
+          "physicalInterface": "",
+          "portGroups": [
+            {
+              "category": "Private",
+              "createDate": "Sep 19, 2026 12:44:44 AM",
+              "description": "TraceSphere workload network",
+              "dns": [
+                "223.5.5.5"
+              ],
+              "enableIPAM": true,
+              "hostRoute": [],
+              "ipRanges": [
+                {
+                  "createDate": "Sep 19, 2026 12:45:03 AM",
+                  "endIp": "10.100.0.250",
+                  "gateway": "10.100.0.1",
+                  "ipVersion": 4,
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+                  "name": "range-demo",
+                  "netmask": "255.255.255.0",
+                  "networkCidr": "10.100.0.0/24",
+                  "prefixLen": 24,
+                  "startIp": "10.100.0.10",
+                  "uuid": "929a7b204f8443b286099b280fecbee9"
+                }
+              ],
+              "ipVersion": 4,
+              "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+              "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+              "name": "pg-demo",
+              "networkServices": [
+                {
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+                  "networkServiceType": "DHCP"
+                },
+                {
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+                  "networkServiceType": "Userdata"
+                }
+              ],
+              "reservedIpRanges": [],
+              "state": "Enabled",
+              "system": false,
+              "type": "portGroup",
+              "uuid": "26391fe900e44409b3d2a37721b08f76",
+              "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "vlanId": 2344,
+              "vlanMode": "ACCESS",
+              "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+            },
+            {
+              "category": "Private",
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "dns": [
+                "223.5.5.5"
+              ],
+              "enableIPAM": false,
+              "hostRoute": [],
+              "ipRanges": [],
+              "ipVersion": 4,
+              "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "name": "DPortGroup 0",
+              "networkServices": [],
+              "reservedIpRanges": [],
+              "state": "Enabled",
+              "system": true,
+              "type": "portGroup",
+              "uuid": "a66f6d6554a84c98884d49275e9613af",
+              "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "vlanId": 0,
+              "vlanMode": "ACCESS",
+              "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+            }
+          ],
+          "type": "virtualSwitch",
+          "uuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vSwitchIndex": 0,
+          "vSwitchType": "LinuxBridge",
+          "virtualNetworkId": 0,
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": null,
+        "vlanId": null,
+        "vlanMode": null
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "offering:21830e28a8f74391ba2a5fe46aca85af",
+      "kind": "offering",
+      "name": "off-small",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "InstanceOffering"
+      },
+      "attributes": {
+        "cpuNum": 4,
+        "cpuSpeed": 0,
+        "memorySize": 4294967296,
+        "raw": {
+          "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+          "cpuNum": 4,
+          "cpuSpeed": 0,
+          "createDate": "Sep 19, 2026 12:50:55 AM",
+          "description": "4 vCPU / 4 GiB for workload VM",
+          "lastOpDate": "Sep 19, 2026 12:50:55 AM",
+          "memorySize": 4294967296,
+          "name": "off-small",
+          "reservedMemorySize": 0,
+          "sortKey": 0,
+          "state": "Enabled",
+          "type": "UserVm",
+          "uuid": "21830e28a8f74391ba2a5fe46aca85af"
+        },
+        "type": "UserVm"
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "service:agent-service",
+      "kind": "service",
+      "name": "agent-service",
+      "correlation_id": "bb03e1b2c022",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "tool.call",
+        "last_observed_at": "2026-09-30T14:14:03.000Z",
+        "status": "ok"
+      },
+      "observed_at": "2026-09-30T14:14:03Z"
+    },
+    {
+      "resource_id": "task:task-1790777643-6c8778",
+      "kind": "task",
+      "name": "task-1790777643-6c8778",
+      "correlation_id": "bb03e1b2c022",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "tool.call",
+        "last_observed_at": "2026-09-30T14:14:03.000Z",
+        "status": "ok"
+      },
+      "observed_at": "2026-09-30T14:14:03Z"
+    },
+    {
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "kind": "vm",
+      "name": "workload-vm",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "host_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "state": "Running",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.platform": "Linux",
+        "zsvirt.type": "UserVm"
+      },
+      "attributes": {
+        "cpuNum": 4,
+        "cpuSpeed": 0,
+        "createDate": "Sep 19, 2026 1:16:29 AM",
+        "defaultL3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+        "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+        "instanceOfferingUuid": "21830e28a8f74391ba2a5fe46aca85af",
+        "ips": [],
+        "lastOpDate": "Sep 19, 2026 9:04:35 AM",
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:14:21.000Z",
+        "macs": [
+          "fa:6f:c9:04:b0:00"
+        ],
+        "memorySize": 4294967296,
+        "nics": [
+          {
+            "createDate": "Sep 19, 2026 1:16:29 AM",
+            "deviceId": 0,
+            "driverType": "virtio",
+            "hypervisorType": "KVM",
+            "internalName": "vnic2.0",
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+            "mac": "fa:6f:c9:04:b0:00",
+            "state": "enable",
+            "type": "VNIC",
+            "usedIps": [],
+            "uuid": "bdedd41023d849158577b973e1116869",
+            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+          }
+        ],
+        "raw": {
+          "allVolumes": [
+            {
+              "actualSize": 13738508288,
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+              "deviceId": 0,
+              "format": "qcow2",
+              "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+              "isShareable": false,
+              "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+              "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+              "name": "ROOT-for-workload-vm",
+              "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+              "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+              "size": 42949672960,
+              "state": "Enabled",
+              "status": "Ready",
+              "type": "Root",
+              "uuid": "c6114309f9d34fa980a00a4895383654",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+          "architecture": "x86_64",
+          "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+          "cpuNum": 4,
+          "cpuSpeed": 0,
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "defaultL3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "guestOsType": "Linux",
+          "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "hypervisorType": "KVM",
+          "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "instanceOfferingUuid": "21830e28a8f74391ba2a5fe46aca85af",
+          "lastHostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "lastOpDate": "Sep 19, 2026 9:04:35 AM",
+          "memorySize": 4294967296,
+          "name": "workload-vm",
+          "platform": "Linux",
+          "reservedMemorySize": 0,
+          "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
+          "state": "Running",
+          "type": "UserVm",
+          "uuid": "63bbb4613a524e4e97090600af03da93",
+          "vmCdRoms": [
+            {
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "deviceId": 0,
+              "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+              "name": "vm-63bbb4613a524e4e97090600af03da93-cdRom",
+              "uuid": "461320dbc7b84b01a05d26fdf244047e",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "vmNics": [
+            {
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "deviceId": 0,
+              "driverType": "virtio",
+              "hypervisorType": "KVM",
+              "internalName": "vnic2.0",
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+              "mac": "fa:6f:c9:04:b0:00",
+              "state": "enable",
+              "type": "VNIC",
+              "usedIps": [],
+              "uuid": "bdedd41023d849158577b973e1116869",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
+        "volumes": [
+          {
+            "actualSize": 13738508288,
+            "createDate": "Sep 19, 2026 1:16:29 AM",
+            "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+            "deviceId": 0,
+            "format": "qcow2",
+            "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+            "isShareable": false,
+            "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+            "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+            "name": "ROOT-for-workload-vm",
+            "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+            "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+            "size": 42949672960,
+            "state": "Enabled",
+            "status": "Ready",
+            "type": "Root",
+            "uuid": "c6114309f9d34fa980a00a4895383654",
+            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+          }
+        ]
+      },
+      "observed_at": "2026-09-30T14:14:21Z"
+    },
+    {
+      "resource_id": "volume:c6114309f9d34fa980a00a4895383654",
+      "kind": "volume",
+      "name": "ROOT-for-workload-vm",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "Root"
+      },
+      "attributes": {
+        "deviceId": 0,
+        "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+        "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+        "raw": {
+          "actualSize": 13738508288,
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+          "deviceId": 0,
+          "format": "qcow2",
+          "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+          "isShareable": false,
+          "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+          "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+          "name": "ROOT-for-workload-vm",
+          "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+          "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "size": 42949672960,
+          "state": "Enabled",
+          "status": "Ready",
+          "type": "Root",
+          "uuid": "c6114309f9d34fa980a00a4895383654",
+          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+        },
+        "size": 42949672960
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    },
+    {
+      "resource_id": "zone:26fd04cdf31047e4a96aff5e41225420",
+      "kind": "zone",
+      "name": "Datacenter-1",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "zstack"
+      },
+      "attributes": {
+        "raw": {
+          "createDate": "Sep 19, 2026 12:34:56 AM",
+          "description": "TraceSphere demo",
+          "isDefault": false,
+          "lastOpDate": "Sep 19, 2026 12:34:56 AM",
+          "name": "Datacenter-1",
+          "state": "Enabled",
+          "type": "zstack",
+          "uuid": "26fd04cdf31047e4a96aff5e41225420"
+        }
+      },
+      "observed_at": "2026-09-30T14:13:45Z"
+    }
+  ],
+  "edges": [
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:6808d8574a1b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "service:agent-service",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "task:task-1790777643-6c8778",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:6808d8574a1b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "service:agent-service",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "task:task-1790777643-6c8778",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "prom-14aa5748",
+      "signal": "memory.current_ratio",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "observed_at": null,
+      "severity": "info",
+      "description": "memory.current_ratio（窗口峰值 0 ratio）",
+      "value": 0,
+      "unit": "ratio",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-04e0639c",
+      "signal": "psi_mem_full_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:45Z",
+      "severity": "info",
+      "description": "psi_mem_full_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-0a1cd48d",
+      "signal": "psi_cpu_full_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:45Z",
+      "severity": "info",
+      "description": "psi_cpu_full_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-3832705e",
+      "signal": "psi_mem_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:45Z",
+      "severity": "info",
+      "description": "psi_mem_some_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "evd-449a43705e074378",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:53Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on workload-vm severity=critical",
+      "source_event_ids": [
+        "evt-58cb834188f04aa8"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "systemd",
+          "pid": 1
+        },
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-e18263b92d9b4bac",
+      "signal": "memory.events.oom_kill",
+      "kind": "cgroup",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:53Z",
+      "severity": "critical",
+      "description": "memory.events.oom_kill 窗口内合计 Δ=7（7 次采样命中）",
+      "value": 7,
+      "unit": "count",
+      "source_event_ids": [
+        "evt-e1e85faa869d4d12",
+        "evt-46947151fa93401f",
+        "evt-2ae60de5e0414fbe",
+        "evt-11c79e6e087c44bb",
+        "evt-3f36ca9882754896",
+        "evt-d5e0d21167da47ba",
+        "evt-e8288aa55c25476f"
+      ],
+      "origin": "cgroup",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "memcg": "docker-5958daac075f.scope",
+          "pid": "1913977"
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "delta": 1,
+        "evidence": "kernel oom-kill log (vm-agent journal poll)",
+        "memcg": "docker-5958daac075f.scope",
+        "pid": "1913977",
+        "samples": 7,
+        "task": "python",
+        "unit": "count",
+        "value": 1,
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "ev-1bf104f8",
+      "signal": "gpu.memory_used_ratio",
+      "kind": "metric",
+      "layer": "",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:53Z",
+      "severity": "info",
+      "description": "gpu.memory_used_ratio（窗口峰值 0.23 ratio）",
+      "value": 0.23,
+      "unit": "ratio",
+      "origin": "gpu",
+      "mode": "mock",
+      "payload": {
+        "gpu_memory_total_bytes": 8589934592,
+        "gpu_memory_used_bytes": 1975684956
+      }
+    },
+    {
+      "evidence_id": "evd-ae197ea1049a42b9",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:54Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-ad3a51ff6f3c4e85"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1915959
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-be7a50e0b6eb4cf6",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:54Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-9c9f15044ce641a4"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1916054
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-b5fd9e6c81c7441d",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:55Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-a87d23f488524393"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1916140
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-83943ed8ff004d0a",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:56Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-981d48da363d4c82"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1916224
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-4603a190eebc4d75",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:13:58Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-7429044174e34979"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1916311
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-8d58811429d04aa1",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:14:01Z",
+      "severity": "critical",
+      "description": "oom.ebpf [ebpf] on 5958daac075f severity=critical",
+      "source_event_ids": [
+        "evt-cce63bda2ecf4b0d"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "python",
+          "pid": 1916419
+        },
+        "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "ev-21b87ecd",
+      "signal": "psi_io_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:14:01Z",
+      "severity": "info",
+      "description": "psi_io_some_avg10（窗口峰值 1.38 percent）",
+      "value": 1.38,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "evd-4391b37350a04735",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "info",
+      "description": "tool.call [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-b5bb7ee5acf047c1"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "target": "http://toxiproxy:8666/tool",
+          "tool": "mock-search"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-6316edfe85ec45f2",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "major",
+      "description": "tool.result [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-08a774ffb6a748ae"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "error": "[Errno 104] Connection reset by peer"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-6c604a8327ca457d",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "major",
+      "description": "task.failed [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-201ab67897144767"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "reason": "tool call failed: [Errno 104] Connection reset by peer"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-6c87e933c1324b3d",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "info",
+      "description": "task.started [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-50044ad7e0874ca1"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "question_len": 19
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-ba80b4732d2a4bcd",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "info",
+      "description": "task.started [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-50044ad7e0874ca1"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "question_len": 19
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-c4f79ec5fda04d23",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "major",
+      "description": "tool.result [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-08a774ffb6a748ae"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "error": "[Errno 104] Connection reset by peer"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-d7463baa9e054568",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "info",
+      "description": "tool.call [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-b5bb7ee5acf047c1"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "target": "http://toxiproxy:8666/tool",
+          "tool": "mock-search"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-fc0ee01483794d06",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "bb03e1b2c022",
+      "task_id": "task-1790777643-6c8778",
+      "observed_at": "2026-09-30T14:14:03Z",
+      "severity": "major",
+      "description": "task.failed [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-201ab67897144767"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "reason": "tool call failed: [Errno 104] Connection reset by peer"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:14:03+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "ev-01f97307",
+      "signal": "psi_cpu_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "bb03e1b2c022",
+      "observed_at": "2026-09-30T14:14:06Z",
+      "severity": "info",
+      "description": "psi_cpu_some_avg10（窗口峰值 1.36 percent）",
+      "value": 1.36,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-2aca40c0",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "resource_name": "cadvisor",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 2.038 percent）",
+      "value": 2.0380526846363005,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-08e48554",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "resource_name": "prometheus",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.2829 percent）",
+      "value": 0.2828825486241089,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-11010fe6",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "resource_name": "tool-service",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.001396 percent）",
+      "value": 0.0013961257145241378,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-29c3bf63",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "resource_name": "toxiproxy",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.01583 percent）",
+      "value": 0.015830754130837732,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-29da9da9",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "resource_name": "mock-dcgm",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.04 percent）",
+      "value": 0.04000416600942553,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-3954052c",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.02457 percent）",
+      "value": 0.024573236906727254,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-12a82cef",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "resource_name": "agent-service",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.02457 percent）",
+      "value": 0.024573236906727254,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-394f961d",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.01194 percent）",
+      "value": 0.01194242424242424,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-3741be3f",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 3.973 percent）",
+      "value": 3.97284003016099,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-34739f9a",
+      "signal": "container.restart",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
+      "resource_name": "5958daac075f",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "warning",
+      "description": "container.restart 窗口内合计 Δ=1（1 次采样命中）",
+      "value": 1,
+      "unit": "count",
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "samples": 1
+      }
+    },
+    {
+      "evidence_id": "prom-25a4f3bf",
+      "signal": "llamacpp.tokens_per_s",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "llamacpp.tokens_per_s（窗口峰值 0.4339 tokens_per_s）",
+      "value": 0.43389830508474575,
+      "unit": "tokens_per_s",
+      "origin": "cadvisor",
+      "mode": "real"
+    }
+  ],
+  "series": [
+    {
+      "name": "memory.current_ratio",
+      "label": "5958daac075f 内存使用率",
+      "unit": "ratio",
+      "points": [
+        [
+          1790777636,
+          0
+        ]
+      ],
+      "thresholds": [
+        {
+          "value": 0.95,
+          "label": "memory limit",
+          "color": "#ff4d4f"
+        }
+      ]
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "5958daac075f working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777356,
+          14598144
+        ],
+        [
+          1790777366,
+          14598144
+        ],
+        [
+          1790777376,
+          14598144
+        ],
+        [
+          1790777386,
+          14598144
+        ],
+        [
+          1790777396,
+          14630912
+        ],
+        [
+          1790777406,
+          14630912
+        ],
+        [
+          1790777416,
+          14630912
+        ],
+        [
+          1790777426,
+          14630912
+        ],
+        [
+          1790777436,
+          14630912
+        ],
+        [
+          1790777446,
+          14630912
+        ],
+        [
+          1790777456,
+          14630912
+        ],
+        [
+          1790777466,
+          14630912
+        ],
+        [
+          1790777476,
+          14630912
+        ],
+        [
+          1790777486,
+          14630912
+        ],
+        [
+          1790777496,
+          14630912
+        ],
+        [
+          1790777506,
+          14630912
+        ],
+        [
+          1790777516,
+          14630912
+        ],
+        [
+          1790777526,
+          14630912
+        ],
+        [
+          1790777536,
+          14630912
+        ],
+        [
+          1790777546,
+          14630912
+        ],
+        [
+          1790777556,
+          14630912
+        ],
+        [
+          1790777566,
+          14630912
+        ],
+        [
+          1790777576,
+          14630912
+        ],
+        [
+          1790777586,
+          14630912
+        ],
+        [
+          1790777596,
+          14630912
+        ],
+        [
+          1790777606,
+          14630912
+        ],
+        [
+          1790777616,
+          14630912
+        ],
+        [
+          1790777626,
+          14630912
+        ],
+        [
+          1790777636,
+          0
+        ],
+        [
+          1790777646,
+          0
+        ],
+        [
+          1790777656,
+          0
+        ],
+        [
+          1790777666,
+          0
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "5958daac075f CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777366,
+          0.0008870711453458075
+        ],
+        [
+          1790777376,
+          0.001436733158799624
+        ],
+        [
+          1790777386,
+          0.002035133967508905
+        ],
+        [
+          1790777396,
+          0.002404972114465093
+        ],
+        [
+          1790777406,
+          0.0025630645829620934
+        ],
+        [
+          1790777416,
+          0.0029966651205139204
+        ],
+        [
+          1790777426,
+          0.0037245767094906245
+        ],
+        [
+          1790777436,
+          0.0039019630095752746
+        ],
+        [
+          1790777446,
+          0.003954876516079683
+        ],
+        [
+          1790777456,
+          0.004038313280296512
+        ],
+        [
+          1790777466,
+          0.004186370112392232
+        ],
+        [
+          1790777476,
+          0.0043681137449176335
+        ],
+        [
+          1790777486,
+          0.004614297617685216
+        ],
+        [
+          1790777496,
+          0.005078567323653563
+        ],
+        [
+          1790777506,
+          0.005276072045462675
+        ],
+        [
+          1790777516,
+          0.005490645983031096
+        ],
+        [
+          1790777526,
+          0.006065160849565457
+        ],
+        [
+          1790777536,
+          0.006892348968966473
+        ],
+        [
+          1790777546,
+          0.007378636657772411
+        ],
+        [
+          1790777556,
+          0.007846283254509073
+        ],
+        [
+          1790777566,
+          0.008498066501580828
+        ],
+        [
+          1790777576,
+          0.008918588199034606
+        ],
+        [
+          1790777586,
+          0.009532908951840639
+        ],
+        [
+          1790777596,
+          0.00990188779545316
+        ],
+        [
+          1790777606,
+          0.01040071960363301
+        ],
+        [
+          1790777616,
+          0.011034984040285663
+        ],
+        [
+          1790777626,
+          0.011640895954467293
+        ],
+        [
+          1790777636,
+          0.01194242424242424
+        ],
+        [
+          1790777646,
+          0.01194242424242424
+        ],
+        [
+          1790777656,
+          0.01194242424242424
+        ],
+        [
+          1790777666,
+          0.01194242424242424
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "6808d8574a1b working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          17530880
+        ],
+        [
+          1790777296,
+          17530880
+        ],
+        [
+          1790777306,
+          17657856
+        ],
+        [
+          1790777316,
+          17731584
+        ],
+        [
+          1790777326,
+          17698816
+        ],
+        [
+          1790777336,
+          17698816
+        ],
+        [
+          1790777346,
+          17698816
+        ],
+        [
+          1790777356,
+          17711104
+        ],
+        [
+          1790777366,
+          17711104
+        ],
+        [
+          1790777376,
+          17711104
+        ],
+        [
+          1790777386,
+          17711104
+        ],
+        [
+          1790777396,
+          17772544
+        ],
+        [
+          1790777406,
+          17772544
+        ],
+        [
+          1790777416,
+          17768448
+        ],
+        [
+          1790777426,
+          17768448
+        ],
+        [
+          1790777436,
+          17768448
+        ],
+        [
+          1790777446,
+          17768448
+        ],
+        [
+          1790777456,
+          17768448
+        ],
+        [
+          1790777466,
+          17768448
+        ],
+        [
+          1790777476,
+          17768448
+        ],
+        [
+          1790777486,
+          17768448
+        ],
+        [
+          1790777496,
+          17768448
+        ],
+        [
+          1790777506,
+          17768448
+        ],
+        [
+          1790777516,
+          17727488
+        ],
+        [
+          1790777526,
+          17727488
+        ],
+        [
+          1790777536,
+          17727488
+        ],
+        [
+          1790777546,
+          17727488
+        ],
+        [
+          1790777556,
+          17739776
+        ],
+        [
+          1790777566,
+          17739776
+        ],
+        [
+          1790777576,
+          17739776
+        ],
+        [
+          1790777586,
+          17739776
+        ],
+        [
+          1790777596,
+          17739776
+        ],
+        [
+          1790777606,
+          17739776
+        ],
+        [
+          1790777616,
+          17739776
+        ],
+        [
+          1790777626,
+          17739776
+        ],
+        [
+          1790777636,
+          17739776
+        ],
+        [
+          1790777646,
+          17739776
+        ],
+        [
+          1790777656,
+          17739776
+        ],
+        [
+          1790777666,
+          17739776
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "6808d8574a1b CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.0004546451170639127
+        ],
+        [
+          1790777296,
+          0.001140523911598538
+        ],
+        [
+          1790777306,
+          0.002943728092260326
+        ],
+        [
+          1790777316,
+          0.003930509250682818
+        ],
+        [
+          1790777326,
+          0.0048661674407626
+        ],
+        [
+          1790777336,
+          0.005545727487280087
+        ],
+        [
+          1790777346,
+          0.005977804762190805
+        ],
+        [
+          1790777356,
+          0.007105525592119999
+        ],
+        [
+          1790777366,
+          0.00763221532293295
+        ],
+        [
+          1790777376,
+          0.008298565972340369
+        ],
+        [
+          1790777386,
+          0.009039221606609877
+        ],
+        [
+          1790777396,
+          0.009774926586417852
+        ],
+        [
+          1790777406,
+          0.009899688918510424
+        ],
+        [
+          1790777416,
+          0.010237496277972472
+        ],
+        [
+          1790777426,
+          0.010977596838222895
+        ],
+        [
+          1790777436,
+          0.011188220828260721
+        ],
+        [
+          1790777446,
+          0.0112668027652025
+        ],
+        [
+          1790777456,
+          0.011384842046642347
+        ],
+        [
+          1790777466,
+          0.011554903714075903
+        ],
+        [
+          1790777476,
+          0.011763337176503942
+        ],
+        [
+          1790777486,
+          0.012017806965162216
+        ],
+        [
+          1790777496,
+          0.012405110610983174
+        ],
+        [
+          1790777506,
+          0.01261696333716162
+        ],
+        [
+          1790777516,
+          0.013036048514290645
+        ],
+        [
+          1790777526,
+          0.013549961953008238
+        ],
+        [
+          1790777536,
+          0.014238639188542115
+        ],
+        [
+          1790777546,
+          0.014759953701696981
+        ],
+        [
+          1790777556,
+          0.016148153630379643
+        ],
+        [
+          1790777566,
+          0.016609693365744135
+        ],
+        [
+          1790777576,
+          0.01721543674571467
+        ],
+        [
+          1790777586,
+          0.01784757727506925
+        ],
+        [
+          1790777596,
+          0.01962512155461729
+        ],
+        [
+          1790777606,
+          0.02016644070166114
+        ],
+        [
+          1790777616,
+          0.020796159778585614
+        ],
+        [
+          1790777626,
+          0.02146024724625076
+        ],
+        [
+          1790777636,
+          0.022093121848785834
+        ],
+        [
+          1790777646,
+          0.023155033721302468
+        ],
+        [
+          1790777656,
+          0.02384775846093142
+        ],
+        [
+          1790777666,
+          0.024573236906727254
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "agent-service working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          17530880
+        ],
+        [
+          1790777296,
+          17530880
+        ],
+        [
+          1790777306,
+          17657856
+        ],
+        [
+          1790777316,
+          17731584
+        ],
+        [
+          1790777326,
+          17698816
+        ],
+        [
+          1790777336,
+          17698816
+        ],
+        [
+          1790777346,
+          17698816
+        ],
+        [
+          1790777356,
+          17711104
+        ],
+        [
+          1790777366,
+          17711104
+        ],
+        [
+          1790777376,
+          17711104
+        ],
+        [
+          1790777386,
+          17711104
+        ],
+        [
+          1790777396,
+          17772544
+        ],
+        [
+          1790777406,
+          17772544
+        ],
+        [
+          1790777416,
+          17768448
+        ],
+        [
+          1790777426,
+          17768448
+        ],
+        [
+          1790777436,
+          17768448
+        ],
+        [
+          1790777446,
+          17768448
+        ],
+        [
+          1790777456,
+          17768448
+        ],
+        [
+          1790777466,
+          17768448
+        ],
+        [
+          1790777476,
+          17768448
+        ],
+        [
+          1790777486,
+          17768448
+        ],
+        [
+          1790777496,
+          17768448
+        ],
+        [
+          1790777506,
+          17768448
+        ],
+        [
+          1790777516,
+          17727488
+        ],
+        [
+          1790777526,
+          17727488
+        ],
+        [
+          1790777536,
+          17727488
+        ],
+        [
+          1790777546,
+          17727488
+        ],
+        [
+          1790777556,
+          17739776
+        ],
+        [
+          1790777566,
+          17739776
+        ],
+        [
+          1790777576,
+          17739776
+        ],
+        [
+          1790777586,
+          17739776
+        ],
+        [
+          1790777596,
+          17739776
+        ],
+        [
+          1790777606,
+          17739776
+        ],
+        [
+          1790777616,
+          17739776
+        ],
+        [
+          1790777626,
+          17739776
+        ],
+        [
+          1790777636,
+          17739776
+        ],
+        [
+          1790777646,
+          17739776
+        ],
+        [
+          1790777656,
+          17739776
+        ],
+        [
+          1790777666,
+          17739776
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "agent-service CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.0004546451170639127
+        ],
+        [
+          1790777296,
+          0.001140523911598538
+        ],
+        [
+          1790777306,
+          0.002943728092260326
+        ],
+        [
+          1790777316,
+          0.003930509250682818
+        ],
+        [
+          1790777326,
+          0.0048661674407626
+        ],
+        [
+          1790777336,
+          0.005545727487280087
+        ],
+        [
+          1790777346,
+          0.005977804762190805
+        ],
+        [
+          1790777356,
+          0.007105525592119999
+        ],
+        [
+          1790777366,
+          0.00763221532293295
+        ],
+        [
+          1790777376,
+          0.008298565972340369
+        ],
+        [
+          1790777386,
+          0.009039221606609877
+        ],
+        [
+          1790777396,
+          0.009774926586417852
+        ],
+        [
+          1790777406,
+          0.009899688918510424
+        ],
+        [
+          1790777416,
+          0.010237496277972472
+        ],
+        [
+          1790777426,
+          0.010977596838222895
+        ],
+        [
+          1790777436,
+          0.011188220828260721
+        ],
+        [
+          1790777446,
+          0.0112668027652025
+        ],
+        [
+          1790777456,
+          0.011384842046642347
+        ],
+        [
+          1790777466,
+          0.011554903714075903
+        ],
+        [
+          1790777476,
+          0.011763337176503942
+        ],
+        [
+          1790777486,
+          0.012017806965162216
+        ],
+        [
+          1790777496,
+          0.012405110610983174
+        ],
+        [
+          1790777506,
+          0.01261696333716162
+        ],
+        [
+          1790777516,
+          0.013036048514290645
+        ],
+        [
+          1790777526,
+          0.013549961953008238
+        ],
+        [
+          1790777536,
+          0.014238639188542115
+        ],
+        [
+          1790777546,
+          0.014759953701696981
+        ],
+        [
+          1790777556,
+          0.016148153630379643
+        ],
+        [
+          1790777566,
+          0.016609693365744135
+        ],
+        [
+          1790777576,
+          0.01721543674571467
+        ],
+        [
+          1790777586,
+          0.01784757727506925
+        ],
+        [
+          1790777596,
+          0.01962512155461729
+        ],
+        [
+          1790777606,
+          0.02016644070166114
+        ],
+        [
+          1790777616,
+          0.020796159778585614
+        ],
+        [
+          1790777626,
+          0.02146024724625076
+        ],
+        [
+          1790777636,
+          0.022093121848785834
+        ],
+        [
+          1790777646,
+          0.023155033721302468
+        ],
+        [
+          1790777656,
+          0.02384775846093142
+        ],
+        [
+          1790777666,
+          0.024573236906727254
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "cadvisor working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          26804224
+        ],
+        [
+          1790777296,
+          26513408
+        ],
+        [
+          1790777306,
+          26255360
+        ],
+        [
+          1790777316,
+          27672576
+        ],
+        [
+          1790777326,
+          27484160
+        ],
+        [
+          1790777336,
+          29380608
+        ],
+        [
+          1790777346,
+          30101504
+        ],
+        [
+          1790777356,
+          31313920
+        ],
+        [
+          1790777366,
+          33505280
+        ],
+        [
+          1790777376,
+          34770944
+        ],
+        [
+          1790777386,
+          33034240
+        ],
+        [
+          1790777396,
+          32833536
+        ],
+        [
+          1790777406,
+          33996800
+        ],
+        [
+          1790777416,
+          35131392
+        ],
+        [
+          1790777426,
+          37924864
+        ],
+        [
+          1790777436,
+          38375424
+        ],
+        [
+          1790777446,
+          41132032
+        ],
+        [
+          1790777456,
+          39690240
+        ],
+        [
+          1790777466,
+          40398848
+        ],
+        [
+          1790777476,
+          39821312
+        ],
+        [
+          1790777486,
+          40325120
+        ],
+        [
+          1790777496,
+          42545152
+        ],
+        [
+          1790777506,
+          44462080
+        ],
+        [
+          1790777516,
+          41107456
+        ],
+        [
+          1790777526,
+          40722432
+        ],
+        [
+          1790777536,
+          41213952
+        ],
+        [
+          1790777546,
+          42315776
+        ],
+        [
+          1790777556,
+          43626496
+        ],
+        [
+          1790777566,
+          40919040
+        ],
+        [
+          1790777576,
+          41840640
+        ],
+        [
+          1790777586,
+          42233856
+        ],
+        [
+          1790777596,
+          42340352
+        ],
+        [
+          1790777606,
+          43786240
+        ],
+        [
+          1790777616,
+          44060672
+        ],
+        [
+          1790777626,
+          45002752
+        ],
+        [
+          1790777636,
+          44744704
+        ],
+        [
+          1790777646,
+          39763968
+        ],
+        [
+          1790777656,
+          42971136
+        ],
+        [
+          1790777666,
+          43405312
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "cadvisor CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.06890308180039141
+        ],
+        [
+          1790777296,
+          0.13657084119728063
+        ],
+        [
+          1790777306,
+          0.21078053057563034
+        ],
+        [
+          1790777316,
+          0.26008984597936313
+        ],
+        [
+          1790777326,
+          0.3232824625392352
+        ],
+        [
+          1790777336,
+          0.4081990366595475
+        ],
+        [
+          1790777346,
+          0.48352931409100414
+        ],
+        [
+          1790777356,
+          0.5631336091036603
+        ],
+        [
+          1790777366,
+          0.633454860371913
+        ],
+        [
+          1790777376,
+          0.6921967423095271
+        ],
+        [
+          1790777386,
+          0.7543925942856375
+        ],
+        [
+          1790777396,
+          0.7739148402953773
+        ],
+        [
+          1790777406,
+          0.8180261032205279
+        ],
+        [
+          1790777416,
+          0.8356166137014698
+        ],
+        [
+          1790777426,
+          0.8469742989536932
+        ],
+        [
+          1790777436,
+          0.8584041284890742
+        ],
+        [
+          1790777446,
+          0.886807531287034
+        ],
+        [
+          1790777456,
+          0.9149794003543165
+        ],
+        [
+          1790777466,
+          0.9303394411473863
+        ],
+        [
+          1790777476,
+          0.9444247018860995
+        ],
+        [
+          1790777486,
+          0.9741900846826936
+        ],
+        [
+          1790777496,
+          0.9959141591462802
+        ],
+        [
+          1790777506,
+          1.0096652676259836
+        ],
+        [
+          1790777516,
+          1.0385001900199837
+        ],
+        [
+          1790777526,
+          1.110854464496283
+        ],
+        [
+          1790777536,
+          1.184747739275153
+        ],
+        [
+          1790777546,
+          1.2487431327446854
+        ],
+        [
+          1790777556,
+          1.3085633954339193
+        ],
+        [
+          1790777566,
+          1.3812304971655083
+        ],
+        [
+          1790777576,
+          1.439408023647283
+        ],
+        [
+          1790777586,
+          1.5146113050976806
+        ],
+        [
+          1790777596,
+          1.5619133497657476
+        ],
+        [
+          1790777606,
+          1.6268777670586556
+        ],
+        [
+          1790777616,
+          1.6905576456654665
+        ],
+        [
+          1790777626,
+          1.7541496263355147
+        ],
+        [
+          1790777636,
+          1.8172934085334491
+        ],
+        [
+          1790777646,
+          1.8850726150402608
+        ],
+        [
+          1790777656,
+          1.9675617355031199
+        ],
+        [
+          1790777666,
+          2.0380526846363005
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "llama-server working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777516,
+          204546048
+        ],
+        [
+          1790777526,
+          204546048
+        ],
+        [
+          1790777536,
+          204546048
+        ],
+        [
+          1790777546,
+          204652544
+        ],
+        [
+          1790777556,
+          204652544
+        ],
+        [
+          1790777566,
+          204652544
+        ],
+        [
+          1790777576,
+          204693504
+        ],
+        [
+          1790777586,
+          204693504
+        ],
+        [
+          1790777596,
+          265789440
+        ],
+        [
+          1790777606,
+          265834496
+        ],
+        [
+          1790777616,
+          265834496
+        ],
+        [
+          1790777626,
+          265834496
+        ],
+        [
+          1790777636,
+          265875456
+        ],
+        [
+          1790777646,
+          265875456
+        ],
+        [
+          1790777656,
+          265875456
+        ],
+        [
+          1790777666,
+          265916416
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "llama-server CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777526,
+          0.037604898563157685
+        ],
+        [
+          1790777536,
+          0.0650587400829533
+        ],
+        [
+          1790777546,
+          0.09262073722886677
+        ],
+        [
+          1790777556,
+          0.1113548580323301
+        ],
+        [
+          1790777566,
+          0.13645889858852775
+        ],
+        [
+          1790777576,
+          0.16188228631491666
+        ],
+        [
+          1790777586,
+          0.18261812188239887
+        ],
+        [
+          1790777596,
+          3.9453947736575583
+        ],
+        [
+          1790777606,
+          3.9346038045857923
+        ],
+        [
+          1790777616,
+          3.918531706915514
+        ],
+        [
+          1790777626,
+          3.9322878583266294
+        ],
+        [
+          1790777636,
+          3.922024435156003
+        ],
+        [
+          1790777646,
+          3.9404997785665206
+        ],
+        [
+          1790777656,
+          3.96828374468197
+        ],
+        [
+          1790777666,
+          3.97284003016099
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "mock-dcgm working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          18522112
+        ],
+        [
+          1790777296,
+          18522112
+        ],
+        [
+          1790777306,
+          18526208
+        ],
+        [
+          1790777316,
+          18530304
+        ],
+        [
+          1790777326,
+          18530304
+        ],
+        [
+          1790777336,
+          18526208
+        ],
+        [
+          1790777346,
+          18526208
+        ],
+        [
+          1790777356,
+          18534400
+        ],
+        [
+          1790777366,
+          18530304
+        ],
+        [
+          1790777376,
+          18534400
+        ],
+        [
+          1790777386,
+          18530304
+        ],
+        [
+          1790777396,
+          18530304
+        ],
+        [
+          1790777406,
+          18530304
+        ],
+        [
+          1790777416,
+          18530304
+        ],
+        [
+          1790777426,
+          18530304
+        ],
+        [
+          1790777436,
+          18530304
+        ],
+        [
+          1790777446,
+          18530304
+        ],
+        [
+          1790777456,
+          18530304
+        ],
+        [
+          1790777466,
+          18530304
+        ],
+        [
+          1790777476,
+          18530304
+        ],
+        [
+          1790777486,
+          18530304
+        ],
+        [
+          1790777496,
+          18534400
+        ],
+        [
+          1790777506,
+          18534400
+        ],
+        [
+          1790777516,
+          18567168
+        ],
+        [
+          1790777526,
+          18567168
+        ],
+        [
+          1790777536,
+          18567168
+        ],
+        [
+          1790777546,
+          18567168
+        ],
+        [
+          1790777556,
+          18567168
+        ],
+        [
+          1790777566,
+          18567168
+        ],
+        [
+          1790777576,
+          18563072
+        ],
+        [
+          1790777586,
+          18567168
+        ],
+        [
+          1790777596,
+          18567168
+        ],
+        [
+          1790777606,
+          18567168
+        ],
+        [
+          1790777616,
+          18571264
+        ],
+        [
+          1790777626,
+          18567168
+        ],
+        [
+          1790777636,
+          18571264
+        ],
+        [
+          1790777646,
+          18571264
+        ],
+        [
+          1790777656,
+          18571264
+        ],
+        [
+          1790777666,
+          18571264
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "mock-dcgm CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.0015796206865237809
+        ],
+        [
+          1790777296,
+          0.003158512670232532
+        ],
+        [
+          1790777306,
+          0.00418917367405978
+        ],
+        [
+          1790777316,
+          0.005557806210569857
+        ],
+        [
+          1790777326,
+          0.00692882218424696
+        ],
+        [
+          1790777336,
+          0.00807935044264212
+        ],
+        [
+          1790777346,
+          0.009071214632569316
+        ],
+        [
+          1790777356,
+          0.00995695401133112
+        ],
+        [
+          1790777366,
+          0.01115141785202701
+        ],
+        [
+          1790777376,
+          0.012519393660841868
+        ],
+        [
+          1790777386,
+          0.01373109138001456
+        ],
+        [
+          1790777396,
+          0.014315733963015618
+        ],
+        [
+          1790777406,
+          0.014807623072458448
+        ],
+        [
+          1790777416,
+          0.015295397123260597
+        ],
+        [
+          1790777426,
+          0.01581550322220641
+        ],
+        [
+          1790777436,
+          0.016176225627651614
+        ],
+        [
+          1790777446,
+          0.016806899949578194
+        ],
+        [
+          1790777456,
+          0.017327293156500854
+        ],
+        [
+          1790777466,
+          0.01765433099985832
+        ],
+        [
+          1790777476,
+          0.018159264389522766
+        ],
+        [
+          1790777486,
+          0.018612339737357514
+        ],
+        [
+          1790777496,
+          0.018973023795090214
+        ],
+        [
+          1790777506,
+          0.019393783007141247
+        ],
+        [
+          1790777516,
+          0.020141760096918985
+        ],
+        [
+          1790777526,
+          0.021276980154810537
+        ],
+        [
+          1790777536,
+          0.022822403343458215
+        ],
+        [
+          1790777546,
+          0.024091334199926526
+        ],
+        [
+          1790777556,
+          0.025111382416170867
+        ],
+        [
+          1790777566,
+          0.026711834328271903
+        ],
+        [
+          1790777576,
+          0.028136180138735367
+        ],
+        [
+          1790777586,
+          0.029323090187626893
+        ],
+        [
+          1790777596,
+          0.03048016342357492
+        ],
+        [
+          1790777606,
+          0.03199720872986775
+        ],
+        [
+          1790777616,
+          0.03340584510004643
+        ],
+        [
+          1790777626,
+          0.03496528459656312
+        ],
+        [
+          1790777636,
+          0.03576654454148404
+        ],
+        [
+          1790777646,
+          0.0372288010994049
+        ],
+        [
+          1790777656,
+          0.03880492242701683
+        ],
+        [
+          1790777666,
+          0.04000416600942553
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "prometheus working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          41013248
+        ],
+        [
+          1790777296,
+          41099264
+        ],
+        [
+          1790777306,
+          41820160
+        ],
+        [
+          1790777316,
+          42606592
+        ],
+        [
+          1790777326,
+          43282432
+        ],
+        [
+          1790777336,
+          43311104
+        ],
+        [
+          1790777346,
+          43819008
+        ],
+        [
+          1790777356,
+          44986368
+        ],
+        [
+          1790777366,
+          45088768
+        ],
+        [
+          1790777376,
+          45862912
+        ],
+        [
+          1790777386,
+          45862912
+        ],
+        [
+          1790777396,
+          45883392
+        ],
+        [
+          1790777406,
+          45907968
+        ],
+        [
+          1790777416,
+          46047232
+        ],
+        [
+          1790777426,
+          46546944
+        ],
+        [
+          1790777436,
+          47214592
+        ],
+        [
+          1790777446,
+          47726592
+        ],
+        [
+          1790777456,
+          52977664
+        ],
+        [
+          1790777466,
+          53587968
+        ],
+        [
+          1790777476,
+          53690368
+        ],
+        [
+          1790777486,
+          53739520
+        ],
+        [
+          1790777496,
+          53760000
+        ],
+        [
+          1790777506,
+          53776384
+        ],
+        [
+          1790777516,
+          53788672
+        ],
+        [
+          1790777526,
+          53792768
+        ],
+        [
+          1790777536,
+          53817344
+        ],
+        [
+          1790777546,
+          53825536
+        ],
+        [
+          1790777556,
+          53833728
+        ],
+        [
+          1790777566,
+          53846016
+        ],
+        [
+          1790777576,
+          53932032
+        ],
+        [
+          1790777586,
+          54923264
+        ],
+        [
+          1790777596,
+          54915072
+        ],
+        [
+          1790777606,
+          55136256
+        ],
+        [
+          1790777616,
+          55156736
+        ],
+        [
+          1790777626,
+          55144448
+        ],
+        [
+          1790777636,
+          55406592
+        ],
+        [
+          1790777646,
+          55746560
+        ],
+        [
+          1790777656,
+          55758848
+        ],
+        [
+          1790777666,
+          55767040
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "prometheus CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.010899382673434856
+        ],
+        [
+          1790777296,
+          0.022377072501444252
+        ],
+        [
+          1790777306,
+          0.030709920483797594
+        ],
+        [
+          1790777316,
+          0.03796088039859831
+        ],
+        [
+          1790777326,
+          0.044613925147127635
+        ],
+        [
+          1790777336,
+          0.05344994423464949
+        ],
+        [
+          1790777346,
+          0.06236754395885117
+        ],
+        [
+          1790777356,
+          0.07283166734107942
+        ],
+        [
+          1790777366,
+          0.08358580130279172
+        ],
+        [
+          1790777376,
+          0.09262710726286125
+        ],
+        [
+          1790777386,
+          0.10042586412658036
+        ],
+        [
+          1790777396,
+          0.10320865032840412
+        ],
+        [
+          1790777406,
+          0.10768216004878964
+        ],
+        [
+          1790777416,
+          0.11095822786271392
+        ],
+        [
+          1790777426,
+          0.11418117776055149
+        ],
+        [
+          1790777436,
+          0.11660910760108471
+        ],
+        [
+          1790777446,
+          0.1204904091627988
+        ],
+        [
+          1790777456,
+          0.12502616220872428
+        ],
+        [
+          1790777466,
+          0.1291255951398546
+        ],
+        [
+          1790777476,
+          0.13185014192808317
+        ],
+        [
+          1790777486,
+          0.13476406219554599
+        ],
+        [
+          1790777496,
+          0.13930286463487648
+        ],
+        [
+          1790777506,
+          0.14230728153674022
+        ],
+        [
+          1790777516,
+          0.1470308251275674
+        ],
+        [
+          1790777526,
+          0.15669694177385804
+        ],
+        [
+          1790777536,
+          0.16709235911659623
+        ],
+        [
+          1790777546,
+          0.1753948988646841
+        ],
+        [
+          1790777556,
+          0.1829033579379507
+        ],
+        [
+          1790777566,
+          0.1938629151134289
+        ],
+        [
+          1790777576,
+          0.2040512951478608
+        ],
+        [
+          1790777586,
+          0.21385157644563768
+        ],
+        [
+          1790777596,
+          0.22058667160771436
+        ],
+        [
+          1790777606,
+          0.23135982606004687
+        ],
+        [
+          1790777616,
+          0.24005096534748566
+        ],
+        [
+          1790777626,
+          0.250084182901171
+        ],
+        [
+          1790777636,
+          0.25746822971546995
+        ],
+        [
+          1790777646,
+          0.2651663491330676
+        ],
+        [
+          1790777656,
+          0.27453114615231516
+        ],
+        [
+          1790777666,
+          0.2828825486241089
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "tool-service working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777646,
+          0
+        ],
+        [
+          1790777656,
+          14598144
+        ],
+        [
+          1790777666,
+          14598144
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "tool-service CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777656,
+          0.0006597483513962901
+        ],
+        [
+          1790777666,
+          0.0013961257145241378
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "toxiproxy working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777286,
+          1536000
+        ],
+        [
+          1790777296,
+          1646592
+        ],
+        [
+          1790777306,
+          1671168
+        ],
+        [
+          1790777316,
+          2015232
+        ],
+        [
+          1790777326,
+          2027520
+        ],
+        [
+          1790777336,
+          2031616
+        ],
+        [
+          1790777346,
+          2031616
+        ],
+        [
+          1790777356,
+          2314240
+        ],
+        [
+          1790777366,
+          2314240
+        ],
+        [
+          1790777376,
+          2314240
+        ],
+        [
+          1790777386,
+          2318336
+        ],
+        [
+          1790777396,
+          2375680
+        ],
+        [
+          1790777406,
+          2375680
+        ],
+        [
+          1790777416,
+          2375680
+        ],
+        [
+          1790777426,
+          2379776
+        ],
+        [
+          1790777436,
+          2383872
+        ],
+        [
+          1790777446,
+          2396160
+        ],
+        [
+          1790777456,
+          2396160
+        ],
+        [
+          1790777466,
+          2404352
+        ],
+        [
+          1790777476,
+          2404352
+        ],
+        [
+          1790777486,
+          2404352
+        ],
+        [
+          1790777496,
+          2416640
+        ],
+        [
+          1790777506,
+          2428928
+        ],
+        [
+          1790777516,
+          2433024
+        ],
+        [
+          1790777526,
+          2437120
+        ],
+        [
+          1790777536,
+          2441216
+        ],
+        [
+          1790777546,
+          2449408
+        ],
+        [
+          1790777556,
+          2478080
+        ],
+        [
+          1790777566,
+          2478080
+        ],
+        [
+          1790777576,
+          2490368
+        ],
+        [
+          1790777586,
+          2490368
+        ],
+        [
+          1790777596,
+          2560000
+        ],
+        [
+          1790777606,
+          2564096
+        ],
+        [
+          1790777616,
+          2572288
+        ],
+        [
+          1790777626,
+          2584576
+        ],
+        [
+          1790777636,
+          2588672
+        ],
+        [
+          1790777646,
+          2605056
+        ],
+        [
+          1790777656,
+          2654208
+        ],
+        [
+          1790777666,
+          2654208
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "toxiproxy CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777286,
+          0.0006907563266871189
+        ],
+        [
+          1790777296,
+          0.001798423764981645
+        ],
+        [
+          1790777306,
+          0.0018147685731955473
+        ],
+        [
+          1790777316,
+          0.004638668388892966
+        ],
+        [
+          1790777326,
+          0.004807529531065114
+        ],
+        [
+          1790777336,
+          0.0053252739113975305
+        ],
+        [
+          1790777346,
+          0.0054972385264451355
+        ],
+        [
+          1790777356,
+          0.006447321322980571
+        ],
+        [
+          1790777366,
+          0.007087716948065198
+        ],
+        [
+          1790777376,
+          0.007511586806918797
+        ],
+        [
+          1790777386,
+          0.007775777777777776
+        ],
+        [
+          1790777396,
+          0.00814470427550386
+        ],
+        [
+          1790777406,
+          0.008187746666666667
+        ],
+        [
+          1790777416,
+          0.008310814814814818
+        ],
+        [
+          1790777426,
+          0.008353178874157435
+        ],
+        [
+          1790777436,
+          0.008475372328528297
+        ],
+        [
+          1790777446,
+          0.008622491018953925
+        ],
+        [
+          1790777456,
+          0.008745708394715765
+        ],
+        [
+          1790777466,
+          0.008816168738240553
+        ],
+        [
+          1790777476,
+          0.00879638157894737
+        ],
+        [
+          1790777486,
+          0.008984060196809316
+        ],
+        [
+          1790777496,
+          0.008948436507936508
+        ],
+        [
+          1790777506,
+          0.009073885191987804
+        ],
+        [
+          1790777516,
+          0.00910092487446654
+        ],
+        [
+          1790777526,
+          0.00956143204949465
+        ],
+        [
+          1790777536,
+          0.009874749033790917
+        ],
+        [
+          1790777546,
+          0.010269123903464173
+        ],
+        [
+          1790777556,
+          0.010811005542589737
+        ],
+        [
+          1790777566,
+          0.0111608
+        ],
+        [
+          1790777576,
+          0.011737484278005972
+        ],
+        [
+          1790777586,
+          0.012395666959789957
+        ],
+        [
+          1790777596,
+          0.012937372124060816
+        ],
+        [
+          1790777606,
+          0.013285040736707688
+        ],
+        [
+          1790777616,
+          0.013458076923076925
+        ],
+        [
+          1790777626,
+          0.013785096168221442
+        ],
+        [
+          1790777636,
+          0.01412881825558893
+        ],
+        [
+          1790777646,
+          0.01484840042198436
+        ],
+        [
+          1790777656,
+          0.015686006504333414
+        ],
+        [
+          1790777666,
+          0.015830754130837732
+        ]
+      ],
+      "thresholds": null
+    }
+  ],
+  "incidents": [
+    {
+      "cluster_id": "clu-bbdb5d7622244172",
+      "correlation_id": "bb03e1b2c022",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "42 events, 11 resources, signals=[cgroup.metric, oom.ebpf, gpu.metric, memory.events.oom_kill, tool.result, task.failed] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:13:45Z",
+      "window_end": "2026-09-30T14:14:23Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-672f7d8c64504e9c",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "10 events, 2 resources, signals=[oom.ebpf, gpu.metric, cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:13:53Z",
+      "window_end": "2026-09-30T14:14:23Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-0711df39ba2b4bb2",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-3d6711955dee4f6c",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-d13a9fa47acc41f5",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-7f04a4e978274e30",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-90fa062f8ecd41ca",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-4c9fd4195b3f4932",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-f095ae153c384368",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:21Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-18169c5a7df843cf",
+      "correlation_id": "bb03e1b2c022",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.correlation_id",
+      "summary": "6 events, 2 resources, signals=[cgroup.metric, tool.result, task.failed, task.started, tool.call] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:01Z",
+      "window_end": "2026-09-30T14:14:06Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-ab2f5a01e880402e",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "17 events, 2 resources, signals=[oom.ebpf, memory.events.oom_kill, cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:13:53Z",
+      "window_end": "2026-09-30T14:14:06Z",
+      "evidence_ids": null
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-09-30T14:14:27Z",
+    "note": "由 tracesphere capture 从真实环境（platform + Prometheus）抓取",
+    "sources": {
+      "platform": "real",
+      "prometheus": "real",
+      "fixture": "off"
+    }
+  }
+}

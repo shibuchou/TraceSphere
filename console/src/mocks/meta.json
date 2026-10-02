@@ -1,0 +1,574 @@
+{
+  "service": "rca-serve",
+  "version": "1.0.0",
+  "generated_at": "2026-09-20T08:29:40Z",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/health",
+      "description": "服务健康 + 各数据源可用性"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/meta",
+      "description": "规则清单、评分维度、证据信号表、端点清单"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/topology",
+      "description": "G6 拓扑（combos + nodes + edges + 状态着色）"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/overview",
+      "description": "健康页：汇总 + 工作负载健康卡片 + 时间线"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/incidents",
+      "description": "告警列表（关联簇 + Top-1 诊断摘要）"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/incidents/{id}",
+      "description": "告警详情：证据 + 时间线 + 诊断 + 影响范围 + 子图"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/diagnose",
+      "description": "对指定 correlation_id / resource_id / 时间窗执行 RCA"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/metrics/series",
+      "description": "ECharts 曲线数据（含阈值线）"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/rules",
+      "description": "规则定义原文 + 结构"
+    }
+  ],
+  "score_dimensions": [
+    {
+      "dimension": "rule_match",
+      "label": "规则证据命中",
+      "max": 55,
+      "formula": "Σ(命中条款权重) / Σ(参与条款权重) × 55；optional 条款缺失不计入分母"
+    },
+    {
+      "dimension": "temporal_precedence",
+      "label": "时间优先性",
+      "max": 15,
+      "formula": "满足 after 约束的比例 × 15"
+    },
+    {
+      "dimension": "resource_adjacency",
+      "label": "资源邻接度",
+      "max": 10,
+      "formula": "同 resource_id 10；同一 VM / 资源图 1 跳 6；跨资源 0"
+    },
+    {
+      "dimension": "signal_strength",
+      "label": "信号强度",
+      "max": 10,
+      "formula": "关键证据 severity/增量强度：critical+大量 10，major 7，warning 4，info 2"
+    },
+    {
+      "dimension": "independent_evidence",
+      "label": "独立证据数",
+      "max": 10,
+      "formula": "独立证据类别数（cgroup/ebpf/metric/app_event/log/zsvirt/topology）：≥3 得满分，2 得 5，1 得 2"
+    }
+  ],
+  "signals": [
+    {
+      "signal": "task.started",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "tool.call",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "tool.result",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "task.failed",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "task.finished",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "inference.result",
+      "layer": "application",
+      "kind": "app_event",
+      "source": "agent-service AppEvent"
+    },
+    {
+      "signal": "memory.events.oom_kill",
+      "layer": "container",
+      "kind": "cgroup",
+      "source": "cgroup v2 / cAdvisor / vm-agent"
+    },
+    {
+      "signal": "memory.current_ratio",
+      "layer": "container",
+      "kind": "metric",
+      "source": "PromQL: working_set / memory.max"
+    },
+    {
+      "signal": "cpu.stat.nr_throttled",
+      "layer": "container",
+      "kind": "cgroup",
+      "source": "cgroup v2 直读（vm-agent）"
+    },
+    {
+      "signal": "cpu.cfs.throttled_periods",
+      "layer": "container",
+      "kind": "metric",
+      "source": "cAdvisor / Prometheus"
+    },
+    {
+      "signal": "container.restart",
+      "layer": "container",
+      "kind": "metric",
+      "source": "cAdvisor container_start_time_seconds"
+    },
+    {
+      "signal": "oom.ebpf",
+      "layer": "container",
+      "kind": "ebpf",
+      "source": "vm-agent tracepoint/oom/mark_victim"
+    },
+    {
+      "signal": "psi_cpu_some_avg10",
+      "layer": "vm",
+      "kind": "metric",
+      "source": "vm-agent（Prometheus 无 PSI）"
+    },
+    {
+      "signal": "psi_cpu_full_avg10",
+      "layer": "vm",
+      "kind": "metric",
+      "source": "vm-agent"
+    },
+    {
+      "signal": "psi_mem_some_avg10",
+      "layer": "vm",
+      "kind": "metric",
+      "source": "vm-agent"
+    },
+    {
+      "signal": "psi_io_some_avg10",
+      "layer": "vm",
+      "kind": "metric",
+      "source": "vm-agent"
+    },
+    {
+      "signal": "tcp.retransmit",
+      "layer": "vm",
+      "kind": "ebpf",
+      "source": "vm-agent tcp hook"
+    },
+    {
+      "signal": "process.exec",
+      "layer": "vm",
+      "kind": "ebpf",
+      "source": "vm-agent process hook"
+    },
+    {
+      "signal": "process.exit",
+      "layer": "vm",
+      "kind": "ebpf",
+      "source": "vm-agent process hook"
+    },
+    {
+      "signal": "zsvirt.alarm",
+      "layer": "zsvirt",
+      "kind": "zsvirt",
+      "source": "ZSvirt REST（平台 B）"
+    },
+    {
+      "signal": "zsvirt.event",
+      "layer": "zsvirt",
+      "kind": "zsvirt",
+      "source": "ZSvirt REST（平台 B）"
+    }
+  ],
+  "rules": [
+    {
+      "rule": "container_oom",
+      "version": 1,
+      "title": "容器内存耗尽（Container OOM）",
+      "description": "容器 cgroup 内存打到 limit 后被内核 OOM kill，导致其上 Agent 任务失败",
+      "severity": "critical",
+      "path": "rca/rules/oom.yaml",
+      "evidence": [
+        {
+          "signal": "memory.events.oom_kill",
+          "kind": "cgroup",
+          "layer": "container",
+          "weight": 35,
+          "require_increase": true,
+          "description": "memory.events.oom_kill Δ > 0（cgroup v2 内核 OOM 计数）"
+        },
+        {
+          "metric": "memory.current_ratio",
+          "op": ">",
+          "value": 0.95,
+          "weight": 20,
+          "description": "memory.current / memory.max > 0.95"
+        },
+        {
+          "signal": "oom.ebpf",
+          "kind": "ebpf",
+          "layer": "container",
+          "weight": 20,
+          "optional": true,
+          "description": "eBPF OOM kill 事件（mark_victim）"
+        },
+        {
+          "signal": "task.failed",
+          "kind": "app_event",
+          "layer": "application",
+          "weight": 15,
+          "after": "memory.events.oom_kill",
+          "description": "OOM 之后 Agent 任务失败（correlation_id 锚点）"
+        },
+        {
+          "signal": "container.restart",
+          "kind": "metric",
+          "layer": "container",
+          "weight": 10,
+          "optional": true,
+          "require_increase": true,
+          "description": "容器重启计数 +1（cAdvisor container_start_time_seconds 变化）"
+        }
+      ],
+      "correlation": {
+        "same_resource": true,
+        "time_window": "5s",
+        "require_correlation_id": false
+      },
+      "result": {
+        "root_cause": "container_memory_exhausted",
+        "label": "容器 memory limit 与实际需求不匹配（或应用内存泄漏）",
+        "suggestions": [
+          {
+            "action": "adjust_memory_limit",
+            "title": "调整容器 memory limit",
+            "basis": "memory.current / memory.max > 0.95 且 memory.events.oom_kill 增量 > 0",
+            "detail": "将该容器 memory limit 提高到峰值 working_set 的 1.3 倍以上",
+            "risk": "提高 limit 会挤占同 VM 其他容器内存，需同步确认 VM 余量"
+          },
+          {
+            "action": "check_memory_leak",
+            "title": "排查应用内存泄漏",
+            "basis": "OOM 前内存持续单调上升（working_set 曲线无回落）",
+            "detail": "检查该服务在 OOM 窗口内的对象增长/缓存未释放路径，配合 profiling",
+            "risk": "定位耗时；期间可先提高 limit 恢复业务"
+          },
+          {
+            "action": "review_restart_policy",
+            "title": "检查容器重启策略",
+            "basis": "容器重启计数递增且业务未恢复",
+            "detail": "重启策略应与告警联动，避免 OOM 循环（OOM → 重启 → 再 OOM）",
+            "risk": "仅改重启策略不解决根因，属止血手段"
+          }
+        ]
+      }
+    },
+    {
+      "rule": "cpu_contention",
+      "version": 1,
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "description": "同 VM 内出现 CPU 压力源，PSI / cgroup throttling 升高，推理延迟上升导致 Agent 任务超时",
+      "severity": "major",
+      "path": "rca/rules/cpu.yaml",
+      "evidence": [
+        {
+          "metric": "psi_cpu_some_avg10",
+          "op": ">",
+          "value": 5,
+          "weight": 30,
+          "description": "PSI cpu.some avg10 明显升高（窗口内峰值 > 5%，基线 < 1%）"
+        },
+        {
+          "signal": "cpu.cfs.throttled_periods",
+          "kind": "metric",
+          "layer": "container",
+          "weight": 25,
+          "require_increase": true,
+          "description": "container_cpu_cfs_throttled_periods_total Δ > 0（限流周期递增）"
+        },
+        {
+          "signal": "cpu.stat.nr_throttled",
+          "kind": "cgroup",
+          "layer": "container",
+          "weight": 15,
+          "optional": true,
+          "require_increase": true,
+          "description": "cpu.stat.nr_throttled / throttled_usec 递增"
+        },
+        {
+          "metric": "llama_latency_p95_ms",
+          "op": ">",
+          "value": 3000,
+          "weight": 15,
+          "description": "llama-server 推理延迟 P95 升高（窗口内 > 3s，基线 < 1s）"
+        },
+        {
+          "signal": "task.failed",
+          "kind": "app_event",
+          "layer": "application",
+          "weight": 15,
+          "match_any": [
+            "timeout",
+            "timed out",
+            "超时"
+          ],
+          "description": "Agent 任务因推理超时失败（correlation_id 锚点）"
+        }
+      ],
+      "correlation": {
+        "same_resource": false,
+        "same_vm": true,
+        "time_window": "5s",
+        "require_correlation_id": false
+      },
+      "result": {
+        "root_cause": "cpu_resource_contention",
+        "label": "同 VM 内 CPU 争抢（可定位到具体压力源容器）",
+        "suggestions": [
+          {
+            "action": "adjust_cpu_limit",
+            "title": "调整 CPU limit / 权重",
+            "basis": "cpu.cfs.throttled_periods 递增且 PSI cpu.some 升高",
+            "detail": "为受影响服务设置 cpu.weight / 提高 cpu.max，抑制压力源容器",
+            "risk": "单纯提高配额会挤占同 VM 其他负载，需按优先级分配"
+          },
+          {
+            "action": "isolate_heavy_container",
+            "title": "隔离高负载容器",
+            "basis": "压力源容器 CPU 用量显著高于同 VM 其他容器",
+            "detail": "将压力源容器迁移到独立 VM，或限制其 cpu.max",
+            "risk": "迁移需确认业务依赖（同 VM 网络/存储）"
+          },
+          {
+            "action": "verify_baseline",
+            "title": "复核基线与阈值",
+            "basis": "PSI 阈值依赖基线，环境变更后需重新标定",
+            "detail": "重新采集空闲基线，更新规则阈值（rules/cpu.yaml）",
+            "risk": "阈值过松会漏报，过紧会误报"
+          }
+        ]
+      }
+    },
+    {
+      "rule": "tool_failure",
+      "version": 1,
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "description": "工具调用链路上出现传输层异常（RST / 重传 / 超时 / 连接失败），导致 Agent 任务失败",
+      "severity": "major",
+      "path": "rca/rules/tool_failure.yaml",
+      "evidence": [
+        {
+          "signal": "tool.result",
+          "kind": "app_event",
+          "layer": "application",
+          "status": "error",
+          "weight": 30,
+          "description": "tool.result status=error（AppEvent，带 correlation_id / task_id）"
+        },
+        {
+          "signal": "task.failed",
+          "kind": "app_event",
+          "layer": "application",
+          "weight": 20,
+          "match_any": [
+            "tool call failed",
+            "tool failed"
+          ],
+          "after": "tool.result",
+          "description": "task.failed 且 reason 指向工具调用失败"
+        },
+        {
+          "signal_any": [
+            "tcp.retransmit",
+            "tcp.connect_failed",
+            "tcp.reset",
+            "tool.transport_error"
+          ],
+          "kind_any": [
+            "ebpf",
+            "log",
+            "app_event"
+          ],
+          "layer": "vm",
+          "weight": 25,
+          "match_any": [
+            "Connection reset by peer",
+            "Connection refused",
+            "timed out",
+            "RST",
+            "retransmit",
+            "超时"
+          ],
+          "description": "传输层异常：connect error / RST / TCP 重传 / timeout 至少一种"
+        },
+        {
+          "signal_any": [
+            "tool.call",
+            "tool.result"
+          ],
+          "kind": "app_event",
+          "layer": "application",
+          "weight": 10,
+          "require_attribute": "target",
+          "description": "工具调用目标端点已知（attributes.target，如 http://toxiproxy:8666/tool）"
+        },
+        {
+          "signal_any": [
+            "log.tool_service_error",
+            "log.error"
+          ],
+          "kind": "log",
+          "layer": "container",
+          "weight": 15,
+          "optional": true,
+          "match_any": [
+            "Traceback",
+            "error",
+            "refused",
+            "reset"
+          ],
+          "description": "目标服务（tool-service）错误日志"
+        }
+      ],
+      "correlation": {
+        "same_resource": false,
+        "time_window": "5s",
+        "require_correlation_id": true,
+        "link_via_graph": [
+          "container",
+          "service",
+          "task"
+        ]
+      },
+      "result": {
+        "root_cause": "tool_endpoint_unreachable",
+        "label": "目标端点不可达 / 依赖服务故障（或网络策略阻断）",
+        "suggestions": [
+          {
+            "action": "check_toxiproxy",
+            "title": "检查 Toxiproxy 故障注入状态",
+            "basis": "传输层异常集中在被代理端口（8666），且 proxy 存在 toxics 配置",
+            "detail": "查询 8474 API 的 /proxies/tool/toxics，确认是否为演练注入，必要时 clear",
+            "risk": "若为真实故障，clear 会掩盖问题；先确认演练窗口"
+          },
+          {
+            "action": "check_target_health",
+            "title": "检查目标服务健康",
+            "basis": "同一端点在窗口内持续失败",
+            "detail": "直连目标服务端口（绕过代理）验证进程存活与响应",
+            "risk": "直连需临时开放网络路径"
+          },
+          {
+            "action": "check_network_policy",
+            "title": "检查网络策略 / DNS 解析",
+            "basis": "connect error / RST 而非应用层 5xx",
+            "detail": "检查 iptables / DNS 解析与目标端口连通性（nc / curl -v）",
+            "risk": "修改网络策略影响面大，需灰度验证"
+          }
+        ]
+      }
+    },
+    {
+      "rule": "gpu_memory_exhaustion",
+      "version": 1,
+      "title": "GPU 显存耗尽（GPU Memory Exhaustion）",
+      "description": "显存占用率逼近上限并出现耗尽事件（模拟 DCGM 信号；可定位到 GPU 与所属 VM）",
+      "severity": "critical",
+      "path": "rules/gpu_memory.yaml",
+      "evidence": [
+        {
+          "metric": "gpu.memory_used_ratio",
+          "op": ">",
+          "value": 0.9,
+          "weight": 35,
+          "description": "ts_gpu_memory_used_ratio 窗口峰值 > 0.9（基线 < 0.35）"
+        },
+        {
+          "signal": "gpu.memory.exhausted",
+          "kind": "metric",
+          "layer": "vm",
+          "weight": 30,
+          "description": "出现 gpu.memory.exhausted 事件（显存耗尽）"
+        },
+        {
+          "signal": "task.failed",
+          "kind": "app_event",
+          "layer": "application",
+          "weight": 15,
+          "optional": true,
+          "match_any": [
+            "timeout",
+            "timed out",
+            "超时",
+            "error",
+            "failed",
+            "失败"
+          ],
+          "description": "受 GPU 影响的 Agent 任务失败（可选）"
+        }
+      ],
+      "correlation": {
+        "same_resource": false,
+        "same_vm": true,
+        "time_window": "5s",
+        "require_correlation_id": false
+      },
+      "result": {
+        "root_cause": "gpu_memory_exhaustion",
+        "label": "GPU 显存耗尽（可定位到具体 GPU 与所属 VM）",
+        "suggestions": [
+          {
+            "action": "free_gpu_memory",
+            "title": "释放显存 / 定位占用进程",
+            "basis": "gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件",
+            "detail": "在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务",
+            "risk": "强杀推理进程会中断在途请求，需先摘除流量"
+          },
+          {
+            "action": "cap_gpu_memory",
+            "title": "为服务设置显存上限",
+            "basis": "单服务显存占用无上限增长（模拟注入复现该模式）",
+            "detail": "通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务",
+            "risk": "上限过低会导致服务启动失败或性能下降"
+          },
+          {
+            "action": "verify_dcgm",
+            "title": "核对采集链路与阈值",
+            "basis": "Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter",
+            "detail": "部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取",
+            "risk": "指标缺失会导致该规则静默失效（需监控采集心跳）"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "inventories": [
+    {
+      "uuid": "26fd04cdf31047e4a96aff5e41225420",
+      "name": "Datacenter-1",
+      "description": "TraceSphere demo",
+      "state": "Enabled",
+      "type": "zstack",
+      "isDefault": false,
+      "createDate": "Sep 19, 2026 12:34:56 AM",
+      "lastOpDate": "Sep 19, 2026 12:34:56 AM"
+    }
+  ],
+  "total": 1
+}

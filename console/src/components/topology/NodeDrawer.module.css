@@ -1,0 +1,161 @@
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.drawerTitle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.drawerTitleText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.drawerName {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.drawerId {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  word-break: break-all;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 6px 10px;
+  font-size: 12px;
+}
+
+.kvKey {
+  color: var(--ts-ink-3);
+  font-size: 11px;
+}
+
+.kvVal {
+  font-family: var(--ts-mono);
+  font-size: 11.5px;
+  word-break: break-all;
+}
+
+.metricTable {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.metricRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 5px 8px;
+  border: 1px solid var(--ts-rule);
+  border-radius: 2px;
+  background: #fbfcfd;
+}
+
+.metricName {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metricValue {
+  font-family: var(--ts-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.eventRow {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  padding: 7px 8px;
+  border-bottom: 1px dotted var(--ts-rule);
+}
+
+.eventTime {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+  width: 62px;
+  flex: none;
+  padding-top: 2px;
+}
+
+.eventBody {
+  min-width: 0;
+}
+
+.eventSignal {
+  font-family: var(--ts-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.eventDesc {
+  font-size: 11.5px;
+  color: var(--ts-ink-2);
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+  border-bottom: 1px solid var(--ts-rule);
+  padding-bottom: 4px;
+}
+
+.incidentRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 1px solid var(--ts-rule);
+  border-left: 3px solid var(--ts-critical);
+  border-radius: 2px;
+  background: var(--ts-surface);
+  font-size: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.incidentRow:hover {
+  background: #fbfcfd;
+  text-decoration: none;
+}
+
+.incidentMeta {
+  margin-left: auto;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+}
+
+.emptyHint {
+  font-size: 11.5px;
+  color: var(--ts-ink-3);
+  padding: 8px 2px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,109 @@
+TraceSphere 诊断（成员 C / RCA Rule Engine + Evidence Match）
+时间窗：2026-09-30T14:07:44Z ~ 2026-09-30T14:17:44Z（600s）
+数据源：platform=real prometheus=real fixture=off ｜ 证据 21 条
+关联锚点：correlation_id=7fc1b31db642
+聚焦资源：container:6808d8574a1b
+
+根因候选 Top-3
+══════════════════════════════════════════════════════════════════════════════
+[1] Agent 工具调用失败（Agent Tool Failure）
+    Evidence Match: 67/100 ｜ 规则 tool_failure v1 ｜ 严重度 major
+    根因：tool_endpoint_unreachable
+          目标端点不可达 / 依赖服务故障（或网络策略阻断）
+    评分明细：
+      · 规则证据命中        32.4/55    2/5 条命中：tool.result、task.failed
+      · 时间优先性         15.0/15    task.failed 晚于 tool.result 0.0s
+      · 资源邻接度         10.0/10    4 条同属 container:6808d8574a1b
+      · 信号强度           8.0/10    主证据 tool.result severity=major（基础 5）+ 额外证据 3 条（+3）
+      · 独立证据数          2.0/10    覆盖 1 类证据来源：app_event
+    证据（4 条，可溯源）：
+      evd-25d71853ec tool.result                app_event  6808d8574a1b     14:17:28
+      evd-87b56d5839 tool.result                app_event  6808d8574a1b     14:17:28
+      evd-4e309b340e task.failed                app_event  6808d8574a1b     14:17:28
+      evd-bccb97e9ad task.failed                app_event  6808d8574a1b     14:17:28
+    处置建议：
+      1) 检查 Toxiproxy 故障注入状态
+         依据：传输层异常集中在被代理端口（8666），且 proxy 存在 toxics 配置
+         操作：查询 8474 API 的 /proxies/tool/toxics，确认是否为演练注入，必要时 clear
+         风险：若为真实故障，clear 会掩盖问题；先确认演练窗口
+      2) 检查目标服务健康
+         依据：同一端点在窗口内持续失败
+         操作：直连目标服务端口（绕过代理）验证进程存活与响应
+         风险：直连需临时开放网络路径
+      3) 检查网络策略 / DNS 解析
+         依据：connect error / RST 而非应用层 5xx
+         操作：检查 iptables / DNS 解析与目标端口连通性（nc / curl -v）
+         风险：修改网络策略影响面大，需灰度验证
+    备选候选：GPU 显存耗尽（GPU Memory Exhaustion）(36)、容器内存耗尽（Container OOM）(30)
+══════════════════════════════════════════════════════════════════════════════
+[2] GPU 显存耗尽（GPU Memory Exhaustion）
+    Evidence Match: 36/100 ｜ 规则 gpu_memory_exhaustion v1 ｜ 严重度 critical
+    根因：gpu_memory_exhaustion
+          GPU 显存耗尽（可定位到具体 GPU 与所属 VM）
+    评分明细：
+      · 规则证据命中        12.7/55    1/3 条命中：task.failed
+      · 时间优先性          0.0/0     规则未定义 after 时序约束，该维度不适用（不参与归一化）
+      · 资源邻接度         10.0/10    2 条同属 container:6808d8574a1b
+      · 信号强度           6.0/10    主证据 task.failed severity=major（基础 5）+ 额外证据 1 条（+1）
+      · 独立证据数          2.0/10    覆盖 1 类证据来源：app_event
+    证据（2 条，可溯源）：
+      evd-4e309b340e task.failed                app_event  6808d8574a1b     14:17:28
+      evd-bccb97e9ad task.failed                app_event  6808d8574a1b     14:17:28
+    处置建议：
+      1) 释放显存 / 定位占用进程
+         依据：gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件
+         操作：在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务
+         风险：强杀推理进程会中断在途请求，需先摘除流量
+      2) 为服务设置显存上限
+         依据：单服务显存占用无上限增长（模拟注入复现该模式）
+         操作：通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务
+         风险：上限过低会导致服务启动失败或性能下降
+      3) 核对采集链路与阈值
+         依据：Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter
+         操作：部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取
+         风险：指标缺失会导致该规则静默失效（需监控采集心跳）
+    备选候选：Agent 工具调用失败（Agent Tool Failure）(67)、容器内存耗尽（Container OOM）(30)
+══════════════════════════════════════════════════════════════════════════════
+[3] 容器内存耗尽（Container OOM）
+    Evidence Match: 30/100 ｜ 规则 container_oom v1 ｜ 严重度 critical
+    根因：container_memory_exhausted
+          容器 memory limit 与实际需求不匹配（或应用内存泄漏）
+    评分明细：
+      · 规则证据命中        11.8/55    1/5 条命中：task.failed
+      · 时间优先性          0.0/15    task.failed 的前序证据 memory.events.oom_kill 缺失
+      · 资源邻接度         10.0/10    2 条同属 container:6808d8574a1b
+      · 信号强度           6.0/10    主证据 task.failed severity=major（基础 5）+ 额外证据 1 条（+1）
+      · 独立证据数          2.0/10    覆盖 1 类证据来源：app_event
+    证据（2 条，可溯源）：
+      evd-4e309b340e task.failed                app_event  6808d8574a1b     14:17:28
+      evd-bccb97e9ad task.failed                app_event  6808d8574a1b     14:17:28
+    处置建议：
+      1) 调整容器 memory limit
+         依据：memory.current / memory.max > 0.95 且 memory.events.oom_kill 增量 > 0
+         操作：将该容器 memory limit 提高到峰值 working_set 的 1.3 倍以上
+         风险：提高 limit 会挤占同 VM 其他容器内存，需同步确认 VM 余量
+      2) 排查应用内存泄漏
+         依据：OOM 前内存持续单调上升（working_set 曲线无回落）
+         操作：检查该服务在 OOM 窗口内的对象增长/缓存未释放路径，配合 profiling
+         风险：定位耗时；期间可先提高 limit 恢复业务
+      3) 检查容器重启策略
+         依据：容器重启计数递增且业务未恢复
+         操作：重启策略应与告警联动，避免 OOM 循环（OOM → 重启 → 再 OOM）
+         风险：仅改重启策略不解决根因，属止血手段
+    备选候选：Agent 工具调用失败（Agent Tool Failure）(67)、GPU 显存耗尽（GPU Memory Exhaustion）(36)
+══════════════════════════════════════════════════════════════════════════════
+影响范围：12 个资源（container 7, gpu 1, service 1, task 1, vm 1, volume 1）
+  · container  agent-service                      -        depth=2
+  · container  cadvisor                           -        depth=2
+  · container  llama-server                       -        depth=2
+  · container  mock-dcgm                          -        depth=2
+  · container  prometheus                         -        depth=2
+  · container  tool-service                       -        depth=2
+  · container  toxiproxy                          -        depth=2
+  · gpu        Mock GPU 0 (DCGM)                  online   depth=2
+  · service    agent-service                      -        depth=2
+  · task       task-1790777848-b29093             failed   depth=2
+  · vm         workload-vm                        Running  depth=1
+  · volume     ROOT-for-workload-vm               Enabled  depth=2
+
+注：Evidence Match 为规则证据命中评分（0–100），非概率。

@@ -1,0 +1,205 @@
+/* ==================================================================
+   TraceSphere Console — 全局基座
+   设计方向：GRID LEDGER（刻度账本）
+   浅色 + 单一工程蓝主色；状态色仅红/橙/绿/灰；发丝分隔线 + 等宽数据字。
+   CSS 变量镜像 src/theme/tokens.ts，两者必须保持一致。
+   ================================================================== */
+
+:root {
+  --ts-primary: #2b5b8f;
+  --ts-primary-soft: #e8f0f8;
+  --ts-ink: #0f1318;
+  --ts-ink-2: #4a545f;
+  --ts-ink-3: #7c8794;
+  --ts-paper: #f6f7f9;
+  --ts-surface: #ffffff;
+  --ts-rule: #dfe3e8;
+  --ts-rule-strong: #c3cad3;
+
+  --ts-healthy: #2e8b57;
+  --ts-healthy-soft: #e7f3ec;
+  --ts-warning: #d97b10;
+  --ts-warning-soft: #fdf1e0;
+  --ts-critical: #c0392b;
+  --ts-critical-soft: #fbe9e7;
+  --ts-unknown: #7c8794;
+  --ts-unknown-soft: #eef0f3;
+
+  --ts-layer-application: #2b5b8f;
+  --ts-layer-container: #1f7a8c;
+  --ts-layer-vm: #7a5ea6;
+  --ts-layer-zsvirt: #8a6d3b;
+
+  --ts-mono: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --ts-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+
+  --ts-header-h: 46px;
+  --ts-strip-h: 42px;
+  --ts-gutter: 16px;
+
+  --ts-radius: 2px;
+  --ts-shadow-drawer: -8px 0 24px rgba(15, 19, 24, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ts-paper);
+  color: var(--ts-ink);
+  font-family: var(--ts-sans);
+  font-size: 13px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ts-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code,
+kbd,
+samp,
+.ts-mono {
+  font-family: var(--ts-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ts-primary);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   版式原语
+   ------------------------------------------------------------------ */
+
+.ts-eyebrow {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+}
+
+.ts-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  color: var(--ts-ink);
+}
+
+.ts-section-title::before {
+  content: '';
+  width: 3px;
+  height: 12px;
+  background: var(--ts-primary);
+  flex: none;
+}
+
+.ts-panel {
+  background: var(--ts-surface);
+  border: 1px solid var(--ts-rule);
+  border-radius: var(--ts-radius);
+}
+
+.ts-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px var(--ts-gutter);
+  border-bottom: 1px solid var(--ts-rule);
+}
+
+.ts-panel__body {
+  padding: var(--ts-gutter);
+}
+
+.ts-panel__body--flush {
+  padding: 0;
+}
+
+.ts-hint {
+  color: var(--ts-ink-3);
+  font-size: 12px;
+}
+
+.ts-inline-meta {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.ts-nowrap {
+  white-space: nowrap;
+}
+
+/* antd 局部对齐：控制台需要更克制的圆角与更密的行高 */
+.ant-table-wrapper .ant-table {
+  font-size: 12px;
+}
+
+.ant-table-wrapper .ant-table-thead > tr > th {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+  background: #fafbfc;
+}
+
+.ant-descriptions-item-label {
+  font-size: 12px;
+  color: var(--ts-ink-3) !important;
+}
+
+.ant-descriptions-item-content {
+  font-size: 12px;
+}
+
+.ant-drawer-header {
+  border-bottom: 1px solid var(--ts-rule);
+}
+
+.ant-timeline .ant-timeline-item-tail {
+  border-inline-start-color: var(--ts-rule);
+}
+
+.ant-collapse-header-text {
+  font-size: 12px;
+}
+
+.ts-scroll-y {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

@@ -1,0 +1,5307 @@
+{
+  "scenario": "case2-cpu",
+  "description": "真实环境抓取（2026-09-21，GPU1 + workload-vm）：CPU 争抢演练任务 - 期望推理超时",
+  "mode": "real",
+  "window": {
+    "from": "2026-09-30T14:07:12Z",
+    "to": "2026-09-30T14:17:12Z",
+    "seconds": 600
+  },
+  "focus": {
+    "correlation_id": "e40e7ba37a41"
+  },
+  "resources": [
+    {
+      "resource_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "kind": "cluster",
+      "name": "Cluster-1",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "zstack"
+      },
+      "attributes": {
+        "hypervisorType": "KVM",
+        "raw": {
+          "architecture": "x86_64",
+          "createDate": "Sep 19, 2026 12:34:56 AM",
+          "hypervisorType": "KVM",
+          "lastOpDate": "Sep 19, 2026 12:42:53 AM",
+          "name": "Cluster-1",
+          "state": "Enabled",
+          "type": "zstack",
+          "uuid": "a29a9e1c13ac4017a187e30fca573625",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        }
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "kind": "container",
+      "name": "llama-server",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:16:35.000Z"
+      },
+      "observed_at": "2026-09-30T14:16:35Z"
+    },
+    {
+      "resource_id": "container:2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "kind": "container",
+      "name": "llama-server",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "origin": "ebpf",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:6808d8574a1b",
+      "kind": "container",
+      "name": "6808d8574a1b",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "task.failed",
+        "last_observed_at": "2026-09-30T14:16:44.000Z",
+        "status": "error"
+      },
+      "observed_at": "2026-09-30T14:16:44Z"
+    },
+    {
+      "resource_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "kind": "container",
+      "name": "agent-service",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "kind": "container",
+      "name": "cadvisor",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "kind": "container",
+      "name": "prometheus",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "kind": "container",
+      "name": "mock-dcgm",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "kind": "container",
+      "name": "tool-service",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "container:df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "kind": "container",
+      "name": "cpu-stress",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:16:35.000Z"
+      },
+      "observed_at": "2026-09-30T14:16:35Z"
+    },
+    {
+      "resource_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "kind": "container",
+      "name": "toxiproxy",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "container_id": "df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "origin": "cgroup",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:05.000Z"
+      },
+      "observed_at": "2026-09-30T14:17:05Z"
+    },
+    {
+      "resource_id": "datastore:2fa50ded127743859cf2bb80e9d3a25a",
+      "kind": "datastore",
+      "name": "bs-local",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "ImageStoreBackupStorage"
+      },
+      "attributes": {
+        "availableCapacity": 56596283392,
+        "raw": {
+          "attachedZoneUuids": [
+            "26fd04cdf31047e4a96aff5e41225420"
+          ],
+          "availableCapacity": 56596283392,
+          "createDate": "Sep 19, 2026 12:43:37 AM",
+          "hostname": "192.168.122.123",
+          "lastOpDate": "Sep 30, 2026 10:15:34 PM",
+          "name": "bs-local",
+          "sshPort": 22,
+          "state": "Enabled",
+          "status": "Connected",
+          "totalCapacity": 97801142272,
+          "type": "ImageStoreBackupStorage",
+          "url": "/var/lib/zstack/imagestore-bs",
+          "username": "root",
+          "uuid": "2fa50ded127743859cf2bb80e9d3a25a"
+        },
+        "totalCapacity": 97801142272
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "datastore:4a0ecf3f472c4042aa4f9f9d36494b11",
+      "kind": "datastore",
+      "name": "ps-local",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "LocalStorage"
+      },
+      "attributes": {
+        "availableCapacity": 30104720896,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "availableCapacity": 30104720896,
+          "availablePhysicalCapacity": 56596303872,
+          "createDate": "Sep 19, 2026 12:43:32 AM",
+          "lastOpDate": "Sep 19, 2026 12:43:32 AM",
+          "mountPath": "/var/lib/zstack/ps-local",
+          "name": "ps-local",
+          "state": "Enabled",
+          "status": "Connected",
+          "systemUsedCapacity": 24121491456,
+          "totalCapacity": 97801142272,
+          "totalPhysicalCapacity": 97801142272,
+          "type": "LocalStorage",
+          "url": "/var/lib/zstack/ps-local",
+          "uuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "totalCapacity": 97801142272
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "gpu:mock-gpu0",
+      "kind": "gpu",
+      "name": "Mock GPU 0 (DCGM)",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "host_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "state": "online",
+      "origin": "mock",
+      "mode": "mock",
+      "labels": {
+        "mock": "true",
+        "vendor": "NVIDIA (Mock)"
+      },
+      "attributes": {
+        "driver": "mock-dcgm",
+        "last_event_type": "gpu.metric",
+        "last_observed_at": "2026-09-30T14:17:08.000Z",
+        "memory_total_bytes": 8589934592,
+        "note": "无 GPU 硬件的模拟数据源（赛题 §4 降级模式）"
+      },
+      "observed_at": "2026-09-30T14:17:08Z"
+    },
+    {
+      "resource_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "kind": "host",
+      "name": "host-1",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.hypervisor": "KVM",
+        "zsvirt.status": "Connected"
+      },
+      "attributes": {
+        "availableCpuCapacity": 116,
+        "availableMemoryCapacity": 12229926912,
+        "cpuNum": 12,
+        "cpuSpeed": null,
+        "managementIp": "192.168.122.123",
+        "osDistribution": "helix",
+        "raw": {
+          "architecture": "x86_64",
+          "availableCpuCapacity": 116,
+          "availableMemoryCapacity": 12229926912,
+          "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+          "cpuNum": 12,
+          "cpuSockets": 12,
+          "cpuStatus": "Unknown",
+          "createDate": "Sep 19, 2026 12:40:44 AM",
+          "diskStatus": "Unknown",
+          "fanStatus": "Unknown",
+          "gpuStatus": "Unknown",
+          "hostname": "zsvirt-mn",
+          "hypervisorType": "KVM",
+          "ipmiPort": 623,
+          "ipmiPowerStatus": "UN_CONFIGURED",
+          "iscsiInitiatorName": "iqn.2015-01.io.helix:ba32b97357d",
+          "lastOpDate": "Sep 19, 2026 1:41:10 AM",
+          "managementIp": "192.168.122.123",
+          "memoryStatus": "Unknown",
+          "name": "host-1",
+          "nicStatus": "Unknown",
+          "nqn": "nqn.2014-08.org.nvmexpress:uuid:ad352a43-fe00-4df4-b2e1-e65d89b6d1dd",
+          "osDistribution": "helix",
+          "osRelease": "Green Obsidian",
+          "osVersion": "8.4",
+          "powerSupplyStatus": "Unknown",
+          "raidStatus": "Unknown",
+          "sshPort": 22,
+          "state": "Enabled",
+          "status": "Connected",
+          "temperatureStatus": "Unknown",
+          "totalCpuCapacity": 120,
+          "totalMemoryCapacity": 16524894208,
+          "username": "root",
+          "uuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "totalCpuCapacity": 120,
+        "totalMemoryCapacity": 16524894208
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "image:f39ba0991de143e6b76b0887e19edb0a",
+      "kind": "image",
+      "name": "ubuntu-24.04-cloudimg",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.format": "qcow2",
+        "zsvirt.platform": "Linux"
+      },
+      "attributes": {
+        "actualSize": 625256960,
+        "architecture": "x86_64",
+        "format": "qcow2",
+        "mediaType": "RootVolumeTemplate",
+        "platform": "Linux",
+        "raw": {
+          "actualSize": 625256960,
+          "architecture": "x86_64",
+          "backupStorageRefs": [
+            {
+              "backupStorageUuid": "2fa50ded127743859cf2bb80e9d3a25a",
+              "createDate": "Sep 19, 2026 12:50:44 AM",
+              "id": 1,
+              "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+              "installPath": "zstore://f39ba0991de143e6b76b0887e19edb0a/9dee208e02952ea357be268f244d0ec95eb2fca9",
+              "lastOpDate": "Sep 19, 2026 12:50:45 AM",
+              "status": "Ready"
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:50:44 AM",
+          "format": "qcow2",
+          "guestOsType": "Linux",
+          "lastOpDate": "Sep 19, 2026 12:50:45 AM",
+          "mediaType": "RootVolumeTemplate",
+          "name": "ubuntu-24.04-cloudimg",
+          "platform": "Linux",
+          "size": 3758096384,
+          "state": "Enabled",
+          "status": "Ready",
+          "system": false,
+          "type": "zstack",
+          "url": "file:///var/lib/zstack/imagestore-bs/ubuntu-24.04.img",
+          "uuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "virtio": true
+        },
+        "size": 3758096384,
+        "status": "Ready",
+        "system": false
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "network:04eb58aa1a704dd3ab227bd3de1ee786",
+      "kind": "network",
+      "name": "L2PortGroup-vlan-2344-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "portGroup",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "bridgeName": "br_dvs0_2344",
+              "createDate": "Sep 19, 2026 12:44:44 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:44:44 AM",
+          "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+          "name": "L2PortGroup-vlan-2344-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+          "physicalInterface": "",
+          "type": "portGroup",
+          "uuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+          "vSwitchType": "LinuxBridge",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "virtualNetworkId": 2344,
+          "vlanId": 2344,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 2344,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "network:26391fe900e44409b3d2a37721b08f76",
+      "kind": "network",
+      "name": "pg-demo",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l3-networks",
+        "zsvirt.category": "Private",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l3-networks",
+        "apiType": "portGroup",
+        "category": "Private",
+        "dns": [
+          "223.5.5.5"
+        ],
+        "enableIPAM": true,
+        "ipRanges": [
+          {
+            "createDate": "Sep 19, 2026 12:45:03 AM",
+            "endIp": "10.100.0.250",
+            "gateway": "10.100.0.1",
+            "ipVersion": 4,
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+            "name": "range-demo",
+            "netmask": "255.255.255.0",
+            "networkCidr": "10.100.0.0/24",
+            "prefixLen": 24,
+            "startIp": "10.100.0.10",
+            "uuid": "929a7b204f8443b286099b280fecbee9"
+          }
+        ],
+        "ipVersion": 4,
+        "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+        "networkCidr": null,
+        "networkServices": [
+          {
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+            "networkServiceType": "DHCP"
+          },
+          {
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+            "networkServiceType": "Userdata"
+          }
+        ],
+        "physicalInterface": null,
+        "raw": {
+          "category": "Private",
+          "createDate": "Sep 19, 2026 12:44:44 AM",
+          "description": "TraceSphere workload network",
+          "dns": [
+            "223.5.5.5"
+          ],
+          "enableIPAM": true,
+          "hostRoute": [],
+          "ipRanges": [
+            {
+              "createDate": "Sep 19, 2026 12:45:03 AM",
+              "endIp": "10.100.0.250",
+              "gateway": "10.100.0.1",
+              "ipVersion": 4,
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+              "name": "range-demo",
+              "netmask": "255.255.255.0",
+              "networkCidr": "10.100.0.0/24",
+              "prefixLen": 24,
+              "startIp": "10.100.0.10",
+              "uuid": "929a7b204f8443b286099b280fecbee9"
+            }
+          ],
+          "ipVersion": 4,
+          "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+          "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+          "name": "pg-demo",
+          "networkServices": [
+            {
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+              "networkServiceType": "DHCP"
+            },
+            {
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+              "networkServiceType": "Userdata"
+            }
+          ],
+          "reservedIpRanges": [],
+          "state": "Enabled",
+          "system": false,
+          "type": "portGroup",
+          "uuid": "26391fe900e44409b3d2a37721b08f76",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vlanId": 2344,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": null,
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 2344,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "network:a66f6d6554a84c98884d49275e9613af",
+      "kind": "network",
+      "name": "DPortGroup 0",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l3-networks",
+        "zsvirt.category": "Private",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l3-networks",
+        "apiType": "portGroup",
+        "category": "Private",
+        "dns": [
+          "223.5.5.5"
+        ],
+        "enableIPAM": false,
+        "ipRanges": [],
+        "ipVersion": 4,
+        "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+        "networkCidr": null,
+        "networkServices": [],
+        "physicalInterface": null,
+        "raw": {
+          "category": "Private",
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "dns": [
+            "223.5.5.5"
+          ],
+          "enableIPAM": false,
+          "hostRoute": [],
+          "ipRanges": [],
+          "ipVersion": 4,
+          "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "DPortGroup 0",
+          "networkServices": [],
+          "reservedIpRanges": [],
+          "state": "Enabled",
+          "system": true,
+          "type": "portGroup",
+          "uuid": "a66f6d6554a84c98884d49275e9613af",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vlanId": 0,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": null,
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 0,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "network:ad7a0511bb90468eb641f4378f870a0e",
+      "kind": "network",
+      "name": "L2PortGroup-noVlan-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "portGroup"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "portGroup",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "bridgeName": "br_dvs0",
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "L2PortGroup-noVlan-for-vSwitch-db58a900bd344ba8ba6904ff7b7ce9e9",
+          "physicalInterface": "",
+          "type": "portGroup",
+          "uuid": "ad7a0511bb90468eb641f4378f870a0e",
+          "vSwitchType": "LinuxBridge",
+          "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "virtualNetworkId": 0,
+          "vlanId": 0,
+          "vlanMode": "ACCESS",
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+        "vlanId": 0,
+        "vlanMode": "ACCESS"
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "network:db58a900bd344ba8ba6904ff7b7ce9e9",
+      "kind": "network",
+      "name": "DSwitch 0",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.api": "l2-networks",
+        "zsvirt.category": "",
+        "zsvirt.type": "virtualSwitch"
+      },
+      "attributes": {
+        "apiCollection": "l2-networks",
+        "apiType": "virtualSwitch",
+        "category": null,
+        "dns": null,
+        "enableIPAM": null,
+        "ipRanges": [],
+        "ipVersion": null,
+        "l2NetworkUuid": null,
+        "networkCidr": null,
+        "networkServices": null,
+        "physicalInterface": null,
+        "raw": {
+          "attachedClusterUuids": [
+            "a29a9e1c13ac4017a187e30fca573625"
+          ],
+          "attachedHostRefs": [
+            {
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+              "l2NetworkUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "l2ProviderType": "LinuxBridge",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "skipDeletion": false
+            }
+          ],
+          "createDate": "Sep 19, 2026 12:42:52 AM",
+          "isDistributed": true,
+          "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+          "name": "DSwitch 0",
+          "physicalInterface": "",
+          "portGroups": [
+            {
+              "category": "Private",
+              "createDate": "Sep 19, 2026 12:44:44 AM",
+              "description": "TraceSphere workload network",
+              "dns": [
+                "223.5.5.5"
+              ],
+              "enableIPAM": true,
+              "hostRoute": [],
+              "ipRanges": [
+                {
+                  "createDate": "Sep 19, 2026 12:45:03 AM",
+                  "endIp": "10.100.0.250",
+                  "gateway": "10.100.0.1",
+                  "ipVersion": 4,
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "lastOpDate": "Sep 19, 2026 12:45:03 AM",
+                  "name": "range-demo",
+                  "netmask": "255.255.255.0",
+                  "networkCidr": "10.100.0.0/24",
+                  "prefixLen": 24,
+                  "startIp": "10.100.0.10",
+                  "uuid": "929a7b204f8443b286099b280fecbee9"
+                }
+              ],
+              "ipVersion": 4,
+              "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+              "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+              "name": "pg-demo",
+              "networkServices": [
+                {
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+                  "networkServiceType": "Userdata"
+                },
+                {
+                  "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+                  "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+                  "networkServiceType": "DHCP"
+                }
+              ],
+              "reservedIpRanges": [],
+              "state": "Enabled",
+              "system": false,
+              "type": "portGroup",
+              "uuid": "26391fe900e44409b3d2a37721b08f76",
+              "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "vlanId": 2344,
+              "vlanMode": "ACCESS",
+              "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+            },
+            {
+              "category": "Private",
+              "createDate": "Sep 19, 2026 12:42:52 AM",
+              "dns": [
+                "223.5.5.5"
+              ],
+              "enableIPAM": false,
+              "hostRoute": [],
+              "ipRanges": [],
+              "ipVersion": 4,
+              "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+              "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+              "name": "DPortGroup 0",
+              "networkServices": [],
+              "reservedIpRanges": [],
+              "state": "Enabled",
+              "system": true,
+              "type": "portGroup",
+              "uuid": "a66f6d6554a84c98884d49275e9613af",
+              "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+              "vlanId": 0,
+              "vlanMode": "ACCESS",
+              "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+            }
+          ],
+          "type": "virtualSwitch",
+          "uuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+          "vSwitchIndex": 0,
+          "vSwitchType": "LinuxBridge",
+          "virtualNetworkId": 0,
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "vSwitchType": "LinuxBridge",
+        "vSwitchUuid": null,
+        "vlanId": null,
+        "vlanMode": null
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "offering:21830e28a8f74391ba2a5fe46aca85af",
+      "kind": "offering",
+      "name": "off-small",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "InstanceOffering"
+      },
+      "attributes": {
+        "cpuNum": 4,
+        "cpuSpeed": 0,
+        "memorySize": 4294967296,
+        "raw": {
+          "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+          "cpuNum": 4,
+          "cpuSpeed": 0,
+          "createDate": "Sep 19, 2026 12:50:55 AM",
+          "description": "4 vCPU / 4 GiB for workload VM",
+          "lastOpDate": "Sep 19, 2026 12:50:55 AM",
+          "memorySize": 4294967296,
+          "name": "off-small",
+          "reservedMemorySize": 0,
+          "sortKey": 0,
+          "state": "Enabled",
+          "type": "UserVm",
+          "uuid": "21830e28a8f74391ba2a5fe46aca85af"
+        },
+        "type": "UserVm"
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "service:agent-service",
+      "kind": "service",
+      "name": "agent-service",
+      "correlation_id": "e40e7ba37a41",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "task.failed",
+        "last_observed_at": "2026-09-30T14:16:44.000Z",
+        "status": "error"
+      },
+      "observed_at": "2026-09-30T14:16:44Z"
+    },
+    {
+      "resource_id": "task:task-1790777684-fd8210",
+      "kind": "task",
+      "name": "task-1790777684-fd8210",
+      "correlation_id": "e40e7ba37a41",
+      "origin": "app",
+      "mode": "real",
+      "attributes": {
+        "last_event_type": "task.failed",
+        "last_observed_at": "2026-09-30T14:16:44.000Z",
+        "status": "error"
+      },
+      "observed_at": "2026-09-30T14:16:44Z"
+    },
+    {
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "kind": "vm",
+      "name": "workload-vm",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "host_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "state": "Running",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.platform": "Linux",
+        "zsvirt.type": "UserVm"
+      },
+      "attributes": {
+        "cpuNum": 4,
+        "cpuSpeed": 0,
+        "createDate": "Sep 19, 2026 1:16:29 AM",
+        "defaultL3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+        "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+        "instanceOfferingUuid": "21830e28a8f74391ba2a5fe46aca85af",
+        "ips": [],
+        "lastOpDate": "Sep 19, 2026 9:04:35 AM",
+        "last_event_type": "cgroup.metric",
+        "last_observed_at": "2026-09-30T14:17:10.000Z",
+        "macs": [
+          "fa:6f:c9:04:b0:00"
+        ],
+        "memorySize": 4294967296,
+        "nics": [
+          {
+            "createDate": "Sep 19, 2026 1:16:29 AM",
+            "deviceId": 0,
+            "driverType": "virtio",
+            "hypervisorType": "KVM",
+            "internalName": "vnic2.0",
+            "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+            "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+            "mac": "fa:6f:c9:04:b0:00",
+            "state": "enable",
+            "type": "VNIC",
+            "usedIps": [],
+            "uuid": "bdedd41023d849158577b973e1116869",
+            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+          }
+        ],
+        "raw": {
+          "allVolumes": [
+            {
+              "actualSize": 13738508288,
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+              "deviceId": 0,
+              "format": "qcow2",
+              "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+              "isShareable": false,
+              "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+              "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+              "name": "ROOT-for-workload-vm",
+              "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+              "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+              "size": 42949672960,
+              "state": "Enabled",
+              "status": "Ready",
+              "type": "Root",
+              "uuid": "c6114309f9d34fa980a00a4895383654",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+          "architecture": "x86_64",
+          "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+          "cpuNum": 4,
+          "cpuSpeed": 0,
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "defaultL3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "guestOsType": "Linux",
+          "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "hypervisorType": "KVM",
+          "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "instanceOfferingUuid": "21830e28a8f74391ba2a5fe46aca85af",
+          "lastHostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+          "lastOpDate": "Sep 19, 2026 9:04:35 AM",
+          "memorySize": 4294967296,
+          "name": "workload-vm",
+          "platform": "Linux",
+          "reservedMemorySize": 0,
+          "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
+          "state": "Running",
+          "type": "UserVm",
+          "uuid": "63bbb4613a524e4e97090600af03da93",
+          "vmCdRoms": [
+            {
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "deviceId": 0,
+              "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+              "name": "vm-63bbb4613a524e4e97090600af03da93-cdRom",
+              "uuid": "461320dbc7b84b01a05d26fdf244047e",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "vmNics": [
+            {
+              "createDate": "Sep 19, 2026 1:16:29 AM",
+              "deviceId": 0,
+              "driverType": "virtio",
+              "hypervisorType": "KVM",
+              "internalName": "vnic2.0",
+              "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+              "lastOpDate": "Sep 19, 2026 1:16:29 AM",
+              "mac": "fa:6f:c9:04:b0:00",
+              "state": "enable",
+              "type": "VNIC",
+              "usedIps": [],
+              "uuid": "bdedd41023d849158577b973e1116869",
+              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            }
+          ],
+          "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
+        },
+        "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
+        "volumes": [
+          {
+            "actualSize": 13738508288,
+            "createDate": "Sep 19, 2026 1:16:29 AM",
+            "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+            "deviceId": 0,
+            "format": "qcow2",
+            "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+            "isShareable": false,
+            "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+            "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+            "name": "ROOT-for-workload-vm",
+            "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+            "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+            "size": 42949672960,
+            "state": "Enabled",
+            "status": "Ready",
+            "type": "Root",
+            "uuid": "c6114309f9d34fa980a00a4895383654",
+            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+          }
+        ]
+      },
+      "observed_at": "2026-09-30T14:17:10Z"
+    },
+    {
+      "resource_id": "volume:c6114309f9d34fa980a00a4895383654",
+      "kind": "volume",
+      "name": "ROOT-for-workload-vm",
+      "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
+      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "Root"
+      },
+      "attributes": {
+        "deviceId": 0,
+        "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+        "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+        "raw": {
+          "actualSize": 13738508288,
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+          "deviceId": 0,
+          "format": "qcow2",
+          "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+          "isShareable": false,
+          "lastAttachDate": "Sep 19, 2026 1:16:30 AM",
+          "lastOpDate": "Sep 30, 2026 9:26:06 PM",
+          "name": "ROOT-for-workload-vm",
+          "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+          "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "size": 42949672960,
+          "state": "Enabled",
+          "status": "Ready",
+          "type": "Root",
+          "uuid": "c6114309f9d34fa980a00a4895383654",
+          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+        },
+        "size": 42949672960
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    },
+    {
+      "resource_id": "zone:26fd04cdf31047e4a96aff5e41225420",
+      "kind": "zone",
+      "name": "Datacenter-1",
+      "state": "Enabled",
+      "origin": "zsvirt",
+      "mode": "real",
+      "labels": {
+        "zsvirt.type": "zstack"
+      },
+      "attributes": {
+        "raw": {
+          "createDate": "Sep 19, 2026 12:34:56 AM",
+          "description": "TraceSphere demo",
+          "isDefault": false,
+          "lastOpDate": "Sep 19, 2026 12:34:56 AM",
+          "name": "Datacenter-1",
+          "state": "Enabled",
+          "type": "zstack",
+          "uuid": "26fd04cdf31047e4a96aff5e41225420"
+        }
+      },
+      "observed_at": "2026-09-30T14:16:28Z"
+    }
+  ],
+  "edges": [
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:6808d8574a1b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "service:agent-service",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
+      "dst_id": "task:task-1790777684-fd8210",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:6808d8574a1b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "service:agent-service",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    },
+    {
+      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "dst_id": "task:task-1790777684-fd8210",
+      "relation": "contains",
+      "origin": "platform-inferred",
+      "mode": "real"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-2410f849",
+      "signal": "psi_cpu_full_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "psi_cpu_full_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-168bca13",
+      "signal": "psi_mem_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "psi_mem_some_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-1ed48758",
+      "signal": "psi_mem_full_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:14:26Z",
+      "severity": "info",
+      "description": "psi_mem_full_avg10（窗口峰值 0 percent）",
+      "value": 0,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "ev-11487bb0",
+      "signal": "gpu.memory_used_ratio",
+      "kind": "metric",
+      "layer": "",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:14:38Z",
+      "severity": "info",
+      "description": "gpu.memory_used_ratio（窗口峰值 0.12 ratio）",
+      "value": 0.12,
+      "unit": "ratio",
+      "origin": "gpu",
+      "mode": "mock",
+      "payload": {
+        "gpu_memory_total_bytes": 8589934592,
+        "gpu_memory_used_bytes": 1030792151
+      }
+    },
+    {
+      "evidence_id": "evd-18c4985ce01f4bc5",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "tool.call [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-f7608d1b8aeb4d1c"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "target": "http://toxiproxy:8666/tool",
+          "tool": "mock-search"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-1afe332a41714f08",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "task.started [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-fe6dec16e7234f71"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "question_len": 19
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-2217c1f224034f75",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "tool.result [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-060748043bb946e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "duration_ms": 2,
+          "result_len": 215
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-2ef16cd3b960429f",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "tool.result [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-060748043bb946e6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "duration_ms": 2,
+          "result_len": 215
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-ba24ffa5a2614e40",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "tool.call [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-f7608d1b8aeb4d1c"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "target": "http://toxiproxy:8666/tool",
+          "tool": "mock-search"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-bc6a479c5f354171",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:14:44Z",
+      "severity": "info",
+      "description": "task.started [app] on 6808d8574a1b status=ok",
+      "source_event_ids": [
+        "evt-fe6dec16e7234f71"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "question_len": 19
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "ok",
+        "timestamp": "2026-09-30T14:14:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "ev-1c2437f3",
+      "signal": "psi_cpu_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:15:35Z",
+      "severity": "major",
+      "description": "psi_cpu_some_avg10（窗口峰值 41.42 percent）",
+      "value": 41.42,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "evd-078c4b8c76234612",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:16:44Z",
+      "severity": "major",
+      "description": "task.failed [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-478ad45701b146c6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "reason": "inference failed: timed out"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:16:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-52422bf37bea4dc4",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "correlation_id": "e40e7ba37a41",
+      "task_id": "task-1790777684-fd8210",
+      "observed_at": "2026-09-30T14:16:44Z",
+      "severity": "major",
+      "description": "task.failed [app] on 6808d8574a1b status=error severity=major",
+      "source_event_ids": [
+        "evt-478ad45701b146c6"
+      ],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "reason": "inference failed: timed out"
+        },
+        "container_id": "6808d8574a1b",
+        "service": "agent-service",
+        "status": "error",
+        "timestamp": "2026-09-30T14:16:44+0000",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "evd-2f2e72b3b75b47c5",
+      "signal": "tcp.retransmit",
+      "kind": "ebpf",
+      "layer": "container",
+      "resource_id": "container:2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "resource_name": "llama-server",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:16:47Z",
+      "severity": "warning",
+      "description": "tcp.retransmit [ebpf] on llama-server severity=warning",
+      "source_event_ids": [
+        "evt-7b5d6d1ad67147ed"
+      ],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "attributes": {
+          "comm": "llama-server",
+          "pid": 1917555
+        },
+        "container_id": "2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+      }
+    },
+    {
+      "evidence_id": "ev-159df637",
+      "signal": "psi_io_some_avg10",
+      "kind": "cgroup",
+      "layer": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "correlation_id": "e40e7ba37a41",
+      "observed_at": "2026-09-30T14:16:50Z",
+      "severity": "info",
+      "description": "psi_io_some_avg10（窗口峰值 0.47 percent）",
+      "value": 0.47,
+      "unit": "percent",
+      "origin": "cgroup",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-32621903",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:6808d8574a1b",
+      "resource_name": "6808d8574a1b",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.02983 percent）",
+      "value": 0.029826699768700234,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-23d85497",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
+      "resource_name": "cadvisor",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 2.591 percent）",
+      "value": 2.590957081871095,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-3b7ad379",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "resource_name": "cpu-stress",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 42.79 percent）",
+      "value": 42.78979040666667,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-2a0359e0",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:2f8820831311bd123e230c15a7dc828740a33d542f1fac85a27c55175a3ed88a",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.05312 percent）",
+      "value": 0.05312064766258257,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-01f2992b",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
+      "resource_name": "prometheus",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.4102 percent）",
+      "value": 0.41018320995599156,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-22d1d33a",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
+      "resource_name": "toxiproxy",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.01963 percent）",
+      "value": 0.019633827044025155,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-22e8b180",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
+      "resource_name": "mock-dcgm",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.05464 percent）",
+      "value": 0.05464275288856069,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-0a0f23bd",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
+      "resource_name": "tool-service",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.006628 percent）",
+      "value": 0.006627612424718787,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-0bb640c6",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
+      "resource_name": "agent-service",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 0.02983 percent）",
+      "value": 0.029826699768700234,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-304fd216",
+      "signal": "container.cpu_pct",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "container.cpu_pct（窗口峰值 14 percent）",
+      "value": 13.998061954022992,
+      "unit": "percent",
+      "origin": "cadvisor",
+      "mode": "real"
+    },
+    {
+      "evidence_id": "prom-0061e4e7",
+      "signal": "cpu.cfs.throttled_periods",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:df15fe2d65a1b013a23708e48e6db629cb29512671cdf56ad5ae2d4c5322138b",
+      "resource_name": "cpu-stress",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "warning",
+      "description": "cpu.cfs.throttled_periods 窗口内合计 Δ=251（1 次采样命中）",
+      "value": 250.89999999999995,
+      "unit": "count",
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "samples": 1
+      }
+    },
+    {
+      "evidence_id": "prom-2c66c71d",
+      "signal": "cpu.cfs.throttled_periods",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "warning",
+      "description": "cpu.cfs.throttled_periods 窗口内合计 Δ=1209（1 次采样命中）",
+      "value": 1208.7,
+      "unit": "count",
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "samples": 1
+      }
+    },
+    {
+      "evidence_id": "prom-1eb30796",
+      "signal": "llamacpp.tokens_per_s",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "llama-server",
+      "observed_at": "2026-09-30T14:17:12Z",
+      "severity": "info",
+      "description": "llamacpp.tokens_per_s（窗口峰值 0.428 tokens_per_s）",
+      "value": 0.42796980790960454,
+      "unit": "tokens_per_s",
+      "origin": "cadvisor",
+      "mode": "real"
+    }
+  ],
+  "series": [
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "6808d8574a1b working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          17530880
+        ],
+        [
+          1790777292,
+          17530880
+        ],
+        [
+          1790777302,
+          17530880
+        ],
+        [
+          1790777312,
+          17657856
+        ],
+        [
+          1790777322,
+          17698816
+        ],
+        [
+          1790777332,
+          17698816
+        ],
+        [
+          1790777342,
+          17698816
+        ],
+        [
+          1790777352,
+          17711104
+        ],
+        [
+          1790777362,
+          17711104
+        ],
+        [
+          1790777372,
+          17711104
+        ],
+        [
+          1790777382,
+          17711104
+        ],
+        [
+          1790777392,
+          17772544
+        ],
+        [
+          1790777402,
+          17772544
+        ],
+        [
+          1790777412,
+          17772544
+        ],
+        [
+          1790777422,
+          17768448
+        ],
+        [
+          1790777432,
+          17768448
+        ],
+        [
+          1790777442,
+          17768448
+        ],
+        [
+          1790777452,
+          17768448
+        ],
+        [
+          1790777462,
+          17768448
+        ],
+        [
+          1790777472,
+          17768448
+        ],
+        [
+          1790777482,
+          17768448
+        ],
+        [
+          1790777492,
+          17768448
+        ],
+        [
+          1790777502,
+          17768448
+        ],
+        [
+          1790777512,
+          17768448
+        ],
+        [
+          1790777522,
+          17727488
+        ],
+        [
+          1790777532,
+          17727488
+        ],
+        [
+          1790777542,
+          17727488
+        ],
+        [
+          1790777552,
+          17727488
+        ],
+        [
+          1790777562,
+          17739776
+        ],
+        [
+          1790777572,
+          17739776
+        ],
+        [
+          1790777582,
+          17739776
+        ],
+        [
+          1790777592,
+          17788928
+        ],
+        [
+          1790777602,
+          17739776
+        ],
+        [
+          1790777612,
+          17739776
+        ],
+        [
+          1790777622,
+          17739776
+        ],
+        [
+          1790777632,
+          17739776
+        ],
+        [
+          1790777642,
+          17739776
+        ],
+        [
+          1790777652,
+          17739776
+        ],
+        [
+          1790777662,
+          17739776
+        ],
+        [
+          1790777672,
+          17739776
+        ],
+        [
+          1790777682,
+          17739776
+        ],
+        [
+          1790777692,
+          17805312
+        ],
+        [
+          1790777702,
+          17805312
+        ],
+        [
+          1790777712,
+          17805312
+        ],
+        [
+          1790777722,
+          17805312
+        ],
+        [
+          1790777732,
+          17805312
+        ],
+        [
+          1790777742,
+          17805312
+        ],
+        [
+          1790777752,
+          17805312
+        ],
+        [
+          1790777762,
+          17805312
+        ],
+        [
+          1790777772,
+          17805312
+        ],
+        [
+          1790777782,
+          17805312
+        ],
+        [
+          1790777792,
+          17805312
+        ],
+        [
+          1790777802,
+          17805312
+        ],
+        [
+          1790777812,
+          17764352
+        ],
+        [
+          1790777822,
+          17764352
+        ],
+        [
+          1790777832,
+          17764352
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "6808d8574a1b CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.0007744732564213467
+        ],
+        [
+          1790777302,
+          0.0015880363598098483
+        ],
+        [
+          1790777312,
+          0.003222591201173856
+        ],
+        [
+          1790777322,
+          0.004613274043231203
+        ],
+        [
+          1790777332,
+          0.005250933136718675
+        ],
+        [
+          1790777342,
+          0.005887278711887302
+        ],
+        [
+          1790777352,
+          0.007061189997425774
+        ],
+        [
+          1790777362,
+          0.007471682249621599
+        ],
+        [
+          1790777372,
+          0.00800217721654185
+        ],
+        [
+          1790777382,
+          0.008851583615080285
+        ],
+        [
+          1790777392,
+          0.009776540767107664
+        ],
+        [
+          1790777402,
+          0.00987279518089578
+        ],
+        [
+          1790777412,
+          0.010120837560691645
+        ],
+        [
+          1790777422,
+          0.010765970375235785
+        ],
+        [
+          1790777432,
+          0.011144279897695076
+        ],
+        [
+          1790777442,
+          0.011341590227947522
+        ],
+        [
+          1790777452,
+          0.011459653755172704
+        ],
+        [
+          1790777462,
+          0.011559753428092009
+        ],
+        [
+          1790777472,
+          0.011714561604331852
+        ],
+        [
+          1790777482,
+          0.011910229734259871
+        ],
+        [
+          1790777492,
+          0.012282346350119914
+        ],
+        [
+          1790777502,
+          0.012560854752976304
+        ],
+        [
+          1790777512,
+          0.01277743942919849
+        ],
+        [
+          1790777522,
+          0.013388344351700318
+        ],
+        [
+          1790777532,
+          0.014035967056611427
+        ],
+        [
+          1790777542,
+          0.014585356404066515
+        ],
+        [
+          1790777552,
+          0.015064003937995677
+        ],
+        [
+          1790777562,
+          0.016400627408647377
+        ],
+        [
+          1790777572,
+          0.016978181881240676
+        ],
+        [
+          1790777582,
+          0.017479705206545373
+        ],
+        [
+          1790777592,
+          0.019000157549684545
+        ],
+        [
+          1790777602,
+          0.019950197565558096
+        ],
+        [
+          1790777612,
+          0.020513681428010494
+        ],
+        [
+          1790777622,
+          0.021262603218608702
+        ],
+        [
+          1790777632,
+          0.021932233943813783
+        ],
+        [
+          1790777642,
+          0.022338337905963918
+        ],
+        [
+          1790777652,
+          0.0235378931538816
+        ],
+        [
+          1790777662,
+          0.024282954309061168
+        ],
+        [
+          1790777672,
+          0.02495912839119828
+        ],
+        [
+          1790777682,
+          0.02538030749206522
+        ],
+        [
+          1790777692,
+          0.026280593967249563
+        ],
+        [
+          1790777702,
+          0.02666687933601147
+        ],
+        [
+          1790777712,
+          0.026810524254802483
+        ],
+        [
+          1790777722,
+          0.02688299877399173
+        ],
+        [
+          1790777732,
+          0.02697760889411442
+        ],
+        [
+          1790777742,
+          0.027036198918666217
+        ],
+        [
+          1790777752,
+          0.027132687813322585
+        ],
+        [
+          1790777762,
+          0.027176165912335456
+        ],
+        [
+          1790777772,
+          0.027285488474583203
+        ],
+        [
+          1790777782,
+          0.027381795170057142
+        ],
+        [
+          1790777792,
+          0.027466616712220816
+        ],
+        [
+          1790777802,
+          0.027619047206222908
+        ],
+        [
+          1790777812,
+          0.028335951093933404
+        ],
+        [
+          1790777822,
+          0.028982253327706077
+        ],
+        [
+          1790777832,
+          0.029826699768700234
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "agent-service working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          17530880
+        ],
+        [
+          1790777292,
+          17530880
+        ],
+        [
+          1790777302,
+          17530880
+        ],
+        [
+          1790777312,
+          17657856
+        ],
+        [
+          1790777322,
+          17698816
+        ],
+        [
+          1790777332,
+          17698816
+        ],
+        [
+          1790777342,
+          17698816
+        ],
+        [
+          1790777352,
+          17711104
+        ],
+        [
+          1790777362,
+          17711104
+        ],
+        [
+          1790777372,
+          17711104
+        ],
+        [
+          1790777382,
+          17711104
+        ],
+        [
+          1790777392,
+          17772544
+        ],
+        [
+          1790777402,
+          17772544
+        ],
+        [
+          1790777412,
+          17772544
+        ],
+        [
+          1790777422,
+          17768448
+        ],
+        [
+          1790777432,
+          17768448
+        ],
+        [
+          1790777442,
+          17768448
+        ],
+        [
+          1790777452,
+          17768448
+        ],
+        [
+          1790777462,
+          17768448
+        ],
+        [
+          1790777472,
+          17768448
+        ],
+        [
+          1790777482,
+          17768448
+        ],
+        [
+          1790777492,
+          17768448
+        ],
+        [
+          1790777502,
+          17768448
+        ],
+        [
+          1790777512,
+          17768448
+        ],
+        [
+          1790777522,
+          17727488
+        ],
+        [
+          1790777532,
+          17727488
+        ],
+        [
+          1790777542,
+          17727488
+        ],
+        [
+          1790777552,
+          17727488
+        ],
+        [
+          1790777562,
+          17739776
+        ],
+        [
+          1790777572,
+          17739776
+        ],
+        [
+          1790777582,
+          17739776
+        ],
+        [
+          1790777592,
+          17788928
+        ],
+        [
+          1790777602,
+          17739776
+        ],
+        [
+          1790777612,
+          17739776
+        ],
+        [
+          1790777622,
+          17739776
+        ],
+        [
+          1790777632,
+          17739776
+        ],
+        [
+          1790777642,
+          17739776
+        ],
+        [
+          1790777652,
+          17739776
+        ],
+        [
+          1790777662,
+          17739776
+        ],
+        [
+          1790777672,
+          17739776
+        ],
+        [
+          1790777682,
+          17739776
+        ],
+        [
+          1790777692,
+          17805312
+        ],
+        [
+          1790777702,
+          17805312
+        ],
+        [
+          1790777712,
+          17805312
+        ],
+        [
+          1790777722,
+          17805312
+        ],
+        [
+          1790777732,
+          17805312
+        ],
+        [
+          1790777742,
+          17805312
+        ],
+        [
+          1790777752,
+          17805312
+        ],
+        [
+          1790777762,
+          17805312
+        ],
+        [
+          1790777772,
+          17805312
+        ],
+        [
+          1790777782,
+          17805312
+        ],
+        [
+          1790777792,
+          17805312
+        ],
+        [
+          1790777802,
+          17805312
+        ],
+        [
+          1790777812,
+          17764352
+        ],
+        [
+          1790777822,
+          17764352
+        ],
+        [
+          1790777832,
+          17764352
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "agent-service CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.0007744732564213467
+        ],
+        [
+          1790777302,
+          0.0015880363598098483
+        ],
+        [
+          1790777312,
+          0.003222591201173856
+        ],
+        [
+          1790777322,
+          0.004613274043231203
+        ],
+        [
+          1790777332,
+          0.005250933136718675
+        ],
+        [
+          1790777342,
+          0.005887278711887302
+        ],
+        [
+          1790777352,
+          0.007061189997425774
+        ],
+        [
+          1790777362,
+          0.007471682249621599
+        ],
+        [
+          1790777372,
+          0.00800217721654185
+        ],
+        [
+          1790777382,
+          0.008851583615080285
+        ],
+        [
+          1790777392,
+          0.009776540767107664
+        ],
+        [
+          1790777402,
+          0.00987279518089578
+        ],
+        [
+          1790777412,
+          0.010120837560691645
+        ],
+        [
+          1790777422,
+          0.010765970375235785
+        ],
+        [
+          1790777432,
+          0.011144279897695076
+        ],
+        [
+          1790777442,
+          0.011341590227947522
+        ],
+        [
+          1790777452,
+          0.011459653755172704
+        ],
+        [
+          1790777462,
+          0.011559753428092009
+        ],
+        [
+          1790777472,
+          0.011714561604331852
+        ],
+        [
+          1790777482,
+          0.011910229734259871
+        ],
+        [
+          1790777492,
+          0.012282346350119914
+        ],
+        [
+          1790777502,
+          0.012560854752976304
+        ],
+        [
+          1790777512,
+          0.01277743942919849
+        ],
+        [
+          1790777522,
+          0.013388344351700318
+        ],
+        [
+          1790777532,
+          0.014035967056611427
+        ],
+        [
+          1790777542,
+          0.014585356404066515
+        ],
+        [
+          1790777552,
+          0.015064003937995677
+        ],
+        [
+          1790777562,
+          0.016400627408647377
+        ],
+        [
+          1790777572,
+          0.016978181881240676
+        ],
+        [
+          1790777582,
+          0.017479705206545373
+        ],
+        [
+          1790777592,
+          0.019000157549684545
+        ],
+        [
+          1790777602,
+          0.019950197565558096
+        ],
+        [
+          1790777612,
+          0.020513681428010494
+        ],
+        [
+          1790777622,
+          0.021262603218608702
+        ],
+        [
+          1790777632,
+          0.021932233943813783
+        ],
+        [
+          1790777642,
+          0.022338337905963918
+        ],
+        [
+          1790777652,
+          0.0235378931538816
+        ],
+        [
+          1790777662,
+          0.024282954309061168
+        ],
+        [
+          1790777672,
+          0.02495912839119828
+        ],
+        [
+          1790777682,
+          0.02538030749206522
+        ],
+        [
+          1790777692,
+          0.026280593967249563
+        ],
+        [
+          1790777702,
+          0.02666687933601147
+        ],
+        [
+          1790777712,
+          0.026810524254802483
+        ],
+        [
+          1790777722,
+          0.02688299877399173
+        ],
+        [
+          1790777732,
+          0.02697760889411442
+        ],
+        [
+          1790777742,
+          0.027036198918666217
+        ],
+        [
+          1790777752,
+          0.027132687813322585
+        ],
+        [
+          1790777762,
+          0.027176165912335456
+        ],
+        [
+          1790777772,
+          0.027285488474583203
+        ],
+        [
+          1790777782,
+          0.027381795170057142
+        ],
+        [
+          1790777792,
+          0.027466616712220816
+        ],
+        [
+          1790777802,
+          0.027619047206222908
+        ],
+        [
+          1790777812,
+          0.028335951093933404
+        ],
+        [
+          1790777822,
+          0.028982253327706077
+        ],
+        [
+          1790777832,
+          0.029826699768700234
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "cadvisor working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          20881408
+        ],
+        [
+          1790777292,
+          25059328
+        ],
+        [
+          1790777302,
+          26099712
+        ],
+        [
+          1790777312,
+          26472448
+        ],
+        [
+          1790777322,
+          26349568
+        ],
+        [
+          1790777332,
+          28762112
+        ],
+        [
+          1790777342,
+          29007872
+        ],
+        [
+          1790777352,
+          30167040
+        ],
+        [
+          1790777362,
+          31973376
+        ],
+        [
+          1790777372,
+          34799616
+        ],
+        [
+          1790777382,
+          34922496
+        ],
+        [
+          1790777392,
+          32198656
+        ],
+        [
+          1790777402,
+          33927168
+        ],
+        [
+          1790777412,
+          34447360
+        ],
+        [
+          1790777422,
+          37253120
+        ],
+        [
+          1790777432,
+          38199296
+        ],
+        [
+          1790777442,
+          40423424
+        ],
+        [
+          1790777452,
+          41648128
+        ],
+        [
+          1790777462,
+          41500672
+        ],
+        [
+          1790777472,
+          38883328
+        ],
+        [
+          1790777482,
+          39931904
+        ],
+        [
+          1790777492,
+          41631744
+        ],
+        [
+          1790777502,
+          43773952
+        ],
+        [
+          1790777512,
+          47714304
+        ],
+        [
+          1790777522,
+          40538112
+        ],
+        [
+          1790777532,
+          40988672
+        ],
+        [
+          1790777542,
+          40697856
+        ],
+        [
+          1790777552,
+          43098112
+        ],
+        [
+          1790777562,
+          44343296
+        ],
+        [
+          1790777572,
+          41840640
+        ],
+        [
+          1790777582,
+          41922560
+        ],
+        [
+          1790777592,
+          41521152
+        ],
+        [
+          1790777602,
+          44081152
+        ],
+        [
+          1790777612,
+          44965888
+        ],
+        [
+          1790777622,
+          45002752
+        ],
+        [
+          1790777632,
+          44797952
+        ],
+        [
+          1790777642,
+          45457408
+        ],
+        [
+          1790777652,
+          41144320
+        ],
+        [
+          1790777662,
+          43892736
+        ],
+        [
+          1790777672,
+          43663360
+        ],
+        [
+          1790777682,
+          43692032
+        ],
+        [
+          1790777692,
+          42524672
+        ],
+        [
+          1790777702,
+          42598400
+        ],
+        [
+          1790777712,
+          43806720
+        ],
+        [
+          1790777722,
+          44142592
+        ],
+        [
+          1790777732,
+          44158976
+        ],
+        [
+          1790777742,
+          42745856
+        ],
+        [
+          1790777752,
+          45985792
+        ],
+        [
+          1790777762,
+          46993408
+        ],
+        [
+          1790777772,
+          44773376
+        ],
+        [
+          1790777782,
+          42217472
+        ],
+        [
+          1790777792,
+          43126784
+        ],
+        [
+          1790777802,
+          44732416
+        ],
+        [
+          1790777812,
+          44711936
+        ],
+        [
+          1790777822,
+          44847104
+        ],
+        [
+          1790777832,
+          44093440
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "cadvisor CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.11017437778170257
+        ],
+        [
+          1790777302,
+          0.17779642954152455
+        ],
+        [
+          1790777312,
+          0.24722402540538202
+        ],
+        [
+          1790777322,
+          0.2930382002517735
+        ],
+        [
+          1790777332,
+          0.3765814981602268
+        ],
+        [
+          1790777342,
+          0.45014870107170063
+        ],
+        [
+          1790777352,
+          0.5273355469014784
+        ],
+        [
+          1790777362,
+          0.6121932179769569
+        ],
+        [
+          1790777372,
+          0.6678606616904652
+        ],
+        [
+          1790777382,
+          0.7338111742176276
+        ],
+        [
+          1790777392,
+          0.7724672001404717
+        ],
+        [
+          1790777402,
+          0.8040364152447398
+        ],
+        [
+          1790777412,
+          0.8343802680844895
+        ],
+        [
+          1790777422,
+          0.8415470792833625
+        ],
+        [
+          1790777432,
+          0.855594620747257
+        ],
+        [
+          1790777442,
+          0.8792652438253744
+        ],
+        [
+          1790777452,
+          0.9051529834000548
+        ],
+        [
+          1790777462,
+          0.9272508207862457
+        ],
+        [
+          1790777472,
+          0.9390056265227585
+        ],
+        [
+          1790777482,
+          0.9648318796658786
+        ],
+        [
+          1790777492,
+          0.986354743102467
+        ],
+        [
+          1790777502,
+          1.0074070079244233
+        ],
+        [
+          1790777512,
+          1.0236020768603815
+        ],
+        [
+          1790777522,
+          1.0807978746507738
+        ],
+        [
+          1790777532,
+          1.1502575338640886
+        ],
+        [
+          1790777542,
+          1.2235405183005066
+        ],
+        [
+          1790777552,
+          1.285157546108767
+        ],
+        [
+          1790777562,
+          1.3496381682349257
+        ],
+        [
+          1790777572,
+          1.4156845439676757
+        ],
+        [
+          1790777582,
+          1.482760187165445
+        ],
+        [
+          1790777592,
+          1.5438018911268956
+        ],
+        [
+          1790777602,
+          1.599769142130937
+        ],
+        [
+          1790777612,
+          1.6617004189808222
+        ],
+        [
+          1790777622,
+          1.7275819040295668
+        ],
+        [
+          1790777632,
+          1.791756941002446
+        ],
+        [
+          1790777642,
+          1.8548704434789773
+        ],
+        [
+          1790777652,
+          1.9354603281867357
+        ],
+        [
+          1790777662,
+          2.012052202547294
+        ],
+        [
+          1790777672,
+          2.0814923400127654
+        ],
+        [
+          1790777682,
+          2.1516889967765342
+        ],
+        [
+          1790777692,
+          2.1898181822274276
+        ],
+        [
+          1790777702,
+          2.21131267953036
+        ],
+        [
+          1790777712,
+          2.2340612354060605
+        ],
+        [
+          1790777722,
+          2.257650793452112
+        ],
+        [
+          1790777732,
+          2.277818931403948
+        ],
+        [
+          1790777742,
+          2.3038255157998098
+        ],
+        [
+          1790777752,
+          2.3253748547479316
+        ],
+        [
+          1790777762,
+          2.3443937091384712
+        ],
+        [
+          1790777772,
+          2.358268550910301
+        ],
+        [
+          1790777782,
+          2.383391454792059
+        ],
+        [
+          1790777792,
+          2.40657787087317
+        ],
+        [
+          1790777802,
+          2.4243746292224246
+        ],
+        [
+          1790777812,
+          2.462723846456749
+        ],
+        [
+          1790777822,
+          2.529558965593495
+        ],
+        [
+          1790777832,
+          2.590957081871095
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "cpu-stress working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777682,
+          14266368
+        ],
+        [
+          1790777692,
+          13873152
+        ],
+        [
+          1790777702,
+          13873152
+        ],
+        [
+          1790777712,
+          13873152
+        ],
+        [
+          1790777722,
+          13873152
+        ],
+        [
+          1790777732,
+          13873152
+        ],
+        [
+          1790777742,
+          13873152
+        ],
+        [
+          1790777752,
+          13873152
+        ],
+        [
+          1790777762,
+          13873152
+        ],
+        [
+          1790777772,
+          13873152
+        ],
+        [
+          1790777782,
+          13873152
+        ],
+        [
+          1790777792,
+          13873152
+        ],
+        [
+          1790777802,
+          13873152
+        ],
+        [
+          1790777812,
+          13873152
+        ],
+        [
+          1790777822,
+          13873152
+        ],
+        [
+          1790777832,
+          13873152
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "cpu-stress CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777692,
+          4.80886073971932
+        ],
+        [
+          1790777702,
+          8.129811673859603
+        ],
+        [
+          1790777712,
+          11.461192200484138
+        ],
+        [
+          1790777722,
+          14.791703148242084
+        ],
+        [
+          1790777732,
+          18.11412984140641
+        ],
+        [
+          1790777742,
+          21.443707375980985
+        ],
+        [
+          1790777752,
+          24.77344381891882
+        ],
+        [
+          1790777762,
+          28.102011853430874
+        ],
+        [
+          1790777772,
+          31.427712176541945
+        ],
+        [
+          1790777782,
+          34.75433174513812
+        ],
+        [
+          1790777792,
+          38.07563756722353
+        ],
+        [
+          1790777802,
+          41.405126989769876
+        ],
+        [
+          1790777812,
+          42.78979040666667
+        ],
+        [
+          1790777822,
+          42.78979040666667
+        ],
+        [
+          1790777832,
+          42.78979040666667
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "llama-server working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777522,
+          204546048
+        ],
+        [
+          1790777532,
+          204546048
+        ],
+        [
+          1790777542,
+          204546048
+        ],
+        [
+          1790777552,
+          204652544
+        ],
+        [
+          1790777562,
+          204652544
+        ],
+        [
+          1790777572,
+          204652544
+        ],
+        [
+          1790777582,
+          204693504
+        ],
+        [
+          1790777592,
+          266092544
+        ],
+        [
+          1790777602,
+          265789440
+        ],
+        [
+          1790777612,
+          265834496
+        ],
+        [
+          1790777622,
+          265834496
+        ],
+        [
+          1790777632,
+          265834496
+        ],
+        [
+          1790777642,
+          265875456
+        ],
+        [
+          1790777652,
+          265875456
+        ],
+        [
+          1790777662,
+          265875456
+        ],
+        [
+          1790777672,
+          265916416
+        ],
+        [
+          1790777682,
+          265916416
+        ],
+        [
+          1790777692,
+          310157312
+        ],
+        [
+          1790777702,
+          309891072
+        ],
+        [
+          1790777712,
+          330137600
+        ],
+        [
+          1790777722,
+          330141696
+        ],
+        [
+          1790777732,
+          330145792
+        ],
+        [
+          1790777742,
+          330145792
+        ],
+        [
+          1790777752,
+          330145792
+        ],
+        [
+          1790777762,
+          330141696
+        ],
+        [
+          1790777772,
+          330141696
+        ],
+        [
+          1790777782,
+          330141696
+        ],
+        [
+          1790777792,
+          330149888
+        ],
+        [
+          1790777802,
+          330149888
+        ],
+        [
+          1790777812,
+          330149888
+        ],
+        [
+          1790777822,
+          330149888
+        ],
+        [
+          1790777832,
+          330149888
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "llama-server CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777522,
+          0.030529565675786886
+        ],
+        [
+          1790777532,
+          0.05536994801119447
+        ],
+        [
+          1790777542,
+          0.08345354021437301
+        ],
+        [
+          1790777552,
+          0.10516511417589748
+        ],
+        [
+          1790777562,
+          0.12688086728880993
+        ],
+        [
+          1790777572,
+          0.15164372652731944
+        ],
+        [
+          1790777582,
+          0.1731107982734842
+        ],
+        [
+          1790777592,
+          2.289558136387154
+        ],
+        [
+          1790777602,
+          3.9430418412760986
+        ],
+        [
+          1790777612,
+          3.9674889274703244
+        ],
+        [
+          1790777622,
+          3.943572847740736
+        ],
+        [
+          1790777632,
+          3.979225044223829
+        ],
+        [
+          1790777642,
+          3.9748784568070494
+        ],
+        [
+          1790777652,
+          3.9786895183137125
+        ],
+        [
+          1790777662,
+          4.021261702230296
+        ],
+        [
+          1790777672,
+          4.003467072533483
+        ],
+        [
+          1790777682,
+          4.023477991075112
+        ],
+        [
+          1790777692,
+          4.388265044124609
+        ],
+        [
+          1790777702,
+          5.215621103360571
+        ],
+        [
+          1790777712,
+          6.040029500918819
+        ],
+        [
+          1790777722,
+          6.90501241403849
+        ],
+        [
+          1790777732,
+          7.7731593009433535
+        ],
+        [
+          1790777742,
+          8.606991818937857
+        ],
+        [
+          1790777752,
+          9.46011931079217
+        ],
+        [
+          1790777762,
+          10.276646465416697
+        ],
+        [
+          1790777772,
+          11.101670567181348
+        ],
+        [
+          1790777782,
+          11.919869332567728
+        ],
+        [
+          1790777792,
+          12.775917655723088
+        ],
+        [
+          1790777802,
+          13.641001168007985
+        ],
+        [
+          1790777812,
+          13.998061954022992
+        ],
+        [
+          1790777822,
+          13.998061954022992
+        ],
+        [
+          1790777832,
+          13.998061954022992
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "llama-server working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777812,
+          204509184
+        ],
+        [
+          1790777822,
+          204578816
+        ],
+        [
+          1790777832,
+          204578816
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "llama-server CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777822,
+          0.02537051819079266
+        ],
+        [
+          1790777832,
+          0.05312064766258257
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "mock-dcgm working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          18481152
+        ],
+        [
+          1790777292,
+          18522112
+        ],
+        [
+          1790777302,
+          18526208
+        ],
+        [
+          1790777312,
+          18526208
+        ],
+        [
+          1790777322,
+          18526208
+        ],
+        [
+          1790777332,
+          18526208
+        ],
+        [
+          1790777342,
+          18526208
+        ],
+        [
+          1790777352,
+          18526208
+        ],
+        [
+          1790777362,
+          18534400
+        ],
+        [
+          1790777372,
+          18534400
+        ],
+        [
+          1790777382,
+          18792448
+        ],
+        [
+          1790777392,
+          18530304
+        ],
+        [
+          1790777402,
+          18534400
+        ],
+        [
+          1790777412,
+          18530304
+        ],
+        [
+          1790777422,
+          18563072
+        ],
+        [
+          1790777432,
+          18534400
+        ],
+        [
+          1790777442,
+          18530304
+        ],
+        [
+          1790777452,
+          18530304
+        ],
+        [
+          1790777462,
+          18530304
+        ],
+        [
+          1790777472,
+          18530304
+        ],
+        [
+          1790777482,
+          18534400
+        ],
+        [
+          1790777492,
+          18530304
+        ],
+        [
+          1790777502,
+          18530304
+        ],
+        [
+          1790777512,
+          18567168
+        ],
+        [
+          1790777522,
+          18567168
+        ],
+        [
+          1790777532,
+          18567168
+        ],
+        [
+          1790777542,
+          18567168
+        ],
+        [
+          1790777552,
+          18563072
+        ],
+        [
+          1790777562,
+          18563072
+        ],
+        [
+          1790777572,
+          18563072
+        ],
+        [
+          1790777582,
+          18567168
+        ],
+        [
+          1790777592,
+          18571264
+        ],
+        [
+          1790777602,
+          18567168
+        ],
+        [
+          1790777612,
+          18571264
+        ],
+        [
+          1790777622,
+          18567168
+        ],
+        [
+          1790777632,
+          18567168
+        ],
+        [
+          1790777642,
+          18571264
+        ],
+        [
+          1790777652,
+          18571264
+        ],
+        [
+          1790777662,
+          18571264
+        ],
+        [
+          1790777672,
+          18571264
+        ],
+        [
+          1790777682,
+          18571264
+        ],
+        [
+          1790777692,
+          18571264
+        ],
+        [
+          1790777702,
+          18571264
+        ],
+        [
+          1790777712,
+          18567168
+        ],
+        [
+          1790777722,
+          18567168
+        ],
+        [
+          1790777732,
+          18567168
+        ],
+        [
+          1790777742,
+          18567168
+        ],
+        [
+          1790777752,
+          18567168
+        ],
+        [
+          1790777762,
+          18567168
+        ],
+        [
+          1790777772,
+          18567168
+        ],
+        [
+          1790777782,
+          18567168
+        ],
+        [
+          1790777792,
+          18567168
+        ],
+        [
+          1790777802,
+          18595840
+        ],
+        [
+          1790777812,
+          18567168
+        ],
+        [
+          1790777822,
+          18567168
+        ],
+        [
+          1790777832,
+          18571264
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "mock-dcgm CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.0026946750181061057
+        ],
+        [
+          1790777302,
+          0.0036985638243132355
+        ],
+        [
+          1790777312,
+          0.005372835946975475
+        ],
+        [
+          1790777322,
+          0.006493509971672034
+        ],
+        [
+          1790777332,
+          0.007451337311973366
+        ],
+        [
+          1790777342,
+          0.008839443032389017
+        ],
+        [
+          1790777352,
+          0.00958796066570833
+        ],
+        [
+          1790777362,
+          0.010772260999705546
+        ],
+        [
+          1790777372,
+          0.01208925453846266
+        ],
+        [
+          1790777382,
+          0.013303082008306127
+        ],
+        [
+          1790777392,
+          0.014144124043602088
+        ],
+        [
+          1790777402,
+          0.014745824895952173
+        ],
+        [
+          1790777412,
+          0.01516058597287819
+        ],
+        [
+          1790777422,
+          0.015608509445530104
+        ],
+        [
+          1790777432,
+          0.016062649664303905
+        ],
+        [
+          1790777442,
+          0.016612947824965075
+        ],
+        [
+          1790777452,
+          0.01717776885268312
+        ],
+        [
+          1790777462,
+          0.017590109699997285
+        ],
+        [
+          1790777472,
+          0.018048501755378074
+        ],
+        [
+          1790777482,
+          0.018482435321318828
+        ],
+        [
+          1790777492,
+          0.018858113011410473
+        ],
+        [
+          1790777502,
+          0.019313551302249196
+        ],
+        [
+          1790777512,
+          0.019675771912511006
+        ],
+        [
+          1790777522,
+          0.020884481324531814
+        ],
+        [
+          1790777532,
+          0.022036128879594972
+        ],
+        [
+          1790777542,
+          0.02361829572901637
+        ],
+        [
+          1790777552,
+          0.024673991266372555
+        ],
+        [
+          1790777562,
+          0.026207212344847818
+        ],
+        [
+          1790777572,
+          0.027384152796265708
+        ],
+        [
+          1790777582,
+          0.0288620980012897
+        ],
+        [
+          1790777592,
+          0.029929914537134863
+        ],
+        [
+          1790777602,
+          0.03105417205020349
+        ],
+        [
+          1790777612,
+          0.03298972571987061
+        ],
+        [
+          1790777622,
+          0.034271129445873176
+        ],
+        [
+          1790777632,
+          0.03544499510636221
+        ],
+        [
+          1790777642,
+          0.036673555564449935
+        ],
+        [
+          1790777652,
+          0.03831648838653732
+        ],
+        [
+          1790777662,
+          0.039513252215040595
+        ],
+        [
+          1790777672,
+          0.040997530948918226
+        ],
+        [
+          1790777682,
+          0.042045771545949344
+        ],
+        [
+          1790777692,
+          0.042667789983759745
+        ],
+        [
+          1790777702,
+          0.043729400687158054
+        ],
+        [
+          1790777712,
+          0.04440806900422398
+        ],
+        [
+          1790777722,
+          0.04518695660280936
+        ],
+        [
+          1790777732,
+          0.0455629307357063
+        ],
+        [
+          1790777742,
+          0.04625065531895134
+        ],
+        [
+          1790777752,
+          0.04690434138019986
+        ],
+        [
+          1790777762,
+          0.04749005288254246
+        ],
+        [
+          1790777772,
+          0.04786113183769277
+        ],
+        [
+          1790777782,
+          0.04857063992695376
+        ],
+        [
+          1790777792,
+          0.050161764771262184
+        ],
+        [
+          1790777802,
+          0.05069203401895406
+        ],
+        [
+          1790777812,
+          0.05138874808926486
+        ],
+        [
+          1790777822,
+          0.0531091164304656
+        ],
+        [
+          1790777832,
+          0.05464275288856069
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "prometheus working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          41795584
+        ],
+        [
+          1790777292,
+          41058304
+        ],
+        [
+          1790777302,
+          41168896
+        ],
+        [
+          1790777312,
+          41844736
+        ],
+        [
+          1790777322,
+          42618880
+        ],
+        [
+          1790777332,
+          43294720
+        ],
+        [
+          1790777342,
+          43368448
+        ],
+        [
+          1790777352,
+          43835392
+        ],
+        [
+          1790777362,
+          45076480
+        ],
+        [
+          1790777372,
+          45834240
+        ],
+        [
+          1790777382,
+          45862912
+        ],
+        [
+          1790777392,
+          45871104
+        ],
+        [
+          1790777402,
+          45895680
+        ],
+        [
+          1790777412,
+          45924352
+        ],
+        [
+          1790777422,
+          46211072
+        ],
+        [
+          1790777432,
+          46907392
+        ],
+        [
+          1790777442,
+          47398912
+        ],
+        [
+          1790777452,
+          48103424
+        ],
+        [
+          1790777462,
+          53084160
+        ],
+        [
+          1790777472,
+          53678080
+        ],
+        [
+          1790777482,
+          53723136
+        ],
+        [
+          1790777492,
+          53739520
+        ],
+        [
+          1790777502,
+          53772288
+        ],
+        [
+          1790777512,
+          53784576
+        ],
+        [
+          1790777522,
+          53809152
+        ],
+        [
+          1790777532,
+          53800960
+        ],
+        [
+          1790777542,
+          53829632
+        ],
+        [
+          1790777552,
+          53837824
+        ],
+        [
+          1790777562,
+          53841920
+        ],
+        [
+          1790777572,
+          53899264
+        ],
+        [
+          1790777582,
+          54206464
+        ],
+        [
+          1790777592,
+          54915072
+        ],
+        [
+          1790777602,
+          54915072
+        ],
+        [
+          1790777612,
+          55148544
+        ],
+        [
+          1790777622,
+          55140352
+        ],
+        [
+          1790777632,
+          55152640
+        ],
+        [
+          1790777642,
+          55496704
+        ],
+        [
+          1790777652,
+          55750656
+        ],
+        [
+          1790777662,
+          55762944
+        ],
+        [
+          1790777672,
+          51273728
+        ],
+        [
+          1790777682,
+          52023296
+        ],
+        [
+          1790777692,
+          52695040
+        ],
+        [
+          1790777702,
+          53288960
+        ],
+        [
+          1790777712,
+          53559296
+        ],
+        [
+          1790777722,
+          53727232
+        ],
+        [
+          1790777732,
+          54226944
+        ],
+        [
+          1790777742,
+          54923264
+        ],
+        [
+          1790777752,
+          55476224
+        ],
+        [
+          1790777762,
+          56111104
+        ],
+        [
+          1790777772,
+          56619008
+        ],
+        [
+          1790777782,
+          57171968
+        ],
+        [
+          1790777792,
+          57417728
+        ],
+        [
+          1790777802,
+          57577472
+        ],
+        [
+          1790777812,
+          57581568
+        ],
+        [
+          1790777822,
+          57630720
+        ],
+        [
+          1790777832,
+          57651200
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "prometheus CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.017266538559322017
+        ],
+        [
+          1790777302,
+          0.029099652547803345
+        ],
+        [
+          1790777312,
+          0.03605757384652243
+        ],
+        [
+          1790777322,
+          0.04074519445330422
+        ],
+        [
+          1790777332,
+          0.049354574182642566
+        ],
+        [
+          1790777342,
+          0.060245936693991774
+        ],
+        [
+          1790777352,
+          0.06687694931153701
+        ],
+        [
+          1790777362,
+          0.07885462662357212
+        ],
+        [
+          1790777372,
+          0.08851705984390384
+        ],
+        [
+          1790777382,
+          0.09729046616777531
+        ],
+        [
+          1790777392,
+          0.10369785521348951
+        ],
+        [
+          1790777402,
+          0.10652435537995159
+        ],
+        [
+          1790777412,
+          0.11036066545557437
+        ],
+        [
+          1790777422,
+          0.11319121040004887
+        ],
+        [
+          1790777432,
+          0.11544361797048985
+        ],
+        [
+          1790777442,
+          0.1191749774889093
+        ],
+        [
+          1790777452,
+          0.1232797537529527
+        ],
+        [
+          1790777462,
+          0.1270507144796937
+        ],
+        [
+          1790777472,
+          0.13140043411492547
+        ],
+        [
+          1790777482,
+          0.13318916306822723
+        ],
+        [
+          1790777492,
+          0.13771316171573206
+        ],
+        [
+          1790777502,
+          0.1413152450423349
+        ],
+        [
+          1790777512,
+          0.14408226388986042
+        ],
+        [
+          1790777522,
+          0.15196662121488236
+        ],
+        [
+          1790777532,
+          0.16194082656190864
+        ],
+        [
+          1790777542,
+          0.17138432406298207
+        ],
+        [
+          1790777552,
+          0.1794125103483982
+        ],
+        [
+          1790777562,
+          0.1889177976302133
+        ],
+        [
+          1790777572,
+          0.20030360907035877
+        ],
+        [
+          1790777582,
+          0.20886652291103439
+        ],
+        [
+          1790777592,
+          0.2178683976243977
+        ],
+        [
+          1790777602,
+          0.22626935178493668
+        ],
+        [
+          1790777612,
+          0.2362619701682191
+        ],
+        [
+          1790777622,
+          0.24585312611870536
+        ],
+        [
+          1790777632,
+          0.25537213757794575
+        ],
+        [
+          1790777642,
+          0.26135443837939476
+        ],
+        [
+          1790777652,
+          0.27087817609100245
+        ],
+        [
+          1790777662,
+          0.2800896227751211
+        ],
+        [
+          1790777672,
+          0.3209210653679125
+        ],
+        [
+          1790777682,
+          0.32948510479688964
+        ],
+        [
+          1790777692,
+          0.33502719737203823
+        ],
+        [
+          1790777702,
+          0.3428513489861426
+        ],
+        [
+          1790777712,
+          0.34676722686391054
+        ],
+        [
+          1790777722,
+          0.35092863870906094
+        ],
+        [
+          1790777732,
+          0.356749814499034
+        ],
+        [
+          1790777742,
+          0.3601116763095684
+        ],
+        [
+          1790777752,
+          0.36433743447086525
+        ],
+        [
+          1790777762,
+          0.3681538571321085
+        ],
+        [
+          1790777772,
+          0.3704037718439114
+        ],
+        [
+          1790777782,
+          0.37538743957513543
+        ],
+        [
+          1790777792,
+          0.37874226291949975
+        ],
+        [
+          1790777802,
+          0.38369219027986634
+        ],
+        [
+          1790777812,
+          0.3877762083243501
+        ],
+        [
+          1790777822,
+          0.4006297313773209
+        ],
+        [
+          1790777832,
+          0.41018320995599156
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "tool-service working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777652,
+          14602240
+        ],
+        [
+          1790777662,
+          14598144
+        ],
+        [
+          1790777672,
+          14598144
+        ],
+        [
+          1790777682,
+          14598144
+        ],
+        [
+          1790777692,
+          14630912
+        ],
+        [
+          1790777702,
+          14630912
+        ],
+        [
+          1790777712,
+          14630912
+        ],
+        [
+          1790777722,
+          14630912
+        ],
+        [
+          1790777732,
+          14630912
+        ],
+        [
+          1790777742,
+          14630912
+        ],
+        [
+          1790777752,
+          14630912
+        ],
+        [
+          1790777762,
+          14630912
+        ],
+        [
+          1790777772,
+          14630912
+        ],
+        [
+          1790777782,
+          14630912
+        ],
+        [
+          1790777792,
+          14630912
+        ],
+        [
+          1790777802,
+          14630912
+        ],
+        [
+          1790777812,
+          14630912
+        ],
+        [
+          1790777822,
+          14630912
+        ],
+        [
+          1790777832,
+          14630912
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "tool-service CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777662,
+          0.0011591224060940367
+        ],
+        [
+          1790777672,
+          0.0017821968036064945
+        ],
+        [
+          1790777682,
+          0.0022083593206601825
+        ],
+        [
+          1790777692,
+          0.002959812460118938
+        ],
+        [
+          1790777702,
+          0.0032496632332229087
+        ],
+        [
+          1790777712,
+          0.0033500122129654503
+        ],
+        [
+          1790777722,
+          0.003479448742138364
+        ],
+        [
+          1790777732,
+          0.003606736959670229
+        ],
+        [
+          1790777742,
+          0.003771601308254613
+        ],
+        [
+          1790777752,
+          0.003940011781829843
+        ],
+        [
+          1790777762,
+          0.004109351777572971
+        ],
+        [
+          1790777772,
+          0.0042759443971846925
+        ],
+        [
+          1790777782,
+          0.0044976624346277656
+        ],
+        [
+          1790777792,
+          0.004646035549892164
+        ],
+        [
+          1790777802,
+          0.0048187328974112105
+        ],
+        [
+          1790777812,
+          0.005073295434821345
+        ],
+        [
+          1790777822,
+          0.006008082639459997
+        ],
+        [
+          1790777832,
+          0.006627612424718787
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_memory_working_set_bytes",
+      "label": "toxiproxy working_set",
+      "unit": "bytes",
+      "points": [
+        [
+          1790777282,
+          1495040
+        ],
+        [
+          1790777292,
+          1646592
+        ],
+        [
+          1790777302,
+          1650688
+        ],
+        [
+          1790777312,
+          1671168
+        ],
+        [
+          1790777322,
+          2023424
+        ],
+        [
+          1790777332,
+          2027520
+        ],
+        [
+          1790777342,
+          2031616
+        ],
+        [
+          1790777352,
+          2228224
+        ],
+        [
+          1790777362,
+          2314240
+        ],
+        [
+          1790777372,
+          2314240
+        ],
+        [
+          1790777382,
+          2318336
+        ],
+        [
+          1790777392,
+          2322432
+        ],
+        [
+          1790777402,
+          2375680
+        ],
+        [
+          1790777412,
+          2375680
+        ],
+        [
+          1790777422,
+          2379776
+        ],
+        [
+          1790777432,
+          2379776
+        ],
+        [
+          1790777442,
+          2396160
+        ],
+        [
+          1790777452,
+          2396160
+        ],
+        [
+          1790777462,
+          2404352
+        ],
+        [
+          1790777472,
+          2404352
+        ],
+        [
+          1790777482,
+          2404352
+        ],
+        [
+          1790777492,
+          2416640
+        ],
+        [
+          1790777502,
+          2420736
+        ],
+        [
+          1790777512,
+          2433024
+        ],
+        [
+          1790777522,
+          2437120
+        ],
+        [
+          1790777532,
+          2437120
+        ],
+        [
+          1790777542,
+          2449408
+        ],
+        [
+          1790777552,
+          2465792
+        ],
+        [
+          1790777562,
+          2478080
+        ],
+        [
+          1790777572,
+          2486272
+        ],
+        [
+          1790777582,
+          2490368
+        ],
+        [
+          1790777592,
+          2560000
+        ],
+        [
+          1790777602,
+          2560000
+        ],
+        [
+          1790777612,
+          2572288
+        ],
+        [
+          1790777622,
+          2584576
+        ],
+        [
+          1790777632,
+          2584576
+        ],
+        [
+          1790777642,
+          2605056
+        ],
+        [
+          1790777652,
+          2650112
+        ],
+        [
+          1790777662,
+          2654208
+        ],
+        [
+          1790777672,
+          2658304
+        ],
+        [
+          1790777682,
+          2662400
+        ],
+        [
+          1790777692,
+          2777088
+        ],
+        [
+          1790777702,
+          2777088
+        ],
+        [
+          1790777712,
+          2777088
+        ],
+        [
+          1790777722,
+          2777088
+        ],
+        [
+          1790777732,
+          2785280
+        ],
+        [
+          1790777742,
+          2793472
+        ],
+        [
+          1790777752,
+          2813952
+        ],
+        [
+          1790777762,
+          2818048
+        ],
+        [
+          1790777772,
+          2826240
+        ],
+        [
+          1790777782,
+          2826240
+        ],
+        [
+          1790777792,
+          2826240
+        ],
+        [
+          1790777802,
+          2830336
+        ],
+        [
+          1790777812,
+          2834432
+        ],
+        [
+          1790777822,
+          2834432
+        ],
+        [
+          1790777832,
+          2838528
+        ]
+      ],
+      "thresholds": null
+    },
+    {
+      "name": "container_cpu_pct",
+      "label": "toxiproxy CPU 使用率",
+      "unit": "percent",
+      "points": [
+        [
+          1790777292,
+          0.0014804858171528477
+        ],
+        [
+          1790777302,
+          0.0019017265939811287
+        ],
+        [
+          1790777312,
+          0.001928512808748184
+        ],
+        [
+          1790777322,
+          0.004714671862468711
+        ],
+        [
+          1790777332,
+          0.004989776182412
+        ],
+        [
+          1790777342,
+          0.005572995418134718
+        ],
+        [
+          1790777352,
+          0.006110411989771276
+        ],
+        [
+          1790777362,
+          0.006860830805658326
+        ],
+        [
+          1790777372,
+          0.007356108171388386
+        ],
+        [
+          1790777382,
+          0.007795045991771818
+        ],
+        [
+          1790777392,
+          0.008130725340537099
+        ],
+        [
+          1790777402,
+          0.008183212005670126
+        ],
+        [
+          1790777412,
+          0.008303601042647189
+        ],
+        [
+          1790777422,
+          0.008382953352135878
+        ],
+        [
+          1790777432,
+          0.00853971988115131
+        ],
+        [
+          1790777442,
+          0.008662110649956093
+        ],
+        [
+          1790777452,
+          0.008663529411764709
+        ],
+        [
+          1790777462,
+          0.008858860048756112
+        ],
+        [
+          1790777472,
+          0.008819927175987858
+        ],
+        [
+          1790777482,
+          0.008813524775540392
+        ],
+        [
+          1790777492,
+          0.008944690053247885
+        ],
+        [
+          1790777502,
+          0.009097078601617884
+        ],
+        [
+          1790777512,
+          0.00912631417155249
+        ],
+        [
+          1790777522,
+          0.009242427172991641
+        ],
+        [
+          1790777532,
+          0.00960731292517007
+        ],
+        [
+          1790777542,
+          0.010017611629291089
+        ],
+        [
+          1790777552,
+          0.010542379249003189
+        ],
+        [
+          1790777562,
+          0.011209556272960074
+        ],
+        [
+          1790777572,
+          0.011612833665721509
+        ],
+        [
+          1790777582,
+          0.012236109780878532
+        ],
+        [
+          1790777592,
+          0.01274277478318247
+        ],
+        [
+          1790777602,
+          0.01311047628041096
+        ],
+        [
+          1790777612,
+          0.013455703271507047
+        ],
+        [
+          1790777622,
+          0.013801399707735572
+        ],
+        [
+          1790777632,
+          0.013821816176470592
+        ],
+        [
+          1790777642,
+          0.014688194670632376
+        ],
+        [
+          1790777652,
+          0.015382597887401992
+        ],
+        [
+          1790777662,
+          0.01573902027027027
+        ],
+        [
+          1790777672,
+          0.016147608447664007
+        ],
+        [
+          1790777682,
+          0.016388609536409946
+        ],
+        [
+          1790777692,
+          0.016794629332194954
+        ],
+        [
+          1790777702,
+          0.01684076488068641
+        ],
+        [
+          1790777712,
+          0.01693793650793651
+        ],
+        [
+          1790777722,
+          0.017401056445729743
+        ],
+        [
+          1790777732,
+          0.0176271917642058
+        ],
+        [
+          1790777742,
+          0.017855022592576975
+        ],
+        [
+          1790777752,
+          0.017749255617507346
+        ],
+        [
+          1790777762,
+          0.017906648444257434
+        ],
+        [
+          1790777772,
+          0.01791422996842285
+        ],
+        [
+          1790777782,
+          0.018310559651753298
+        ],
+        [
+          1790777792,
+          0.018597472532543236
+        ],
+        [
+          1790777802,
+          0.018948268631676365
+        ],
+        [
+          1790777812,
+          0.01891430065359477
+        ],
+        [
+          1790777822,
+          0.01951327953066285
+        ],
+        [
+          1790777832,
+          0.019633827044025155
+        ]
+      ],
+      "thresholds": null
+    }
+  ],
+  "incidents": [
+    {
+      "cluster_id": "clu-5df976f1f6f54ffc",
+      "correlation_id": "e40e7ba37a41",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "127 events, 12 resources, signals=[cgroup.metric, gpu.metric, tool.result, tool.call, task.started, task.failed] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:26Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-f7e5f69115f74563",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "9 events, 2 resources, signals=[cgroup.metric, tcp.retransmit] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:16:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-00cc377cec4e4487",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-220ff189f3004c87",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-f455c0f686db4a48",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-6201a7aedea64837",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-1193cc0aba944844",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-69f8ad35607e42d8",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "40 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-57b982b6459f4dcb",
+      "correlation_id": "",
+      "resource_id": "gpu:mock-gpu0",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "42 events, 2 resources, signals=[gpu.metric, cgroup.metric] focus=gpu:mock-gpu0",
+      "window_start": "2026-09-30T14:14:38Z",
+      "window_end": "2026-09-30T14:17:10Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-62d83bce097145f9",
+      "correlation_id": "e40e7ba37a41",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.correlation_id",
+      "summary": "30 events, 2 resources, signals=[cgroup.metric, tool.result, tool.call, task.started, task.failed] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:40Z",
+      "window_end": "2026-09-30T14:16:45Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-9f03a2ceee8d44b4",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "32 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:16:40Z",
+      "evidence_ids": null
+    },
+    {
+      "cluster_id": "clu-ea5010a8835d45fc",
+      "correlation_id": "",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "rule": "correlation.same_resource_time_window",
+      "summary": "32 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "window_start": "2026-09-30T14:14:45Z",
+      "window_end": "2026-09-30T14:16:40Z",
+      "evidence_ids": null
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-09-30T14:17:13Z",
+    "note": "由 tracesphere capture 从真实环境（platform + Prometheus）抓取",
+    "sources": {
+      "platform": "real",
+      "prometheus": "real",
+      "fixture": "off"
+    }
+  }
+}

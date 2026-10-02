@@ -1,0 +1,44 @@
+flowchart LR
+    accTitle: TraceSphere 部署边界与安全面
+    accDescr: 展示管理节点、业务虚拟机和运维访问之间的部署边界，以及 Token、回环绑定、只读 ZSvirt 和降级模式。
+
+    operator["运维人员\nWeb / CLI"]
+
+    subgraph management["管理节点 / 平台侧"]
+        platform["Platform :8000\n非回环必须配置 API Token"]
+        rca["RCA + Console :8010\nRCA Token + CORS 白名单"]
+        sqlite["SQLite WAL\nresources / events / evidence / clusters"]
+        rules["YAML Rule Library"]
+    end
+
+    subgraph workload_vm["ZSvirt 业务 VM"]
+        vmagent["vm-agent systemd\nVMAGENT_TOKEN\n逐 hook 降级 + spool"]
+        app["agent-service / tool-service\nPLATFORM_TOKEN / TASK_TOKEN"]
+        observability["Prometheus / cAdvisor\n默认回环，PROM_BIND 可覆盖"]
+        mockgpu["Mock DCGM\n默认回环 / GPU 降级"]
+    end
+
+    zsvirt["ZSvirt API\n只读账号 + OAuth 会话"]
+    fixture["Fixture / 回放\n无 GPU / 无 eBPF 降级"]
+
+    operator --> rca
+    operator --> platform
+    zsvirt -->|只读同步| platform
+    fixture --> platform
+    platform --> sqlite
+    sqlite --> rca
+    rules --> rca
+    vmagent -->|Bearer Token| platform
+    app -->|Bearer Token| platform
+    mockgpu -->|Bearer Token| platform
+    observability -->|RCA 查询| rca
+    rca --> operator
+
+    classDef boundary fill:#e8f1fb,stroke:#2b5b8f,color:#163b61,stroke-width:1.4px
+    classDef workload fill:#eaf6f1,stroke:#2e8b57,color:#184f35,stroke-width:1.4px
+    classDef security fill:#fff3e3,stroke:#d97b10,color:#75420a,stroke-width:1.4px
+    classDef user fill:#eef2f6,stroke:#65717e,color:#1f2933,stroke-width:1.4px
+
+    class platform,rca,sqlite,rules,zsvirt,fixture boundary
+    class vmagent,app,observability,mockgpu workload
+    class operator user

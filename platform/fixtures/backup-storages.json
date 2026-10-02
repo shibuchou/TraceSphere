@@ -1,0 +1,23 @@
+{
+  "inventories": [
+    {
+      "hostname": "192.168.122.123",
+      "username": "root",
+      "sshPort": 22,
+      "uuid": "2fa50ded127743859cf2bb80e9d3a25a",
+      "name": "bs-local",
+      "url": "/var/lib/zstack/imagestore-bs",
+      "totalCapacity": 97801142272,
+      "availableCapacity": 65873833984,
+      "type": "ImageStoreBackupStorage",
+      "state": "Enabled",
+      "status": "Connected",
+      "createDate": "Sep 19, 2026 12:43:37 AM",
+      "lastOpDate": "Sep 20, 2026 5:23:34 PM",
+      "attachedZoneUuids": [
+        "26fd04cdf31047e4a96aff5e41225420"
+      ]
+    }
+  ],
+  "total": 1
+}

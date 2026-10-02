@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: cadvisor
+    static_configs:
+      - targets: ["cadvisor:8080"]
+
+  - job_name: llama-server
+    static_configs:
+      - targets: ["llama-server:8080"]
+
+  - job_name: toxiproxy
+    static_configs:
+      - targets: ["toxiproxy:8474"]
+
+  # 无 GPU 硬件的降级模式：模拟 DCGM 显存指标（赛题 §4）
+  - job_name: mock-dcgm
+    static_configs:
+      - targets: ["mock-dcgm:9400"]

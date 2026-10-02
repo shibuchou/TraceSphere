@@ -1,0 +1,79 @@
+{
+  "inventories": [
+    {
+      "uuid": "63bbb4613a524e4e97090600af03da93",
+      "name": "workload-vm",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
+      "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+      "hostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+      "lastHostUuid": "cbb61d8a22cc4fd1b3702af673cbf405",
+      "instanceOfferingUuid": "21830e28a8f74391ba2a5fe46aca85af",
+      "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
+      "platform": "Linux",
+      "architecture": "x86_64",
+      "defaultL3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+      "type": "UserVm",
+      "hypervisorType": "KVM",
+      "memorySize": 4294967296,
+      "reservedMemorySize": 0,
+      "cpuNum": 4,
+      "cpuSpeed": 0,
+      "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+      "createDate": "Sep 19, 2026 1:16:29 AM",
+      "lastOpDate": "Sep 19, 2026 9:04:35 AM",
+      "state": "Running",
+      "vmNics": [
+        {
+          "uuid": "bdedd41023d849158577b973e1116869",
+          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "mac": "fa:6f:c9:04:b0:00",
+          "hypervisorType": "KVM",
+          "driverType": "virtio",
+          "usedIps": [],
+          "internalName": "vnic2.0",
+          "deviceId": 0,
+          "type": "VNIC",
+          "state": "enable",
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "lastOpDate": "Sep 19, 2026 1:16:29 AM"
+        }
+      ],
+      "allVolumes": [
+        {
+          "uuid": "c6114309f9d34fa980a00a4895383654",
+          "name": "ROOT-for-workload-vm",
+          "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+          "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
+          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
+          "type": "Root",
+          "format": "qcow2",
+          "size": 42949672960,
+          "actualSize": 6517972992,
+          "deviceId": 0,
+          "state": "Enabled",
+          "status": "Ready",
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "lastOpDate": "Sep 20, 2026 4:26:06 PM",
+          "isShareable": false,
+          "lastAttachDate": "Sep 19, 2026 1:16:30 AM"
+        }
+      ],
+      "vmCdRoms": [
+        {
+          "uuid": "461320dbc7b84b01a05d26fdf244047e",
+          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "deviceId": 0,
+          "name": "vm-63bbb4613a524e4e97090600af03da93-cdRom",
+          "createDate": "Sep 19, 2026 1:16:29 AM",
+          "lastOpDate": "Sep 19, 2026 1:16:29 AM"
+        }
+      ],
+      "guestOsType": "Linux"
+    }
+  ],
+  "total": 1
+}

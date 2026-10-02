@@ -1,0 +1,35 @@
+{
+  "inventories": [
+    {
+      "uuid": "f39ba0991de143e6b76b0887e19edb0a",
+      "name": "ubuntu-24.04-cloudimg",
+      "state": "Enabled",
+      "status": "Ready",
+      "size": 3758096384,
+      "actualSize": 625256960,
+      "url": "file:///var/lib/zstack/imagestore-bs/ubuntu-24.04.img",
+      "mediaType": "RootVolumeTemplate",
+      "guestOsType": "Linux",
+      "type": "zstack",
+      "platform": "Linux",
+      "architecture": "x86_64",
+      "format": "qcow2",
+      "system": false,
+      "virtio": true,
+      "createDate": "Sep 19, 2026 12:50:44 AM",
+      "lastOpDate": "Sep 19, 2026 12:50:45 AM",
+      "backupStorageRefs": [
+        {
+          "id": 1,
+          "imageUuid": "f39ba0991de143e6b76b0887e19edb0a",
+          "backupStorageUuid": "2fa50ded127743859cf2bb80e9d3a25a",
+          "installPath": "zstore://f39ba0991de143e6b76b0887e19edb0a/9dee208e02952ea357be268f244d0ec95eb2fca9",
+          "status": "Ready",
+          "createDate": "Sep 19, 2026 12:50:44 AM",
+          "lastOpDate": "Sep 19, 2026 12:50:45 AM"
+        }
+      ]
+    }
+  ],
+  "total": 1
+}

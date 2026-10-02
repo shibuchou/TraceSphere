@@ -1,0 +1,82 @@
+# TraceSphere RCA 规则：Agent 工具调用失败（Case 3）
+# 结构：rule / evidence / correlation / result（方案 §6.3 冻结）
+rule: tool_failure
+version: 1
+title: Agent 工具调用失败（Agent Tool Failure）
+description: 工具调用链路上出现传输层异常（RST / 重传 / 超时 / 连接失败），导致 Agent 任务失败
+severity: major
+
+evidence:
+  # ---- 应用层锚点：工具调用返回错误 ----
+  - signal: tool.result
+    kind: app_event
+    layer: application
+    status: error
+    weight: 30
+    description: tool.result status=error（AppEvent，带 correlation_id / task_id）
+
+  # ---- 任务失败语义与工具调用直接相关 ----
+  - signal: task.failed
+    kind: app_event
+    layer: application
+    weight: 20
+    match_any: ["tool call failed", "tool failed"]
+    after: tool.result
+    description: task.failed 且 reason 指向工具调用失败
+
+  # ---- 传输层信号（至少一种即可，方案 §7 Case3 验收口径）----
+  - signal_any: [tcp.retransmit, tcp.connect_failed, tcp.reset, tool.transport_error]
+    kind_any: [ebpf, log, app_event]
+    layer: vm
+    weight: 25
+    match_any:
+      - "Connection reset by peer"
+      - "Connection refused"
+      - "timed out"
+      - "RST"
+      - "retransmit"
+      - "超时"
+    description: 传输层异常：connect error / RST / TCP 重传 / timeout 至少一种
+
+  # ---- 目标端点可定位（工具调用目标已知，用于影响范围与处置）----
+  - signal_any: [tool.call, tool.result]
+    kind: app_event
+    layer: application
+    weight: 10
+    require_attribute: target
+    description: 工具调用目标端点已知（attributes.target，如 http://toxiproxy:8666/tool）
+
+  # ---- 目标服务错误日志（P1：Fluent Bit / Loki 接入后启用）----
+  - signal_any: [log.tool_service_error, log.error]
+    kind: log
+    layer: container
+    weight: 15
+    optional: true
+    match_any: ["Traceback", "error", "refused", "reset"]
+    description: 目标服务（tool-service）错误日志
+
+correlation:
+  same_resource: false
+  time_window: 5s
+  require_correlation_id: true    # 工具失败天然带 correlation_id，优先按应用锚点聚合
+  link_via_graph: [container, service, task]
+
+result:
+  root_cause: tool_endpoint_unreachable
+  label: 目标端点不可达 / 依赖服务故障（或网络策略阻断）
+  suggestions:
+    - action: check_toxiproxy
+      title: 检查 Toxiproxy 故障注入状态
+      basis: 传输层异常集中在被代理端口（8666），且 proxy 存在 toxics 配置
+      detail: 查询 8474 API 的 /proxies/tool/toxics，确认是否为演练注入，必要时 clear
+      risk: 若为真实故障，clear 会掩盖问题；先确认演练窗口
+    - action: check_target_health
+      title: 检查目标服务健康
+      basis: 同一端点在窗口内持续失败
+      detail: 直连目标服务端口（绕过代理）验证进程存活与响应
+      risk: 直连需临时开放网络路径
+    - action: check_network_policy
+      title: 检查网络策略 / DNS 解析
+      basis: connect error / RST 而非应用层 5xx
+      detail: 检查 iptables / DNS 解析与目标端口连通性（nc / curl -v）
+      risk: 修改网络策略影响面大，需灰度验证

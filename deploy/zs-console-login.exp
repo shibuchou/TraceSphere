@@ -1,0 +1,38 @@
+#!/usr/bin/expect -f
+# TraceSphere - ZSvirt 控制台自动登录诊断
+# 用法: expect zs-console-login.exp [vm-name] [命令]
+set timeout 25
+set vm  "zsvirt-mgmt"
+set cmd "ip -4 addr show; ip route; echo CONSOLE_DIAG_OK"
+if {[llength $argv] > 0} { set vm  [lindex $argv 0] }
+if {[llength $argv] > 1} { set cmd [lindex $argv 1] }
+
+log_user 1
+spawn sudo -n virsh console $vm --force
+
+send "\r"
+expect {
+    -re "login:" { send "root\r" }
+    timeout { puts "\n\[ERROR\] 25s 内未见 login 提示（可能仍在启动或卡住）"; exit 2 }
+}
+
+expect {
+    -re "Password:" { send "$env(ZS_PW)\r" }
+    timeout { puts "\n\[ERROR\] 未见 Password 提示"; exit 3 }
+}
+
+expect {
+    -re "# $" { }
+    -re "#"     { }
+    timeout { puts "\n\[ERROR\] 登录超时（密码错误或 SHELL 异常）"; exit 4 }
+}
+
+send "$cmd\r"
+expect {
+    -re "CONSOLE_DIAG_OK" { }
+    timeout { puts "\n\[ERROR\] 命令执行超时"; }
+}
+
+send "exit\r"
+expect eof
+puts "\n\[OK\] console diag finished"

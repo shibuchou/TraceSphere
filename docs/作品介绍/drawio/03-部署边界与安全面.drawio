@@ -1,0 +1,160 @@
+<mxfile host="drawio-skill" agent="diagram-ir" version="3.0.0">
+  <diagram id="system" name="System">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="operator" value="运维人员&#10;Web / CLI" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1" data-model-id="operator" data-kind="actor" data-properties="{}" data-source-properties="{}" data-source-label="运维人员&#10;Web / CLI" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}">
+          <mxGeometry x="890" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="platform" value="Platform :8000&#10;非回环必须配置 API Token" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1" data-model-id="platform" data-kind="gateway" data-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-label="Platform :8000&#10;非回环必须配置 API Token" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="private">
+          <mxGeometry x="530" y="110" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rca" value="RCA + Console :8010&#10;RCA Token + CORS 白名单" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1" data-model-id="rca" data-kind="gateway" data-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-label="RCA + Console :8010&#10;RCA Token + CORS 白名单" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="private">
+          <mxGeometry x="890" y="320" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sqlite" value="SQLite WAL&#10;resources / events / evidence / clusters" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1" data-model-id="sqlite" data-kind="database" data-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-label="SQLite WAL&#10;resources / events / evidence / clusters" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="private">
+          <mxGeometry x="650" y="210" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" value="YAML Rule Library" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="rules" data-kind="data" data-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-label="YAML Rule Library" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="private">
+          <mxGeometry x="1010" y="210" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vmagent" value="vm-agent systemd&#10;VMAGENT_TOKEN&#10;逐 hook 降级 + spool" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="vmagent" data-kind="agent" data-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-label="vm-agent systemd&#10;VMAGENT_TOKEN&#10;逐 hook 降级 + spool" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="workload_vm">
+          <mxGeometry x="0" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app" value="agent-service / tool-service&#10;PLATFORM_TOKEN / TASK_TOKEN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="app" data-kind="service" data-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-label="agent-service / tool-service&#10;PLATFORM_TOKEN / TASK_TOKEN" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="workload_vm">
+          <mxGeometry x="180" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="observability" value="Prometheus / cAdvisor&#10;默认回环，PROM_BIND 可覆盖" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1" data-model-id="observability" data-kind="database" data-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-label="Prometheus / cAdvisor&#10;默认回环，PROM_BIND 可覆盖" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="workload_vm">
+          <mxGeometry x="1180" y="210" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mockgpu" value="Mock DCGM&#10;默认回环 / GPU 降级" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="mockgpu" data-kind="service" data-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;workload_vm&quot;}" data-source-label="Mock DCGM&#10;默认回环 / GPU 降级" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="workload_vm">
+          <mxGeometry x="360" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="zsvirt" value="ZSvirt API&#10;只读账号 + OAuth 会话" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1" data-model-id="zsvirt" data-kind="external" data-properties="{&quot;trust_boundary&quot;:&quot;external&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;external&quot;}" data-source-label="ZSvirt API&#10;只读账号 + OAuth 会话" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="external">
+          <mxGeometry x="530" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fixture" value="Fixture / 回放&#10;无 GPU / 无 eBPF 降级" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="fixture" data-kind="data" data-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-properties="{&quot;trust_boundary&quot;:&quot;private&quot;}" data-source-label="Fixture / 回放&#10;无 GPU / 无 eBPF 降级" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\03-部署边界与安全面.json&quot;}" data-boundary="private">
+          <mxGeometry x="710" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="Web / CLI" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="operator" target="rca" data-model-id="e01" data-kind="sync" data-properties="{}" data-source-properties="{}" data-source-label="Web / CLI">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="70" />
+              <mxPoint x="980" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" value="健康 / 运维" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="operator" target="platform" data-model-id="e02" data-kind="sync" data-properties="{}" data-source-properties="{}" data-source-label="健康 / 运维">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="910" y="110" />
+              <mxPoint x="910" y="150" />
+              <mxPoint x="910" y="150" />
+              <mxPoint x="910" y="150" />
+              <mxPoint x="710" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="只读同步" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="zsvirt" target="platform" data-model-id="e03" data-kind="data" data-properties="{&quot;protocol&quot;:&quot;OAuth&quot;}" data-source-properties="{&quot;protocol&quot;:&quot;OAuth&quot;}" data-source-label="只读同步">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="70" />
+              <mxPoint x="610" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="回放" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="fixture" target="platform" data-model-id="e04" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="回放">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="100" />
+              <mxPoint x="760" y="130" />
+              <mxPoint x="760" y="130" />
+              <mxPoint x="760" y="130" />
+              <mxPoint x="710" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="落库" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="platform" target="sqlite" data-model-id="e05" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="落库">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="670" y="180" />
+              <mxPoint x="670" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="诊断数据" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="sqlite" target="rca" data-model-id="e06" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="诊断数据">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="250" />
+              <mxPoint x="940" y="250" />
+              <mxPoint x="940" y="250" />
+              <mxPoint x="940" y="250" />
+              <mxPoint x="940" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="规则" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="rules" target="rca" data-model-id="e07" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="规则">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1030" y="280" />
+              <mxPoint x="1030" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="Bearer Token" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="vmagent" target="platform" data-model-id="e08" data-kind="data" data-properties="{&quot;protocol&quot;:&quot;HTTPS&quot;}" data-source-properties="{&quot;protocol&quot;:&quot;HTTPS&quot;}" data-source-label="Bearer Token">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="110" />
+              <mxPoint x="80" y="160" />
+              <mxPoint x="80" y="160" />
+              <mxPoint x="80" y="160" />
+              <mxPoint x="520" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="Bearer Token" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="app" target="platform" data-model-id="e09" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="Bearer Token">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="100" />
+              <mxPoint x="260" y="140" />
+              <mxPoint x="260" y="140" />
+              <mxPoint x="260" y="140" />
+              <mxPoint x="520" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="Bearer Token" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="mockgpu" target="platform" data-model-id="e10" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="Bearer Token">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="100" />
+              <mxPoint x="440" y="120" />
+              <mxPoint x="440" y="120" />
+              <mxPoint x="440" y="120" />
+              <mxPoint x="520" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="指标查询" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="observability" target="rca" data-model-id="e11" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="指标查询">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1260" y="310" />
+              <mxPoint x="1260" y="350" />
+              <mxPoint x="1260" y="350" />
+              <mxPoint x="1260" y="350" />
+              <mxPoint x="1060" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="诊断结果" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="rca" target="operator" data-model-id="e12" data-kind="sync" data-properties="{}" data-source-properties="{}" data-source-label="诊断结果">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="320" />
+              <mxPoint x="960" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

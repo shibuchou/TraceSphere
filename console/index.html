@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="TraceSphere Web Console — ZSvirt 智算云 Agent 故障根因诊断控制台（拓扑 / 健康 / 告警 / 诊断）"
+    />
+    <title>TraceSphere Console · ZSvirt 智算云根因诊断</title>
+    <style>
+      /* 首屏骨架：避免 JS 加载期间白屏 */
+      html,
+      body {
+        margin: 0;
+        background: #f6f7f9;
+      }
+      #boot {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 28px 22px;
+        font: 13px/1.6 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: #4a545f;
+      }
+      #boot .b {
+        width: 220px;
+        height: 10px;
+        background: #e6eaee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="boot">
+        <strong style="color: #0f1318">TraceSphere Console</strong>
+        <span>正在加载控制台资源…</span>
+        <div class="b"></div>
+        <div class="b" style="width: 160px"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+flowchart TB
+    accTitle: TraceSphere 总体技术架构
+    accDescr: 展示 ZSvirt 基础设施、业务虚拟机采集、平台关联、RCA 诊断和 Web Console 的分层关系。
+
+    operator["运维人员"]
+    console["Web Console\n拓扑 / 健康 / 告警 / 诊断"]
+    cli["TraceSphere CLI\n诊断 / 告警 / 拓扑"]
+
+    subgraph platform["平台侧：TraceSphere Platform"]
+        zsvirt["ZSvirt RESTProvider\n只读资源与告警"]
+        fixture["FixtureProvider\n回放 / 降级"]
+        registry["Resource Registry\nHost / VM / GPU / Container"]
+        ingest["Event Ingest\nSchema v1 + 身份补全"]
+        correlate["Correlation Engine\n时间窗 + 资源图 + correlation_id"]
+        evidence["Evidence Store\nSQLite WAL"]
+        api["Platform API\n/api/v1"]
+    end
+
+    subgraph vm["业务 VM：AI 工作负载与低侵入采集"]
+        agent["vm-agent\neBPF / PSI / cgroup / journal\n逐 hook 降级 + spool"]
+        workload["AI 工作负载\nagent-service → tool-service\n→ llama.cpp"]
+        metrics["Prometheus + cAdvisor\n5s 指标抓取"]
+        gpu["Mock DCGM / DCGM exporter\nGPU 显存与耗尽事件"]
+    end
+
+    rca["RCA Rule Engine\nYAML 规则 + Evidence Match 五维评分"]
+
+    operator --> console
+    operator --> cli
+    console --> api
+    cli --> rca
+    zsvirt --> registry
+    fixture --> registry
+    registry --> ingest
+    ingest --> correlate
+    correlate --> evidence
+    evidence --> api
+    evidence --> rca
+    agent --> ingest
+    workload --> ingest
+    metrics --> rca
+    gpu --> ingest
+    api --> rca
+    rca --> console
+
+    classDef user fill:#eef2f6,stroke:#65717e,color:#1f2933,stroke-width:1.4px
+    classDef platform_node fill:#e8f1fb,stroke:#2b5b8f,color:#163b61,stroke-width:1.4px
+    classDef vm_node fill:#eaf6f1,stroke:#2e8b57,color:#184f35,stroke-width:1.4px
+    classDef diagnosis_node fill:#fff3e3,stroke:#d97b10,color:#75420a,stroke-width:1.4px
+
+    class operator,console,cli user
+    class zsvirt,fixture,registry,ingest,correlate,evidence,api platform_node
+    class agent,workload,metrics,gpu vm_node
+    class rca diagnosis_node

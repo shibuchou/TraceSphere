@@ -1,0 +1,52 @@
+TraceSphere 诊断（成员 C / RCA Rule Engine + Evidence Match）
+时间窗：2026-09-30T14:08:23Z ~ 2026-09-30T14:18:23Z（600s）
+数据源：platform=real prometheus=real fixture=off ｜ 证据 23 条
+说明：已按资源拓扑+时间窗补入 61 条系统层原始证据（correlation_id 锚点之外，合并后参与匹配）
+聚焦资源：gpu:mock-gpu0
+
+根因候选 Top-1
+══════════════════════════════════════════════════════════════════════════════
+[1] GPU 显存耗尽（GPU Memory Exhaustion）
+    Evidence Match: 89/100 ｜ 规则 gpu_memory_exhaustion v1 ｜ 严重度 critical
+    根因：gpu_memory_exhaustion
+          GPU 显存耗尽（可定位到具体 GPU 与所属 VM）
+    评分明细：
+      · 规则证据命中        55.0/55    2/3 条命中：gpu.memory_used_ratio、gpu.memory.exhausted
+      · 时间优先性          0.0/0     规则未定义 after 时序约束，该维度不适用（不参与归一化）
+      · 资源邻接度         10.0/10    3 条同属 gpu:mock-gpu0
+      · 信号强度           9.0/10    主证据 gpu.memory_used_ratio severity=critical（基础 7）+ 额外证据 2 条（+2）
+      · 独立证据数          2.0/10    覆盖 1 类证据来源：metric
+    证据（3 条，可溯源）：
+      ev-0076870d    gpu.memory_used_ratio      metric     Mock GPU 0 (DCGM) 14:17:56 value=0.995 ratio
+      evd-274daa0275 gpu.memory.exhausted       metric     Mock GPU 0 (DCGM) 14:17:56
+      evd-ac76f9297f gpu.memory.exhausted       metric     Mock GPU 0 (DCGM) 14:17:56
+    处置建议：
+      1) 释放显存 / 定位占用进程
+         依据：gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件
+         操作：在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务
+         风险：强杀推理进程会中断在途请求，需先摘除流量
+      2) 为服务设置显存上限
+         依据：单服务显存占用无上限增长（模拟注入复现该模式）
+         操作：通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务
+         风险：上限过低会导致服务启动失败或性能下降
+      3) 核对采集链路与阈值
+         依据：Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter
+         操作：部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取
+         风险：指标缺失会导致该规则静默失效（需监控采集心跳）
+══════════════════════════════════════════════════════════════════════════════
+影响范围：13 个资源（container 7, image 1, network 1, service 1, task 1, vm 1, volume 1）
+  · container  agent-service                      -        depth=2
+  · container  cadvisor                           -        depth=2
+  · container  llama-server                       -        depth=2
+  · container  mock-dcgm                          -        depth=2
+  · container  prometheus                         -        depth=2
+  · container  tool-service                       -        depth=2
+  · container  toxiproxy                          -        depth=2
+  · image      ubuntu-24.04-cloudimg              Enabled  depth=2
+  · network    pg-demo                            Enabled  depth=2
+  · service    agent-service                      -        depth=2
+  · task       task-1790777882-7e409e             -        depth=2
+  · vm         workload-vm                        Running  depth=1
+  · volume     ROOT-for-workload-vm               Enabled  depth=2
+
+注：Evidence Match 为规则证据命中评分（0–100），非概率。

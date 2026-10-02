@@ -1,0 +1,80 @@
+{
+  "inventories": [
+    {
+      "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+      "vlanMode": "ACCESS",
+      "vlanId": 2344,
+      "uuid": "26391fe900e44409b3d2a37721b08f76",
+      "name": "pg-demo",
+      "description": "TraceSphere workload network",
+      "type": "portGroup",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "l2NetworkUuid": "04eb58aa1a704dd3ab227bd3de1ee786",
+      "state": "Enabled",
+      "system": false,
+      "category": "Private",
+      "ipVersion": 4,
+      "enableIPAM": true,
+      "createDate": "Sep 19, 2026 12:44:44 AM",
+      "lastOpDate": "Sep 19, 2026 12:44:44 AM",
+      "dns": [
+        "223.5.5.5"
+      ],
+      "ipRanges": [
+        {
+          "uuid": "929a7b204f8443b286099b280fecbee9",
+          "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "name": "range-demo",
+          "startIp": "10.100.0.10",
+          "endIp": "10.100.0.250",
+          "netmask": "255.255.255.0",
+          "gateway": "10.100.0.1",
+          "networkCidr": "10.100.0.0/24",
+          "ipVersion": 4,
+          "prefixLen": 24,
+          "createDate": "Sep 19, 2026 12:45:03 AM",
+          "lastOpDate": "Sep 19, 2026 12:45:03 AM"
+        }
+      ],
+      "networkServices": [
+        {
+          "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+          "networkServiceType": "Userdata"
+        },
+        {
+          "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
+          "networkServiceProviderUuid": "a64965c0f7d54653a1fa7f7ae5d927b7",
+          "networkServiceType": "DHCP"
+        }
+      ],
+      "hostRoute": [],
+      "reservedIpRanges": []
+    },
+    {
+      "vSwitchUuid": "db58a900bd344ba8ba6904ff7b7ce9e9",
+      "vlanMode": "ACCESS",
+      "vlanId": 0,
+      "uuid": "a66f6d6554a84c98884d49275e9613af",
+      "name": "DPortGroup 0",
+      "type": "portGroup",
+      "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
+      "l2NetworkUuid": "ad7a0511bb90468eb641f4378f870a0e",
+      "state": "Enabled",
+      "system": true,
+      "category": "Private",
+      "ipVersion": 4,
+      "enableIPAM": false,
+      "createDate": "Sep 19, 2026 12:42:52 AM",
+      "lastOpDate": "Sep 19, 2026 12:42:52 AM",
+      "dns": [
+        "223.5.5.5"
+      ],
+      "ipRanges": [],
+      "networkServices": [],
+      "hostRoute": [],
+      "reservedIpRanges": []
+    }
+  ],
+  "total": 2
+}

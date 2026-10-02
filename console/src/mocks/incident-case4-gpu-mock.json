@@ -1,0 +1,466 @@
+{
+  "incident": {
+    "incident_id": "inc-case4-gpu-mock",
+    "correlation_id": "85bcc7f9b016",
+    "title": "GPU 显存耗尽（GPU Memory Exhaustion）",
+    "rule": "gpu_memory_exhaustion",
+    "severity": "critical",
+    "status": "open",
+    "match_score": 89,
+    "first_seen_at": "2026-09-20T08:25:35Z",
+    "last_seen_at": "2026-09-20T08:25:40Z",
+    "focus_resource": {
+      "resource_id": "gpu:mock-gpu0",
+      "kind": "gpu",
+      "name": "Mock GPU 0 (DCGM)"
+    },
+    "evidence_count": 3,
+    "affected_tasks": 1,
+    "summary": "Mock GPU 0 (DCGM) 显存占用率峰值 0.995，出现 gpu.memory.exhausted 事件（模拟 DCGM 降级数据源）",
+    "source": "correlation_cluster"
+  },
+  "window": {
+    "from": "2026-09-20T08:20:37Z",
+    "to": "2026-09-20T08:25:37Z"
+  },
+  "source": {
+    "platform": "real",
+    "prometheus": "real",
+    "fixture": "mock"
+  },
+  "diagnosis": {
+    "diagnosis_id": "diag-20260920T082540Z-gpu_memory_exhaustion",
+    "rule": "gpu_memory_exhaustion",
+    "rule_version": 1,
+    "title": "GPU 显存耗尽（GPU Memory Exhaustion）",
+    "root_cause": "gpu_memory_exhaustion",
+    "root_cause_label": "GPU 显存耗尽（可定位到具体 GPU 与所属 VM）",
+    "severity": "critical",
+    "match_score": 89,
+    "match_note": "证据命中评分（非概率）：主判据为显存占用率 > 0.9 与耗尽事件",
+    "score_breakdown": [
+      {
+        "dimension": "rule_match",
+        "score": 55,
+        "max": 55,
+        "detail": "2/2 条必选条款命中：gpu.memory_used_ratio、gpu.memory.exhausted"
+      },
+      {
+        "dimension": "temporal_precedence",
+        "score": 13,
+        "max": 15,
+        "detail": "GPU 显存耗尽证据早于任务失败 3 秒"
+      },
+      {
+        "dimension": "resource_adjacency",
+        "score": 10,
+        "max": 10,
+        "detail": "证据同属 gpu:mock-gpu0（VM 邻接 1 跳）"
+      },
+      {
+        "dimension": "signal_strength",
+        "score": 9,
+        "max": 10,
+        "detail": "显存占用率 0.995（critical）+ 独立互证"
+      },
+      {
+        "dimension": "independent_evidence",
+        "score": 2,
+        "max": 10,
+        "detail": "覆盖 metric 与 app_event 两类独立证据来源"
+      }
+    ],
+    "evidence_ids": [
+      "ev-gpu-gpu-memory_used_ratio",
+      "ev-gpu-gpu-memory-exhausted",
+      "ev-gpu-task-failed"
+    ],
+    "suggestions": [
+      {
+        "action": "free_gpu_memory",
+        "title": "释放显存 / 定位占用进程",
+        "basis": "gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件",
+        "detail": "在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务",
+        "risk": "强杀推理进程会中断在途请求，需先摘除流量"
+      },
+      {
+        "action": "cap_gpu_memory",
+        "title": "为服务设置显存上限",
+        "basis": "单服务显存占用无上限增长（模拟注入复现该模式）",
+        "detail": "通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务",
+        "risk": "上限过低会导致服务启动失败或性能下降"
+      },
+      {
+        "action": "verify_dcgm",
+        "title": "核对采集链路与阈值",
+        "basis": "Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter",
+        "detail": "部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取",
+        "risk": "指标缺失会导致该规则静默失效（需监控采集心跳）"
+      }
+    ],
+    "alternatives": [
+      {
+        "rule": "cpu_contention",
+        "title": "CPU 资源争抢（CPU Resource Contention）",
+        "root_cause": "cpu_resource_contention",
+        "match_score": 18,
+        "reason": "PSI cpu.some 峰值仅 0.63%（阈值 5%），throttled_periods 无数据，主判据未命中"
+      },
+      {
+        "rule": "tool_failure",
+        "title": "Agent 工具调用失败（Agent Tool Failure）",
+        "root_cause": "tool_endpoint_unreachable",
+        "match_score": 15,
+        "reason": "同一窗口内存在 tool.result status=error（Connection reset by peer），但工具失败发生在 OOM kill 之后，且记忆指针指向 0 值——按时间优先性归为结果而非原因"
+      }
+    ],
+    "window": {
+      "from": "2026-09-20T08:20:40Z",
+      "to": "2026-09-20T08:25:40Z",
+      "seconds": 300
+    },
+    "correlation_id": "85bcc7f9b016"
+  },
+  "candidates": [
+    {
+      "diagnosis_id": "diag-20260920T082540Z-gpu_memory_exhaustion",
+      "rule": "gpu_memory_exhaustion",
+      "rule_version": 1,
+      "title": "GPU 显存耗尽（GPU Memory Exhaustion）",
+      "root_cause": "gpu_memory_exhaustion",
+      "root_cause_label": "GPU 显存耗尽（可定位到具体 GPU 与所属 VM）",
+      "severity": "critical",
+      "match_score": 89,
+      "match_note": "证据命中评分（非概率）：主判据为显存占用率 > 0.9 与耗尽事件",
+      "score_breakdown": [
+        {
+          "dimension": "rule_match",
+          "score": 55,
+          "max": 55,
+          "detail": "2/2 条必选条款命中：gpu.memory_used_ratio、gpu.memory.exhausted"
+        },
+        {
+          "dimension": "temporal_precedence",
+          "score": 13,
+          "max": 15,
+          "detail": "GPU 显存耗尽证据早于任务失败 3 秒"
+        },
+        {
+          "dimension": "resource_adjacency",
+          "score": 10,
+          "max": 10,
+          "detail": "证据同属 gpu:mock-gpu0（VM 邻接 1 跳）"
+        },
+        {
+          "dimension": "signal_strength",
+          "score": 9,
+          "max": 10,
+          "detail": "显存占用率 0.995（critical）+ 独立互证"
+        },
+        {
+          "dimension": "independent_evidence",
+          "score": 2,
+          "max": 10,
+          "detail": "覆盖 metric 与 app_event 两类独立证据来源"
+        }
+      ],
+      "evidence_ids": [
+        "ev-gpu-gpu-memory_used_ratio",
+        "ev-gpu-gpu-memory-exhausted",
+        "ev-gpu-task-failed"
+      ],
+      "suggestions": [
+        {
+          "action": "free_gpu_memory",
+          "title": "释放显存 / 定位占用进程",
+          "basis": "gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件",
+          "detail": "在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务",
+          "risk": "强杀推理进程会中断在途请求，需先摘除流量"
+        },
+        {
+          "action": "cap_gpu_memory",
+          "title": "为服务设置显存上限",
+          "basis": "单服务显存占用无上限增长（模拟注入复现该模式）",
+          "detail": "通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务",
+          "risk": "上限过低会导致服务启动失败或性能下降"
+        },
+        {
+          "action": "verify_dcgm",
+          "title": "核对采集链路与阈值",
+          "basis": "Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter",
+          "detail": "部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取",
+          "risk": "指标缺失会导致该规则静默失效（需监控采集心跳）"
+        }
+      ],
+      "alternatives": [
+        {
+          "rule": "cpu_contention",
+          "title": "CPU 资源争抢（CPU Resource Contention）",
+          "root_cause": "cpu_resource_contention",
+          "match_score": 18,
+          "reason": "PSI cpu.some 峰值仅 0.63%（阈值 5%），throttled_periods 无数据，主判据未命中"
+        },
+        {
+          "rule": "tool_failure",
+          "title": "Agent 工具调用失败（Agent Tool Failure）",
+          "root_cause": "tool_endpoint_unreachable",
+          "match_score": 15,
+          "reason": "同一窗口内存在 tool.result status=error（Connection reset by peer），但工具失败发生在 OOM kill 之后，且记忆指针指向 0 值——按时间优先性归为结果而非原因"
+        }
+      ],
+      "window": {
+        "from": "2026-09-20T08:20:40Z",
+        "to": "2026-09-20T08:25:40Z",
+        "seconds": 300
+      },
+      "correlation_id": "85bcc7f9b016"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-gpu-gpu-memory_used_ratio",
+      "signal": "gpu.memory_used_ratio",
+      "kind": "metric",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "correlation_id": "85bcc7f9b016",
+      "task_id": null,
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "critical",
+      "description": "GPU 显存占用率=99.5%（基线 < 35%）",
+      "value": 0.995,
+      "baseline": null,
+      "unit": "ratio",
+      "source_event_ids": [
+        "evt-gpu-memory-exhausted"
+      ],
+      "origin": "gpu",
+      "mode": "mock",
+      "payload": {
+        "gpu_memory_used_bytes": 8545000000,
+        "gpu_memory_total_bytes": 8589934592,
+        "samples": 4
+      }
+    },
+    {
+      "evidence_id": "ev-gpu-gpu-memory-exhausted",
+      "signal": "gpu.memory.exhausted",
+      "kind": "metric",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "correlation_id": "85bcc7f9b016",
+      "task_id": null,
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "critical",
+      "description": "出现 gpu.memory.exhausted 事件（显存耗尽）",
+      "value": null,
+      "baseline": null,
+      "unit": null,
+      "source_event_ids": [
+        "evt-gpu-memory-exhausted"
+      ],
+      "origin": "gpu",
+      "mode": "mock",
+      "payload": {
+        "gpu_memory_used_bytes": 8545000000,
+        "gpu_memory_total_bytes": 8589934592,
+        "samples": 4
+      }
+    },
+    {
+      "evidence_id": "ev-gpu-task-failed",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "container:1f0a4c9b2d33",
+      "resource_name": "agent-service",
+      "correlation_id": "85bcc7f9b016",
+      "task_id": "task-gpu-demo",
+      "observed_at": "2026-09-20T08:25:40Z",
+      "severity": "major",
+      "description": "GPU 显存耗尽演练任务失败（correlation 锚点）",
+      "value": null,
+      "baseline": null,
+      "unit": null,
+      "source_event_ids": [
+        "evt-gpu-memory-exhausted"
+      ],
+      "origin": "gpu",
+      "mode": "mock",
+      "payload": {}
+    }
+  ],
+  "timeline": [
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "signal": "gpu.memory_used_ratio",
+      "severity": "critical",
+      "description": "显存占用率升至 0.995（注入 exhaust）",
+      "evidence_id": "ev-gpu-gpu-memory_used_ratio",
+      "incident_id": "inc-case4-gpu-mock"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "vm",
+      "resource_id": "gpu:mock-gpu0",
+      "resource_name": "Mock GPU 0 (DCGM)",
+      "signal": "gpu.memory.exhausted",
+      "severity": "critical",
+      "description": "显存耗尽事件上报",
+      "evidence_id": "ev-gpu-gpu-memory-exhausted",
+      "incident_id": "inc-case4-gpu-mock"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:40Z",
+      "layer": "application",
+      "resource_id": "container:1f0a4c9b2d33",
+      "resource_name": "agent-service",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "演练任务失败（关联锚点）",
+      "evidence_id": "ev-gpu-task-failed",
+      "incident_id": "inc-case4-gpu-mock"
+    }
+  ],
+  "impact": {
+    "focus": {
+      "resource_id": "gpu:mock-gpu0",
+      "kind": "gpu",
+      "name": "Mock GPU 0 (DCGM)"
+    },
+    "counts": {
+      "gpus": 1,
+      "vms": 1,
+      "containers": 1,
+      "services": 1,
+      "tasks": 1
+    },
+    "scope": [
+      {
+        "resource_id": "gpu:mock-gpu0",
+        "kind": "gpu",
+        "name": "Mock GPU 0 (DCGM)",
+        "relation": "focus",
+        "depth": 0,
+        "status": "critical",
+        "detail": "显存占用 99.5%，已出现耗尽事件"
+      },
+      {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "kind": "vm",
+        "name": "workload-vm",
+        "relation": "assigned_to",
+        "depth": 1,
+        "status": "critical",
+        "detail": "承载耗尽 GPU"
+      },
+      {
+        "resource_id": "container:1f0a4c9b2d33",
+        "kind": "container",
+        "name": "agent-service",
+        "relation": "runs_on",
+        "depth": 2,
+        "status": "major",
+        "detail": "演练任务失败"
+      },
+      {
+        "resource_id": "task:task-gpu-demo",
+        "kind": "task",
+        "name": "task-gpu-demo",
+        "relation": "calls",
+        "depth": 3,
+        "status": "critical",
+        "detail": "GPU 显存耗尽后任务失败"
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "host:cbb61d8a",
+        "label": "host-1 (GPU1)",
+        "kind": "host",
+        "combo": null,
+        "status": "healthy",
+        "incident_count": 0,
+        "subtitle": "ZStack KVM · ZSvirt 云平台节点",
+        "metrics": []
+      },
+      {
+        "id": "gpu:mock-gpu0",
+        "label": "Mock GPU 0 (DCGM)",
+        "kind": "gpu",
+        "combo": "combo:vm:63bbb461",
+        "status": "critical",
+        "incident_count": 1,
+        "subtitle": "Mock DCGM · 显存占用 99.5%",
+        "metrics": []
+      },
+      {
+        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "label": "workload-vm",
+        "kind": "vm",
+        "combo": "combo:vm:63bbb461",
+        "status": "warning",
+        "incident_count": 1,
+        "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
+        "metrics": []
+      },
+      {
+        "id": "container:1f0a4c9b2d33",
+        "label": "agent-service",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "status": "warning",
+        "incident_count": 1,
+        "subtitle": "Agent 服务",
+        "metrics": []
+      },
+      {
+        "id": "task:task-gpu-demo",
+        "label": "task-gpu-demo",
+        "kind": "task",
+        "combo": "combo:vm:63bbb461",
+        "status": "critical",
+        "incident_count": 1,
+        "subtitle": "GPU 演练任务 · failed",
+        "metrics": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "sg-gpu-1",
+        "source": "host:cbb61d8a",
+        "target": "gpu:mock-gpu0",
+        "relation": "contains",
+        "label": "contains"
+      },
+      {
+        "id": "sg-gpu-2",
+        "source": "gpu:mock-gpu0",
+        "target": "vm:63bbb4613a524e4e97090600af03da93",
+        "relation": "assigned_to",
+        "label": "assigned_to"
+      },
+      {
+        "id": "sg-gpu-3",
+        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "target": "container:1f0a4c9b2d33",
+        "relation": "contains",
+        "label": "contains"
+      },
+      {
+        "id": "sg-gpu-4",
+        "source": "container:1f0a4c9b2d33",
+        "target": "task:task-gpu-demo",
+        "relation": "calls",
+        "label": "calls"
+      }
+    ]
+  }
+}

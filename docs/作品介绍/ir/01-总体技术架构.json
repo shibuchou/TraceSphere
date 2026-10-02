@@ -1,0 +1,40 @@
+{
+  "schema": "drawio-skill/diagram-ir/v1",
+  "metadata": {"title": "TraceSphere 总体技术架构", "description": "ZSvirt 基础设施、业务 VM 采集、Platform、RCA 与 Console"},
+  "nodes": [
+    {"id":"operator","label":"运维人员","kind":"actor"},
+    {"id":"console","label":"Web Console\n拓扑 / 健康 / 告警 / 诊断","kind":"frontend"},
+    {"id":"cli","label":"TraceSphere CLI\n诊断 / 告警 / 拓扑","kind":"command"},
+    {"id":"zsvirt","label":"ZSvirt RESTProvider\n只读资源与告警","kind":"external","properties":{"trust_boundary":"external"}},
+    {"id":"fixture","label":"FixtureProvider\n回放 / 降级","kind":"data"},
+    {"id":"registry","label":"Resource Registry\nHost / VM / GPU / Container","kind":"service"},
+    {"id":"ingest","label":"Event Ingest\nSchema v1 + 身份补全","kind":"service"},
+    {"id":"correlate","label":"Correlation Engine\n时间窗 + 资源图 + correlation_id","kind":"service"},
+    {"id":"evidence","label":"Evidence Store\nSQLite WAL","kind":"database"},
+    {"id":"api","label":"Platform API\n/api/v1","kind":"gateway"},
+    {"id":"agent","label":"vm-agent\neBPF / PSI / cgroup / journal\n逐 hook 降级 + spool","kind":"agent"},
+    {"id":"workload","label":"AI 工作负载\nagent-service → tool-service\n→ llama.cpp","kind":"service"},
+    {"id":"metrics","label":"Prometheus + cAdvisor\n5s 指标抓取","kind":"database"},
+    {"id":"gpu","label":"Mock DCGM / DCGM exporter\nGPU 显存与耗尽事件","kind":"service"},
+    {"id":"rca","label":"RCA Rule Engine\nYAML 规则 + Evidence Match 五维评分","kind":"service"}
+  ],
+  "edges": [
+    {"id":"e01","source":"operator","target":"console","label":"查看","kind":"sync"},
+    {"id":"e02","source":"operator","target":"cli","label":"运维命令","kind":"sync"},
+    {"id":"e03","source":"console","target":"api","label":"查询","kind":"sync"},
+    {"id":"e04","source":"cli","target":"rca","label":"诊断","kind":"sync"},
+    {"id":"e05","source":"zsvirt","target":"registry","label":"资源 / 告警","kind":"data"},
+    {"id":"e06","source":"fixture","target":"registry","label":"回放","kind":"data"},
+    {"id":"e07","source":"registry","target":"ingest","label":"资源身份","kind":"data"},
+    {"id":"e08","source":"ingest","target":"correlate","label":"事件","kind":"data"},
+    {"id":"e09","source":"correlate","target":"evidence","label":"证据","kind":"data"},
+    {"id":"e10","source":"evidence","target":"api","label":"查询","kind":"data"},
+    {"id":"e11","source":"evidence","target":"rca","label":"诊断输入","kind":"data"},
+    {"id":"e12","source":"agent","target":"ingest","label":"采集事件","kind":"data"},
+    {"id":"e13","source":"workload","target":"ingest","label":"AppEvent","kind":"data"},
+    {"id":"e14","source":"metrics","target":"rca","label":"指标","kind":"data"},
+    {"id":"e15","source":"gpu","target":"ingest","label":"GPU 事件","kind":"data"},
+    {"id":"e16","source":"api","target":"rca","label":"聚合上下文","kind":"data"},
+    {"id":"e17","source":"rca","target":"console","label":"根因 / 影响 / 建议","kind":"data"}
+  ]
+}

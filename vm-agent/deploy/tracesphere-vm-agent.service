@@ -1,0 +1,34 @@
+[Unit]
+Description=TraceSphere vm-agent (eBPF + PSI/cgroup probe)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/tracesphere/bin/vm-agent
+Restart=always
+RestartSec=3
+
+# 目标权限方案（最小权限）：优先 CAP_BPF + CAP_PERFMON；
+# 具体 capability 集需按目标内核版本 / attach 类型实测确定。
+# 当前环境（Ubuntu 24.04 内核 6.8，tracepoint attach）以 root 运行最稳妥；
+# 如需最小化，取消下面 User/AmbientCapabilities/CapabilityBoundingSet 注释并按实测调整。
+#User=root
+#AmbientCapabilities=CAP_BPF CAP_PERFMON CAP_SYS_RESOURCE
+#CapabilityBoundingSet=CAP_BPF CAP_PERFMON CAP_SYS_RESOURCE CAP_DAC_READ_SEARCH CAP_SYS_ADMIN
+
+# 事件与指标追加写入文件（evidence-chain.sh 读取该文件）
+StandardOutput=append:/opt/tracesphere/evidence/vm-agent.log
+StandardError=append:/opt/tracesphere/evidence/vm-agent.log
+
+# 运行时环境（直报平台 / VM 归属 / 开关）；安装脚本会在缺失时生成模板
+#   VMAGENT_PLATFORM_URL=http://<platform-host>:8000   （为空则仅本地日志）
+#   VMAGENT_VM_UUID=<ZSvirt VM uuid>                    （VM 级证据挂到资源图）
+#   VMAGENT_TOKEN=<api token>                           （平台开启鉴权时）
+#   VMAGENT_REPORT_PROCESS=1                            （默认 0：不上报高频 exec/exit）
+EnvironmentFile=-/etc/tracesphere/agent.env
+
+# 可选：额外采集某个容器的 cgroup（示例，取消注释并替换 <container-id>）
+#Environment=VMAGENT_CGROUP=/sys/fs/cgroup/system.slice/docker-<container-id>.scope
+
+[Install]
+WantedBy=multi-user.target

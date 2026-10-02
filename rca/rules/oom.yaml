@@ -1,0 +1,73 @@
+# TraceSphere RCA 规则：容器内存耗尽（Case 1）
+# 结构：rule / evidence / correlation / result（方案 §6.3 冻结）
+rule: container_oom
+version: 1
+title: 容器内存耗尽（Container OOM）
+description: 容器 cgroup 内存打到 limit 后被内核 OOM kill，导致其上 Agent 任务失败
+severity: critical
+
+evidence:
+  # ---- 主判据：cgroup v2 内核计数（方案 §7 Case1「必需」项）----
+  - signal: memory.events.oom_kill
+    kind: cgroup
+    layer: container
+    weight: 35
+    require_increase: true
+    description: memory.events.oom_kill Δ > 0（cgroup v2 内核 OOM 计数）
+
+  # ---- 内存逼近 limit ----
+  - metric: memory.current_ratio
+    op: ">"
+    value: 0.95
+    weight: 20
+    description: memory.current / memory.max > 0.95
+
+  # ---- 可选增强证据：eBPF OOM hook（目标内核不可用时缺失，不阻塞闭环）----
+  - signal: oom.ebpf
+    kind: ebpf
+    layer: container
+    weight: 20
+    optional: true
+    description: eBPF OOM kill 事件（mark_victim）
+
+  # ---- 应用层表现：任务失败，且必须晚于 OOM ----
+  - signal: task.failed
+    kind: app_event
+    layer: application
+    weight: 15
+    after: memory.events.oom_kill
+    description: OOM 之后 Agent 任务失败（correlation_id 锚点）
+
+  # ---- 容器重启（cAdvisor 重启计数 / container_start_time_seconds）----
+  - signal: container.restart
+    kind: metric
+    layer: container
+    weight: 10
+    optional: true
+    require_increase: true
+    description: 容器重启计数 +1（cAdvisor container_start_time_seconds 变化）
+
+correlation:
+  same_resource: true
+  time_window: 5s
+  require_correlation_id: false
+
+result:
+  root_cause: container_memory_exhausted
+  label: 容器 memory limit 与实际需求不匹配（或应用内存泄漏）
+  suggestions:
+    - action: adjust_memory_limit
+      title: 调整容器 memory limit
+      basis: memory.current / memory.max > 0.95 且 memory.events.oom_kill 增量 > 0
+      detail: 将该容器 memory limit 提高到峰值 working_set 的 1.3 倍以上
+      risk: 提高 limit 会挤占同 VM 其他容器内存，需同步确认 VM 余量
+    - action: check_memory_leak
+      title: 排查应用内存泄漏
+      basis: OOM 前内存持续单调上升（working_set 曲线无回落）
+      detail: 检查该服务在 OOM 窗口内的对象增长/缓存未释放路径，配合 profiling
+      risk: 定位耗时；期间可先提高 limit 恢复业务
+    - action: review_restart_policy
+      title: 检查容器重启策略
+      basis: 容器重启计数递增且业务未恢复
+      detail: 重启策略应与告警联动，避免 OOM 循环（OOM → 重启 → 再 OOM）
+      risk: 仅改重启策略不解决根因，属止血手段

@@ -1,0 +1,314 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--ts-paper);
+}
+
+/* ---------------------------- 顶栏 ---------------------------- */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: stretch;
+  height: var(--ts-header-h);
+  background: var(--ts-surface);
+  border-bottom: 1px solid var(--ts-rule);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px 0 14px;
+  border-right: 1px solid var(--ts-rule);
+  flex: none;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.12;
+}
+
+.brandName {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.brandSub {
+  font-family: var(--ts-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ts-ink-3);
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 13px;
+  color: var(--ts-ink-2);
+  font-size: 12.5px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.navItem:hover {
+  background: #fafbfc;
+  text-decoration: none;
+  color: var(--ts-ink);
+}
+
+.navItemActive {
+  color: var(--ts-primary);
+  border-bottom-color: var(--ts-primary);
+  background: var(--ts-primary-soft);
+  font-weight: 600;
+}
+
+.navIndex {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+}
+
+.navBadge {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  min-width: 16px;
+  text-align: center;
+  padding: 0 4px;
+  border-radius: 7px;
+  background: var(--ts-critical);
+  color: #fff;
+  line-height: 15px;
+}
+
+.headRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  flex: none;
+  border-left: 1px solid var(--ts-rule);
+}
+
+.env {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  color: var(--ts-ink-3);
+  letter-spacing: 0.04em;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------------------------- 控制条 ---------------------------- */
+
+.strip {
+  position: sticky;
+  top: var(--ts-header-h);
+  z-index: 19;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  min-height: var(--ts-strip-h);
+  padding: 6px 16px;
+  background: #fbfcfd;
+  border-bottom: 1px solid var(--ts-rule);
+}
+
+.stripGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scenarioBtn {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 9px;
+  border: 1px solid var(--ts-rule-strong);
+  border-radius: 2px;
+  background: var(--ts-surface);
+  font-size: 12px;
+  color: var(--ts-ink-2);
+  white-space: nowrap;
+}
+
+.scenarioBtn:hover {
+  border-color: var(--ts-primary);
+  color: var(--ts-primary);
+}
+
+.scenarioBtnActive {
+  border-color: var(--ts-primary);
+  background: var(--ts-primary-soft);
+  color: var(--ts-primary);
+  font-weight: 600;
+}
+
+.scenarioIndex {
+  font-family: var(--ts-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.hintText {
+  font-family: var(--ts-mono);
+  font-size: 11px;
+  color: var(--ts-ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 46ch;
+}
+
+.stripSpacer {
+  flex: 1 1 auto;
+}
+
+/* ---------------------------- 主体 ---------------------------- */
+
+.main {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 14px 16px 24px;
+  min-width: 0;
+}
+
+/* ---------------------------- 页脚 ---------------------------- */
+
+.footer {
+  border-top: 1px solid var(--ts-rule);
+  background: var(--ts-surface);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--ts-ink-3);
+}
+
+.footerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ts-mono);
+  font-size: 11px;
+}
+
+.footerSpacer {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 900px) {
+  .env {
+    display: none;
+  }
+  .brandSub {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    position: relative;
+    height: auto;
+    min-height: 44px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    min-height: 44px;
+    padding: 0 10px;
+  }
+
+  .nav {
+    order: 3;
+    flex: 1 0 100%;
+    height: 40px;
+    border-top: 1px solid var(--ts-rule);
+  }
+
+  .navItem {
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 0 9px;
+  }
+
+  .headRight {
+    margin-left: auto;
+    gap: 6px;
+    padding: 0 8px;
+    border-left: 0;
+  }
+
+  .headRight :global(.ant-btn) {
+    padding-inline: 5px;
+    font-size: 11px;
+  }
+
+  .strip {
+    position: relative;
+    top: auto;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .stripGroup {
+    min-width: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stripGroup:first-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stripGroup:first-child > .scenarioBtn {
+    min-width: 0;
+    min-height: 36px;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hintText {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .stripSpacer {
+    display: none;
+  }
+
+  .stripGroup:last-child {
+    justify-content: space-between;
+  }
+}

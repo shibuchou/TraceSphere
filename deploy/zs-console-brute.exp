@@ -1,0 +1,20 @@
+#!/usr/bin/expect -f
+# TraceSphere - ZSvirt 控制台暴力抓取（不管提示，直接记录一切原始输出）
+set timeout 60
+spawn sudo -n virsh console zsvirt-mgmt --force
+log_file -a /tmp/zs-console-raw.log
+
+send "\r"
+after 5000
+send "\r"
+after 5000
+send "root\r"
+after 5000
+send "$env(ZS_PW)\r"
+after 5000
+send "ip -4 addr show; echo DIAG_DONE\r"
+after 8000
+send "\035"
+
+expect eof
+puts "\n\[OK\] raw log saved to /tmp/zs-console-raw.log"

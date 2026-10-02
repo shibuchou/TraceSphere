@@ -1,0 +1,61 @@
+{
+  "success": true,
+  "events": [
+    {
+      "namespace": "ZStack/MN",
+      "name": "ManagementNodeJoin",
+      "labels": {
+        "ManagementNodeIP": "192.168.122.123"
+      },
+      "emergencyLevel": "Normal",
+      "resourceId": "206d0cbc76ce30e99699c4fdb6d7e50c",
+      "time": 1789748768443,
+      "dataUuid": "53bcc470d11046ddb7907d890321f2f8",
+      "accountUuid": "36c27e8ff05c4780bf6d2fa65700f22e",
+      "subscriptionUuid": "10d9c4e69fc2456bb8c6c6d456bb5038",
+      "readStatus": "Unread"
+    },
+    {
+      "namespace": "ZStack/MN",
+      "name": "ManagementNodeJoin",
+      "labels": {
+        "ManagementNodeIP": "192.168.122.123"
+      },
+      "emergencyLevel": "Normal",
+      "resourceId": "206d0cbc76ce30e99699c4fdb6d7e50c",
+      "time": 1789748575184,
+      "dataUuid": "f1bc28e5b1904282bdb6dd497f5830f2",
+      "accountUuid": "36c27e8ff05c4780bf6d2fa65700f22e",
+      "subscriptionUuid": "10d9c4e69fc2456bb8c6c6d456bb5038",
+      "readStatus": "Unread"
+    },
+    {
+      "namespace": "ZStack/MN",
+      "name": "ManagementNodeJoin",
+      "labels": {
+        "ManagementNodeIP": "172.27.52.119"
+      },
+      "emergencyLevel": "Normal",
+      "resourceId": "a5a6dc031d7a3a5c913c54e1dfd3a97b",
+      "time": 1787487431068,
+      "dataUuid": "88a0c79ebd914218854243d417972286",
+      "accountUuid": "36c27e8ff05c4780bf6d2fa65700f22e",
+      "subscriptionUuid": "10d9c4e69fc2456bb8c6c6d456bb5038",
+      "readStatus": "Unread"
+    },
+    {
+      "namespace": "ZStack/MN",
+      "name": "ManagementNodeJoin",
+      "labels": {
+        "ManagementNodeIP": "172.27.52.119"
+      },
+      "emergencyLevel": "Normal",
+      "resourceId": "a5a6dc031d7a3a5c913c54e1dfd3a97b",
+      "time": 1787486144596,
+      "dataUuid": "fc57b0926918492bb8923c1fa9bc14cc",
+      "accountUuid": "36c27e8ff05c4780bf6d2fa65700f22e",
+      "subscriptionUuid": "10d9c4e69fc2456bb8c6c6d456bb5038",
+      "readStatus": "Unread"
+    }
+  ]
+}

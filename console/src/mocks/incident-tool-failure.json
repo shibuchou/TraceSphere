@@ -1,0 +1,545 @@
+{
+  "incident": {
+    "incident_id": "inc-8da4d26c78f6",
+    "correlation_id": "8da4d26c78f6",
+    "title": "Agent 工具调用失败（Agent Tool Failure）",
+    "rule": "tool_failure",
+    "severity": "major",
+    "status": "acknowledged",
+    "match_score": 79,
+    "first_seen_at": "2026-09-20T08:27:20Z",
+    "last_seen_at": "2026-09-20T08:27:30Z",
+    "focus_resource": { "resource_id": "container:e6eab2f12b53", "name": "toxiproxy", "kind": "container" },
+    "evidence_count": 6,
+    "affected_tasks": 1,
+    "summary": "tool.result status=error（timed out）→ task.failed（同 correlation_id，Δt=10s）",
+    "source": "correlation_cluster"
+  },
+  "window": { "from": "2026-09-20T08:23:30Z", "to": "2026-09-20T08:27:30Z" },
+  "source": { "platform": "real", "prometheus": "real", "fixture": "mock" },
+  "diagnosis": {
+    "diagnosis_id": "diag-20260920T082730Z-tool_failure",
+    "rule": "tool_failure",
+    "rule_version": 1,
+    "title": "Agent 工具调用失败（Agent Tool Failure）",
+    "root_cause": "tool_endpoint_unreachable",
+    "root_cause_label": "目标端点不可达 / 依赖服务故障（或网络策略阻断）",
+    "severity": "major",
+    "match_score": 79,
+    "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+    "score_breakdown": [
+      {
+        "dimension": "rule_match",
+        "label": "规则证据命中",
+        "score": 55,
+        "max": 55,
+        "detail": "3/3 条参与条款命中（log.tool_service_error 可选条款缺失不计入分母）：tool.result status=error、task.failed match_any=['tool call failed','tool failed']、传输层 timed out + tool.call 的 attributes.target 可定位"
+      },
+      {
+        "dimension": "temporal_precedence",
+        "label": "时间优先性",
+        "score": 15,
+        "max": 15,
+        "detail": "1/1 条 after 约束满足：tool.result（08:27:30Z）早于 task.failed（08:27:30Z，同一秒内先后收口）"
+      },
+      {
+        "dimension": "resource_adjacency",
+        "label": "资源邻接度",
+        "score": 0,
+        "max": 10,
+        "detail": "证据跨资源：task 锚点 + container:e6eab2f12b53（toxiproxy），非同 resource_id 也非同 VM 内跨容器判定路径"
+      },
+      {
+        "dimension": "signal_strength",
+        "label": "信号强度",
+        "score": 4,
+        "max": 10,
+        "detail": "关键证据 severity=warning（tool.result error）；传输层仅有超时语义，无 RST / 无重传计数"
+      },
+      {
+        "dimension": "independent_evidence",
+        "label": "独立证据数",
+        "score": 5,
+        "max": 10,
+        "detail": "覆盖 2 类证据来源：app_event / log（Fluent Bit 未接入，log 类由 ad-hoc 采集补齐）"
+      }
+    ],
+    "evidence_ids": ["ev-0041", "ev-0042", "ev-0043", "ev-0044", "ev-0045", "ev-0046"],
+    "suggestions": [
+      {
+        "action": "check_toxiproxy",
+        "title": "检查 Toxiproxy 故障注入状态",
+        "basis": "传输层异常集中在被代理端口 8666，且 attributes.target 指向 http://toxiproxy:8666/tool",
+        "detail": "查询 8474 API 的 /proxies/tool/toxics，确认是否为演练注入（当前存在 latency toxic），必要时 POST /proxies/tool/toxics/{name} 删除",
+        "risk": "若为真实故障，clear 会掩盖问题；先确认演练窗口与责任人"
+      },
+      {
+        "action": "check_target_health",
+        "title": "检查目标服务健康",
+        "basis": "同一端点在窗口内持续失败（10s 无响应后 timed out）",
+        "detail": "直连目标服务端口（绕过代理 8666）验证进程存活与响应：curl -sv http://tool-service:8666/tool",
+        "risk": "直连需临时开放网络路径，且绕过了代理会失去注入能力"
+      },
+      {
+        "action": "check_network_policy",
+        "title": "检查网络策略 / DNS 解析",
+        "basis": "表现为超时而非应用层 5xx，指向连接层阻塞",
+        "detail": "检查 iptables / DNS 解析与目标端口连通性（nc -vz / curl -v），核对 ZSvirt 安全组规则",
+        "risk": "修改网络策略影响面大，需灰度验证"
+      }
+    ],
+    "alternatives": [
+      {
+        "rule": "container_oom",
+        "title": "容器内存耗尽（Container OOM）",
+        "root_cause": "container_memory_exhausted",
+        "match_score": 14,
+        "reason": "toxiproxy 的 memory.events.oom_kill = 0 且 memory.max = max（未设限），容器侧内存条款整体未命中"
+      },
+      {
+        "rule": "cpu_contention",
+        "title": "CPU 资源争抢（CPU Resource Contention）",
+        "root_cause": "cpu_resource_contention",
+        "match_score": 22,
+        "reason": "窗口内 PSI cpu.some 峰值仅 0.93%（阈值 5%），throttled_periods 无数据；工具调用仅耗时 10s 且无推理链路参与"
+      }
+    ],
+    "window": { "from": "2026-09-20T08:23:30Z", "to": "2026-09-20T08:27:30Z" },
+    "correlation_id": "8da4d26c78f6"
+  },
+  "candidates": [
+    {
+      "diagnosis_id": "diag-20260920T082730Z-tool_failure",
+      "rule": "tool_failure",
+      "rule_version": 1,
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "root_cause": "tool_endpoint_unreachable",
+      "root_cause_label": "目标端点不可达 / 依赖服务故障（或网络策略阻断）",
+      "severity": "major",
+      "match_score": 79,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 55, "max": 55, "detail": "3/3 条命中" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 15, "max": 15, "detail": "tool.result 早于 task.failed" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 0, "max": 10, "detail": "跨资源" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 4, "max": 10, "detail": "warning 级" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 5, "max": 10, "detail": "2 类证据来源" }
+      ],
+      "evidence_ids": ["ev-0041", "ev-0042", "ev-0043", "ev-0044", "ev-0045", "ev-0046"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "8da4d26c78f6"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082730Z-cpu_contention",
+      "rule": "cpu_contention",
+      "rule_version": 1,
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "root_cause": "cpu_resource_contention",
+      "root_cause_label": "同 VM 内 CPU 争抢（可定位到具体压力源容器）",
+      "severity": "major",
+      "match_score": 22,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 8, "max": 55, "detail": "0/4 条参与条款命中（仅 task.failed 的 match_any=超时 弱命中）" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 0, "max": 15, "detail": "无 after 约束命中" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 6, "max": 10, "detail": "同 VM 内跨容器" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 4, "max": 10, "detail": "warning 级" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 4, "max": 10, "detail": "2 类" }
+      ],
+      "evidence_ids": ["ev-0042", "ev-0062"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "8da4d26c78f6"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082730Z-container_oom",
+      "rule": "container_oom",
+      "rule_version": 1,
+      "title": "容器内存耗尽（Container OOM）",
+      "root_cause": "container_memory_exhausted",
+      "root_cause_label": "容器 memory limit 与实际需求不匹配（或应用内存泄漏）",
+      "severity": "critical",
+      "match_score": 14,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 0, "max": 55, "detail": "0/2 条参与条款命中" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 0, "max": 15, "detail": "0/1" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 10, "max": 10, "detail": "同 toxiproxy 容器" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 2, "max": 10, "detail": "info 级" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 2, "max": 10, "detail": "1 类" }
+      ],
+      "evidence_ids": ["ev-0044", "ev-0042"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "8da4d26c78f6"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-0041",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "correlation_id": "8da4d26c78f6",
+      "task_id": "task-1789892840-179c3c",
+      "observed_at": "2026-09-20T08:27:20Z",
+      "severity": "info",
+      "description": "tool.call mock-search → http://toxiproxy:8666/tool（require_attribute: target 命中）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-tool-call-179c3c"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "tool.call",
+        "task_id": "task-1789892840-179c3c",
+        "correlation_id": "8da4d26c78f6",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:27:20+0000",
+        "status": "ok",
+        "attributes": { "tool": "mock-search", "target": "http://toxiproxy:8666/tool" }
+      }
+    },
+    {
+      "evidence_id": "ev-0042",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "correlation_id": "8da4d26c78f6",
+      "task_id": "task-1789892840-179c3c",
+      "observed_at": "2026-09-20T08:27:30Z",
+      "severity": "warning",
+      "description": "tool.result status=error：timed out（主判据命中）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-tool-result-179c3c"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "tool.result",
+        "task_id": "task-1789892840-179c3c",
+        "correlation_id": "8da4d26c78f6",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:27:30+0000",
+        "status": "error",
+        "attributes": { "error": "timed out", "elapsed_ms": 10000, "target": "http://toxiproxy:8666/tool" }
+      }
+    },
+    {
+      "evidence_id": "ev-0043",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "correlation_id": "8da4d26c78f6",
+      "task_id": "task-1789892840-179c3c",
+      "observed_at": "2026-09-20T08:27:30Z",
+      "severity": "major",
+      "description": "task.failed reason='tool call failed: timed out'（match_any 命中）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-task-failed-179c3c"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.failed",
+        "task_id": "task-1789892840-179c3c",
+        "correlation_id": "8da4d26c78f6",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:27:30+0000",
+        "status": "error",
+        "attributes": { "reason": "tool call failed: timed out" }
+      }
+    },
+    {
+      "evidence_id": "ev-0044",
+      "signal": "tool.transport_error",
+      "kind": "log",
+      "layer": "vm",
+      "resource_id": "container:e6eab2f12b53",
+      "resource_name": "toxiproxy",
+      "correlation_id": "8da4d26c78f6",
+      "observed_at": "2026-09-20T08:27:30Z",
+      "severity": "warning",
+      "description": "传输层异常：连接在 8666 端口建立后无响应，10s 后超时（signal_any 命中 timed out）",
+      "value": 10000,
+      "baseline": 0,
+      "unit": "ms",
+      "source_event_ids": ["evt-adhoc-transport-179c3c"],
+      "origin": "log",
+      "mode": "real",
+      "payload": {
+        "probe": "ad-hoc 采集（Fluent Bit 未接入，P1 项）",
+        "proxy": "tool",
+        "listen": "0.0.0.0:8666",
+        "upstream": "tool-service:8666",
+        "toxics": [{ "type": "latency", "attributes": { "latency": 10000, "jitter": 0 } }],
+        "raw": "[Errno 110] Connection timed out while reading from upstream",
+        "note": "无 RST / 无 TCP 重传计数，命中 timed out 分支"
+      }
+    },
+    {
+      "evidence_id": "ev-0045",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "correlation_id": "8da4d26c78f6",
+      "task_id": "task-1789892840-179c3c",
+      "observed_at": "2026-09-20T08:27:20Z",
+      "severity": "info",
+      "description": "task.started（question=工具故障演练任务 - 期望超时失败）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-task-started-179c3c"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.started",
+        "task_id": "task-1789892840-179c3c",
+        "correlation_id": "8da4d26c78f6",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:27:20+0000",
+        "status": "ok",
+        "attributes": { "question": "工具故障演练任务 - 期望超时失败" }
+      }
+    },
+    {
+      "evidence_id": "ev-0046",
+      "signal": "memory.events.oom_kill",
+      "kind": "cgroup",
+      "layer": "container",
+      "resource_id": "container:e6eab2f12b53",
+      "resource_name": "toxiproxy",
+      "correlation_id": "8da4d26c78f6",
+      "observed_at": "2026-09-20T08:27:30Z",
+      "severity": "info",
+      "description": "反证：toxiproxy memory.events.oom_kill = 0（排除容器内存耗尽）",
+      "value": 0,
+      "baseline": 0,
+      "unit": "count",
+      "source_event_ids": ["evt-cgroup-e6eab2f1-memevents"],
+      "origin": "cgroup",
+      "mode": "real",
+      "payload": {
+        "cgroup_path": "/sys/fs/cgroup/system.slice/docker-e6eab2f12b53a8e3684fd21afc277f4660295866709b0e12beaee9906fe5659b.scope",
+        "memory.current": 4304896,
+        "memory.max": "max",
+        "memory.events": { "low": 0, "high": 0, "max": 0, "oom": 0, "oom_kill": 0, "oom_group_kill": 0 },
+        "cpu.stat": { "nr_periods": 0, "nr_throttled": 0, "throttled_usec": 0, "usage_usec": 29692168 },
+        "pid": 3463
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "observed_at": "2026-09-20T08:27:20Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "task.started（correlation 8da4d26c78f6）",
+      "evidence_id": "ev-0045",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:20Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "tool.call",
+      "severity": "info",
+      "description": "tool.call mock-search → http://toxiproxy:8666/tool",
+      "evidence_id": "ev-0041",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:25Z",
+      "layer": "container",
+      "resource_id": "container:e6eab2f12b53",
+      "resource_name": "toxiproxy",
+      "signal": "tool.transport_error",
+      "severity": "warning",
+      "description": "代理链路无响应：上游读取阻塞（latency toxic 10s）",
+      "evidence_id": "ev-0044",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:30Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "tool.result",
+      "severity": "warning",
+      "description": "tool.result status=error：timed out（elapsed 10000ms）",
+      "evidence_id": "ev-0042",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:30Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892840-179c3c",
+      "resource_name": "task-1789892840-179c3c",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "task.failed：tool call failed: timed out",
+      "evidence_id": "ev-0043",
+      "incident_id": "inc-8da4d26c78f6"
+    },
+    {
+      "observed_at": "2026-09-20T08:27:30Z",
+      "layer": "container",
+      "resource_id": "container:e6eab2f12b53",
+      "resource_name": "toxiproxy",
+      "signal": "memory.current",
+      "severity": "info",
+      "description": "反证收口：toxiproxy memory.current=4.3e6、oom_kill=0、nr_throttled=0（容器侧无资源异常）",
+      "evidence_id": "ev-0046",
+      "incident_id": "inc-8da4d26c78f6"
+    }
+  ],
+  "impact": {
+    "focus": { "resource_id": "container:e6eab2f12b53", "name": "toxiproxy", "kind": "container" },
+    "counts": { "tasks": 1, "services": 2, "containers": 2, "vms": 1 },
+    "scope": [
+      {
+        "resource_id": "task:task-1789892840-179c3c",
+        "kind": "task",
+        "name": "task-1789892840-179c3c",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "工具故障演练任务 · tool.result=timed out · correlation 8da4d26c78f6"
+      },
+      {
+        "resource_id": "service:svc-tool",
+        "kind": "service",
+        "name": "mock-search",
+        "relation": "depends_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "工具后端：经 8666 代理访问，窗口内调用全部超时"
+      },
+      {
+        "resource_id": "container:7196bcad3bc1",
+        "kind": "container",
+        "name": "tool-service",
+        "relation": "contains",
+        "depth": 2,
+        "status": "critical",
+        "detail": "下游真实服务；同窗口另有 OOM 事件（inc-d38fc66c8364），需注意两个故障窗叠加"
+      },
+      {
+        "resource_id": "service:svc-agent",
+        "kind": "service",
+        "name": "agent-service",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "healthy",
+        "detail": "编排入口：记录到 tool.result error → task.failed 事件串"
+      },
+      {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "kind": "vm",
+        "name": "workload-vm",
+        "relation": "contains",
+        "depth": 2,
+        "status": "warning",
+        "detail": "承载代理与下游容器（4 vCPU / 4 GiB）"
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "container:e6eab2f12b53",
+        "label": "toxiproxy",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "故障注入代理 8666（focus）",
+        "status": "critical",
+        "incident_count": 2,
+        "badges": ["timed out"],
+        "metrics": [{ "name": "proxy_upstream_errors", "value": 1, "unit": "count" }]
+      },
+      {
+        "id": "container:7196bcad3bc1",
+        "label": "tool-service",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "下游工具后端",
+        "status": "critical",
+        "incident_count": 1,
+        "badges": ["OOM ×4"],
+        "metrics": [{ "name": "memory.current_ratio", "value": 1.02, "unit": "ratio" }]
+      },
+      {
+        "id": "service:svc-tool",
+        "label": "mock-search",
+        "kind": "service",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "工具服务端点",
+        "status": "warning",
+        "incident_count": 2,
+        "badges": ["error ×2"],
+        "metrics": [{ "name": "tool_error_ratio", "value": 0.5, "unit": "ratio" }]
+      },
+      {
+        "id": "task:task-1789892840-179c3c",
+        "label": "task-…179c3c",
+        "kind": "task",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "correlation 8da4d26c78f6",
+        "status": "warning",
+        "incident_count": 1,
+        "badges": ["failed"],
+        "metrics": []
+      },
+      {
+        "id": "container:1f0a4c9b2d33",
+        "label": "agent-service",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "Agent 编排入口",
+        "status": "warning",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "service:svc-agent",
+        "label": "agent-service",
+        "kind": "service",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "任务编排：tool.result error → task.failed 事件串来源",
+        "status": "healthy",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "label": "workload-vm",
+        "kind": "vm",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
+        "status": "warning",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      }
+    ],
+    "edges": [
+      { "id": "sg-t1", "source": "container:e6eab2f12b53", "target": "container:7196bcad3bc1", "relation": "proxies", "label": "proxies" },
+      { "id": "sg-t2", "source": "container:7196bcad3bc1", "target": "service:svc-tool", "relation": "runs_on", "label": "runs_on" },
+      { "id": "sg-t3", "source": "container:1f0a4c9b2d33", "target": "service:svc-agent", "relation": "runs_on", "label": "runs_on" },
+      { "id": "sg-t4", "source": "service:svc-agent", "target": "task:task-1789892840-179c3c", "relation": "calls", "label": "calls" },
+      { "id": "sg-t5", "source": "task:task-1789892840-179c3c", "target": "service:svc-tool", "relation": "depends_on", "label": "depends_on" },
+      { "id": "sg-t6", "source": "vm:63bbb4613a524e4e97090600af03da93", "target": "container:e6eab2f12b53", "relation": "contains", "label": "contains" }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "drawio-skill/diagram-ir/v1",
+  "metadata": {"title": "TraceSphere 部署边界与安全面", "description": "管理节点、业务 VM、访问端和安全控制"},
+  "nodes": [
+    {"id":"operator","label":"运维人员\nWeb / CLI","kind":"actor"},
+    {"id":"platform","label":"Platform :8000\n非回环必须配置 API Token","kind":"gateway","properties":{"trust_boundary":"private"}},
+    {"id":"rca","label":"RCA + Console :8010\nRCA Token + CORS 白名单","kind":"gateway","properties":{"trust_boundary":"private"}},
+    {"id":"sqlite","label":"SQLite WAL\nresources / events / evidence / clusters","kind":"database","properties":{"trust_boundary":"private"}},
+    {"id":"rules","label":"YAML Rule Library","kind":"data","properties":{"trust_boundary":"private"}},
+    {"id":"vmagent","label":"vm-agent systemd\nVMAGENT_TOKEN\n逐 hook 降级 + spool","kind":"agent","properties":{"trust_boundary":"workload_vm"}},
+    {"id":"app","label":"agent-service / tool-service\nPLATFORM_TOKEN / TASK_TOKEN","kind":"service","properties":{"trust_boundary":"workload_vm"}},
+    {"id":"observability","label":"Prometheus / cAdvisor\n默认回环，PROM_BIND 可覆盖","kind":"database","properties":{"trust_boundary":"workload_vm"}},
+    {"id":"mockgpu","label":"Mock DCGM\n默认回环 / GPU 降级","kind":"service","properties":{"trust_boundary":"workload_vm"}},
+    {"id":"zsvirt","label":"ZSvirt API\n只读账号 + OAuth 会话","kind":"external","properties":{"trust_boundary":"external"}},
+    {"id":"fixture","label":"Fixture / 回放\n无 GPU / 无 eBPF 降级","kind":"data","properties":{"trust_boundary":"private"}}
+  ],
+  "edges": [
+    {"id":"e01","source":"operator","target":"rca","label":"Web / CLI","kind":"sync"},
+    {"id":"e02","source":"operator","target":"platform","label":"健康 / 运维","kind":"sync"},
+    {"id":"e03","source":"zsvirt","target":"platform","label":"只读同步","kind":"data","properties":{"protocol":"OAuth"}},
+    {"id":"e04","source":"fixture","target":"platform","label":"回放","kind":"data"},
+    {"id":"e05","source":"platform","target":"sqlite","label":"落库","kind":"data"},
+    {"id":"e06","source":"sqlite","target":"rca","label":"诊断数据","kind":"data"},
+    {"id":"e07","source":"rules","target":"rca","label":"规则","kind":"data"},
+    {"id":"e08","source":"vmagent","target":"platform","label":"Bearer Token","kind":"data","properties":{"protocol":"HTTPS"}},
+    {"id":"e09","source":"app","target":"platform","label":"Bearer Token","kind":"data"},
+    {"id":"e10","source":"mockgpu","target":"platform","label":"Bearer Token","kind":"data"},
+    {"id":"e11","source":"observability","target":"rca","label":"指标查询","kind":"data"},
+    {"id":"e12","source":"rca","target":"operator","label":"诊断结果","kind":"sync"}
+  ]
+}

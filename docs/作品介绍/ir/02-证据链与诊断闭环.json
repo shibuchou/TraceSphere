@@ -1,0 +1,34 @@
+{
+  "schema": "drawio-skill/diagram-ir/v1",
+  "metadata": {"title": "TraceSphere 证据链与诊断闭环", "description": "多信号进入统一证据链并输出可解释诊断"},
+  "nodes": [
+    {"id":"task_event","label":"Agent 任务事件\ntask_id / correlation_id\ntool.result / task.failed","kind":"source"},
+    {"id":"system_signal","label":"系统信号\nPSI / cgroup / eBPF / journal","kind":"source"},
+    {"id":"metric_signal","label":"指标信号\nPrometheus / cAdvisor / llama","kind":"source"},
+    {"id":"gpu_signal","label":"GPU 信号\n显存比例 / exhausted","kind":"source"},
+    {"id":"cloud_event","label":"ZSvirt 信号\n资源 / 告警 / 事件","kind":"source"},
+    {"id":"normalize","label":"Schema v1 归一化\n字段白名单 + Token + 隐私最小化","kind":"service"},
+    {"id":"identity","label":"身份映射\nPID → cgroup → container → VM\nGPU assigned_to VM","kind":"service"},
+    {"id":"correlate","label":"关联簇\ncorrelation_id + 时间窗 + 资源图","kind":"service"},
+    {"id":"evidence","label":"证据快照\n来源 / 时间 / 数值 / source_event_ids","kind":"database"},
+    {"id":"rules","label":"规则匹配\nYAML 条款 + 必选 / 可选 / 时序","kind":"service"},
+    {"id":"score","label":"Evidence Match\n规则命中 55\n时序 15 / 邻接 10 / 强度 10 / 独立性 10","kind":"service"},
+    {"id":"result","label":"诊断输出\nTop-N 根因候选\n影响范围 + 处置建议","kind":"output"},
+    {"id":"operate","label":"告警运营\n确认 / 静默 / 恢复\n每 IP 限流","kind":"control"}
+  ],
+  "edges": [
+    {"id":"e01","source":"task_event","target":"normalize","label":"事件","kind":"data"},
+    {"id":"e02","source":"system_signal","target":"normalize","label":"信号","kind":"data"},
+    {"id":"e03","source":"metric_signal","target":"normalize","label":"指标","kind":"data"},
+    {"id":"e04","source":"gpu_signal","target":"normalize","label":"信号","kind":"data"},
+    {"id":"e05","source":"cloud_event","target":"normalize","label":"告警","kind":"data"},
+    {"id":"e06","source":"normalize","target":"identity","label":"归一事件","kind":"data"},
+    {"id":"e07","source":"identity","target":"correlate","label":"资源身份","kind":"data"},
+    {"id":"e08","source":"correlate","target":"evidence","label":"关联簇","kind":"data"},
+    {"id":"e09","source":"evidence","target":"rules","label":"证据","kind":"data"},
+    {"id":"e10","source":"rules","target":"score","label":"命中结果","kind":"data"},
+    {"id":"e11","source":"score","target":"result","label":"评分排序","kind":"data"},
+    {"id":"e12","source":"result","target":"operate","label":"处置闭环","kind":"control"},
+    {"id":"e13","source":"operate","target":"correlate","label":"状态反馈","kind":"async"}
+  ]
+}

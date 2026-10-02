@@ -1,0 +1,59 @@
+# TraceSphere RCA 规则：GPU 显存耗尽（Mock DCGM 降级模式，赛题 §4）
+#
+# 无 GPU 硬件时由 workload/mock/gpu_exporter.py 上报模拟 DCGM 指标；
+# 真实环境替换为 nvidia-dcgm-exporter / nvml 指标后，本规则无需改动。
+rule: gpu_memory_exhaustion
+version: 1
+title: GPU 显存耗尽（GPU Memory Exhaustion）
+description: 显存占用率逼近上限并出现耗尽事件（模拟 DCGM 信号；可定位到 GPU 与所属 VM）
+severity: critical
+
+evidence:
+  # ---- 主判据：显存占用率窗口峰值 > 90% ----
+  - metric: gpu.memory_used_ratio
+    op: ">"
+    value: 0.9
+    weight: 35
+    description: ts_gpu_memory_used_ratio 窗口峰值 > 0.9（基线 < 0.35）
+
+  # ---- 耗尽事件（exporter 越过阈值时上报一次，critical）----
+  - signal: gpu.memory.exhausted
+    kind: metric
+    layer: vm
+    weight: 30
+    description: 出现 gpu.memory.exhausted 事件（显存耗尽）
+
+  # ---- 业务影响：受影响的 Agent 任务失败（可选互证）----
+  - signal: task.failed
+    kind: app_event
+    layer: application
+    weight: 15
+    optional: true
+    match_any: ["timeout", "timed out", "超时", "error", "failed", "失败"]
+    description: 受 GPU 影响的 Agent 任务失败（correlation_id 锚点，可选）
+
+correlation:
+  same_resource: false
+  same_vm: true
+  time_window: 5s
+  require_correlation_id: false
+
+result:
+  root_cause: gpu_memory_exhaustion
+  label: GPU 显存耗尽（可定位到具体 GPU 与所属 VM）
+  suggestions:
+    - action: free_gpu_memory
+      title: 释放显存 / 定位占用进程
+      basis: gpu.memory_used_ratio > 0.9 且出现 gpu.memory.exhausted 事件
+      detail: 在 GPU 所属 VM 内用 nvidia-smi / DCGM 定位占用进程，释放或重启超量服务
+      risk: 强杀推理进程会中断在途请求，需先摘除流量
+    - action: cap_gpu_memory
+      title: 为服务设置显存上限
+      basis: 单服务显存占用无上限增长（模拟注入复现该模式）
+      detail: 通过 MPS / vGPU 切分或框架级显存上限（如 gpu_memory_utilization）约束服务
+      risk: 上限过低会导致服务启动失败或性能下降
+    - action: verify_dcgm
+      title: 核对采集链路与阈值
+      basis: Mock DCGM 为降级数据源，真实环境需切换到 DCGM exporter
+      detail: 部署 nvidia-dcgm-exporter 并核对 ts_gpu_* 指标命名与 Prometheus 抓取
+      risk: 指标缺失会导致该规则静默失效（需监控采集心跳）

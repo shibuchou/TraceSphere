@@ -1,0 +1,34 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies and generated build output
+**/node_modules/
+**/.npm-cache/
+**/dist/
+**/dist-ssr/
+**/build/
+coverage/
+
+# Python caches and environments
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.venv/
+*.py[cod]
+
+# Local editor state, logs and backups
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.bak
+*.orig

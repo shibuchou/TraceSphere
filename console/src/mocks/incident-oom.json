@@ -1,0 +1,662 @@
+{
+  "incident": {
+    "incident_id": "inc-d38fc66c8364",
+    "correlation_id": "d38fc66c8364",
+    "title": "容器内存耗尽（Container OOM）",
+    "rule": "container_oom",
+    "severity": "critical",
+    "status": "open",
+    "match_score": 92,
+    "first_seen_at": "2026-09-20T08:25:35Z",
+    "last_seen_at": "2026-09-20T08:25:37Z",
+    "focus_resource": { "resource_id": "container:7196bcad3bc1", "name": "tool-service", "kind": "container" },
+    "evidence_count": 9,
+    "affected_tasks": 2,
+    "summary": "memory.events.oom_kill Δ=4 → task.failed（同一容器，Δt=2s）",
+    "source": "correlation_cluster"
+  },
+  "window": { "from": "2026-09-20T08:20:37Z", "to": "2026-09-20T08:25:37Z" },
+  "source": { "platform": "real", "prometheus": "real", "fixture": "mock" },
+  "diagnosis": {
+    "diagnosis_id": "diag-20260920T082540Z-container_oom",
+    "rule": "container_oom",
+    "rule_version": 1,
+    "title": "容器内存耗尽（Container OOM）",
+    "root_cause": "container_memory_exhausted",
+    "root_cause_label": "容器 memory limit 与实际需求不匹配（或应用内存泄漏）",
+    "severity": "critical",
+    "match_score": 92,
+    "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+    "score_breakdown": [
+      {
+        "dimension": "rule_match",
+        "label": "规则证据命中",
+        "score": 55,
+        "max": 55,
+        "detail": "4/4 条参与条款命中（container.restart 可选条款缺失不计入分母）：memory.events.oom_kill Δ=4、memory.current_ratio=1.02>0.95、oom.ebpf 1 条、task.failed 1 条"
+      },
+      {
+        "dimension": "temporal_precedence",
+        "label": "时间优先性",
+        "score": 15,
+        "max": 15,
+        "detail": "1/1 条 after 约束满足：容器层 OOM（08:25:35Z）早于应用层 task.failed（08:25:37Z），Δt=2.0s"
+      },
+      {
+        "dimension": "resource_adjacency",
+        "label": "资源邻接度",
+        "score": 10,
+        "max": 10,
+        "detail": "全部证据同属 container:7196bcad3bc1（tool-service），无跨资源跳转"
+      },
+      {
+        "dimension": "signal_strength",
+        "label": "信号强度",
+        "score": 7,
+        "max": 10,
+        "detail": "关键证据 oom_kill 增量 4，severity=critical（因峰值增量未达 10+ 量级，未取满分）"
+      },
+      {
+        "dimension": "independent_evidence",
+        "label": "独立证据数",
+        "score": 5,
+        "max": 10,
+        "detail": "覆盖 3 类证据来源：cgroup / ebpf / metric / app_event 中的 3 类有效类别"
+      }
+    ],
+    "evidence_ids": [
+      "ev-0001",
+      "ev-0002",
+      "ev-0003",
+      "ev-0004",
+      "ev-0005",
+      "ev-0006",
+      "ev-0007",
+      "ev-0008",
+      "ev-0009"
+    ],
+    "suggestions": [
+      {
+        "action": "adjust_memory_limit",
+        "title": "调整容器 memory limit",
+        "basis": "memory.current / memory.max = 1.02 > 0.95，且 memory.events.oom_kill 增量 = 4",
+        "detail": "将该容器 memory limit 提高到峰值 working_set 的 1.3 倍以上（当前峰值 1.46e7 字节，建议 ≥ 1.9e7）",
+        "risk": "提高 limit 会挤占同 VM 其他容器内存，需同步确认 workload-vm 余量（当前 4 GiB）"
+      },
+      {
+        "action": "check_memory_leak",
+        "title": "排查应用内存泄漏",
+        "basis": "OOM 前 working_set 由 8.6e6 单调升至 1.46e7，曲线无回落",
+        "detail": "检查 tool-service 在 OOM 窗口内的对象增长/缓存未释放路径，配合 profiling 复现",
+        "risk": "定位耗时；期间可先提高 limit 恢复业务"
+      },
+      {
+        "action": "review_restart_policy",
+        "title": "检查容器重启策略",
+        "basis": "容器重启计数递增（container.restart Δ=2）且业务未恢复",
+        "detail": "重启策略应与 OOM 告警联动，避免 OOM → 重启 → 再 OOM 的循环",
+        "risk": "仅改重启策略不解决根因，属止血手段"
+      }
+    ],
+    "alternatives": [
+      {
+        "rule": "tool_failure",
+        "title": "Agent 工具调用失败（Agent Tool Failure）",
+        "root_cause": "tool_endpoint_unreachable",
+        "match_score": 15,
+        "reason": "同一窗口内存在 tool.result status=error（Connection reset by peer），但工具失败发生在 OOM kill 之后，且记忆指针指向 0 值——按时间优先性归为结果而非原因"
+      },
+      {
+        "rule": "cpu_contention",
+        "title": "CPU 资源争抢（CPU Resource Contention）",
+        "root_cause": "cpu_resource_contention",
+        "match_score": 18,
+        "reason": "PSI cpu.some 峰值仅 0.63%（阈值 5%），throttled_periods 无数据，主判据未命中"
+      }
+    ],
+    "window": { "from": "2026-09-20T08:20:37Z", "to": "2026-09-20T08:25:37Z" },
+    "correlation_id": "d38fc66c8364"
+  },
+  "candidates": [
+    {
+      "diagnosis_id": "diag-20260920T082540Z-container_oom",
+      "rule": "container_oom",
+      "rule_version": 1,
+      "title": "容器内存耗尽（Container OOM）",
+      "root_cause": "container_memory_exhausted",
+      "root_cause_label": "容器 memory limit 与实际需求不匹配（或应用内存泄漏）",
+      "severity": "critical",
+      "match_score": 92,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 55, "max": 55, "detail": "4/4 条参与条款命中" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 15, "max": 15, "detail": "OOM 早于 task.failed 2.0s" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 10, "max": 10, "detail": "同 container:7196bcad3bc1" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 7, "max": 10, "detail": "oom_kill Δ=4，severity=critical" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 5, "max": 10, "detail": "3 类证据来源" }
+      ],
+      "evidence_ids": ["ev-0001", "ev-0002", "ev-0003", "ev-0004", "ev-0005", "ev-0006", "ev-0007", "ev-0008", "ev-0009"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "d38fc66c8364"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082540Z-cpu_contention",
+      "rule": "cpu_contention",
+      "rule_version": 1,
+      "title": "CPU 资源争抢（CPU Resource Contention）",
+      "root_cause": "cpu_resource_contention",
+      "root_cause_label": "同 VM 内 CPU 争抢（可定位到具体压力源容器）",
+      "severity": "major",
+      "match_score": 18,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 0, "max": 55, "detail": "0/2 条参与条款命中：PSI 峰值 0.63% ≤ 5%，throttled_periods 无数据" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 0, "max": 15, "detail": "本规则无 after 约束" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 6, "max": 10, "detail": "证据同属 workload-vm（同一 VM 内跨容器）" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 2, "max": 10, "detail": "最高 severity=info" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 10, "max": 10, "detail": "覆盖 cgroup / metric / app_event 等 ≥3 类" }
+      ],
+      "evidence_ids": ["ev-0001", "ev-0007", "ev-0201"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "d38fc66c8364"
+    },
+    {
+      "diagnosis_id": "diag-20260920T082540Z-tool_failure",
+      "rule": "tool_failure",
+      "rule_version": 1,
+      "title": "Agent 工具调用失败（Agent Tool Failure）",
+      "root_cause": "tool_endpoint_unreachable",
+      "root_cause_label": "目标端点不可达 / 依赖服务故障（或网络策略阻断）",
+      "severity": "major",
+      "match_score": 15,
+      "match_note": "Evidence Match 为规则证据命中评分（0–100），非概率",
+      "score_breakdown": [
+        { "dimension": "rule_match", "label": "规则证据命中", "score": 8, "max": 55, "detail": "1/2 条参与条款命中：tool.result status=error 命中；task.failed 的 after=tool.result 成立但 reason 指向工具失败而非端点不可达" },
+        { "dimension": "temporal_precedence", "label": "时间优先性", "score": 15, "max": 15, "detail": "1/1 条 after 约束满足" },
+        { "dimension": "resource_adjacency", "label": "资源邻接度", "score": 0, "max": 10, "detail": "跨资源（tool-service ↔ toxiproxy）" },
+        { "dimension": "signal_strength", "label": "信号强度", "score": 2, "max": 10, "detail": "severity=warning" },
+        { "dimension": "independent_evidence", "label": "独立证据数", "score": 5, "max": 10, "detail": "2 类（app_event / log）" }
+      ],
+      "evidence_ids": ["ev-0007", "ev-0008"],
+      "suggestions": [],
+      "alternatives": [],
+      "correlation_id": "d38fc66c8364"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-0001",
+      "signal": "memory.events.oom_kill",
+      "kind": "cgroup",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "critical",
+      "description": "memory.events.oom_kill Δ=4 [cgroup] on tool-service",
+      "value": 4,
+      "baseline": 0,
+      "unit": "count",
+      "source_event_ids": ["evt-cgroup-7196bcad-oom"],
+      "origin": "cgroup",
+      "mode": "real",
+      "payload": {
+        "cgroup_path": "/sys/fs/cgroup/system.slice/docker-7196bcad3bc14a641755cd8e19d6bdaca73a3d00b5ea5a30905124747fb3001b.scope",
+        "memory.events": { "low": 0, "high": 0, "max": 1042, "oom": 4, "oom_kill": 4, "oom_group_kill": 0 },
+        "window": "5s",
+        "container_id": "7196bcad3bc14a641755cd8e19d6bdaca73a3d00b5ea5a30905124747fb3001b"
+      }
+    },
+    {
+      "evidence_id": "ev-0002",
+      "signal": "memory.current_ratio",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:35Z",
+      "severity": "critical",
+      "description": "memory.current / memory.max = 1.02 > 0.95（working_set 峰值 1.46e7 字节）",
+      "value": 1.02,
+      "baseline": 0.61,
+      "unit": "ratio",
+      "source_event_ids": ["evt-prom-ws-7196bcad"],
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "promql": "container_memory_working_set_bytes{name=\"tool-service\"} / container_spec_memory_limit_bytes{name=\"tool-service\"}",
+        "memory_current": 10100000,
+        "memory_max": 10485760,
+        "working_set_series": { "min": 0, "max": 14600000, "last": 10100000, "samples": 17 },
+        "threshold": 0.95
+      }
+    },
+    {
+      "evidence_id": "ev-0003",
+      "signal": "oom.ebpf",
+      "kind": "ebpf",
+      "layer": "vm",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:36Z",
+      "severity": "major",
+      "description": "eBPF oom hook（mark_victim）命中：comm=python pid=155597",
+      "value": 10,
+      "baseline": 0,
+      "unit": "count",
+      "source_event_ids": ["evt-oom-155597"],
+      "origin": "ebpf",
+      "mode": "real",
+      "payload": {
+        "probe": "tracepoint/oom/mark_victim",
+        "records": [
+          { "comm": "systemd", "kind": 3, "origin": "oom", "pid": 1, "ts": 112604891833563, "wall": "2026-09-20T08:25:35Z" },
+          { "comm": "python", "kind": 3, "origin": "oom", "pid": 155420, "ts": 112605160535090, "wall": "2026-09-20T08:25:35Z" },
+          { "comm": "python", "kind": 3, "origin": "oom", "pid": 155597, "ts": 112606118494987, "wall": "2026-09-20T08:25:36Z" }
+        ],
+        "note": "vm-agent eBPF ringbuf（kind=3 origin=oom）"
+      }
+    },
+    {
+      "evidence_id": "ev-0004",
+      "signal": "container.restart",
+      "kind": "metric",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "correlation_id": "d38fc66c8364",
+      "observed_at": "2026-09-20T08:25:38Z",
+      "severity": "warning",
+      "description": "容器重启计数 +2（container_start_time_seconds 变化）",
+      "value": 2,
+      "baseline": 0,
+      "unit": "count",
+      "source_event_ids": ["evt-prom-restart-7196bcad"],
+      "origin": "cadvisor",
+      "mode": "real",
+      "payload": {
+        "promql": "changes(container_start_time_seconds{name=\"tool-service\"}[4m])",
+        "series": { "min": 1.79e9, "max": 1.79e9, "last": 1.79e9, "samples": 16 },
+        "note": "可选条款：容器未重建时该项为 0，不计入分母"
+      }
+    },
+    {
+      "evidence_id": "ev-0005",
+      "signal": "task.started",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "info",
+      "description": "task.started service=agent-service（关联锚点 correlation_id=d38fc66c8364）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-task-started-9d8d72"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.started",
+        "task_id": "task-1789892737-9d8d72",
+        "correlation_id": "d38fc66c8364",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:25:37+0000",
+        "status": "ok",
+        "attributes": { "question": "OOM 演练任务 - 期望工具调用失败" }
+      }
+    },
+    {
+      "evidence_id": "ev-0006",
+      "signal": "tool.call",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "info",
+      "description": "tool.call mock-search → http://toxiproxy:8666/tool（attributes.target 可定位端点）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-tool-call-9d8d72"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "tool.call",
+        "task_id": "task-1789892737-9d8d72",
+        "correlation_id": "d38fc66c8364",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:25:37+0000",
+        "status": "ok",
+        "attributes": { "tool": "mock-search", "target": "http://toxiproxy:8666/tool" }
+      }
+    },
+    {
+      "evidence_id": "ev-0007",
+      "signal": "tool.result",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "warning",
+      "description": "tool.result status=error：[Errno 104] Connection reset by peer",
+      "unit": "none",
+      "source_event_ids": ["evt-app-tool-result-9d8d72"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "tool.result",
+        "task_id": "task-1789892737-9d8d72",
+        "correlation_id": "d38fc66c8364",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:25:37+0000",
+        "status": "error",
+        "attributes": { "error": "[Errno 104] Connection reset by peer" }
+      }
+    },
+    {
+      "evidence_id": "ev-0008",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892737-9d8d72",
+      "observed_at": "2026-09-20T08:25:37Z",
+      "severity": "major",
+      "description": "task.failed reason='tool call failed: [Errno 104] Connection reset by peer'（晚于 OOM 2.0s）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-task-failed-9d8d72"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.failed",
+        "task_id": "task-1789892737-9d8d72",
+        "correlation_id": "d38fc66c8364",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:25:37+0000",
+        "status": "error",
+        "attributes": { "reason": "tool call failed: [Errno 104] Connection reset by peer" }
+      }
+    },
+    {
+      "evidence_id": "ev-0009",
+      "signal": "task.failed",
+      "kind": "app_event",
+      "layer": "application",
+      "resource_id": "task:task-1789892721-4b7c19",
+      "resource_name": "task-1789892721-4b7c19",
+      "correlation_id": "d38fc66c8364",
+      "task_id": "task-1789892721-4b7c19",
+      "observed_at": "2026-09-20T08:25:40Z",
+      "severity": "major",
+      "description": "task.failed reason='tool call failed: [Errno 104] Connection reset by peer'（同一 OOM 周期内第二个任务）",
+      "unit": "none",
+      "source_event_ids": ["evt-app-task-failed-4b7c19"],
+      "origin": "app",
+      "mode": "real",
+      "payload": {
+        "event_type": "task.failed",
+        "task_id": "task-1789892721-4b7c19",
+        "correlation_id": "d38fc66c8364",
+        "service": "agent-service",
+        "timestamp": "2026-09-20T08:25:40+0000",
+        "status": "error",
+        "attributes": { "reason": "tool call failed: [Errno 104] Connection reset by peer" }
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "observed_at": "2026-09-20T08:25:35Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "memory.current_ratio",
+      "severity": "warning",
+      "description": "memory.current / memory.max = 1.02，越过 0.95 阈值",
+      "evidence_id": "ev-0002",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:35Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "memory.events.oom_kill",
+      "severity": "critical",
+      "description": "cgroup v2 OOM 计数开始递增（Δ=3）",
+      "evidence_id": "ev-0001",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:36Z",
+      "layer": "vm",
+      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_name": "workload-vm",
+      "signal": "oom.ebpf",
+      "severity": "major",
+      "description": "eBPF mark_victim：comm=python pid=155597",
+      "evidence_id": "ev-0003",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "memory.events.oom_kill",
+      "severity": "critical",
+      "description": "窗口内 OOM 计数收口于 Δ=4（oom_kill）",
+      "evidence_id": "ev-0001",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "task.started",
+      "severity": "info",
+      "description": "task.started（correlation d38fc66c8364）",
+      "evidence_id": "ev-0005",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "tool.call",
+      "severity": "info",
+      "description": "tool.call mock-search → http://toxiproxy:8666/tool",
+      "evidence_id": "ev-0006",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "tool.result",
+      "severity": "warning",
+      "description": "tool.result status=error：Connection reset by peer",
+      "evidence_id": "ev-0007",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:37Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892737-9d8d72",
+      "resource_name": "task-1789892737-9d8d72",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "task.failed（OOM 之后 2.0s，after 约束满足）",
+      "evidence_id": "ev-0008",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:38Z",
+      "layer": "container",
+      "resource_id": "container:7196bcad3bc1",
+      "resource_name": "tool-service",
+      "signal": "container.restart",
+      "severity": "warning",
+      "description": "容器重启计数 +2（OOM → 重启 → 再 OOM 循环风险）",
+      "evidence_id": "ev-0004",
+      "incident_id": "inc-d38fc66c8364"
+    },
+    {
+      "observed_at": "2026-09-20T08:25:40Z",
+      "layer": "application",
+      "resource_id": "task:task-1789892721-4b7c19",
+      "resource_name": "task-1789892721-4b7c19",
+      "signal": "task.failed",
+      "severity": "major",
+      "description": "同 correlation 簇内第二个任务失败（受影响任务数 = 2）",
+      "evidence_id": "ev-0009",
+      "incident_id": "inc-d38fc66c8364"
+    }
+  ],
+  "impact": {
+    "focus": { "resource_id": "container:7196bcad3bc1", "name": "tool-service", "kind": "container" },
+    "counts": { "tasks": 2, "services": 1, "containers": 1, "vms": 1 },
+    "scope": [
+      {
+        "resource_id": "task:task-1789892737-9d8d72",
+        "kind": "task",
+        "name": "task-1789892737-9d8d72",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "critical",
+        "detail": "OOM 演练任务 - 期望工具调用失败 · correlation d38fc66c8364"
+      },
+      {
+        "resource_id": "task:task-1789892721-4b7c19",
+        "kind": "task",
+        "name": "task-1789892721-4b7c19",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "同一 OOM 周期内失败任务 · correlation d38fc66c8364"
+      },
+      {
+        "resource_id": "service:svc-tool",
+        "kind": "service",
+        "name": "mock-search",
+        "relation": "runs_on",
+        "depth": 1,
+        "status": "warning",
+        "detail": "工具后端，OOM 期间 50% 调用返回 error"
+      },
+      {
+        "resource_id": "container:e6eab2f12b53",
+        "kind": "container",
+        "name": "toxiproxy",
+        "relation": "proxies",
+        "depth": 2,
+        "status": "healthy",
+        "detail": "上游 tool-service 不可用导致 Connection reset"
+      },
+      {
+        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "kind": "vm",
+        "name": "workload-vm",
+        "relation": "contains",
+        "depth": 2,
+        "status": "warning",
+        "detail": "承载容器，4 vCPU / 4 GiB；OOM 未触发 VM 级回收"
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "container:7196bcad3bc1",
+        "label": "tool-service",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "OOM 焦点资源",
+        "status": "critical",
+        "incident_count": 1,
+        "badges": ["OOM ×4"],
+        "metrics": [{ "name": "memory.current_ratio", "value": 1.02, "unit": "ratio" }]
+      },
+      {
+        "id": "service:svc-tool",
+        "label": "mock-search",
+        "kind": "service",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "工具后端",
+        "status": "warning",
+        "incident_count": 1,
+        "badges": ["error ×1"],
+        "metrics": [{ "name": "tool_error_ratio", "value": 0.5, "unit": "ratio" }]
+      },
+      {
+        "id": "task:task-1789892737-9d8d72",
+        "label": "task-…9d8d72",
+        "kind": "task",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "correlation d38fc66c8364",
+        "status": "critical",
+        "incident_count": 1,
+        "badges": ["failed"],
+        "metrics": []
+      },
+      {
+        "id": "container:e6eab2f12b53",
+        "label": "toxiproxy",
+        "kind": "container",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "故障注入代理",
+        "status": "healthy",
+        "incident_count": 1,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "service:svc-agent",
+        "label": "agent-service",
+        "kind": "service",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "任务编排入口（correlation 锚点产生方）",
+        "status": "healthy",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      },
+      {
+        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "label": "workload-vm",
+        "kind": "vm",
+        "combo": "combo:vm:63bbb461",
+        "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
+        "status": "warning",
+        "incident_count": 0,
+        "badges": [],
+        "metrics": []
+      }
+    ],
+    "edges": [
+      { "id": "sg-1", "source": "container:7196bcad3bc1", "target": "service:svc-tool", "relation": "runs_on", "label": "runs_on" },
+      { "id": "sg-2", "source": "service:svc-agent", "target": "task:task-1789892737-9d8d72", "relation": "calls", "label": "calls" },
+      { "id": "sg-3", "source": "task:task-1789892737-9d8d72", "target": "service:svc-tool", "relation": "depends_on", "label": "depends_on" },
+      { "id": "sg-4", "source": "service:svc-tool", "target": "container:e6eab2f12b53", "relation": "proxies", "label": "proxies" },
+      { "id": "sg-5", "source": "vm:63bbb4613a524e4e97090600af03da93", "target": "container:7196bcad3bc1", "relation": "contains", "label": "contains" }
+    ]
+  }
+}

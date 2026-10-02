@@ -1,0 +1,165 @@
+<mxfile host="drawio-skill" agent="diagram-ir" version="3.0.0">
+  <diagram id="system" name="System">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="task_event" value="Agent 任务事件&#10;task_id / correlation_id&#10;tool.result / task.failed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="task_event" data-kind="source" data-properties="{}" data-source-properties="{}" data-source-label="Agent 任务事件&#10;task_id / correlation_id&#10;tool.result / task.failed" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="0" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="system_signal" value="系统信号&#10;PSI / cgroup / eBPF / journal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="system_signal" data-kind="source" data-properties="{}" data-source-properties="{}" data-source-label="系统信号&#10;PSI / cgroup / eBPF / journal" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="180" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="metric_signal" value="指标信号&#10;Prometheus / cAdvisor / llama" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="metric_signal" data-kind="source" data-properties="{}" data-source-properties="{}" data-source-label="指标信号&#10;Prometheus / cAdvisor / llama" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="360" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu_signal" value="GPU 信号&#10;显存比例 / exhausted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="gpu_signal" data-kind="source" data-properties="{}" data-source-properties="{}" data-source-label="GPU 信号&#10;显存比例 / exhausted" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="530" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud_event" value="ZSvirt 信号&#10;资源 / 告警 / 事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="cloud_event" data-kind="source" data-properties="{}" data-source-properties="{}" data-source-label="ZSvirt 信号&#10;资源 / 告警 / 事件" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="710" y="0" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="normalize" value="Schema v1 归一化&#10;字段白名单 + Token + 隐私最小化" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="normalize" data-kind="service" data-properties="{}" data-source-properties="{}" data-source-label="Schema v1 归一化&#10;字段白名单 + Token + 隐私最小化" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="360" y="110" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="identity" value="身份映射&#10;PID → cgroup → container → VM&#10;GPU assigned_to VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="identity" data-kind="service" data-properties="{}" data-source-properties="{}" data-source-label="身份映射&#10;PID → cgroup → container → VM&#10;GPU assigned_to VM" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="360" y="210" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="correlate" value="关联簇&#10;correlation_id + 时间窗 + 资源图" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="correlate" data-kind="service" data-properties="{}" data-source-properties="{}" data-source-label="关联簇&#10;correlation_id + 时间窗 + 资源图" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="360" y="320" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" value="证据快照&#10;来源 / 时间 / 数值 / source_event_ids" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1" data-model-id="evidence" data-kind="database" data-properties="{}" data-source-properties="{}" data-source-label="证据快照&#10;来源 / 时间 / 数值 / source_event_ids" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="300" y="420" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" value="规则匹配&#10;YAML 条款 + 必选 / 可选 / 时序" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="rules" data-kind="service" data-properties="{}" data-source-properties="{}" data-source-label="规则匹配&#10;YAML 条款 + 必选 / 可选 / 时序" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="300" y="530" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="score" value="Evidence Match&#10;规则命中 55&#10;时序 15 / 邻接 10 / 强度 10 / 独立性 10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="score" data-kind="service" data-properties="{}" data-source-properties="{}" data-source-label="Evidence Match&#10;规则命中 55&#10;时序 15 / 邻接 10 / 强度 10 / 独立性 10" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="300" y="640" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="result" value="诊断输出&#10;Top-N 根因候选&#10;影响范围 + 处置建议" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="result" data-kind="output" data-properties="{}" data-source-properties="{}" data-source-label="诊断输出&#10;Top-N 根因候选&#10;影响范围 + 处置建议" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="300" y="740" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="operate" value="告警运营&#10;确认 / 静默 / 恢复&#10;每 IP 限流" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1" data-model-id="operate" data-kind="control" data-properties="{}" data-source-properties="{}" data-source-label="告警运营&#10;确认 / 静默 / 恢复&#10;每 IP 限流" data-provenance="{&quot;path&quot;:&quot;D:\\code\\Ubuntu\\zsvirt\\tracesphere\\docs\\作品介绍\\ir\\02-证据链与诊断闭环.json&quot;}">
+          <mxGeometry x="360" y="850" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="事件" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="task_event" target="normalize" data-model-id="e01" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="事件">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="110" />
+              <mxPoint x="80" y="150" />
+              <mxPoint x="80" y="150" />
+              <mxPoint x="80" y="150" />
+              <mxPoint x="340" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" value="信号" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="system_signal" target="normalize" data-model-id="e02" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="信号">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="100" />
+              <mxPoint x="320" y="130" />
+              <mxPoint x="320" y="130" />
+              <mxPoint x="320" y="130" />
+              <mxPoint x="340" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="指标" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="metric_signal" target="normalize" data-model-id="e03" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="指标">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="70" />
+              <mxPoint x="440" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="信号" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="gpu_signal" target="normalize" data-model-id="e04" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="信号">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="100" />
+              <mxPoint x="610" y="130" />
+              <mxPoint x="610" y="130" />
+              <mxPoint x="610" y="130" />
+              <mxPoint x="530" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="告警" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="cloud_event" target="normalize" data-model-id="e05" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="告警">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="110" />
+              <mxPoint x="790" y="150" />
+              <mxPoint x="790" y="150" />
+              <mxPoint x="790" y="150" />
+              <mxPoint x="530" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="归一事件" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="normalize" target="identity" data-model-id="e06" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="归一事件">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="180" />
+              <mxPoint x="440" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="资源身份" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="identity" target="correlate" data-model-id="e07" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="资源身份">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="280" />
+              <mxPoint x="440" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="关联簇" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="correlate" target="evidence" data-model-id="e08" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="关联簇">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="390" />
+              <mxPoint x="410" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="证据" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="evidence" target="rules" data-model-id="e09" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="证据">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="490" />
+              <mxPoint x="380" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="命中结果" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="rules" target="score" data-model-id="e10" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="命中结果">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="600" />
+              <mxPoint x="380" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="评分排序" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="score" target="result" data-model-id="e11" data-kind="data" data-properties="{}" data-source-properties="{}" data-source-label="评分排序">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="710" />
+              <mxPoint x="380" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="处置闭环" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="result" target="operate" data-model-id="e12" data-kind="control" data-properties="{}" data-source-properties="{}" data-source-label="处置闭环">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="810" />
+              <mxPoint x="410" y="840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" value="状态反馈" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="operate" target="correlate" data-model-id="e13" data-kind="async" data-properties="{}" data-source-properties="{}" data-source-label="状态反馈">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="850" />
+              <mxPoint x="490" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

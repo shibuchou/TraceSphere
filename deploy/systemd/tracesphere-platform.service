@@ -1,0 +1,20 @@
+[Unit]
+Description=TraceSphere Platform (resource registry + evidence store + correlation engine)
+After=network.target
+
+[Service]
+Type=simple
+User=__TS_USER__
+# __TS_* 占位符由 install-services.sh 按实际部署用户/仓库位置生成（systemd 的 %h 指 root 家目录，不可用）
+WorkingDirectory=__TS_ROOT__/platform
+# 可选环境文件（ZSVIRT_PASSWORD / TRACESPHERE_API_TOKEN 等）
+EnvironmentFile=-/etc/tracesphere/platform.env
+ExecStart=/usr/bin/python3 run.py --provider rest --host 0.0.0.0 --port 8000 --db data/tracesphere.db
+Restart=always
+RestartSec=3
+# 输出进 journal（查看：journalctl -u tracesphere-platform -f；数据日志另存 data/platform.log 由应用侧写入）
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

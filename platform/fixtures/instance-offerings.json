@@ -1,0 +1,20 @@
+{
+  "inventories": [
+    {
+      "uuid": "21830e28a8f74391ba2a5fe46aca85af",
+      "name": "off-small",
+      "description": "4 vCPU / 4 GiB for workload VM",
+      "cpuNum": 4,
+      "cpuSpeed": 0,
+      "memorySize": 4294967296,
+      "reservedMemorySize": 0,
+      "type": "UserVm",
+      "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
+      "sortKey": 0,
+      "createDate": "Sep 19, 2026 12:50:55 AM",
+      "lastOpDate": "Sep 19, 2026 12:50:55 AM",
+      "state": "Enabled"
+    }
+  ],
+  "total": 1
+}

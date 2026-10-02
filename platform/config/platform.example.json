@@ -1,0 +1,44 @@
+{
+  "platform": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "db_path": "data/tracesphere.db",
+    "log_level": "INFO"
+  },
+  "zsvirt": {
+    "provider": "fixture",
+    "base_url": "http://127.0.0.1:8080/zstack/v1",
+    "account": "admin",
+    "password": null,
+    "password_env": "ZSVIRT_PASSWORD",
+    "fixtures_dir": "fixtures",
+    "fixture_scenario": null,
+    "sync_on_start": true,
+    "request_timeout_sec": 20,
+    "verify_tls": false,
+    "page_size": 100,
+    "paths": {
+      "zones": "zones",
+      "clusters": "clusters",
+      "hosts": "hosts",
+      "vms": "vm-instances",
+      "images": "images",
+      "l3_networks": "l3-networks",
+      "l2_networks": "l2-networks",
+      "port_groups": "port-groups",
+      "primary_storages": "primary-storages",
+      "instance_offerings": "instance-offerings",
+      "alarms": "zwatch/alarms",
+      "events": "zwatch/events"
+    }
+  },
+  "api": {
+    "token": "",
+    "cors_origins": ["*"],
+    "max_body_bytes": 5242880
+  },
+  "correlation": {
+    "window_seconds": 5.0,
+    "max_events": 5000
+  }
+}

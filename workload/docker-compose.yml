@@ -1,0 +1,115 @@
+name: tracesphere
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.53.0@sha256:075b1ba2c4ebb04bc3a6ab86c06ec8d8099f8fda1c96ef6d104d9bb1def1d8bc
+    container_name: prometheus
+    volumes:
+      - /opt/tracesphere/workload/prometheus:/etc/prometheus:ro
+    ports:
+      # 平台（RCA）需跨机读取：默认回环，跨机部署时设 PROM_BIND=<业务 VM IP>
+      - "${PROM_BIND:-127.0.0.1}:9090:9090"
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.m.daocloud.io/cadvisor/cadvisor:v0.49.1@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388
+    container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kvm
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8080:8080"
+    restart: unless-stopped
+
+  llama-server:
+    image: ghcr.m.daocloud.io/ggml-org/llama.cpp:server@sha256:f26a6403915b6131b903717458aeeadd2527d2a6b8bf64bc9264bc6d16a40474
+    container_name: llama-server
+    command:
+      - "-m"
+      - "/models/model.gguf"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
+      - "-c"
+      - "1024"
+      - "-t"
+      - "3"
+      - "--metrics"
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8081:8080"
+    volumes:
+      - /opt/tracesphere/models:/models:ro
+    restart: unless-stopped
+
+  tool-service:
+    image: python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+    container_name: tool-service
+    command: ["python", "/app/tool.py"]
+    environment:
+      TOOL_LATENCY_MS: "0"
+      PORT: "9000"
+    volumes:
+      - /opt/tracesphere/workload/tool-service:/app:ro
+    restart: unless-stopped
+
+  # 无 GPU 硬件的降级模式（赛题 §4）：模拟 DCGM 显存指标源。
+  # 平台侧需开启 mock_gpu（TRACESPHERE_MOCK_GPU=1）注册 Host→GPU→VM 资源边。
+  mock-dcgm:
+    image: python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+    container_name: mock-dcgm
+    command: ["python", "/app/gpu_exporter.py"]
+    environment:
+      PORT: "9400"
+      INTERVAL: "15"
+      EVENTS_URL: "${PLATFORM_EVENTS_URL:-}"
+      VM_UUID: "${TRACESPHERE_VM_UUID:-}"
+      GPU_RESOURCE_ID: "${TRACESPHERE_GPU_RESOURCE_ID:-gpu:mock-gpu0}"
+      GPU_MEMORY_TOTAL_BYTES: "8589934592"
+      PLATFORM_TOKEN: "${PLATFORM_TOKEN:-}"
+    volumes:
+      - /opt/tracesphere/workload/mock:/app:ro
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:9400:9400"
+    restart: unless-stopped
+
+  toxiproxy:
+    image: shopify/toxiproxy:latest@sha256:a6b080af39986b863a1f7c5a3b9bacf2afeb48abab8f0eb7e243f8f7ad38c645
+    container_name: toxiproxy
+    command: ["-host", "0.0.0.0"]
+    ports:
+      # 控制面 (8474) 与业务代理 (8666) 都只绑回环，避免被外部改写链路
+      - "${BIND_ADDR:-127.0.0.1}:8474:8474"
+      - "${BIND_ADDR:-127.0.0.1}:8666:8666"
+    restart: unless-stopped
+
+  agent-service:
+    image: python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+    container_name: agent-service
+    command: ["python", "/app/agent.py"]
+    environment:
+      TOOL_URL: "http://toxiproxy:8666/tool"
+      LLM_URL: "http://llama-server:8080/v1/chat/completions"
+      SERVICE_NAME: "agent-service"
+      PORT: "8080"
+      # 直报平台与 VM 归属（由同目录 .env 或环境变量注入；置空则只打 stdout）
+      EVENTS_URL: "${PLATFORM_EVENTS_URL:-}"
+      VM_UUID: "${TRACESPHERE_VM_UUID:-}"
+      # 平台 API Token（与平台 TRACESPHERE_API_TOKEN 一致）；TASK_TOKEN 可选，设置后 /task 需要 X-Task-Token
+      PLATFORM_TOKEN: "${PLATFORM_TOKEN:-}"
+      TASK_TOKEN: "${TASK_TOKEN:-}"
+    volumes:
+      - /opt/tracesphere/workload/agent-service:/app:ro
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8082:8080"
+    depends_on:
+      - llama-server
+      - tool-service
+      - toxiproxy
+    restart: unless-stopped

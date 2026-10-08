@@ -72,7 +72,7 @@ export function LayerTag({ layer, tiny }: BaseTagProps & { layer: EvidenceLayer 
   const color = LAYER_COLOR[layer] ?? COLORS.inkTertiary;
   return (
     <span className={cx(styles.tag, styles.layer, tiny && styles.tiny, styles.mono)} style={{ color }}>
-      {LAYER_TEXT[layer] ?? layer}
+      {LAYER_TEXT[layer] ?? (layer ? layer : '未知层级')}
     </span>
   );
 }

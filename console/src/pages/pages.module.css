@@ -126,6 +126,17 @@
   }
 }
 
+@media (max-width: 640px) {
+  .wlName {
+    min-width: 0;
+  }
+
+  .wlId {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
 .wlHead {
   display: flex;
   align-items: flex-start;
@@ -255,7 +266,7 @@
 
 .impactRow {
   display: grid;
-  grid-template-columns: 60px 1fr auto;
+  grid-template-columns: 60px minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
   padding: 7px 10px;
@@ -263,6 +274,14 @@
   border-radius: var(--ts-radius);
   background: var(--ts-surface);
   font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .impactRow > span:nth-child(2) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
 .depthChip {

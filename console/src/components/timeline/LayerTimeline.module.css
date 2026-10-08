@@ -150,3 +150,36 @@
   font-size: 12px;
   color: var(--ts-ink-3);
 }
+
+@media (max-width: 640px) {
+  .group {
+    grid-template-columns: 54px 56px 14px minmax(0, 1fr);
+  }
+
+  .timeCell {
+    padding-right: 4px;
+    padding-left: 4px;
+    font-size: 10px;
+  }
+
+  .layerCell {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .rows,
+  .row {
+    min-width: 0;
+  }
+
+  .row {
+    padding-right: 6px;
+  }
+
+  .signal,
+  .desc,
+  .meta {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}

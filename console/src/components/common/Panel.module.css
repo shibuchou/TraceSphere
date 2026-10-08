@@ -79,6 +79,17 @@
   font-weight: 600;
 }
 
+@media (max-width: 640px) {
+  .headLeft {
+    flex-wrap: wrap;
+  }
+
+  .sub {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 .collapseMeta {
   font-family: var(--ts-mono);
   font-size: 11px;

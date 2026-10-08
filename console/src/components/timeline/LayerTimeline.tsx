@@ -4,6 +4,7 @@ import { Icon } from '@/components/common/Icon';
 import { LayerTag, PlainTag, SeverityTag } from '@/components/common/Tags';
 import { LAYER_COLOR, LAYER_TEXT } from '@/theme/tokens';
 import { fmtClockMs } from '@/utils/format';
+import { normalizeEvidenceLayer } from '@/utils/evidenceLayer';
 import type { EvidenceLayer, TimelineEntry } from '@/types';
 
 interface LayerTimelineProps {
@@ -47,17 +48,23 @@ export function LayerTimeline({
   filterable = true,
 }: LayerTimelineProps) {
   const [activeLayers, setActiveLayers] = useState<EvidenceLayer[] | null>(null);
+  const normalizedEntries = useMemo(
+    () => entries.map((entry) => ({ ...entry, layer: normalizeEvidenceLayer(entry.layer, entry.resource_id) })),
+    [entries],
+  );
 
   const groups = useMemo(() => {
-    const filtered = activeLayers ? entries.filter((e) => activeLayers.includes(e.layer)) : entries;
+    const filtered = activeLayers
+      ? normalizedEntries.filter((e) => activeLayers.includes(e.layer))
+      : normalizedEntries;
     return groupByTime(filtered);
-  }, [entries, activeLayers]);
+  }, [normalizedEntries, activeLayers]);
 
   const layerCounts = useMemo(() => {
     const counts = new Map<EvidenceLayer, number>();
-    for (const e of entries) counts.set(e.layer, (counts.get(e.layer) ?? 0) + 1);
+    for (const e of normalizedEntries) counts.set(e.layer, (counts.get(e.layer) ?? 0) + 1);
     return counts;
-  }, [entries]);
+  }, [normalizedEntries]);
 
   const toggleLayer = (layer: EvidenceLayer) => {
     setActiveLayers((prev) => {

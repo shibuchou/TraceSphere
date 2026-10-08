@@ -4,6 +4,7 @@ import styles from './EvidenceList.module.css';
 import { Icon } from '@/components/common/Icon';
 import { EvidenceKindTag, LayerTag, SeverityTag } from '@/components/common/Tags';
 import { fmtClockMs, fmtValue } from '@/utils/format';
+import { normalizeEvidenceLayer } from '@/utils/evidenceLayer';
 import type { EvidenceItem, EvidenceLayer, Severity } from '@/types';
 import { SEVERITY_TEXT } from '@/theme/tokens';
 
@@ -29,9 +30,13 @@ export function EvidenceList({ items, highlightIds = [], dense = false, emptyTex
   const [sortBySeverity, setSortBySeverity] = useState(false);
 
   const highlighted = useMemo(() => new Set(highlightIds), [highlightIds]);
+  const normalizedItems = useMemo(
+    () => items.map((item) => ({ ...item, layer: normalizeEvidenceLayer(item.layer, item.resource_id) })),
+    [items],
+  );
 
   const filtered = useMemo(() => {
-    const list = items.filter(
+    const list = normalizedItems.filter(
       (e) => (layer === 'all' || e.layer === layer) && (severity === 'all' || e.severity === severity),
     );
     if (sortBySeverity) {
@@ -40,15 +45,18 @@ export function EvidenceList({ items, highlightIds = [], dense = false, emptyTex
       );
     }
     return list;
-  }, [items, layer, severity, sortBySeverity]);
+  }, [normalizedItems, layer, severity, sortBySeverity]);
 
   const layerOptions = useMemo(() => {
-    const set = new Set(items.map((e) => e.layer));
+    const set = new Set(normalizedItems.map((e) => e.layer));
     return [
-      { value: 'all', label: `全部层级 (${items.length})` },
-      ...[...set].map((l) => ({ value: l, label: `${l} (${items.filter((e) => e.layer === l).length})` })),
+      { value: 'all', label: `全部层级 (${normalizedItems.length})` },
+      ...[...set].map((l) => ({
+        value: l,
+        label: `${l} (${normalizedItems.filter((e) => e.layer === l).length})`,
+      })),
     ];
-  }, [items]);
+  }, [normalizedItems]);
 
   const toggle = (id: string) =>
     setOpenIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -176,9 +184,7 @@ export function EvidenceList({ items, highlightIds = [], dense = false, emptyTex
                     <span className={styles.payloadKey}>observed_at</span>
                     <span>{item.observed_at}</span>
                     <span className={styles.payloadKey}>layer / kind</span>
-                    <span>
-                      {item.layer} / {item.kind}
-                    </span>
+                    <span>{item.layer} / {item.kind}</span>
                     <span className={styles.payloadKey}>resource</span>
                     <span>
                       {item.resource_id}

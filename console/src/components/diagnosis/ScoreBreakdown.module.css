@@ -130,6 +130,8 @@
   color: var(--ts-ink-3);
   padding-left: 2px;
   margin-top: -2px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .dimRow {
@@ -162,6 +164,18 @@
 .candidateCurrent {
   border-color: var(--ts-primary);
   background: var(--ts-primary-soft);
+}
+
+@media (max-width: 640px) {
+  .candidate {
+    grid-template-columns: minmax(0, 1fr) 90px 40px;
+    gap: 6px;
+  }
+
+  .candidate > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 }
 
 .candidateTitle {

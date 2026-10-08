@@ -171,3 +171,49 @@
   background: #fafbfc;
   font-size: 12px;
 }
+
+@media (max-width: 640px) {
+  .itemHead {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 6px 8px;
+    padding-right: 8px;
+  }
+
+  .right {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .idCell {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .main,
+  .signal,
+  .desc {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .metaItem {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .payload {
+    padding-left: 12px;
+  }
+
+  .payloadGrid {
+    grid-template-columns: max-content minmax(0, 1fr);
+    overflow-wrap: anywhere;
+  }
+}

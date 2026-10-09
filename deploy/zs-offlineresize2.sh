@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -u
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 VOLDIR=/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654
 
 echo "== volume dir 内容 =="

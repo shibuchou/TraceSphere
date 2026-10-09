@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 务实方案：宿主机侧手工提供 DHCP+NAT（绕过 ZSvirt flat DHCP 应用问题）
 set -u
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 
 echo "== [0] 环境检查 =="
 which dnsmasq || echo "no-dnsmasq"

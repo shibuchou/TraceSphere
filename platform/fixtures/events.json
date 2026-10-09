@@ -33,7 +33,7 @@
       "namespace": "ZStack/MN",
       "name": "ManagementNodeJoin",
       "labels": {
-        "ManagementNodeIP": "172.27.52.119"
+        "ManagementNodeIP": "192.0.2.10"
       },
       "emergencyLevel": "Normal",
       "resourceId": "a5a6dc031d7a3a5c913c54e1dfd3a97b",
@@ -47,7 +47,7 @@
       "namespace": "ZStack/MN",
       "name": "ManagementNodeJoin",
       "labels": {
-        "ManagementNodeIP": "172.27.52.119"
+        "ManagementNodeIP": "192.0.2.10"
       },
       "emergencyLevel": "Normal",
       "resourceId": "a5a6dc031d7a3a5c913c54e1dfd3a97b",

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 为 VM 注入 cloud-init NoCloud seed（设置 ubuntu/root 密码 + 允许密码 SSH）
 set -u
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 SEED=/var/lib/zstack/seed.iso
 
 echo "== 工具检查 =="

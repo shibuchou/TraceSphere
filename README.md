@@ -192,6 +192,14 @@ bash tools/acceptance.sh
 | 内部资料 | `docs/开工交接-*.md`、`docs/交接文档-*.md`、`docs/fixlog-*.md`、`docs/anonymization-sweep-*.md`、`docs/demo-*.md`、`deploy/README.md`、`deploy/zs-*.sh`、`deploy/mn-*.sh`、`deploy/*.exp`、`deploy/login-try.sh` | 含服务器/账号/内网信息，**不入提交物** |
 | 需脱敏 | `platform/fixtures/`（ZSvirt 响应，含内网 UUID/IP） | 提交副本由打包脚本统一替换网段与 VM uuid（`192.0.2.0/24`、`10.0.0.0/24`） |
 
+## 演示视频
+
+4 分 30 秒演示（正常工作负载 → 四类故障注入 → 关联簇与证据链 → Top-1 根因与处置建议）：
+
+- Gitee：https://gitee.com/shibuchou/TraceSphere/raw/main/docs/video/tracesphere-demo.mp4
+- GitHub 镜像：https://github.com/shibuchou/TraceSphere/raw/main/docs/video/tracesphere-demo.mp4
+- 文件与说明：`docs/video/`
+
 ## 许可
 
 本项目代码以 MIT 许可证开源（见 `LICENSE`）；引用的开源组件遵循各自许可证（Prometheus / cAdvisor / Toxiproxy / llama.cpp / cilium-ebpf / AntV G6 / React / AntD 等，清单见上表）。Oracle/第三方商标归各自所有者。

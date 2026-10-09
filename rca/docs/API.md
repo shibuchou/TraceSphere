@@ -188,14 +188,14 @@ Evidence Match = Rule Match（规则证据命中）
   "source": {"platform": "real", "prometheus": "real"},
   "combos": [
     {"id": "combo:host:cbb61d8a", "label": "host-1 (GPU1)", "kind": "host", "parent": null},
-    {"id": "combo:vm:63bbb461", "label": "workload-vm", "kind": "vm", "parent": "combo:host:cbb61d8a"}
+    {"id": "combo:vm:a1b2c3d4", "label": "workload-vm", "kind": "vm", "parent": "combo:host:cbb61d8a"}
   ],
   "nodes": [
     {
-      "id": "vm:63bbb4613a524e4e97090600af03da93",
+      "id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "label": "workload-vm",
       "kind": "vm",
-      "combo": "combo:vm:63bbb461",
+      "combo": "combo:vm:a1b2c3d4",
       "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
       "status": "healthy",
       "incident_count": 0,

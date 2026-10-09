@@ -23,7 +23,7 @@ if ROOT not in sys.path:
 from tsplatform.app import PlatformApp, build_provider  # noqa: E402
 from tsplatform.config import load_config  # noqa: E402
 
-WORKLOAD_VM_UUID = "63bbb4613a524e4e97090600af03da93"
+WORKLOAD_VM_UUID = "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
 
 
 def main(argv=None):

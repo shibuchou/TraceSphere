@@ -58,7 +58,7 @@
         "label": "资源邻接度",
         "score": 6,
         "max": 10,
-        "detail": "证据跨资源：cpu-stress / workload-vm / agent-service 同属 vm:63bbb461…，资源图 1 跳可达"
+        "detail": "证据跨资源：cpu-stress / workload-vm / agent-service 同属 vm:a1b2c3d4…，资源图 1 跳可达"
       },
       {
         "dimension": "signal_strength",
@@ -409,7 +409,7 @@
       "signal": "psi_cpu_some_avg10",
       "kind": "metric",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "cf6d4dfcd64a",
       "observed_at": "2026-09-20T08:28:52Z",
@@ -630,7 +630,7 @@
     {
       "observed_at": "2026-09-20T08:28:22Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "warning",
@@ -652,7 +652,7 @@
     {
       "observed_at": "2026-09-20T08:28:32Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "critical",
@@ -674,7 +674,7 @@
     {
       "observed_at": "2026-09-20T08:28:52Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "critical",
@@ -766,7 +766,7 @@
         "detail": "压力源容器（focus）：nr_throttled 27，usage_usec 81.5s"
       },
       {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "kind": "vm",
         "name": "workload-vm",
         "relation": "contains",
@@ -782,7 +782,7 @@
         "id": "container:e5d6f856a747",
         "label": "cpu-stress",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "CPU 压力源（focus）",
         "status": "warning",
         "incident_count": 1,
@@ -801,7 +801,7 @@
         "id": "container:7c21e0b45a88",
         "label": "llama-server",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "推理后端 · P95 36.4s",
         "status": "healthy",
         "incident_count": 0,
@@ -820,7 +820,7 @@
         "id": "task:task-1789892897-9025e6",
         "label": "task-…9025e6",
         "kind": "task",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "correlation cf6d4dfcd64a",
         "status": "warning",
         "incident_count": 1,
@@ -833,7 +833,7 @@
         "id": "container:1f0a4c9b2d33",
         "label": "agent-service",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "Agent 编排入口",
         "status": "warning",
         "incident_count": 0,
@@ -844,7 +844,7 @@
         "id": "service:svc-agent",
         "label": "agent-service",
         "kind": "service",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "任务编排（未在本次候选命中，但为影响路径一环）",
         "status": "healthy",
         "incident_count": 0,
@@ -852,10 +852,10 @@
         "metrics": []
       },
       {
-        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "label": "workload-vm",
         "kind": "vm",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "PSI cpu.some 24.17%",
         "status": "warning",
         "incident_count": 0,
@@ -874,21 +874,21 @@
     "edges": [
       {
         "id": "sg-c1",
-        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "source": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "target": "container:e5d6f856a747",
         "relation": "contains",
         "label": "contains"
       },
       {
         "id": "sg-c2",
-        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "source": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "target": "container:7c21e0b45a88",
         "relation": "contains",
         "label": "contains"
       },
       {
         "id": "sg-c3",
-        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "source": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "target": "container:1f0a4c9b2d33",
         "relation": "contains",
         "label": "contains"

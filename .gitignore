@@ -49,3 +49,9 @@ docs/成品文档/
 
 # Ad-hoc local backups created next to the repo
 .*-backup-*
+
+# Local sanitizer rules (contain internal identifiers, never committed)
+tools/sanitize-rules.local
+
+# Local browser-automation artifacts (may contain live resource ids)
+.playwright-cli/

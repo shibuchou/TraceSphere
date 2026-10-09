@@ -17,7 +17,7 @@ import os
 # 真实环境标识（采集自 workload-vm：docker inspect / /etc/machine-id / DMI）
 # ---------------------------------------------------------------------------
 HOST_ID = "host:cbb61d8a22cc4fd1b3702af673cbf405"
-VM_UUID = "63bbb4613a524e4e97090600af03da93"
+VM_UUID = "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
 VM_ID = "vm:" + VM_UUID
 
 C_TOOL = "container:b9e5d37792546769827f4cfbb012e09ed7caca7343c60ec75ca109318bd717de"
@@ -99,7 +99,7 @@ def base_resources(extra_containers=()):
             "state": "running", "origin": "zsvirt", "mode": "real",
             "attributes": {
                 "cpuNum": 4, "memorySize": 4294967296, "ips": ["10.0.0.10"],
-                "machine_id": VM_UUID, "dmi_uuid": "63bbb461-3a52-4e4e-9709-0600af03da93",
+                "machine_id": VM_UUID, "dmi_uuid": "a1b2c3d4-3a52-4e4e-9709-0600af03da93",
                 "configured_vm_uuid": VM_UUID,
             },
         },

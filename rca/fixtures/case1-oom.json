@@ -41,7 +41,7 @@
       "resource_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
       "kind": "container",
       "name": "llama-server",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
       "origin": "cgroup",
       "mode": "real",
@@ -55,7 +55,7 @@
       "resource_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
       "kind": "container",
       "name": "5958daac075f",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
       "origin": "ebpf",
       "mode": "real",
@@ -69,7 +69,7 @@
       "resource_id": "container:6808d8574a1b",
       "kind": "container",
       "name": "6808d8574a1b",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "6808d8574a1b",
       "correlation_id": "bb03e1b2c022",
       "origin": "app",
@@ -85,7 +85,7 @@
       "resource_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
       "kind": "container",
       "name": "agent-service",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
       "origin": "cgroup",
       "mode": "real",
@@ -99,7 +99,7 @@
       "resource_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
       "kind": "container",
       "name": "cadvisor",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
       "origin": "cgroup",
       "mode": "real",
@@ -113,7 +113,7 @@
       "resource_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
       "kind": "container",
       "name": "prometheus",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
       "origin": "cgroup",
       "mode": "real",
@@ -127,7 +127,7 @@
       "resource_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
       "kind": "container",
       "name": "mock-dcgm",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
       "origin": "cgroup",
       "mode": "real",
@@ -141,7 +141,7 @@
       "resource_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
       "kind": "container",
       "name": "tool-service",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
       "origin": "cgroup",
       "mode": "real",
@@ -155,7 +155,7 @@
       "resource_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
       "kind": "container",
       "name": "toxiproxy",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "container_id": "df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
       "origin": "cgroup",
       "mode": "real",
@@ -239,7 +239,7 @@
       "resource_id": "gpu:mock-gpu0",
       "kind": "gpu",
       "name": "Mock GPU 0 (DCGM)",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "host_id": "host:cbb61d8a22cc4fd1b3702af673cbf405",
       "state": "online",
       "origin": "mock",
@@ -850,7 +850,7 @@
       "observed_at": "2026-09-30T14:14:03Z"
     },
     {
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "kind": "vm",
       "name": "workload-vm",
       "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
@@ -891,7 +891,7 @@
             "type": "VNIC",
             "usedIps": [],
             "uuid": "bdedd41023d849158577b973e1116869",
-            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
           }
         ],
         "raw": {
@@ -899,7 +899,7 @@
             {
               "actualSize": 13738508288,
               "createDate": "Sep 19, 2026 1:16:29 AM",
-              "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+              "description": "Root volume for VM[uuid:a1b2c3d456784b7d8e9f0a1b2c3d4e5f]",
               "deviceId": 0,
               "format": "qcow2",
               "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
@@ -914,7 +914,7 @@
               "status": "Ready",
               "type": "Root",
               "uuid": "c6114309f9d34fa980a00a4895383654",
-              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+              "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
             }
           ],
           "allocatorStrategy": "LeastVmPreferredHostAllocatorStrategy",
@@ -938,15 +938,15 @@
           "rootVolumeUuid": "c6114309f9d34fa980a00a4895383654",
           "state": "Running",
           "type": "UserVm",
-          "uuid": "63bbb4613a524e4e97090600af03da93",
+          "uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
           "vmCdRoms": [
             {
               "createDate": "Sep 19, 2026 1:16:29 AM",
               "deviceId": 0,
               "lastOpDate": "Sep 19, 2026 1:16:29 AM",
-              "name": "vm-63bbb4613a524e4e97090600af03da93-cdRom",
+              "name": "vm-a1b2c3d456784b7d8e9f0a1b2c3d4e5f-cdRom",
               "uuid": "461320dbc7b84b01a05d26fdf244047e",
-              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+              "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
             }
           ],
           "vmNics": [
@@ -963,7 +963,7 @@
               "type": "VNIC",
               "usedIps": [],
               "uuid": "bdedd41023d849158577b973e1116869",
-              "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+              "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
             }
           ],
           "zoneUuid": "26fd04cdf31047e4a96aff5e41225420"
@@ -973,7 +973,7 @@
           {
             "actualSize": 13738508288,
             "createDate": "Sep 19, 2026 1:16:29 AM",
-            "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+            "description": "Root volume for VM[uuid:a1b2c3d456784b7d8e9f0a1b2c3d4e5f]",
             "deviceId": 0,
             "format": "qcow2",
             "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
@@ -988,7 +988,7 @@
             "status": "Ready",
             "type": "Root",
             "uuid": "c6114309f9d34fa980a00a4895383654",
-            "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+            "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
           }
         ]
       },
@@ -999,7 +999,7 @@
       "kind": "volume",
       "name": "ROOT-for-workload-vm",
       "cluster_id": "cluster:a29a9e1c13ac4017a187e30fca573625",
-      "vm_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "vm_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "state": "Enabled",
       "origin": "zsvirt",
       "mode": "real",
@@ -1013,7 +1013,7 @@
         "raw": {
           "actualSize": 13738508288,
           "createDate": "Sep 19, 2026 1:16:29 AM",
-          "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+          "description": "Root volume for VM[uuid:a1b2c3d456784b7d8e9f0a1b2c3d4e5f]",
           "deviceId": 0,
           "format": "qcow2",
           "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
@@ -1028,7 +1028,7 @@
           "status": "Ready",
           "type": "Root",
           "uuid": "c6114309f9d34fa980a00a4895383654",
-          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93"
+          "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
         },
         "size": 42949672960
       },
@@ -1138,77 +1138,77 @@
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:280be5bc94e6f138b4a0256b9b892b23ca384509e384f6b39092caf392d80fd0",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:6808d8574a1b",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:6808d8574a1b066242f43787b89c91042aa293b01494a947dd942167b5c25a10",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:72d63bdcbd364245df3df792c250cf16b8366ee30fd066d3a059cc0b70bcfc07",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:7837461b3e7b691cf9e5c4eda52dd7ba89bf3b9bec1f4aa2fa2c6c90b953a11d",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:a67084723ec212cdefeb43d8418d509f8193169336bdc57386f9178ca70835fe",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:c2295140f6d7626fe4bc8d2521c9ce0670b68645607900e08abd21c14ed3a3a4",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "container:df21c144a301a05b5f71c926745dc9f67558fbd6cd8b55dba2bb6b24aa4227a1",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "service:agent-service",
       "relation": "contains",
       "origin": "platform-inferred",
       "mode": "real"
     },
     {
-      "src_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "src_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "dst_id": "task:task-1790777643-6c8778",
       "relation": "contains",
       "origin": "platform-inferred",
@@ -1236,7 +1236,7 @@
       "signal": "psi_mem_full_avg10",
       "kind": "cgroup",
       "layer": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:13:45Z",
@@ -1252,7 +1252,7 @@
       "signal": "psi_cpu_full_avg10",
       "kind": "cgroup",
       "layer": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:13:45Z",
@@ -1268,7 +1268,7 @@
       "signal": "psi_mem_some_avg10",
       "kind": "cgroup",
       "layer": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:13:45Z",
@@ -1284,7 +1284,7 @@
       "signal": "oom.ebpf",
       "kind": "ebpf",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:13:53Z",
@@ -1300,7 +1300,7 @@
           "comm": "systemd",
           "pid": 1
         },
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1342,7 +1342,7 @@
         "task": "python",
         "unit": "count",
         "value": 1,
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1387,7 +1387,7 @@
           "pid": 1915959
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1412,7 +1412,7 @@
           "pid": 1916054
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1437,7 +1437,7 @@
           "pid": 1916140
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1462,7 +1462,7 @@
           "pid": 1916224
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1487,7 +1487,7 @@
           "pid": 1916311
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1512,7 +1512,7 @@
           "pid": 1916419
         },
         "container_id": "5958daac075fca0d15bb9dd667b4a949e85d9a8e1bceaf535bbfb625a9df7a1f",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1520,7 +1520,7 @@
       "signal": "psi_io_some_avg10",
       "kind": "cgroup",
       "layer": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:14:01Z",
@@ -1557,7 +1557,7 @@
         "service": "agent-service",
         "status": "ok",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1585,7 +1585,7 @@
         "service": "agent-service",
         "status": "error",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1613,7 +1613,7 @@
         "service": "agent-service",
         "status": "error",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1641,7 +1641,7 @@
         "service": "agent-service",
         "status": "ok",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1669,7 +1669,7 @@
         "service": "agent-service",
         "status": "ok",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1697,7 +1697,7 @@
         "service": "agent-service",
         "status": "error",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1726,7 +1726,7 @@
         "service": "agent-service",
         "status": "ok",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1754,7 +1754,7 @@
         "service": "agent-service",
         "status": "error",
         "timestamp": "2026-09-30T14:14:03+0000",
-        "vm_uuid": "63bbb4613a524e4e97090600af03da93"
+        "vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
       }
     },
     {
@@ -1762,7 +1762,7 @@
       "signal": "psi_cpu_some_avg10",
       "kind": "cgroup",
       "layer": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "correlation_id": "bb03e1b2c022",
       "observed_at": "2026-09-30T14:14:06Z",
@@ -1931,7 +1931,7 @@
       "signal": "llamacpp.tokens_per_s",
       "kind": "metric",
       "layer": "container",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "llama-server",
       "observed_at": "2026-09-30T14:14:26Z",
       "severity": "info",
@@ -4378,9 +4378,9 @@
     {
       "cluster_id": "clu-bbdb5d7622244172",
       "correlation_id": "bb03e1b2c022",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "42 events, 11 resources, signals=[cgroup.metric, oom.ebpf, gpu.metric, memory.events.oom_kill, tool.result, task.failed] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "42 events, 11 resources, signals=[cgroup.metric, oom.ebpf, gpu.metric, memory.events.oom_kill, tool.result, task.failed] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:13:45Z",
       "window_end": "2026-09-30T14:14:23Z",
       "evidence_ids": null
@@ -4388,9 +4388,9 @@
     {
       "cluster_id": "clu-672f7d8c64504e9c",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "10 events, 2 resources, signals=[oom.ebpf, gpu.metric, cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "10 events, 2 resources, signals=[oom.ebpf, gpu.metric, cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:13:53Z",
       "window_end": "2026-09-30T14:14:23Z",
       "evidence_ids": null
@@ -4398,9 +4398,9 @@
     {
       "cluster_id": "clu-0711df39ba2b4bb2",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4408,9 +4408,9 @@
     {
       "cluster_id": "clu-3d6711955dee4f6c",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4418,9 +4418,9 @@
     {
       "cluster_id": "clu-d13a9fa47acc41f5",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4428,9 +4428,9 @@
     {
       "cluster_id": "clu-7f04a4e978274e30",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4438,9 +4438,9 @@
     {
       "cluster_id": "clu-90fa062f8ecd41ca",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4448,9 +4448,9 @@
     {
       "cluster_id": "clu-4c9fd4195b3f4932",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4458,9 +4458,9 @@
     {
       "cluster_id": "clu-f095ae153c384368",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "7 events, 2 resources, signals=[cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:21Z",
       "evidence_ids": null
@@ -4468,9 +4468,9 @@
     {
       "cluster_id": "clu-18169c5a7df843cf",
       "correlation_id": "bb03e1b2c022",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.correlation_id",
-      "summary": "6 events, 2 resources, signals=[cgroup.metric, tool.result, task.failed, task.started, tool.call] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "6 events, 2 resources, signals=[cgroup.metric, tool.result, task.failed, task.started, tool.call] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:14:01Z",
       "window_end": "2026-09-30T14:14:06Z",
       "evidence_ids": null
@@ -4478,9 +4478,9 @@
     {
       "cluster_id": "clu-ab2f5a01e880402e",
       "correlation_id": "",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "rule": "correlation.same_resource_time_window",
-      "summary": "17 events, 2 resources, signals=[oom.ebpf, memory.events.oom_kill, cgroup.metric] focus=vm:63bbb4613a524e4e97090600af03da93",
+      "summary": "17 events, 2 resources, signals=[oom.ebpf, memory.events.oom_kill, cgroup.metric] focus=vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "window_start": "2026-09-30T14:13:53Z",
       "window_end": "2026-09-30T14:14:06Z",
       "evidence_ids": null

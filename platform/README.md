@@ -50,7 +50,7 @@ python run.py --config config/platform.json
 curl http://127.0.0.1:8000/api/v1/health
 curl -X POST http://127.0.0.1:8000/api/v1/resources/sync
 curl 'http://127.0.0.1:8000/api/v1/resources?kind=vm'
-curl 'http://127.0.0.1:8000/api/v1/resources/vm:63bbb4613a524e4e97090600af03da93/graph?depth=2'
+curl 'http://127.0.0.1:8000/api/v1/resources/vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f/graph?depth=2'
 ```
 
 端到端冒烟（fixtures → 注册 → 事件 → 关联 → 证据）：
@@ -115,8 +115,8 @@ resource_id / correlation_id / trace_id / task_id / severity / payload`；
 ```json
 POST /api/v1/agents/register
 {
-  "agent_id": "vm-agent-63bbb461",
-  "configured_vm_uuid": "63bbb4613a524e4e97090600af03da93",
+  "agent_id": "vm-agent-a1b2c3d4",
+  "configured_vm_uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
   "machine_id": "</etc/machine-id>",
   "dmi_uuid": "<DMI UUID>",
   "hostname": "workload-vm",

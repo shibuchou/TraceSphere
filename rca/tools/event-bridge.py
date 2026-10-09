@@ -14,7 +14,7 @@
 用法（在 workload-vm 上，需 sudo 以读取 docker 与 vm-agent 日志）：
 
     sudo python3 event-bridge.py --platform http://127.0.0.1:8000 \
-        --vm-uuid 63bbb4613a524e4e97090600af03da93 --minutes 15 --register
+        --vm-uuid a1b2c3d456784b7d8e9f0a1b2c3d4e5f --minutes 15 --register
 
     sudo python3 event-bridge.py ... --follow            # 持续跟随（演示模式）
     sudo python3 event-bridge.py ... --dry-run           # 只打印不推送

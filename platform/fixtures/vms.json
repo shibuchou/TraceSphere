@@ -1,7 +1,7 @@
 {
   "inventories": [
     {
-      "uuid": "63bbb4613a524e4e97090600af03da93",
+      "uuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "name": "workload-vm",
       "zoneUuid": "26fd04cdf31047e4a96aff5e41225420",
       "clusterUuid": "a29a9e1c13ac4017a187e30fca573625",
@@ -26,7 +26,7 @@
       "vmNics": [
         {
           "uuid": "bdedd41023d849158577b973e1116869",
-          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
           "l3NetworkUuid": "26391fe900e44409b3d2a37721b08f76",
           "mac": "fa:6f:c9:04:b0:00",
           "hypervisorType": "KVM",
@@ -44,9 +44,9 @@
         {
           "uuid": "c6114309f9d34fa980a00a4895383654",
           "name": "ROOT-for-workload-vm",
-          "description": "Root volume for VM[uuid:63bbb4613a524e4e97090600af03da93]",
+          "description": "Root volume for VM[uuid:a1b2c3d456784b7d8e9f0a1b2c3d4e5f]",
           "primaryStorageUuid": "4a0ecf3f472c4042aa4f9f9d36494b11",
-          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
           "rootImageUuid": "f39ba0991de143e6b76b0887e19edb0a",
           "installPath": "/var/lib/zstack/ps-local/rootVolumes/acct-36c27e8ff05c4780bf6d2fa65700f22e/vol-c6114309f9d34fa980a00a4895383654/c6114309f9d34fa980a00a4895383654.qcow2",
           "type": "Root",
@@ -65,9 +65,9 @@
       "vmCdRoms": [
         {
           "uuid": "461320dbc7b84b01a05d26fdf244047e",
-          "vmInstanceUuid": "63bbb4613a524e4e97090600af03da93",
+          "vmInstanceUuid": "a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
           "deviceId": 0,
-          "name": "vm-63bbb4613a524e4e97090600af03da93-cdRom",
+          "name": "vm-a1b2c3d456784b7d8e9f0a1b2c3d4e5f-cdRom",
           "createDate": "Sep 19, 2026 1:16:29 AM",
           "lastOpDate": "Sep 19, 2026 1:16:29 AM"
         }

@@ -29,7 +29,7 @@
       "status": "critical",
       "health_score": 38,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -95,7 +95,7 @@
       "status": "warning",
       "health_score": 61,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -161,7 +161,7 @@
       "status": "warning",
       "health_score": 72,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -211,7 +211,7 @@
       "status": "healthy",
       "health_score": 84,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -254,7 +254,7 @@
       "status": "healthy",
       "health_score": 90,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -296,7 +296,7 @@
       "status": "healthy",
       "health_score": 98,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -330,7 +330,7 @@
       "status": "healthy",
       "health_score": 97,
       "parent": {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "name": "workload-vm",
         "kind": "vm"
       },
@@ -444,7 +444,7 @@
       ]
     },
     {
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "name": "workload-vm",
       "kind": "vm",
       "workload_type": "compute",
@@ -556,7 +556,7 @@
     {
       "observed_at": "2026-09-20T08:21:40Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "info",
@@ -588,7 +588,7 @@
     {
       "observed_at": "2026-09-20T08:25:36Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "oom.ebpf",
       "severity": "major",
@@ -643,7 +643,7 @@
     {
       "observed_at": "2026-09-20T08:25:37Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "info",
@@ -708,7 +708,7 @@
     {
       "observed_at": "2026-09-20T08:28:52Z",
       "layer": "vm",
-      "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+      "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
       "resource_name": "workload-vm",
       "signal": "psi_cpu_some_avg10",
       "severity": "critical",

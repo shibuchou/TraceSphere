@@ -54,7 +54,7 @@ sync = call("/api/v1/resources/sync", method="POST")
 print("sync: ok=%s resources=%d edges=%d events_ingested=%d duplicates=%d" % (
     sync["ok"], sync["resources"], sync["edges"], sync["events_ingested"], sync["events_duplicated"]))
 
-graph = call("/api/v1/resources/vm:63bbb4613a524e4e97090600af03da93/graph?depth=1")
+graph = call("/api/v1/resources/vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f/graph?depth=1")
 print("graph: nodes=%d edges=%d" % (len(graph["nodes"]), len(graph["edges"])))
 for edge in graph["edges"]:
     print("  %s -[%s]-> %s" % (edge["src_id"], edge["relation"], edge["dst_id"]))

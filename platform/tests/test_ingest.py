@@ -82,7 +82,7 @@ class IngestTest(unittest.TestCase):
         self.assertIsNotNone(self.resources.get("container:abc"))
 
     def test_zsvirt_alarm_resolves_target_uuid(self):
-        vm_uuid = "63bbb4613a524e4e97090600af03da93"
+        vm_uuid = "a1b2c3d456784b7d8e9f0a1b2c3d4e5f"
         self.resources.upsert({"resource_id": "vm:%s" % vm_uuid, "kind": "vm", "name": "workload-vm", "cluster_id": "cluster:c1"})
         result = self.ingest.ingest(
             {

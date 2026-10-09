@@ -38,7 +38,7 @@
 ```text
 [1] CPU 资源争抢（CPU Resource Contention）      Evidence Match: 97/100
       · 规则证据命中        55.0/55   4/5 条命中：psi_cpu_some_avg10、cpu.cfs.throttled_periods、llama_latency_p95_ms、task.failed
-      · 资源邻接度          9.2/10    1 条同属 vm:63bbb461…；5 条一跳邻接
+      · 资源邻接度          9.2/10    1 条同属 vm:a1b2c3d4…；5 条一跳邻接
       · 独立证据数         10.0/10    覆盖 3 类证据来源：app_event / cgroup / metric
       psi_cpu_some_avg10 峰值 40.9%（基线 < 1%） ｜ cpu.cfs.throttled_periods Δ=1190
 

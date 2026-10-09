@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 IP=${VM_IP:?}
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 
 echo "== ping =="
 ping -c 2 -W 2 $IP | tail -3

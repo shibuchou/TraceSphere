@@ -443,7 +443,7 @@
         "detail": "编排入口：记录到 tool.result error → task.failed 事件串"
       },
       {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "kind": "vm",
         "name": "workload-vm",
         "relation": "contains",
@@ -459,7 +459,7 @@
         "id": "container:e6eab2f12b53",
         "label": "toxiproxy",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "故障注入代理 8666（focus）",
         "status": "critical",
         "incident_count": 2,
@@ -470,7 +470,7 @@
         "id": "container:7196bcad3bc1",
         "label": "tool-service",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "下游工具后端",
         "status": "critical",
         "incident_count": 1,
@@ -481,7 +481,7 @@
         "id": "service:svc-tool",
         "label": "mock-search",
         "kind": "service",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "工具服务端点",
         "status": "warning",
         "incident_count": 2,
@@ -492,7 +492,7 @@
         "id": "task:task-1789892840-179c3c",
         "label": "task-…179c3c",
         "kind": "task",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "correlation 8da4d26c78f6",
         "status": "warning",
         "incident_count": 1,
@@ -503,7 +503,7 @@
         "id": "container:1f0a4c9b2d33",
         "label": "agent-service",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "Agent 编排入口",
         "status": "warning",
         "incident_count": 0,
@@ -514,7 +514,7 @@
         "id": "service:svc-agent",
         "label": "agent-service",
         "kind": "service",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "任务编排：tool.result error → task.failed 事件串来源",
         "status": "healthy",
         "incident_count": 0,
@@ -522,10 +522,10 @@
         "metrics": []
       },
       {
-        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "label": "workload-vm",
         "kind": "vm",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
         "status": "warning",
         "incident_count": 0,
@@ -539,7 +539,7 @@
       { "id": "sg-t3", "source": "container:1f0a4c9b2d33", "target": "service:svc-agent", "relation": "runs_on", "label": "runs_on" },
       { "id": "sg-t4", "source": "service:svc-agent", "target": "task:task-1789892840-179c3c", "relation": "calls", "label": "calls" },
       { "id": "sg-t5", "source": "task:task-1789892840-179c3c", "target": "service:svc-tool", "relation": "depends_on", "label": "depends_on" },
-      { "id": "sg-t6", "source": "vm:63bbb4613a524e4e97090600af03da93", "target": "container:e6eab2f12b53", "relation": "contains", "label": "contains" }
+      { "id": "sg-t6", "source": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f", "target": "container:e6eab2f12b53", "relation": "contains", "label": "contains" }
     ]
   }
 }

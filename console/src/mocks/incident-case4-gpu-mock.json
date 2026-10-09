@@ -351,7 +351,7 @@
         "detail": "显存占用 99.5%，已出现耗尽事件"
       },
       {
-        "resource_id": "vm:63bbb4613a524e4e97090600af03da93",
+        "resource_id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "kind": "vm",
         "name": "workload-vm",
         "relation": "assigned_to",
@@ -395,17 +395,17 @@
         "id": "gpu:mock-gpu0",
         "label": "Mock GPU 0 (DCGM)",
         "kind": "gpu",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "status": "critical",
         "incident_count": 1,
         "subtitle": "Mock DCGM · 显存占用 99.5%",
         "metrics": []
       },
       {
-        "id": "vm:63bbb4613a524e4e97090600af03da93",
+        "id": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "label": "workload-vm",
         "kind": "vm",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "status": "warning",
         "incident_count": 1,
         "subtitle": "10.0.0.10 · 4 vCPU / 4 GiB",
@@ -415,7 +415,7 @@
         "id": "container:1f0a4c9b2d33",
         "label": "agent-service",
         "kind": "container",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "status": "warning",
         "incident_count": 1,
         "subtitle": "Agent 服务",
@@ -425,7 +425,7 @@
         "id": "task:task-gpu-demo",
         "label": "task-gpu-demo",
         "kind": "task",
-        "combo": "combo:vm:63bbb461",
+        "combo": "combo:vm:a1b2c3d4",
         "status": "critical",
         "incident_count": 1,
         "subtitle": "GPU 演练任务 · failed",
@@ -443,13 +443,13 @@
       {
         "id": "sg-gpu-2",
         "source": "gpu:mock-gpu0",
-        "target": "vm:63bbb4613a524e4e97090600af03da93",
+        "target": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "relation": "assigned_to",
         "label": "assigned_to"
       },
       {
         "id": "sg-gpu-3",
-        "source": "vm:63bbb4613a524e4e97090600af03da93",
+        "source": "vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f",
         "target": "container:1f0a4c9b2d33",
         "relation": "contains",
         "label": "contains"

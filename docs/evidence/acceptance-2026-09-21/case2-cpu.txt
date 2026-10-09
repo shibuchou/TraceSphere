@@ -2,7 +2,7 @@ TraceSphere 诊断（成员 C / RCA Rule Engine + Evidence Match）
 时间窗：2026-09-30T14:07:12Z ~ 2026-09-30T14:17:12Z（600s）
 数据源：platform=real prometheus=real fixture=off ｜ 证据 28 条
 关联锚点：correlation_id=e40e7ba37a41
-聚焦资源：vm:63bbb4613a524e4e97090600af03da93
+聚焦资源：vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 
 根因候选 Top-3
 ══════════════════════════════════════════════════════════════════════════════
@@ -13,7 +13,7 @@ TraceSphere 诊断（成员 C / RCA Rule Engine + Evidence Match）
     评分明细：
       · 规则证据命中        45.3/55    3/5 条命中：psi_cpu_some_avg10、cpu.cfs.throttled_periods、task.failed
       · 时间优先性          0.0/0     规则未定义 after 时序约束，该维度不适用（不参与归一化）
-      · 资源邻接度          9.2/10    1 条同属 vm:63bbb4613a524e4e97090600af03da93；4 条一跳邻接（同容器/服务上下文）
+      · 资源邻接度          9.2/10    1 条同属 vm:a1b2c3d456784b7d8e9f0a1b2c3d4e5f；4 条一跳邻接（同容器/服务上下文）
       · 信号强度           8.0/10    主证据 psi_cpu_some_avg10 severity=major（基础 5）+ 额外证据 4 条（+3）
       · 独立证据数         10.0/10    覆盖 3 类证据来源：app_event / cgroup / metric
     证据（5 条，可溯源）：

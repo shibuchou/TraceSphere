@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 离线扩盘：qemu-img resize + VolumeVO 同步 + 重启 VM
 set -u
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 VOL=c6114309f9d34fa980a00a4895383654
 NEW=42949672960
 DBPW=zstack.mysql.password

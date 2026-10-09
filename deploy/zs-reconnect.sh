@@ -4,7 +4,7 @@ MN=${MN_IP:?}
 PW=${ZS_PW:?export ZS_PW}
 BASE="http://$MN:8080/zstack/v1"
 HOST=cbb61d8a22cc4fd1b3702af673cbf405
-VM=63bbb4613a524e4e97090600af03da93
+VM=a1b2c3d456784b7d8e9f0a1b2c3d4e5f
 PWHASH=$(printf '%s' "$PW" | sha512sum | cut -d' ' -f1)
 SESS=$(curl -s -m 15 -X PUT "$BASE/accounts/login" \
   -H 'Content-Type: application/json' \

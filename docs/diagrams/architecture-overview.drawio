@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="26.0.0" agent="TraceSphere diagrams redesign">
+  <diagram id="architecture-overview" name="TraceSphere 总体架构">
+    <mxGraphModel dx="1120" dy="1120" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1120" pageHeight="1120" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="figure-title" value="TraceSphere 总体架构" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=32;fontColor=#17364D;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="24" width="1040" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="figure-subtitle" value="基础设施与业务VM的信号汇入统一资源上下文，支撑可追溯的根因诊断" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="80" width="1040" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="infra" value="ZSvirt 基础设施" style="rounded=1;arcSize=9;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;connectable=1;recursiveResize=0;fillColor=#F1F7F9;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=18;spacingLeft=22;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="500" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="infra-scope" value="Host / VM / 网络 / 存储" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="infra" data-visual="label">
+          <mxGeometry x="22" y="54" width="456" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="n_rest" value="RESTProvider" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=21;fontStyle=1;fontColor=#17364D;" vertex="1" parent="infra">
+          <mxGeometry x="20" y="100" width="220" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_rest-body-0" value="真实，只读资源同步" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_rest" data-visual="label">
+          <mxGeometry x="18" y="53" width="184" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="n_fix" value="FixtureProvider" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFF6E6;strokeColor=#A96C19;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=21;fontStyle=1;fontColor=#17364D;" vertex="1" parent="infra">
+          <mxGeometry x="260" y="100" width="220" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_fix-body-0" value="回放与降级" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#A96C19;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_fix" data-visual="label">
+          <mxGeometry x="18" y="53" width="184" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="n_reg" value="Resource Registry + Graph" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=21;fontStyle=1;fontColor=#17364D;" vertex="1" parent="infra">
+          <mxGeometry x="20" y="218" width="460" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_reg-body-0" value="资源注册与关系建模" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_reg" data-visual="label">
+          <mxGeometry x="18" y="53" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="workload" value="VM 内工作负载与采集" style="rounded=1;arcSize=9;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;connectable=1;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=18;spacingLeft=22;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="580" y="140" width="500" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="n_chain" value="Agent 任务执行链" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=22;fontStyle=1;fontColor=#17364D;" vertex="1" parent="workload">
+          <mxGeometry x="20" y="100" width="460" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_chain-body-0" value="agent-service / tool-service / llama-server" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_chain" data-visual="label">
+          <mxGeometry x="18" y="53" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="n_agent" value="vm-agent" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=22;fontStyle=1;fontColor=#17364D;" vertex="1" parent="workload">
+          <mxGeometry x="20" y="218" width="220" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_agent-body-0" value="eBPF / PSI / cgroup" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_agent" data-visual="label">
+          <mxGeometry x="18" y="53" width="184" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="n_mon" value="指标采集" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=22;fontStyle=1;fontColor=#17364D;" vertex="1" parent="workload">
+          <mxGeometry x="260" y="218" width="220" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_mon-body-0" value="cAdvisor / Prometheus" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="n_mon" data-visual="label">
+          <mxGeometry x="18" y="53" width="184" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="platform" value="Platform" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#12394F;strokeColor=#12394F;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="220" y="550" width="680" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="platform-body-0" value="SQLite WAL：events / evidence / clusters" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#D5E8ED;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="platform" data-visual="label">
+          <mxGeometry x="18" y="61" width="644" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca" value="RCA Rule Engine" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=26;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="220" y="732" width="680" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-body-0" value="YAML 规则与 Evidence Match 证据评分" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="rca" data-visual="label">
+          <mxGeometry x="18" y="61" width="644" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="console" value="Web Console + CLI" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=26;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="220" y="914" width="680" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="console-body-0" value="React / G6 / ECharts / tracesphere" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="console" data-visual="label">
+          <mxGeometry x="18" y="61" width="644" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="资源同步" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.10294117647058823;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="infra" target="platform">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-75" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="运行事件直报" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8970588235294118;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="workload" target="platform">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_prom_rca" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="n_mon" target="rca">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="500" />
+              <mxPoint x="1070" y="500" />
+              <mxPoint x="1070" y="788" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="prom-note-1" value="Prometheus" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#0B8B83;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="925" y="670" width="135" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="prom-note-2" value="RCA 直接查询" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#0B8B83;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="925" y="698" width="135" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="platform" target="rca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rca" target="console">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-0" value="" style="rounded=0;fillColor=#315D7A;strokeColor=none;" vertex="1" parent="1" data-visual="legend">
+          <mxGeometry x="110" y="1078" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-text-0" value="真实接入 / 资源上下文" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=16;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="134" y="1070" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-1" value="" style="rounded=0;fillColor=#0B8B83;strokeColor=none;" vertex="1" parent="1" data-visual="legend">
+          <mxGeometry x="430" y="1078" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-text-1" value="关联 / 诊断 / 输出" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=16;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="454" y="1070" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-2" value="" style="rounded=0;fillColor=#A96C19;strokeColor=none;" vertex="1" parent="1" data-visual="legend">
+          <mxGeometry x="750" y="1078" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-text-2" value="回放 / 降级" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=16;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="774" y="1070" width="270" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

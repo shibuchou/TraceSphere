@@ -1,0 +1,6 @@
+flowchart TB
+    accTitle: 核心资源关系
+    accDescr: Host、VM、Container、GPU、Service、Task 之间通过 contains、assigned_to、runs_on 关系构成资源图。
+    host["Host"] -->|contains| vm["VM"] -->|contains| container["Container"]
+    container -->|runs_on| service["Service"] -->|runs_on| task["Task"]
+    gpu["GPU"] -->|assigned_to| vm

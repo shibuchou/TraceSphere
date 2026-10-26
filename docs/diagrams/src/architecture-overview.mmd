@@ -1,0 +1,19 @@
+flowchart TB
+    accTitle: TraceSphere 总体架构
+    accDescr: ZSvirt 基础设施与 VM 内工作负载两条通路汇入 Platform，经 RCA 规则引擎诊断后由 Web Console 与 CLI 展示。
+    subgraph infra["ZSvirt 基础设施（Host / VM / 网络 / 存储）"]
+        rest_provider["RESTProvider（真实）"]
+        fixture_provider["FixtureProvider（回放/降级）"]
+        registry["Resource Registry + Resource Graph"]
+    end
+    subgraph workload["VM 内工作负载（真实）"]
+        agent_chain["agent-service → tool-service → llama-server"]
+        vm_agent["vm-agent（eBPF + PSI/cgroup）"]
+        metrics["cAdvisor / Prometheus"]
+    end
+    platform["Platform（SQLite WAL：events / evidence / clusters）"]
+    rca["RCA Rule Engine（YAML 规则 + Evidence Match 评分）"]
+    console["Web Console（React + G6 + ECharts）/ CLI（tracesphere）"]
+    infra --> platform
+    workload --> platform
+    platform --> rca --> console

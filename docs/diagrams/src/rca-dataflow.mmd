@@ -1,0 +1,22 @@
+flowchart TB
+    accTitle: RCA 诊断数据流
+    accDescr: 四类数据源经证据归一化与规则匹配产出根因候选，通过 HTTP API、Console 与 CLI 输出。
+    subgraph sources["真实数据源"]
+        api_context["platform /api/v1/context"]
+        api_clusters["platform /api/v1/clusters"]
+        cadvisor["prometheus（cAdvisor）"]
+        fixtures["fixtures/*.json（回放）"]
+    end
+    subgraph c_side["C 侧"]
+        normalize["evidence 归一化（转换 / 去噪 / 合并）"]
+        match["规则匹配（Evidence Match 评分）"]
+    end
+    subgraph outputs["输出"]
+        topn["根因候选 Top-N + 影响范围 + 时间线 + 处置建议"]
+        serve["HTTP API（:8010）+ Console + CLI"]
+    end
+    api_context --> normalize
+    api_clusters --> normalize
+    cadvisor --> normalize
+    fixtures --> normalize
+    normalize --> match --> topn --> serve

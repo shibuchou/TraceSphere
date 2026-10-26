@@ -1,0 +1,30 @@
+flowchart TB
+    accTitle: TraceSphere 分层架构
+    accDescr: ZSvirt 基础设施层经双 Provider 接入 Platform，Platform 连接 RCA 诊断与 VM 内采集负载，RCA 输出到 Web Console 四视图。
+    subgraph zsvirt["ZSvirt 基础设施层"]
+        providers["RESTProvider（真实，只读同步）/ FixtureProvider（回放与降级）"]
+        inventory["资源清单：Host / VM / Cluster / Zone / Network / Storage / Image"]
+        alarms["告警清单：zwatch/alarms、zwatch/events → Schema v1 alert 事件"]
+    end
+    subgraph platform["Platform（成员 B）"]
+        registry["Resource Registry + Resource Graph（资源图，SQLite WAL）"]
+        ingest["Event Ingest（Schema v1 归一化 + 身份补全 + 短 ID 前缀归一）"]
+        correlation["Correlation Engine（应用锚点 + 同资源时间窗，产「关联簇 = 告警」）"]
+        evidence_store["Evidence Store（证据链：信号 / 值 / 来源事件 / 时间）"]
+        http_api["HTTP API /api/v1（resources / events / evidence / clusters / context …）"]
+    end
+    subgraph rca["RCA 诊断（成员 C）"]
+        rule_engine["YAML 规则 + Evidence Match 五维评分（0-100）"]
+        rca_serve["CLI + HTTP + Console"]
+    end
+    subgraph vm_side["VM 内采集与负载（成员 A）"]
+        vm_agent["vm-agent：eBPF + PSI + cgroup + 内核"]
+        app_event["agent-service：AppEvent 直报"]
+        workload["llama.cpp / tool-service / Toxiproxy"]
+        monitor["Prometheus + cAdvisor + Mock DCGM"]
+    end
+    web_console["Web Console（React）：拓扑 / 健康 / 告警 / 诊断 四视图"]
+    zsvirt --> platform
+    platform --> rca
+    platform --> vm_side
+    rca --> web_console

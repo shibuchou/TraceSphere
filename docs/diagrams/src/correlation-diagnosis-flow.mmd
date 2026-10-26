@@ -1,0 +1,13 @@
+flowchart TB
+    accTitle: 事件关联与诊断流程
+    accDescr: 事件经两遍关联引擎生成关联簇与证据，RCA 规则匹配后按五维评分输出根因候选、影响范围与处置建议。
+    event_ingest["事件入库"] --> correlation_engine["关联引擎（两遍）"]
+    correlation_engine --> pass1["pass1：correlation_id 锚（Agent 任务链路：task / tool / inference / 容器 / 内核证据）"]
+    correlation_engine --> pass2["pass2：同资源时间窗锚（无 corr 的系统层事件聚合）"]
+    pass1 --> cluster["关联簇 cluster（= 一条告警）"]
+    pass2 --> cluster
+    cluster --> evidence_gen["Evidence 生成（signal / value / delta / unit）"]
+    evidence_gen --> rule_load["RCA：加载 rules/*.yaml"]
+    rule_load --> evidence_match["证据匹配（mandatory / optional / 阈值 / 时序 after）"]
+    evidence_match --> scoring["Evidence Match 五维评分（0–100）：rule_match 55 + temporal_precedence 15 + resource_adjacency 10 + signal_strength 10 + independent_evidence 10"]
+    scoring --> output["输出：Top-N 根因候选 + 影响范围（资源图 depth）+ 处置建议（依据 / 操作 / 风险）；证据 ID 全量可溯源；时间线按 应用 / 容器 / 虚拟机 / 云平台 分层着色"]

@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="26.0.0" agent="TraceSphere diagrams redesign">
+  <diagram id="correlation-diagnosis-flow" name="事件关联与根因诊断流程">
+    <mxGraphModel dx="1120" dy="1560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1120" pageHeight="1560" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="figure-title" value="事件关联与根因诊断流程" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=32;fontColor=#17364D;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="24" width="1040" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="figure-subtitle" value="应用任务锚点与资源时间窗互补，多类证据共同支撑候选排序" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="80" width="1040" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="ingest" value="事件入库" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="360" y="140" width="400" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="engine" value="关联引擎：两遍关联" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="360" y="260" width="400" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="pass1" value="Pass 1：任务锚点" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=22;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="460" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pass1-body-0" value="correlation_id" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="pass1" data-visual="label">
+          <mxGeometry x="18" y="53" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pass1-body-1" value="任务 / 工具 / 推理 / 容器与内核证据" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="pass1" data-visual="label">
+          <mxGeometry x="18" y="80" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pass2" value="Pass 2：资源时间窗" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=22;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="600" y="380" width="460" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pass2-body-0" value="同一资源与时间窗口" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="pass2" data-visual="label">
+          <mxGeometry x="18" y="53" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pass2-body-1" value="聚合无 correlation_id 的系统事件" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="pass2" data-visual="label">
+          <mxGeometry x="18" y="80" width="424" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster" value="关联簇 Cluster" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=23;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="360" y="560" width="400" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster-body-0" value="对应一条关联告警" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="cluster" data-visual="label">
+          <mxGeometry x="18" y="55" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="evidgen" value="Evidence 生成" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="300" y="700" width="520" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="evidgen-body-0" value="signal / value / delta / unit" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="evidgen" data-visual="label">
+          <mxGeometry x="18" y="57" width="484" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" value="RCA：加载规则" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="300" y="838" width="520" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="rules-body-0" value="rules/*.yaml" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="rules" data-visual="label">
+          <mxGeometry x="18" y="57" width="484" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="matching" value="规则证据匹配" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="220" y="976" width="680" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="matching-body-0" value="mandatory / optional / 阈值 / 时序 after" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=20;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="matching" data-visual="label">
+          <mxGeometry x="18" y="57" width="644" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="scoring" value="Evidence Match 五维评分" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#12394F;strokeColor=#12394F;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=25;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1118" width="800" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="score-name-0" value="规则命中" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#C7DFE6;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="20" y="60" width="148" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="score-number-0" value="55" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=29;fontColor=#FFFFFF;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="20" y="91" width="148" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="score-name-1" value="时序" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#C7DFE6;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="173" y="60" width="148" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="score-number-1" value="15" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=29;fontColor=#FFFFFF;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="173" y="91" width="148" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="score-name-2" value="资源邻接" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#C7DFE6;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="326" y="60" width="148" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="score-number-2" value="10" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=29;fontColor=#FFFFFF;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="326" y="91" width="148" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="score-name-3" value="信号强度" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#C7DFE6;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="479" y="60" width="148" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="score-number-3" value="10" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=29;fontColor=#FFFFFF;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="479" y="91" width="148" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="score-name-4" value="证据覆盖" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#C7DFE6;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="632" y="60" width="148" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="score-number-4" value="10" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=29;fontColor=#FFFFFF;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="632" y="91" width="148" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="score-normalize" value="按适用维度上限归一化至0–100，非概率" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#D5E8ED;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="scoring" data-visual="label">
+          <mxGeometry x="24" y="144" width="750" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="output" value="输出根因候选、影响范围与处置建议" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1380" width="800" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="output-body-0" value="Top-N / 资源图 depth / 依据、操作与风险" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="output" data-visual="label">
+          <mxGeometry x="18" y="57" width="764" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="output-body-1" value="证据ID可追溯，时间线按应用、容器、VM、云平台分层" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="output" data-visual="label">
+          <mxGeometry x="18" y="84" width="764" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ingest" target="engine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="engine" target="pass1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="356" />
+              <mxPoint x="290" y="356" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="engine" target="pass2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="356" />
+              <mxPoint x="830" y="356" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.275;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pass1" target="cluster">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="530" />
+              <mxPoint x="470" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.725;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pass2" target="cluster">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="530" />
+              <mxPoint x="650" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cluster" target="evidgen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="evidgen" target="rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rules" target="matching">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="matching" target="scoring">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="scoring" target="output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

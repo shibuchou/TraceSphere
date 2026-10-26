@@ -6,22 +6,7 @@
 TraceSphere 以「**虚拟机为边界、工作负载为对象、事件关联为核心**」，统一组织指标、日志、事件与告警证据，
 回答一个核心问题：**某个 Agent 任务的一次失败，究竟由应用、容器、虚拟机、GPU 还是宿主机引起？**
 
-```text
-         ZSvirt 基础设施（Host / VM / 网络 / 存储）            VM 内工作负载（真实）
-        ┌─────────────────────────────────┐        ┌──────────────────────────────────┐
-        │ RESTProvider（真实）             │        │ agent-service → tool-service     │
-        │ FixtureProvider（回放/降级）     │        │               → llama-server     │
-        │ Resource Registry + Resource Graph│        │ vm-agent（eBPF + PSI/cgroup）    │
-        └──────────────┬──────────────────┘        │ cAdvisor / Prometheus            │
-                       │                           └───────────────┬──────────────────┘
-                       └───────────────┬───────────────────────────┘
-                                       ▼
-                  Platform（SQLite WAL：events / evidence / clusters）
-                                       │
-                  RCA Rule Engine（YAML 规则 + Evidence Match 评分）
-                                       │
-                  Web Console（React + G6 + ECharts） / CLI（tracesphere）
-```
+![TraceSphere 总体架构](docs/diagrams/architecture-overview.svg)
 
 ## 仓库结构（三成员合并）
 

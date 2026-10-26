@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="26.0.0" agent="TraceSphere diagrams redesign">
+  <diagram id="resource-graph" name="核心资源关系">
+    <mxGraphModel dx="940" dy="1010" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="940" pageHeight="1010" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="figure-title" value="核心资源关系" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=32;fontColor=#17364D;fontStyle=1;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="24" width="860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="figure-subtitle" value="纵向排列承载层级，箭头严格表示资源关系的实际方向" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="40" y="80" width="860" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="host" value="Host 宿主机" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="host-body-0" value="基础设施资源" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="host" data-visual="label">
+          <mxGeometry x="18" y="57" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="vm" value="VM 虚拟机" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="80" y="300" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vm-body-0" value="业务运行边界" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="vm" data-visual="label">
+          <mxGeometry x="18" y="57" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="container" value="Container 容器" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="container-body-0" value="工作负载与资源约束" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="container" data-visual="label">
+          <mxGeometry x="18" y="57" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="service" value="Service 服务" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="80" y="620" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="service-body-0" value="工具或模型服务" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="service" data-visual="label">
+          <mxGeometry x="18" y="57" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="task" value="Task 智能体任务" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#EDF8F6;strokeColor=#0B8B83;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="80" y="780" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="task-body-0" value="任务锚点与执行事件" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="task" data-visual="label">
+          <mxGeometry x="18" y="57" width="364" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu" value="GPU" style="rounded=1;arcSize=8;absoluteArcSize=1;html=1;whiteSpace=wrap;container=1;collapsible=0;recursiveResize=0;fillColor=#FFFFFF;strokeColor=#C9D8E2;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=15;spacingLeft=18;spacingRight=15;fontFamily=Noto Sans SC;fontSize=24;fontStyle=1;fontColor=#17364D;" vertex="1" parent="1">
+          <mxGeometry x="660" y="300" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu-body-0" value="分配给业务VM" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=19;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="gpu" data-visual="label">
+          <mxGeometry x="18" y="57" width="204" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="host" target="vm">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vm" target="container">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="runs_on" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="service" target="container">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="runs_on" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="task" target="service">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="assigned_to" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0B8B83;strokeWidth=2;endArrow=block;endFill=1;endSize=8;fontFamily=Noto Sans SC;fontSize=17;fontColor=#5C7082;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gpu" target="vm">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-24" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relationship-note" value="contains 表示包含，runs_on 从任务 / 服务指向其运行依赖" style="text;html=1;whiteSpace=wrap;rounded=0;fillColor=none;strokeColor=none;align=left;verticalAlign=middle;fontFamily=Noto Sans SC;fontSize=18;fontColor=#5C7082;fontStyle=0;spacing=0;pointerEvents=0;" vertex="1" parent="1" data-visual="label">
+          <mxGeometry x="80" y="935" width="820" height="32" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

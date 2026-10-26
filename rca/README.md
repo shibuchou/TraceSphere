@@ -6,17 +6,7 @@
 「最可能的问题是什么、证据是什么、影响谁、该怎么处理」。C 不重复采集、不重复关联、
 不自研 Alertmanager 已有的 grouping/silence/inhibition/dedup。
 
-```text
-真实数据源                      C 侧                    输出
-─────────────────────────  ─────────────────────  ─────────────────────────────
-platform /api/v1/context  ─┐
-platform /api/v1/clusters  ─┤
-prometheus(cAdvisor)      ─┼─▶ evidence 归一化 ─▶ 规则匹配 ─▶ 根因候选 Top-N
-fixtures/*.json（回放）    ─┘   （转换/去噪/合并）   Evidence    + 影响范围 + 时间线
-                                                  Match 评分  + 处置建议
-                                                            ↓
-                                              HTTP API（:8010）+ Console + CLI
-```
+![RCA 诊断数据流](../docs/diagrams/rca-dataflow.svg)
 
 ## 目录
 

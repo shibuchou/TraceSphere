@@ -3,6 +3,8 @@
 > 本目录保存方案、部署、测试、使用说明、验收证据和演示材料。
 > 标注“内部资料”的文件含部署环境细节，不随提交包分发。
 
+[中文](README.md) | [English](en/README.md)
+
 ## 面向评审与使用
 
 | 文档 | 内容 | 适用读者 |
@@ -16,6 +18,18 @@
 | [RCA 接口契约](../rca/docs/API.md) | 规则 YAML、证据模型、五维评分、诊断 HTTP API | 研发 |
 | [平台接口说明](../platform/README.md) | `/api/v1` 平台接口、Schema v1、关联引擎 | 研发 |
 | [探针说明](../vm-agent/README.md) | vm-agent 采集能力、构建、降级、开销 | 研发 |
+
+## English documentation
+
+| 文档 | 内容 |
+|---|---|
+| [English documentation index](en/README.md) | 英文文档入口 |
+| [README.en.md](../README.en.md) | 英文项目总览、快速开始、数据契约与提交边界 |
+| [Solution overview](en/solution-overview.md) | 英文方案说明 |
+| [Deployment guide](en/deployment-guide.md) | 英文部署文档 |
+| [Testing guide](en/testing-guide.md) | 英文测试文档 |
+| [User guide](en/user-guide.md) | 英文用户手册 |
+| [Project introduction](en/project-introduction.md) | 英文作品介绍 |
 
 ## 验收证据
 

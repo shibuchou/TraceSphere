@@ -3,6 +3,8 @@
 > 面向 ZSvirt 虚拟机内容器与智能体工作负载的全栈可观测平台
 > 上海开源软件应用创新大赛 · 基于 ZSvirt 虚拟化平台
 
+[中文](README.md) | [English](README.en.md)
+
 TraceSphere 以「**虚拟机为边界、工作负载为对象、事件关联为核心**」，统一组织指标、日志、事件与告警证据，
 回答一个核心问题：**某个 Agent 任务的一次失败，究竟由应用、容器、虚拟机、GPU 还是宿主机引起？**
 
@@ -34,6 +36,7 @@ tracesphere/
 | [测试文档](docs/测试文档.md) | 测试策略、用例、四场景验收、安全与性能、缺陷、已知限制、回归清单 |
 | [用户手册](docs/用户手册.md) | Console 四页使用、告警状态操作、诊断解读、CLI、FAQ |
 | [文档索引](docs/README.md) | 全部文档与证据文件导航 |
+| [English documentation](README.en.md) | GitHub 英文 README 与 `docs/en/` 文档集 |
 
 ## 最小化环境要求
 
@@ -55,7 +58,7 @@ tracesphere/
 | Prometheus / cAdvisor | v2.53 / v0.49.1 | Apache-2.0 |
 | Toxiproxy | latest | MIT |
 | cilium/ebpf（Go） | v0.22.0 | MIT |
-| AntV G6 / ECharts / React / AntD | 见 console/package.json | MIT |
+| AntV G6 / ECharts / React / AntD | 见 console/package.json | MIT / Apache-2.0 |
 | SQLite | 3.x（Python 内置） | Public Domain |
 
 ## 快速开始（从零部署）
@@ -183,7 +186,7 @@ bash tools/acceptance.sh
 
 | 范围 | 文件 | 说明 |
 |---|---|---|
-| 可提交 | `vm-agent/ platform/ rca/ console/ workload/ tools/ deploy/systemd/` + 本 README + `docs/README.md`、`docs/方案说明.md`、`docs/部署文档.md`、`docs/测试文档.md`、`docs/用户手册.md`、`docs/作品介绍.md`、`docs/evidence/`（脱敏副本） | 已完成凭据/内网信息清理（脚本从环境变量取参）；证据报告由打包脚本统一替换内网网段 |
+| 可提交 | `vm-agent/ platform/ rca/ console/ workload/ tools/ deploy/systemd/` + 本 README + `README.en.md`、`docs/README.md`、`docs/en/`、`docs/方案说明.md`、`docs/部署文档.md`、`docs/测试文档.md`、`docs/用户手册.md`、`docs/作品介绍.md`、`docs/evidence/`（脱敏副本） | 已完成凭据/内网信息清理（脚本从环境变量取参）；证据报告由打包脚本统一替换内网网段 |
 | 内部资料 | `docs/开工交接-*.md`、`docs/交接文档-*.md`、`docs/fixlog-*.md`、`docs/anonymization-sweep-*.md`、`docs/demo-*.md`、`deploy/README.md`、`deploy/zs-*.sh`、`deploy/mn-*.sh`、`deploy/*.exp`、`deploy/login-try.sh` | 含服务器/账号/内网信息，**不入提交物** |
 | 需脱敏 | `platform/fixtures/`（ZSvirt 响应，含内网 UUID/IP） | 提交副本由打包脚本统一替换网段与 VM uuid（`192.0.2.0/24`、`10.0.0.0/24`） |
 

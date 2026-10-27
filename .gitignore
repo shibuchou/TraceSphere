@@ -44,6 +44,13 @@ docs/fixlog-*.md
 docs/anonymization-sweep-*.md
 deploy/README.md
 
+# Credential-probing scripts removed from history on 2026-10-27; keep them local only
+deploy/login-try.sh
+deploy/zs-console-brute.exp
+deploy/mn-account.sh
+deploy/mn-dumpcheck.sh
+deploy/mn-dumpcheck2.sh
+
 # Local deliverable drafts (PDFs generated from local paths)
 docs/成品文档/
 

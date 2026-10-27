@@ -187,7 +187,9 @@ bash tools/acceptance.sh
 | 范围 | 文件 | 说明 |
 |---|---|---|
 | 可提交 | `vm-agent/ platform/ rca/ console/ workload/ tools/ deploy/systemd/` + 本 README + `README.en.md`、`docs/README.md`、`docs/en/`、`docs/方案说明.md`、`docs/部署文档.md`、`docs/测试文档.md`、`docs/用户手册.md`、`docs/作品介绍.md`、`docs/evidence/`（脱敏副本） | 已完成凭据/内网信息清理（脚本从环境变量取参）；证据报告由打包脚本统一替换内网网段 |
-| 内部资料 | `docs/开工交接-*.md`、`docs/交接文档-*.md`、`docs/fixlog-*.md`、`docs/anonymization-sweep-*.md`、`docs/demo-*.md`、`deploy/README.md`、`deploy/zs-*.sh`、`deploy/mn-*.sh`、`deploy/*.exp`、`deploy/login-try.sh` | 含服务器/账号/内网信息，**不入提交物** |
+| 内部资料（已 gitignore） | `docs/开工交接-*.md`、`docs/交接文档-*.md`、`docs/fixlog-*.md`、`docs/anonymization-sweep-*.md`、`docs/demo-*.md`、`deploy/README.md` | 含服务器/账号/内网信息，**不入提交物** |
+| 已清出历史（2026-10-27） | `deploy/login-try.sh`、`deploy/zs-console-brute.exp`、`deploy/mn-account.sh`、`deploy/mn-dumpcheck.sh`、`deploy/mn-dumpcheck2.sh` | 口令试撞与平台数据库账号表导出脚本，改为本机保留并写入 `.gitignore` |
+| 环境初始化脚本（在仓库内） | `deploy/zs-*.sh`、`deploy/mn-*.sh`、`deploy/zs-console-login.exp` | 只含实验网段 `10.0.0.0/24` 地址与 ZSvirt 初始化步骤，口令一律走环境变量；此前"不入提交物"的表述与仓库实际不符，已更正 |
 | 需脱敏 | `platform/fixtures/`（ZSvirt 响应，含内网 UUID/IP） | 提交副本由打包脚本统一替换网段与 VM uuid（`192.0.2.0/24`、`10.0.0.0/24`） |
 
 ## 演示视频

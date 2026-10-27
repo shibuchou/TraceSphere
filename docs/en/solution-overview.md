@@ -1,7 +1,7 @@
 # TraceSphere Solution Overview
 
 > Full-stack observability for containerized and agent workloads inside ZSvirt virtual machines
-> Shanghai Open Source Software Application Innovation Competition · Built on ZSvirt
+> Shanghai Open Source Software Application Innovation Competition (上海开源软件应用创新大赛) · Built on ZSvirt
 
 [中文](../方案说明.md) | English
 
@@ -11,7 +11,7 @@ This document corresponds to delivery requirement §3.a: architecture, deploymen
 
 ## 1. Design goals
 
-TraceSphere uses three organizing ideas: **VM as the boundary, workload as the object, and event correlation as the core**. It brings metrics, logs, events, and alert evidence into one traceable chain and answers one operational question:
+TraceSphere uses three organizing ideas: **VM as the boundary, workload as the object, and event correlation as the core**. It brings metrics, structured events, and alert evidence into one traceable chain and answers one operational question:
 
 **When an agent task fails, is the cause the application, the container, the VM, the GPU, or the host?**
 

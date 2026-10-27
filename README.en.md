@@ -1,11 +1,11 @@
 # TraceSphere
 
 > Full-stack observability and root-cause diagnosis for containerized and agent workloads inside ZSvirt virtual machines
-> Shanghai Open Source Software Application Innovation Competition · Built on ZSvirt
+> Shanghai Open Source Software Application Innovation Competition (上海开源软件应用创新大赛) · Built on ZSvirt
 
 [中文](README.md) | English
 
-TraceSphere is organized around three ideas: **VM as the boundary, workload as the object, and event correlation as the core**. It unifies metrics, logs, events, and alert evidence into one traceable chain and answers one operational question:
+TraceSphere is organized around three ideas: **VM as the boundary, workload as the object, and event correlation as the core**. It unifies metrics, structured events, and alert evidence into one traceable chain and answers one operational question:
 
 **When an agent task fails, is the cause the application, the container, the VM, the GPU, or the host?**
 

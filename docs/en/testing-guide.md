@@ -1,7 +1,7 @@
 # TraceSphere Testing Guide
 
 > A full-stack observability platform for containers and agent workloads inside ZSvirt virtual machines
-> Shanghai Open Source Software Application Innovation Competition · Based on the ZSvirt virtualization platform
+> Shanghai Open Source Software Application Innovation Competition (上海开源软件应用创新大赛) · Based on the ZSvirt virtualization platform
 > Document version: v1.0 (2026-10-27) | Code: tracesphere repository main branch
 
 [中文](../测试文档.md) | English

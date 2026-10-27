@@ -1,7 +1,7 @@
 # TraceSphere
 
 > 面向 ZSvirt 虚拟机内容器与智能体工作负载的全栈可观测平台
-> 第三届中国研究生操作系统开源创新大赛 · 智算云赛道 · ZSvirt 赛题
+> 上海开源软件应用创新大赛 · 基于 ZSvirt 虚拟化平台
 
 TraceSphere 以「**虚拟机为边界、工作负载为对象、事件关联为核心**」，统一组织指标、日志、事件与告警证据，
 回答一个核心问题：**某个 Agent 任务的一次失败，究竟由应用、容器、虚拟机、GPU 还是宿主机引起？**
@@ -21,9 +21,19 @@ tracesphere/
 ├── console/         # C：Web Console（React + TS + AntD + G6 + ECharts）
 ├── deploy/          # 部署脚本（ZSvirt 环境 / VM 初始化 / systemd 服务）
 ├── tools/           # 集成工具（demo-up / acceptance / 四场景注入 / 证据链串联）
-├── docs/            # 证据报告、方案说明、交接文档、修复记录（部分为内部资料，见下）
+├── docs/            # 方案说明、部署/测试/用户文档、证据报告、演示材料（内部资料见下）
 └── LICENSE          # MIT
 ```
+
+## 文档导航
+
+| 文档 | 内容 |
+|---|---|
+| [方案说明](docs/方案说明.md) | 总体架构、部署边界、数据模型、采集、关联、告警、诊断、ZSvirt 集成 |
+| [部署文档](docs/部署文档.md) | 三种部署形态、ZSvirt / 业务 VM / 平台侧步骤、配置参考、运维与排障 |
+| [测试文档](docs/测试文档.md) | 测试策略、用例、四场景验收、安全与性能、缺陷、已知限制、回归清单 |
+| [用户手册](docs/用户手册.md) | Console 四页使用、告警状态操作、诊断解读、CLI、FAQ |
+| [文档索引](docs/README.md) | 全部文档与证据文件导航 |
 
 ## 最小化环境要求
 
@@ -62,7 +72,7 @@ export TRACESPHERE_PLATFORM_URL='http://<平台 IP>:8000' # 业务 VM 可达的�
 
 > `tools/` 下的 demo-up / acceptance / case 脚本均从以上环境变量取部署参数，仓库内不含真实地址与口令。
 
-> `deploy/README.md` 记录了本环境的 ZSvirt 部署、平台初始化与网络打通全过程（含踩坑）。
+> 完整步骤见 [docs/部署文档.md](docs/部署文档.md)；`deploy/README.md` 记录了某次实测环境的 ZSvirt 部署、平台初始化与网络打通全过程（内部资料，含踩坑）。
 
 ### 2) 平台侧（platform + rca 服务）
 
@@ -173,7 +183,7 @@ bash tools/acceptance.sh
 
 | 范围 | 文件 | 说明 |
 |---|---|---|
-| 可提交 | `vm-agent/ platform/ rca/ console/ workload/ tools/ deploy/systemd/` + 本 README + `docs/方案说明.md` + `docs/evidence/`（脱敏副本） | 已完成凭据/内网信息清理（脚本从环境变量取参）；证据报告由打包脚本统一替换内网网段 |
+| 可提交 | `vm-agent/ platform/ rca/ console/ workload/ tools/ deploy/systemd/` + 本 README + `docs/README.md`、`docs/方案说明.md`、`docs/部署文档.md`、`docs/测试文档.md`、`docs/用户手册.md`、`docs/作品介绍.md`、`docs/evidence/`（脱敏副本） | 已完成凭据/内网信息清理（脚本从环境变量取参）；证据报告由打包脚本统一替换内网网段 |
 | 内部资料 | `docs/开工交接-*.md`、`docs/交接文档-*.md`、`docs/fixlog-*.md`、`docs/anonymization-sweep-*.md`、`docs/demo-*.md`、`deploy/README.md`、`deploy/zs-*.sh`、`deploy/mn-*.sh`、`deploy/*.exp`、`deploy/login-try.sh` | 含服务器/账号/内网信息，**不入提交物** |
 | 需脱敏 | `platform/fixtures/`（ZSvirt 响应，含内网 UUID/IP） | 提交副本由打包脚本统一替换网段与 VM uuid（`192.0.2.0/24`、`10.0.0.0/24`） |
 

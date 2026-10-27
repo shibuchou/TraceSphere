@@ -187,7 +187,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         />
         <span className={styles.footerSpacer} />
         <span className={styles.footerItem}>
-          TraceSphere v0.1 · 中国研究生操作系统开源创新大赛 · 智算云赛道 ZSvirt
+          TraceSphere v0.1 · 上海开源软件应用创新大赛 · 基于 ZSvirt 虚拟化平台
         </span>
       </footer>
 
